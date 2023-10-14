@@ -1,0 +1,17 @@
+:root {
+    --space-black: #131218;
+    --salon-purple: #D15FFE; 
+}
+
+body {
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.sticky {
+    top: 0;
+    position: sticky;
+    width: 100%;
+}
