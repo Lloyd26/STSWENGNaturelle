@@ -11,6 +11,8 @@
     width: 100%;
     z-index: 1;
     flex: 0 0 auto;
+    align-items: center;
+    justify-content: space-around;
 }
 
 #main-content{
@@ -25,4 +27,47 @@
     height: 150px;
     width: 100vw;
     display: flex;
+}
+
+#salon-logo{
+    height: 75px;
+    width: 75px;
+    float: left;
+}
+
+#nav-bar{
+    display: inline;
+}
+
+.nav-bt{
+    cursor: pointer;
+    padding: 35px 25px 35px 25px;
+    background: linear-gradient(180deg, var(--space-black), transparent) transparent;
+    transition: background-color .5s;
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+}
+
+.last{
+    border-right: none;
+}
+
+#login-bt{
+    padding: 10px 30px 10px 30px;
+    background: linear-gradient(180deg, var(--salon-purple), transparent) transparent;
+    transition: background-color .5s;
+    background-color: var(--salon-purple);
+    border-radius: 10px;
+}
+
+#login-bt:hover, #login-bt:focus{
+    background-color: #4d2e59;
+}
+
+.nav-bt:hover, .nav-bt:focus {
+    background-color: #323436;
+    color: #fff;
 }
