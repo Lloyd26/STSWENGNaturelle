@@ -43,6 +43,23 @@
     opacity: 1 !important;
 }
 
+.nav-item.dropdown .dropdown-menu {
+    box-shadow: 2px 1px 16px rgba(0, 0, 0, 0.15);
+}
+
+.nav-item.dropdown .dropdown-item {
+    line-height: 2;
+    transition: color 180ms ease-in-out, font-weight 0.3s ease-in-out, margin-left 1s cubic-bezier(0.25, 0.75, 0, 1), letter-spacing 0.3s cubic-bezier(0.25, 0.75, 0, 1);
+}
+
+.nav-item.dropdown .dropdown-item:hover {
+    background-color: transparent;
+    color: var(--salon-purple);
+    font-weight: 700;
+    margin-left: 5px;
+    letter-spacing: 0.5px;
+}
+
 #main-content{
     display: flex;
     height: 100vh;
