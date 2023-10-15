@@ -19,15 +19,17 @@
     bottom: 0;
     width: 0;
     height: 5px;
-    background-color: var(--salon-purple);
+    background-color: transparent;
     border-radius: 100px;
     margin-left: auto;
     margin-right: auto;
-    transition: width 0.5s cubic-bezier(0.25, 0.75, 0, 1);
+    transition: width 0.5s cubic-bezier(0.25, 0.75, 0, 1), background 0.3s ease-in-out;
 }
 
 .nav-item.active::after, .nav-item:hover::after {
     width: 90%;
+    background-color: var(--salon-purple);
+    transition: width 1s cubic-bezier(0.25, 0.75, 0, 1), background 0.3s ease-in-out;
 }
 
 #header .nav-link {
