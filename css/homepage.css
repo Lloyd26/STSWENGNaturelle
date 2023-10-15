@@ -22,13 +22,6 @@
     background-color: white;
 }
 
-#footer{
-    background-color: var(--space-black);
-    height: 150px;
-    width: 100%;
-    display: flex;
-}
-
 #salon-logo{
     height: 75px;
     width: 75px;
@@ -47,7 +40,7 @@
     background-color: transparent;
     color: white;
     border: none;
-    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
     font-size: 20px;
 }
 
@@ -70,4 +63,77 @@
 .nav-bt:hover, .nav-bt:focus {
     background-color: #323436;
     color: #fff;
+}
+
+#footer{
+    background-color: var(--space-black);
+    height: 375px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    bottom: 0;
+    color: white;
+    justify-content: center;
+    align-items: center;
+}
+
+#walk-in-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+#walk-in-address{
+    font-weight: 600;
+    font-size: 25px;
+}
+
+#contact-info{
+    margin: 35px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+}
+
+#facebook-info{
+    display: flex;
+    flex-direction: row;
+    border-right: 2px gray solid;
+    gap: 5;
+    justify-content: right;
+    align-items: center;
+    flex: 5 5 0;
+    padding: 20px;
+}
+
+#visit-text{
+    width: 90px;
+    font-weight: 600;
+}
+
+#fb-logo{
+    height: 60px;
+    width: 60px;
+}
+
+#telephone-icon{
+    height: 15px;
+    width: 15px;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+#telephone-info{
+    flex: 5 5 0;
+    justify-content: left;
+    align-items: center;
+}
+
+#telephone-num{
+    font-weight: 600;
 }

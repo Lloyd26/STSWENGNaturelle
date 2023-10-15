@@ -13,10 +13,19 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    font-family: 'Raleway', sans-serif;
 }
 
 .sticky {
     position: sticky;
     top: 0;
     width: 100%;
+}
+
+.wrap{
+    word-wrap: break-word;
+}
+
+.underlined{
+    text-decoration: underline;
 }
