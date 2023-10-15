@@ -6,7 +6,8 @@
 
 :root {
     --space-black: #131218;
-    --salon-purple: #D15FFE; 
+    --salon-purple: #D15FFE;
+    --navbar-height: 85px;
 }
 
 body {
