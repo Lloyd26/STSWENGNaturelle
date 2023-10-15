@@ -1,6 +1,6 @@
 const controller = {
     getIndex: function(req, res) {
-        res.render('index');
+        res.render('main', {layout: 'index'});
     }
 }
 

@@ -1,0 +1,100 @@
+#header {
+    background-color: var(--space-black);
+}
+
+#salon-logo{
+    height: 75px;
+    width: 75px;
+    float: left;
+}
+
+.nav-item {
+    height: var(--navbar-height);
+    line-height: var(--navbar-height);
+}
+
+.nav-item::after {
+    content: "";
+    display: block;
+    position: relative;
+    bottom: 0;
+    width: 0;
+    height: 5px;
+    background-color: transparent;
+    border-radius: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: width 0.5s cubic-bezier(0.25, 0.75, 0, 1), background 0.3s ease-in-out;
+}
+
+.nav-item.active::after, .nav-item:hover::after {
+    width: 90%;
+    background-color: var(--salon-purple);
+    transition: width 1s cubic-bezier(0.25, 0.75, 0, 1), background 0.3s ease-in-out;
+}
+
+#header .nav-link {
+    color: #FFF;
+    padding: 0 2rem;
+    font-size: 1.25em;
+    font-weight: 600;
+    opacity: 0.7;
+    transition: opacity 180ms ease-in-out;
+}
+
+.nav-item.active > .nav-link, .nav-item:hover > .nav-link {
+    opacity: 1 !important;
+}
+
+.nav-item.dropdown .dropdown-menu {
+    box-shadow: 2px 1px 16px rgba(0, 0, 0, 0.15);
+}
+
+.nav-item.dropdown .dropdown-item {
+    line-height: 2;
+    transition: color 180ms ease-in-out, font-weight 0.3s ease-in-out, margin-left 1s cubic-bezier(0.25, 0.75, 0, 1), letter-spacing 0.3s cubic-bezier(0.25, 0.75, 0, 1);
+}
+
+.nav-item.dropdown .dropdown-item:hover {
+    background-color: transparent;
+    color: var(--salon-purple);
+    font-weight: 700;
+    margin-left: 5px;
+    letter-spacing: 0.5px;
+}
+
+.nav-bt{
+    cursor: pointer;
+    padding: 35px 25px 35px 25px;
+    background: linear-gradient(180deg, var(--space-black), transparent) transparent;
+    transition: background-color .5s;
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.last{
+    border-right: none;
+}
+
+#btn-login {
+    padding: 0.5rem 2rem;
+    background-color: transparent;
+    color: #FFF;
+    border: 3px solid var(--salon-purple);
+    border-radius: 50px;
+    transition: background-color 180ms ease-in-out;
+    font-weight: 700;
+}
+
+#btn-login:hover, #btn-login:focus{
+    background-color: var(--salon-purple);
+}
+
+.nav-bt:hover, .nav-bt:focus {
+    background-color: #323436;
+    color: #fff;
+}
+
