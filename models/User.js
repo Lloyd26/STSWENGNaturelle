@@ -13,8 +13,7 @@ const userSchema = new Schema ({
     password: {
         type: SchemaTypes.String,
         required: true
-    },
-
+    }
 })
 
 // for MongoDB collection "users"
