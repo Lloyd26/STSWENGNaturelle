@@ -19,7 +19,6 @@ const reservationSchema = new Schema ({
     personnel: {
         type: SchemaTypes.String
     }
-
 })
 
 // for MongoDB collection "reservations"
