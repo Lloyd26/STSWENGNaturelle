@@ -1,6 +1,9 @@
 const { Schema, SchemaTypes, model } = require('mongoose');
 
 const productSchema = new Schema ({
+    productID: {
+        type: SchemaTypes.String
+    },
     productName: {
         type: SchemaTypes.String
     },
@@ -9,9 +12,6 @@ const productSchema = new Schema ({
     },
     price: {
         type: SchemaTypes.Number
-    },
-    productID: {
-        type: SchemaTypes.String
     }
 })
 
