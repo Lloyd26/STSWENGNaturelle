@@ -48,6 +48,11 @@
     color: var(--salon-purple);
 }
 
+#password-input::placeholder{
+    font-family: 'Raleway';
+    letter-spacing: 0em;
+}
+
 #register-link{
     color: var(--space-black);
     cursor: pointer;
