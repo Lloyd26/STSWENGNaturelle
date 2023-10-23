@@ -6,4 +6,6 @@ const app = express();
 
 app.get('/', controller.getIndex);
 
+app.get('/login', controller.getLogin);
+
 module.exports = app;
