@@ -4,14 +4,14 @@
     <form id="login-form">
         <h2 id="login-header">Welcome back!</h2>
         <div class="mb-3">
-            <input class="form-control form-control-lg" id="email-input" type="email" placeholder="Email Address">
+            <input class="form-control form-control-lg" id="input-email" name="email" type="email" placeholder="Email Address">
         </div>
         <div class="mb-3">
-            <input class="form-control form-control-lg" id="password-input" type="password" placeholder="Password">
+            <input class="form-control form-control-lg" id="input-password" name="password" type="password" placeholder="Password">
         </div>
         <div id="error-msg" data-error-status="normal">The username/password does not exist.</div>
         <div id="last-row">
-            <a href="" id="register-link">Create an Account</a>
+            <a href="/register" id="register-link">Create an Account</a>
             <button class="btn" id="btn-submit" type="submit">Log In</button>
         </div>
     </form>
