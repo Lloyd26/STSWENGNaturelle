@@ -35,6 +35,7 @@ $(document).ready(function() {
 
         if (!validForm) {
             e.preventDefault();
+            email_input.focus();
             showError("Please enter your email and password.")
         } else if (!isEmailValid(email)) {
             e.preventDefault();
