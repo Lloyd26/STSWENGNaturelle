@@ -1,4 +1,4 @@
-#login-frame {
+#login-container {
     min-height: 85vh;
     display: flex;
     flex-direction: column;
@@ -7,7 +7,7 @@
     background-color: var(--clr-analogous-2-50);
 }
 
-#login-form {
+#form-login {
     background-color: #FFF;
     box-shadow: 2px 1px 16px rgba(0, 0, 0, 0.15);
     padding: 3rem 5rem;
@@ -52,7 +52,7 @@
     background-color: var(--clr-primary-600);
 }
 
-#password-input::placeholder {
+#input-password::placeholder {
     font-family: 'Raleway', sans-serif;
     letter-spacing: 0;
 }
