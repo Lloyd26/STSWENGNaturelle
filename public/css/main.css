@@ -39,3 +39,17 @@ input[type='password']{
     font-family: Verdana;
     letter-spacing: 0.125em;
 }
+
+@keyframes shake {
+    0% { transform: translateX(1px); }
+    10% { transform: translateX(-1px); }
+    20% { transform: translateX(-3px); }
+    30% { transform: translateX(3px); }
+    40% { transform: translateX(1px); }
+    50% { transform: translateX(-1px); }
+    60% { transform: translateX(-3px); }
+    70% { transform: translateX(3px); }
+    80% { transform: translateX(-1px); }
+    90% { transform: translateX(1px); }
+    100% { transform: translateX(1px); }
+}
