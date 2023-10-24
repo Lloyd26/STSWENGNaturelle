@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="css/register.css">
+<script src="/js/auth.js"></script>
+
+<div id="register-container">
+    <form id="form-register">
+        <h2 id="register-header">Create an Account</h2>
+        <div class="mb-3" id="input-name">
+            <div class="input-container">
+                <label class="input-label">First Name</label>
+                <input class="form-control form-control-lg" id="input-firstname" name="firstname" type="text" placeholder="Ex: Juan">
+            </div>
+            <div class="input-container">
+                <label class="input-label">Last Name</label>
+                <input class="form-control form-control-lg" id="input-lastname" name="lastname" type="text" placeholder="Ex: Dela Cruz">
+            </div>
+        </div>
+        <div class="mb-3 input-container">
+            <label class="input-label">Email Address</label>
+            <input class="form-control form-control-lg" id="input-email" name="email" type="email" placeholder="Ex: juandelacruz@gmail.com">
+        </div>
+        <div class="mb-3">
+            <label class="input-label">Contact Number</label>
+            <input class="form-control form-control-lg" id="input-contactnum" name="contactnum" type="tel" placeholder="Ex: 09123456789">
+        </div>
+        <div class="mb-3">
+            <label class="input-label">Password</label>
+            <input class="form-control form-control-lg" id="input-password" name="password" type="password" placeholder="Must be at least 8 characters">
+        </div>
+        <div id="error-msg" data-error-status="normal">The username/password does not exist.</div>
+        <div id="last-row">
+            <div id="login-text">Already have an account? <a href="/register" id="register-link">Login</a></div>
+            <button class="btn" id="btn-submit" type="submit">Sign Up</button>
+        </div>
+    </form>
+</div>

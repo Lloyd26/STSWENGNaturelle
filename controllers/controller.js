@@ -5,6 +5,10 @@ const controller = {
 
     getLogin: function(req, res) {
         res.render('login', {layout: 'index', active: {login: true}});
+    },
+
+    getRegister: function(req, res) {
+        res.render('register', {layout: 'index', active: {login: true}});
     }
 }
 

@@ -8,4 +8,6 @@ app.get('/', controller.getIndex);
 
 app.get('/login', controller.getLogin);
 
+app.get('/register', controller.getRegister);
+
 module.exports = app;
