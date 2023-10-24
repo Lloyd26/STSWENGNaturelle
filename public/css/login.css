@@ -1,73 +1,91 @@
-#login-frame{
-    min-height: 75vh;
+#login-frame {
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    display: flex;
-    flex-direction: column;
-    margin-top: 100px;
+    justify-content: center;
+    background-color: var(--clr-analogous-2-50);
 }
 
-#login-form{
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    gap: 20px;
+#login-form {
+    background-color: #FFF;
+    box-shadow: 2px 1px 16px rgba(0, 0, 0, 0.15);
+    padding: 3rem 5rem;
+    border-radius: var(--radius);
+    width: 40%;
 }
 
-#login-header{
-    font-size: 40px;
+#login-header {
+    color: var(--clr-primary-700);
+    font-size: 2.5em;
     font-weight: 900;
-    margin-right: 200px;
+    text-align: center;
+    margin-top: 1.5rem;
+    margin-bottom: 3rem;
 }
 
-.form-input{
-    border-radius: 10px;
-    padding: 20px;
-    background-color: lightgray;
+.form-control {
+    border-radius: var(--radius);
     color: var(--space-black);
-    border: none;
+    padding: calc(var(--radius) / 4) calc(var(--radius) / 1.5);
 }
 
-.form-input:focus{
-    outline: 3px solid var(--space-black);
+.form-control:focus {
+    border-color: var(--clr-primary-100);
+    box-shadow: 0 0 0 0.25rem var(--clr-primary-50);
 }
 
-#submit-btn{
+#btn-submit {
     background-color: var(--salon-purple);
-    border-radius: 10px;
-    border: none;
-    flex: 30%;
+    border-radius: var(--radius);
     color: white;
     font-weight: 600;
-    padding: 10px;
-    font-size: 18px;
+    padding: 0.5rem calc(var(--radius) / 1);
     transition: background-color 180ms ease-in-out;
 }
 
-#submit-btn:hover{
-    background-color: var(--space-black);
-    color: var(--salon-purple);
+#btn-submit:hover {
+    background-color: var(--clr-primary-200);
 }
 
-#password-input::placeholder{
-    font-family: 'Raleway';
-    letter-spacing: 0em;
+#btn-submit:active, #btn-submit:focus {
+    background-color: var(--clr-primary-600);
 }
 
-#register-link{
-    color: var(--space-black);
+#password-input::placeholder {
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: 0;
+}
+
+#register-link {
+    color: var(--clr-primary-900);
     cursor: pointer;
-    flex: 70%;
     font-size: 18px;
+    text-decoration: none;
 }
 
-#last-row{
+#register-link:hover {
+    text-decoration: underline;
+}
+
+#last-row {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    margin-top: 3rem;
 }
 
-#error-msg{
-    font-style: italic;
-    color: red;
-    display: none;
+#error-msg {
+    padding: 0;
+    font-size: 0;
+}
+
+#error-msg[data-error-status="error"] {
+    background-color: var(--clr-triadic-1);
+    color: #FFF;
+    text-align: center;
+    padding: 0.5rem calc(var(--radius) / 2);
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+    font-size: 1em;
 }

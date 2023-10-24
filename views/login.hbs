@@ -2,13 +2,17 @@
 
 <div id="login-frame">
     <form id="login-form">
-        <div id="login-header">Welcome back!</div>
-        <input class="form-input" id="email-input" type="email" placeholder="Email Address">
-        <input class="form-input" id="password-input" type="password" placeholder="Password">
-        <label id="error-msg">The username/password does not exist.</label>
+        <h2 id="login-header">Welcome back!</h2>
+        <div class="mb-3">
+            <input class="form-control form-control-lg" id="email-input" type="email" placeholder="Email Address">
+        </div>
+        <div class="mb-3">
+            <input class="form-control form-control-lg" id="password-input" type="password" placeholder="Password">
+        </div>
+        <div id="error-msg" data-error-status="normal">The username/password does not exist.</div>
         <div id="last-row">
             <a href="" id="register-link">Create an Account</a>
-            <input id="submit-btn" type="submit" value="Log In">
+            <button class="btn" id="btn-submit" type="submit">Log In</button>
         </div>
     </form>
 </div>
