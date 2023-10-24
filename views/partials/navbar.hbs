@@ -6,13 +6,13 @@
             <img id="salon-logo" src="/assets/images/salon-logo.png">
         </a>
         <ul class="navbar-nav" id="nav-bar">
-            <li class="nav-item active" id="home-bt">
+            <li class="nav-item{{#if active.home}} active{{/if}}" id="home-bt">
                 <a href="/" class="nav-link">Home</a>
             </li>
-            <li class="nav-item" id="about-bt">
+            <li class="nav-item{{#if active.about}} active{{/if}}" id="about-bt">
                 <a href="" class="nav-link">About</a>
             </li>
-            <li class="nav-item dropdown" id="services-bt">
+            <li class="nav-item dropdown{{#if active.services}} active{{/if}}" id="services-bt">
                 <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Services</a>
                 <ul class="dropdown-menu">
                     <li><a href="" class="dropdown-item">Hair</a></li>
@@ -22,16 +22,16 @@
                     <li><a href="" class="dropdown-item">Nails</a></li>
                 </ul>
             </li>
-            <li class="nav-item" id="promos-bt">
+            <li class="nav-item{{#if active.promos}} active{{/if}}" id="promos-bt">
                 <a href="" class="nav-link">Promos</a>
             </li>
-            <li class="nav-item" id="faq-bt">
+            <li class="nav-item{{#if active.faq}} active{{/if}}" id="faq-bt">
                 <a href="" class="nav-link">FAQ</a>
             </li>
-            <li class="nav-item last" id="contacts-bt">
+            <li class="nav-item{{#if active.contacts}} active{{/if}}" id="contacts-bt">
                 <a href="" class="nav-link">Contacts</a>
             </li>
         </ul>
-        <button class="btn" id="btn-login" type="button" data-toggle="modal" data-target="#exampleModal">LOG IN</button>
+        <a class="btn{{#if active.login}} active{{/if}}" id="btn-login" href="/login">LOG IN</a>
     </div>
 </nav>

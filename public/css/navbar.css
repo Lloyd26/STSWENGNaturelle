@@ -89,7 +89,7 @@
     font-weight: 700;
 }
 
-#btn-login:hover, #btn-login:focus{
+#btn-login:hover, #btn-login:focus, #btn-login.active {
     background-color: var(--salon-purple);
 }
 
