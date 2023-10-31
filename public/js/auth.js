@@ -13,6 +13,11 @@ function isEmailValid(email) {
     return email.match(validEmailRegex);
 }
 
+function isContactNumValid(contactnum) {
+    const validContactNumRegex = /^(09)\\d{9}/;
+    return contactnum.match(validContactNumRegex);
+}
+
 function showError(error_text) {
     let error_container = $('#error-msg');
     error_container.attr('data-error-status', 'error');
@@ -41,6 +46,34 @@ $(document).ready(function() {
             e.preventDefault();
             email_input.focus();
             showError("Please enter a valid email address!");
+        }
+    })
+
+    $("#form-register").on("submit", function(e) {
+        let fname_input = $("#input-firstname");
+        let lname_input = $("#input-lastname");
+        let contact_input = $("#input-contactnum");
+        let email_input = $("#input-email");
+        let password_input = $("#input-password");
+
+        let email = email_input.val();
+        let password = password_input.val();
+        let contact_num = contact_input.val();
+
+        let validForm = validateForm(email, password);
+
+        if (!validForm) {
+            e.preventDefault();
+            email_input.focus();
+            showError("Please enter your email and password.")
+        } else if (!isEmailValid(email)) {
+            e.preventDefault();
+            email_input.focus();
+            showError("Please enter a valid email address!");
+        } else if (!isContactNumValid(contact_num)) {
+            e.preventDefault();
+            contact_input.focus();
+            showError("Please enter a valid contact number!");
         }
     })
 })
