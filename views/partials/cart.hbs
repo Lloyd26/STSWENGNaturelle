@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="css/cart.css">
+<script src="/js/auth.js"></script>
+
+<div id="cart-container">
+    <div id="reservation-details">
+        <h2 id="cart-header">Your Cart</h2>
+        <div id="schedule-detail">
+            <div id="reservation-for">Reservation for: </div>
+            <div>Date: <span id="date-detail">01/01/2023</span></div>
+            <div>Time: <span id="time-detail">10:00 AM</span></div>
+        </div>
+    </div>
+    <div id="services-container">
+        <div id="cart-item">
+            <div id="quantity-container">x<span id="quantity">1</span></div>
+            <div id="cart-service-details">
+                <div id="cart-service-name">Nail Care</div>
+                <label>Preferred Staff:<span id="cart-staff-name">Ann</span></label>
+                <div id="cart-other-details">ung bagay n kulay po sana sa pasko tnx</div>
+            </div>
+            <div id="cart-price-label">₱<span id="cart-price-value">500.00</span></div>
+            <div id="edit-btn-container">
+                <button class="btn edit" id="add-btn">+</button>
+                <button class="btn edit" id="remove-btn">-</button>
+            </div>
+        </div>
+        <div id="cart-item">
+            <div id="quantity-container">x<span id="quantity">1</span></div>
+            <div id="cart-service-details">
+                <div id="cart-service-name">Nail Care</div>
+                <label>Preferred Staff:<span id="cart-staff-name">Ann</span></label>
+                <div id="cart-other-details">ung bagay n kulay po sana sa pasko tnx</div>
+            </div>
+            <div id="cart-price-label">₱<span id="cart-price-value">500.00</span></div>
+            <div id="edit-btn-container">
+                <button class="btn edit" id="add-btn">+</button>
+                <button class="btn edit" id="remove-btn">-</button>
+            </div>
+        </div>
+    </div>
+    <div id="error-msg" data-error-status="normal">The username/password does not exist.</div>
+    <div id="reservation-footer">
+        <div id="price-container">
+            <div id="estimated-price">Estimated Price: </div>
+            <div id="total-price-label">₱<span id="total-price-value">1000.00</span></div>
+        </div>
+        <button class="btn" id="btn-reserve" type="submit">Reserve</button>
+        <button class="btn" id="btn-reset" type="submit"></button>
+    </div>
+</div>

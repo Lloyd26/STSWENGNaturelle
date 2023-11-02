@@ -1,0 +1,178 @@
+#cart-container{
+    background-color: #FFF;
+    box-shadow: 2px 1px 16px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    border-radius: var(--radius);
+    margin: 2em 2em 2em 0em;
+    flex: 5 0 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#reservation-details{
+    background-color: var(--salon-purple);
+    color: var(--space-black);
+    border-top-left-radius: var(--radius);
+    border-top-right-radius: var(--radius);
+    padding: 3em 2em 2em 3em;
+    display: flex;
+    align-items: center;
+}
+
+#reservation-details > div{
+    font-size: 20px;
+    color: #FFF;
+}
+
+#cart-header{
+    flex: 5 0 0;
+    color: #FFF;
+    font-size: 2.5em;
+    font-weight: 900;
+    text-align: center;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    margin-left: 1.5rem;
+    text-align: left;
+}
+
+#reservation-for{
+    font-weight: 800;
+}
+
+#schedule-detail {
+    text-align: left;
+    flex: 5 0 0;
+}
+
+#date-detail, #time-detail {
+    margin-left: 2em;
+    font-weight: 700;
+    color: #FFF;
+}
+
+#services-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 2em;
+    flex: 8 0 0;
+    overflow-y: scroll;
+}
+
+#cart-item{
+    display: flex;
+    padding: 2em;
+    gap: 2em;
+    align-items: center;
+    box-shadow: 2px 5px 16px rgba(0, 0, 0, 0.10);
+    border-radius: var(--radius);
+}
+
+#quantity-container{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+#quantity, #cart-staff-name{
+    margin-left: .5em;
+    font-weight: 700;
+}
+
+#cart-service-details{
+    flex: 8 0 0;
+}
+
+#cart-service-name{
+    font-weight: 900;
+    font-size: 20px;
+}
+
+#cart-other-details{
+    color: gray;
+    font-size: 14px;
+}
+
+.edit{
+    background-color: var(--salon-purple);
+    font-size: 40px;
+    font-weight: 600;
+    color: #FFF;
+    height: 1em;
+    width: 1em;
+    padding: 0px;
+    line-height: 1em;
+}
+
+.edit:hover {
+    background-color: var(--clr-primary-200);
+    color: #FFF;
+}
+
+#edit-btn-container{
+    display: flex;
+    gap: 1em;
+}
+
+#reservation-footer{
+    background-color: var(--space-black);
+    color: #FFF;
+    border-bottom-left-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
+    padding: 2em 2em 3em 3em;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+#estimated-price{
+    font-weight: 600;
+}
+
+#total-price-label, #total-price-value{
+    font-size: 40px;
+    font-weight: 900;
+}
+
+#price-container{
+    flex: 7 0 0;
+}
+
+#btn-reserve{
+    flex: 3 0 0;
+    background-color: var(--salon-purple);
+    border-radius: var(--radius);
+    color: white;
+    font-weight: 600;
+    padding: 0.5rem calc(var(--radius) / 1);
+    transition: background-color 180ms ease-in-out;
+    font-size: 25px;
+}
+
+#btn-reserve:hover {
+    background-color: var(--clr-primary-200);
+}
+
+#btn-reset{
+    background-image:url("../assets/images/trash-logo-medium.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 45px;
+    height: 45px;
+    background-size: 40px 40px;
+    border-radius: var(--radius);
+    color: white;
+    font-weight: 600;
+    padding: 2em;
+    transition: background-image 180ms ease-in-out;
+    transition: background-size 180ms ease-in-out;
+}
+
+#btn-reset:hover{
+    background-image:url("../assets/images/trash-logo-medium-hover.png");
+    background-size: 50px 50px;
+}
+
+#btn-reset:active{
+    border: none;
+}

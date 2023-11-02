@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="css/serviceform.css">
+<script src="/js/auth.js"></script>
+
+<form id="form-reservation">
+    <h2 id="reservation-header">Service Details</h2>
+    <div class="mb-3 input-container">
+        <label class="input-label">Service</label>
+        <select class="form-select form-select-lg" id="input-service" name="service" type="text">
+                <option value="0" selected disabled hidden>Choose a Service</option>
+                <option value="1">Hair Color</option>
+                <option value="2">Nail Care</option>
+                <option value="3">Classic Rebond</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="input-label">Staff Preference</label>
+        <select class="form-select form-select-lg" id="input-staff" name="staff" type="text">
+                <option value="0" selected disabled hidden>Choose a Staff</option>
+                <option value="1">Ann</option>
+                <option value="2">Bob</option>
+                <option value="3">Cindy</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="input-label">Other Details</label>
+        <textarea class="form-control form-control-lg" id="input-details" name="details" type="text" placeholder="Ex: hair color, nail color, etc."></textarea>
+    </div>
+    <div id="error-msg" data-error-status="normal">The username/password does not exist.</div>
+    <div id="last-row">
+        <button class="btn" id="btn-submit" type="submit">Add to Cart</button>
+    </div>
+</form>

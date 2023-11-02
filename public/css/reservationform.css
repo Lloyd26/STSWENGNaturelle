@@ -1,0 +1,20 @@
+#input-time{
+    border-radius: var(--radius);
+    color: var(--space-black);
+    padding: calc(var(--radius) / 4) calc(var(--radius) / 1.5);
+}
+
+#input-time:focus {
+    border-color: var(--clr-primary-100);
+    box-shadow: 0 0 0 0.25rem var(--clr-primary-50);
+}
+
+#input-schedule{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.input-container{
+    flex: 5 0 0;
+}

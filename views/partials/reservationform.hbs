@@ -1,0 +1,21 @@
+<link rel="stylesheet" href="css/reservationform.css">
+<script src="/js/auth.js"></script>
+
+<form id="form-reservation">
+    <h2 id="reservation-header">Reservation Details</h2>
+    <div class="mb-3" id="input-schedule">
+        <div class="input-container">
+            <label class="input-label">Date</label>
+            <input class="form-control form-control-lg" id="input-date" name="date" type="date" placeholder="Ex: 01/01/2023">
+        </div>
+        <div class="input-container">
+            <label class="input-label">Time</label>
+            <select class="form-select form-select-lg" id="input-time" name="time" type="text">
+                <option value="1" selected>10:00 AM</option>
+                <option value="2">2:30 PM</option>
+                <option value="3">8:00 PM</option>
+            </select>
+        </div>
+    </div>
+    <div id="error-msg" data-error-status="normal">The username/password does not exist.</div>
+</form>

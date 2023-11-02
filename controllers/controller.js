@@ -9,6 +9,10 @@ const controller = {
 
     getRegister: function(req, res) {
         res.render('register', {layout: 'index', active: {login: true}});
+    },
+
+    getReservation: function(req, res) {
+        res.render('reservation', {layout: 'index', active: {login: true}});
     }
 }
 
