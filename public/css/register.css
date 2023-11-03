@@ -1,5 +1,5 @@
 #register-container {
-    min-height: 100vh;
+    min-height: 120vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,7 +7,6 @@
     background-color: var(--clr-analogous-2-50);
     background-image: url("https://www.toptal.com/designers/subtlepatterns/uploads/light_toast.png");
     background-blend-mode: lighten;
-    padding: 30px;
 }
 
 #form-register {
@@ -27,32 +26,28 @@
     margin-bottom: 3rem;
 }
 
-.input-container{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.input-label{
-    margin-left: 10px;
-    font-weight: 500;
-    font-size: 18px;
-}
-
-#input-name{
-    display: flex;
-    gap: 15px;
-}
-
 .form-control {
     border-radius: var(--radius);
     color: var(--space-black);
+    padding: calc(var(--radius) / 4) calc(var(--radius) / 2);
+}
+
+.form-control-lg {
     padding: calc(var(--radius) / 4) calc(var(--radius) / 1.5);
 }
 
 .form-control:focus {
     border-color: var(--clr-primary-100);
     box-shadow: 0 0 0 0.25rem var(--clr-primary-50);
+}
+
+.form-label {
+    font-weight: 600;
+    transition: color 180ms ease-in-out;
+}
+
+.form-label:has(+ .form-control:focus) {
+    color: var(--clr-primary);
 }
 
 #btn-submit {
@@ -72,9 +67,10 @@
     background-color: var(--clr-primary-600);
 }
 
-::placeholder{
+::placeholder {
     font-style: italic;
-    font-size: 18px;
+    font-size: 1em;
+    color: rgba(0, 0, 0, 0.5) !important;
 }
 
 #input-password::placeholder {
@@ -116,6 +112,6 @@
     transition: padding 180ms cubic-bezier(0.4, 0, 0.2, 1), font-size 0.375s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
 }
 
-#register-text{
+#register-text {
     font-size: 18px;
 }
