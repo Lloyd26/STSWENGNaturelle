@@ -1,9 +1,9 @@
 <link rel="stylesheet" href="css/login.css">
 <script src="/js/auth.js"></script>
 
-<div id="login-container">
-    <form id="form-login">
-        <h2 id="login-header">Welcome back!</h2>
+<div id="form-wrapper">
+    <form id="form-login" class="form-container">
+        <h2 id="form-header">Welcome back!</h2>
         <div class="mb-3">
             <input class="form-control form-control-lg" id="input-email" name="email" type="email" placeholder="Email Address">
         </div>
@@ -12,7 +12,7 @@
         </div>
         <div id="error-msg" data-error-status="normal">The username/password does not exist.</div>
         <div id="last-row">
-            <a href="/register" id="register-link">Create an Account</a>
+            <a href="/register" id="form-switch-link">Create an Account</a>
             <button class="btn" id="btn-submit" type="submit">Log In</button>
         </div>
     </form>
