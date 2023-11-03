@@ -11,12 +11,12 @@ function validateForm(...forms) {
 
 function isEmailValid(email) {
     const validEmailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    return email.match(validEmailRegex);
+    return validEmailRegex.test(email);
 }
 
-function isContactNumValid(contactnum) {
-    const validContactNumRegex = /^(09)\\d{9}/;
-    return contactnum.match(validContactNumRegex);
+function isContactNumValid(contactNum) {
+    const validContactNumRegex = /^(09)\d{9}/;
+    return validContactNumRegex.test(contactNum);
 }
 
 function showError(error_text) {
