@@ -43,6 +43,7 @@ $(document).ready(function() {
         } else if (!isEmailValid(email.val())) {
             e.preventDefault();
             email.focus();
+            email.addClass("is-invalid");
             showError("Please enter a valid email address!");
         }
     })
