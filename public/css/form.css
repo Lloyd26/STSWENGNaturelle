@@ -1,3 +1,5 @@
+@import url("bs-form-override.css");
+
 #form-wrapper {
     display: flex;
     flex-direction: column;
@@ -22,30 +24,6 @@
     text-align: center;
     margin-top: 1.5rem;
     margin-bottom: 3rem;
-}
-
-.form-control {
-    border-radius: var(--radius);
-    color: var(--space-black);
-    padding: calc(var(--radius) / 4) calc(var(--radius) / 2);
-}
-
-.form-control-lg {
-    padding: calc(var(--radius) / 4) calc(var(--radius) / 1.5);
-}
-
-.form-control:focus {
-    border-color: var(--clr-primary-100);
-    box-shadow: 0 0 0 0.25rem var(--clr-primary-50);
-}
-
-.form-label {
-    font-weight: 600;
-    transition: color 180ms ease-in-out;
-}
-
-.form-label:has(+ .form-control:focus) {
-    color: var(--clr-primary);
 }
 
 #btn-submit {

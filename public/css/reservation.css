@@ -1,36 +1,33 @@
+@import url("bs-form-override.css");
+
 #reservation-container {
     display: flex;
     flex-direction: row;
     background-color: var(--clr-analogous-2-50);
-    padding: 2em;
-    gap: 2em;
+    padding: 5rem;
+    gap: 2rem;
 }
 
 #form-container {
     min-height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
-    padding: 2em;
-    gap: 4em;
+    gap: 2rem;
 }
 
-#form-reservation {
+.form-reservation {
     background-color: #FFF;
     box-shadow: 2px 1px 16px rgba(0, 0, 0, 0.15);
-    padding: 3rem 5rem;
+    padding: var(--radius);
     border-radius: var(--radius);
     width: 100%;
 }
 
-#reservation-header {
+.reservation-header {
     color: var(--clr-primary-700);
     font-size: 2.5em;
     font-weight: 900;
-    text-align: center;
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     text-align: left;
 }
 
@@ -49,17 +46,6 @@
 #input-details{
     min-height: 100px;
     overflow: auto;
-}
-
-.form-control {
-    border-radius: var(--radius);
-    color: var(--space-black);
-    padding: calc(var(--radius) / 4) calc(var(--radius) / 1.5);
-}
-
-.form-control:focus {
-    border-color: var(--clr-primary-100);
-    box-shadow: 0 0 0 0.25rem var(--clr-primary-50);
 }
 
 #btn-submit {

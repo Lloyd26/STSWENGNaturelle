@@ -1,47 +1,40 @@
-#cart-container{
+#cart-container {
     background-color: #FFF;
     box-shadow: 2px 1px 16px rgba(0, 0, 0, 0.15);
     width: 100%;
     border-radius: var(--radius);
-    margin: 2em 2em 2em 0em;
     flex: 5 0 0;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
-#reservation-details{
-    background-color:white;
+#reservation-details {
     color: var(--space-black);
-    border-top-left-radius: var(--radius);
-    border-top-right-radius: var(--radius);
-    padding: 2em 2em 2em 3em;
+    padding: calc(var(--radius) / 2) var(--radius);
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    background: #FFF;
+    box-shadow: 2px 1px 16px rgba(0, 0, 0, 0.15);
+    z-index: 1;
 }
 
-#reservation-details > div{
-    font-size: 18px;
+#reservation-details > div {
+    font-size: 1.125em;
 }
 
-#cart-header{
-    flex: 5 0 0;
+#cart-header {
     color: var(--clr-primary-700);
     font-size: 3.0em;
     font-weight: 900;
-    text-align: center;
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
-    margin-left: 1.5rem;
     text-align: left;
 }
 
-#reservation-for{
+#reservation-for {
     font-weight: 800;
-}
-
-#schedule-detail {
-    text-align: center;
-    flex: 5 0 0;
 }
 
 #date-detail, #time-detail {
@@ -49,49 +42,56 @@
     font-weight: 700;
 }
 
-#services-container{
+#services-container {
     display: flex;
     flex-direction: column;
-    gap: 1em;
-    padding: 1em 2em;
-    flex: 8 0 0;
+    gap: 1.5rem;
+    padding: 3rem;
+    flex-grow: 1;
     overflow-y: scroll;
+    background-color: #FAFAFA;
 }
 
-#cart-item{
+.cart-item{
+    background-color: #FFF;
     display: flex;
-    padding: 2em;
+    padding: calc(var(--radius) / 2) calc(var(--radius) / 1.5);
     gap: 2em;
     align-items: center;
-    box-shadow: 2px 5px 16px rgba(0, 0, 0, 0.10);
-    border-radius: var(--radius);
-    transition: box-shadow 180ms ease-in-out;
+    box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.15);
+    border-radius: calc(var(--radius) / 1.5);
+    transition: box-shadow 0.3s ease-in-out;
 }
 
-#cart-item:hover{
-    box-shadow: 2px 5px 16px rgba(0, 0, 0, 0.2);
+.cart-item:hover{
+    box-shadow: 2px 4px 32px rgba(0, 0, 0, 0.3);
 }
 
-#quantity-container{
+.quantity-container{
     font-size: 20px;
     font-weight: 500;
 }
 
-#quantity, #cart-staff-name{
+.quantity, .cart-staff-name{
     margin-left: .5em;
     font-weight: 700;
 }
 
-#cart-service-details{
+.cart-service-details{
     flex: 8 0 0;
 }
 
-#cart-service-name{
+.cart-service-name{
     font-weight: 900;
     font-size: 20px;
+    transition: color 0.3s ease-in-out;
 }
 
-#cart-other-details{
+.cart-item:hover .cart-service-name {
+    color: var(--clr-primary-500);
+}
+
+.cart-other-details{
     color: gray;
     font-size: 14px;
 }
@@ -112,37 +112,35 @@
     color: #FFF;
 }
 
-#edit-btn-container{
+.edit-btn-container {
     display: flex;
-    gap: 1em;
+    gap: 1rem;
 }
 
-#reservation-footer{
+#reservation-footer {
     background-color: var(--space-black);
     color: #FFF;
-    border-bottom-left-radius: var(--radius);
-    border-bottom-right-radius: var(--radius);
-    padding: 2em 2em 2em 3em;
+    padding: calc(var(--radius) / 2) var(--radius);
     display: flex;
     align-items: center;
-    gap: 1em;
+    gap: 1rem;
 }
 
-#estimated-price{
+#estimated-price {
     font-weight: 600;
 }
 
-#total-price-label, #total-price-value{
+#total-price-label, #total-price-value {
     font-size: 40px;
     font-weight: 900;
 }
 
-#price-container{
-    flex: 7 0 0;
+#price-container {
+    flex-grow: 8;
 }
 
-#btn-reserve{
-    flex: 3 0 0;
+#btn-reserve {
+    flex-grow: 1;
     background-color: var(--salon-purple);
     border-radius: var(--radius);
     color: white;
@@ -156,7 +154,7 @@
     background-color: var(--clr-primary-200);
 }
 
-#btn-reset{
+#btn-reset {
     background-image:url("../assets/images/trash-logo-medium.png");
     background-position: center;
     background-repeat: no-repeat;
@@ -167,15 +165,14 @@
     color: white;
     font-weight: 600;
     padding: 2em;
-    transition: background-image 180ms ease-in-out;
-    transition: background-size 180ms ease-in-out;
+    transition: background-image 180ms ease-in-out, background-size 180ms ease-in-out;
 }
 
-#btn-reset:hover{
+#btn-reset:hover {
     background-image:url("../assets/images/trash-logo-medium-hover.png");
     background-size: 50px 50px;
 }
 
-#btn-reset:active{
+#btn-reset:active {
     border: none;
 }

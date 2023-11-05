@@ -1,14 +1,3 @@
 #last-row{
-    justify-content: right;
-}
-
-#input-service, #input-staff{
-    border-radius: var(--radius);
-    color: var(--space-black);
-    padding: calc(var(--radius) / 4) calc(var(--radius) / 1.5);
-}
-
-#input-service:focus, #input-staff:focus {
-    border-color: var(--clr-primary-100);
-    box-shadow: 0 0 0 0.25rem var(--clr-primary-50);
+    justify-content: center;
 }
