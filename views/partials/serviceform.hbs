@@ -2,9 +2,9 @@
 <script src="/js/auth.js"></script>
 
 <form class="form-reservation">
-    <h2 class="reservation-header">Service Details</h2>
+    <h2 class="reservation-header"><i class="fa fa-user-cog"></i>Service Details</h2>
     <div class="mb-3">
-        <label class="form-label" for="input-service">Service</label>
+        <label class="form-label" for="input-service"><i class="fa fa-cogs"></i>Service</label>
         <select class="form-select" id="input-service" name="service" type="text">
                 <option value="0" selected disabled hidden>Choose a Service</option>
                 <option value="1">Hair Color</option>
@@ -13,7 +13,7 @@
         </select>
     </div>
     <div class="mb-3">
-        <label class="form-label" for="input-staff">Staff Preference</label>
+        <label class="form-label" for="input-staff"><i class="fa fa-users-cog"></i>Staff Preference</label>
         <select class="form-select" id="input-staff" name="staff" type="text">
                 <option value="0" selected disabled hidden>Choose a Staff</option>
                 <option value="1">Ann</option>
@@ -22,11 +22,11 @@
         </select>
     </div>
     <div class="mb-3">
-        <label class="form-label" for="input-details">Other Details</label>
+        <label class="form-label" for="input-details"><i class="fa fa-clipboard-list"></i>Other Details</label>
         <textarea class="form-control" id="input-details" name="details" type="text" placeholder="Ex: hair color, nail color, etc."></textarea>
     </div>
-    <div id="error-msg" data-error-status="normal">The username/password does not exist.</div>
+    <div id="error-msg" data-error-status="normal"></div>
     <div id="last-row">
-        <button class="btn" id="btn-submit" type="submit">Add to Cart</button>
+        <button class="btn" id="btn-submit" type="submit"><i class="fa fa-cart-plus"></i>Add to Cart</button>
     </div>
 </form>
