@@ -1,0 +1,50 @@
+.service-section-container{
+    background-color: #FFF;
+    box-shadow: 2px 1px 16px rgba(0, 0, 0, 0.15);
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    padding: 2em;
+    gap: 2em;
+    justify-content: center;
+    width: 40%;
+}
+
+.service-table{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-collapse: separate;
+    border-spacing: 1em 0;
+}
+
+.first-row{
+    text-align: left;
+}
+
+.service-title{
+    font-size: 30px;
+    font-weight: 900;
+    flex: 7 0 0;
+}
+
+.service-option{
+    font-size: 20px;
+    flex: 1 0 0;
+    font-weight: 800;
+    text-align: center;
+    padding: 0em 0em 0em 1em;
+}
+
+.service-suboption{
+    flex: 7 0 0;
+    text-align: left;
+}
+
+.service-price{
+    flex: 1 0 0;
+    text-align: right;
+    font-weight: 600;
+    font-size: 1.2em;
+}

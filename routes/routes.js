@@ -12,4 +12,6 @@ app.get('/register', controller.getRegister);
 
 app.get('/reservation', controller.getReservation);
 
+app.get('/services', controller.getServices);
+
 module.exports = app;

@@ -13,6 +13,10 @@ const controller = {
 
     getReservation: function(req, res) {
         res.render('reservation', {layout: 'index', active: {login: true}});
+    },
+
+    getServices: function(req, res) {
+        res.render('services', {layout: 'index', active: {login: true}});
     }
 }
 
