@@ -1,0 +1,33 @@
+#services-page-container {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--clr-analogous-2-50);
+    padding: 5rem;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+#services-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.reminders-container{
+    background-color: #FFF;
+    box-shadow: 2px 1px 16px rgba(0, 0, 0, 0.15);
+    border-radius: var(--radius);
+    overflow: hidden;
+    padding: 1em 10em;
+    gap: 2em;
+    justify-content: center;
+}
+
+.reminder{
+    text-align: center;
+    color: var(--space-black);
+    font-weight: 700;
+}
