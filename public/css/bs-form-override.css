@@ -35,3 +35,9 @@ textarea.form-control {
 .form-label:has(+ .form-control:focus), .form-label:has(+ .form-select:focus) {
     color: var(--clr-primary);
 }
+
+@media (max-width: 1200px) {
+    textarea.form-control::placeholder {
+        font-size: 1em;
+    }
+}

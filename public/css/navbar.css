@@ -1,3 +1,12 @@
+.navbar > .container-fluid {
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.container-fluid > .navbar-collapse {
+    justify-content: center;
+}
+
 #header {
     background-color: var(--space-black);
 }
@@ -98,3 +107,55 @@
     color: #fff;
 }
 
+@media (max-width: 1200px) {
+    .navbar > .container-fluid {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    #salon-logo {
+        width: 50px;
+        height: 50px;
+    }
+
+    :root {
+        --navbar-height: 60px !important;
+    }
+
+    .navbar-toggler:has(+ .navbar-collapse.collapse:not(.show)) {
+        transform: translateX(calc(var(--navbar-height) / 4));
+    }
+
+    .navbar-toggler:has(+ .navbar-collapse.collapse.show), .navbar-toggler:has(+ .navbar-collapse.collapsing) {
+        margin-left: auto;
+        margin-right: auto;
+        transform: translateX(calc(var(--navbar-height) / 2 * -1 - var(--bs-navbar-toggler-padding-y) / 2));
+    }
+
+    .navbar-collapse.collapsing + #btn-login, .navbar-collapse.collapse.show + #btn-login {
+        position: absolute;
+        top: calc(0.5rem + (var(--navbar-height) / 4) - (0.5rem / 2));
+        right: 1.5rem;
+    }
+
+    .nav-link {
+        text-align: center;
+    }
+
+    .nav-item::after {
+        bottom: 5px;
+    }
+
+    .nav-item.active::after, .nav-item:hover::after {
+        width: 70%;
+    }
+
+    .nav-item.dropdown .dropdown-item {
+        text-align: center;
+    }
+
+    #btn-login {
+        padding: 0.5rem 1.5rem;
+        font-size: 0.75em;
+    }
+}

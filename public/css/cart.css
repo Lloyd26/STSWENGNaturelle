@@ -35,10 +35,18 @@
 
 #reservation-for {
     font-weight: 800;
+    margin-bottom: 0.25em;
+}
+
+#reservation-datetime {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-items: stretch;
+    grid-column-gap: 2rem;
 }
 
 #date-detail, #time-detail {
-    margin-left: 2em;
+    text-align: right;
     font-weight: 700;
 }
 
@@ -48,7 +56,7 @@
     gap: 1.5rem;
     padding: 3rem;
     flex-grow: 1;
-    overflow-y: scroll;
+    overflow-y: auto;
     background-color: #FAFAFA;
 }
 
@@ -83,7 +91,8 @@
 
 .cart-service-name{
     font-weight: 900;
-    font-size: 20px;
+    font-size: 1.5em;
+    color: var(--clr-primary-900);
     transition: color 0.3s ease-in-out;
 }
 
@@ -103,8 +112,9 @@
     color: #FFF;
     height: 1em;
     width: 1em;
-    padding: 0px;
+    padding: 0;
     line-height: 1em;
+    border-radius: var(--radius);
 }
 
 .edit:hover {
@@ -139,15 +149,21 @@
     flex-grow: 8;
 }
 
+#cart-controls-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
 #btn-reserve {
     flex-grow: 1;
     background-color: var(--salon-purple);
     border-radius: var(--radius);
     color: white;
     font-weight: 600;
-    padding: 0.5rem calc(var(--radius) / 1);
+    padding: 0.5rem var(--radius);
     transition: background-color 180ms ease-in-out;
-    font-size: 25px;
+    font-size: 1.5em;
 }
 
 #btn-reserve:hover {
@@ -164,8 +180,8 @@
     border-radius: var(--radius);
     color: white;
     font-weight: 600;
-    padding: 2em;
-    transition: background-image 180ms ease-in-out, background-size 180ms ease-in-out;
+    padding: 2rem;
+    transition: background-image 180ms ease-in-out, background-size 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #btn-reset:hover {
@@ -175,4 +191,79 @@
 
 #btn-reset:active {
     border: none;
+}
+
+@media (max-width: 1200px) {
+    #cart-container {
+        flex: initial;
+    }
+
+    #reservation-details {
+        flex-direction: column;
+    }
+
+    #cart-header {
+        font-size: 2.5em;
+        text-align: center;
+    }
+
+    #cart-header > .fa {
+        margin-right: 0;
+        margin-bottom: 0.5em;
+        display: block;
+    }
+
+    #schedule-detail {
+        width: 100%;
+    }
+
+    #reservation-for {
+        text-align: center;
+    }
+
+    #services-container {
+        padding: 1rem 0;
+        gap: 1rem;
+    }
+
+    .cart-item {
+        padding: calc(var(--radius) / 2);
+        flex-wrap: wrap;
+        border-radius: 0;
+    }
+
+    .edit-btn-container {
+        width: 100%;
+    }
+
+    .edit {
+        width: 100%;
+        background-color: transparent;
+        color: var(--salon-purple);
+        border: 1px solid var(--salon-purple);
+    }
+
+    #reservation-footer {
+        flex-direction: column;
+        align-items: normal;
+    }
+
+    #price-container {
+        text-align: center;
+    }
+
+    #btn-reserve {
+        font-size: 1.125em;
+    }
+
+    #btn-reset {
+        width: 30px;
+        height: 30px;
+        background-size: 35px;
+        padding: 1.5rem;
+    }
+
+    #btn-reset:hover {
+        background-size: 40px;
+    }
 }

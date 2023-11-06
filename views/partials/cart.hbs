@@ -6,15 +6,18 @@
         <h2 id="cart-header"><i class="fa fa-shopping-cart"></i>Your Cart</h2>
         <div id="schedule-detail">
             <div id="reservation-for">Reservation for: </div>
-            <div><i class="fa fa-calendar-alt"></i>Date: <span id="date-detail">01/01/2023</span></div>
-            <div><i class="fa fa-clock"></i>Time: <span id="time-detail">10:00 AM</span></div>
+            <div id="reservation-datetime">
+                <div><i class="fa fa-calendar-alt"></i>Date:</div>
+                <div id="date-detail">01/01/2023</div>
+                <div><i class="fa fa-clock"></i>Time:</div>
+                <div id="time-detail">10:00 AM</div>
+            </div>
         </div>
     </div>
     <div id="services-container">
         <div class="cart-item">
-            <div class="quantity-container">x<span class="quantity">1</span></div>
             <div class="cart-service-details">
-                <div class="cart-service-name">Nail Care</div>
+                <div class="cart-service-name">Nail Care <span class="quantity">(&times;1)</span></div>
                 <label>Preferred Staff:<span class="cart-staff-name">Ann</span></label>
                 <div class="cart-other-details">ung bagay n kulay po sana sa pasko tnx</div>
             </div>
@@ -25,9 +28,8 @@
             </div>
         </div>
         <div class="cart-item">
-            <div class="quantity-container">x<span class="quantity">1</span></div>
             <div class="cart-service-details">
-                <div class="cart-service-name">Nail Care</div>
+                <div class="cart-service-name">Nail Care <span class="quantity">(&times;1)</span></div>
                 <label>Preferred Staff:<span class="cart-staff-name">Ann</span></label>
                 <div class="cart-other-details">ung bagay n kulay po sana sa pasko tnx</div>
             </div>
@@ -44,7 +46,9 @@
             <div id="estimated-price">Estimated Price: </div>
             <div id="total-price-label">₱<span id="total-price-value">1000.00</span></div>
         </div>
-        <button class="btn" id="btn-reserve" type="submit"><i class="fa fa-check"></i>Reserve</button>
-        <button class="btn" id="btn-reset" type="submit"></button>
+        <div id="cart-controls-container">
+            <button class="btn" id="btn-reserve" type="submit"><i class="fa fa-check"></i>Reserve</button>
+            <button class="btn" id="btn-reset" type="submit"></button>
+        </div>
     </div>
 </div>

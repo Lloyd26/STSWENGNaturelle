@@ -112,3 +112,32 @@
 #register-text{
     font-size: 18px;
 }
+
+@media (max-width: 1200px) {
+    #reservation-container {
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1.5rem;
+    }
+
+    #form-container {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+        gap: 1.5rem;
+    }
+
+    .form-reservation {
+        padding: var(--radius) calc(var(--radius) / 2);
+    }
+
+    .reservation-header {
+        font-size: 2em;
+        text-align: center;
+    }
+
+    .reservation-header > .fa {
+        margin-right: 0;
+        margin-bottom: 0.5em;
+        display: block;
+    }
+}
