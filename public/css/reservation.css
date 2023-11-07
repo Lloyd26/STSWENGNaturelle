@@ -86,37 +86,6 @@
     text-decoration: underline;
 }
 
-#last-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 3rem;
-}
-
-#error-msg {
-    padding: 0;
-    font-size: 0;
-}
-
-#error-msg:not([data-error-status="normal"]) {
-    color: #FFF;
-    text-align: center;
-    padding: 0.5rem calc(var(--radius) / 2);
-    border-radius: var(--radius);
-    margin-bottom: 1rem;
-    font-size: 1em;
-    transition: padding 180ms cubic-bezier(0.4, 0, 0.2, 1), font-size 0.375s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
-}
-
-#error-msg[data-error-status="error"] {
-    background-color: var(--clr-triadic-1);
-
-}
-
-#error-msg[data-error-status="success"] {
-    background-color: var(--clr-complementary-700);
-}
-
 #register-text{
     font-size: 18px;
 }
