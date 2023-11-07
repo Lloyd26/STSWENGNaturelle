@@ -14,4 +14,6 @@ app.get('/reservation', controller.getReservation);
 
 app.get('/services', controller.getServices);
 
+app.get('/reserveinfo', controller.getReserveInfo);
+
 module.exports = app;

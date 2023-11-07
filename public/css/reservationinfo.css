@@ -1,0 +1,54 @@
+@import url("bs-form-override.css");
+
+#reservation-container {
+    background-color: var(--clr-analogous-2-50);
+    padding: 5rem;
+    gap: 2rem;
+}
+
+.info-header{
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+}
+
+.info-header h1{
+    color: var(--clr-primary-700);
+    font-size: 3.0em;
+    font-weight: 900;
+    margin-top: 0;
+    text-align: center;
+}
+
+.reservation-list-container {
+    padding: 40px 30px;
+    text-align: center;
+    background-color: #FFF;
+    box-shadow: 2px 1px 16px rgba(0, 0, 0, 0.15);
+    width: 60%;
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 0 auto;
+    top: 50%;
+    left: 50%;
+}
+
+.reservation-list-container button{
+    background-color: #FFF;
+    color: #181515;
+    border: none;
+    padding: 30px 40px;
+    border-radius: var(--radius);
+    margin: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 90%;
+    box-shadow: 2px 1px 16px rgba(0, 0, 0, 0.15);
+    text-align: left;
+}
+
+.reservation-list-container button span{
+    font-weight: 600;
+    font-size: 1.3em;
+    color: #181515;
+}

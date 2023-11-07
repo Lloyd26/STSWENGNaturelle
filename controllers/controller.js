@@ -15,6 +15,10 @@ const controller = {
         res.render('reservation', {layout: 'index', active: {login: true}});
     },
 
+    getReserveInfo: function(req, res) {
+        res.render('reserveinfo', {layout: 'index', active: {login: true}});
+    },
+
     getServices: function(req, res) {
         res.render('services', {layout: 'index', active: {login: true}});
     }
