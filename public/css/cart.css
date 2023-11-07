@@ -20,10 +20,6 @@
     z-index: 1;
 }
 
-#reservation-details > div {
-    font-size: 1.125em;
-}
-
 #cart-header {
     color: var(--clr-primary-700);
     font-size: 3.0em;
@@ -31,6 +27,10 @@
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
     text-align: left;
+}
+
+#schedule-detail {
+    font-size: 1.125em;
 }
 
 #reservation-for {
@@ -42,7 +42,7 @@
     display: grid;
     grid-template-columns: auto auto;
     justify-items: stretch;
-    grid-column-gap: 2rem;
+    grid-column-gap: 1rem;
 }
 
 #date-detail, #time-detail {
@@ -194,16 +194,57 @@
 }
 
 @media (max-width: 1200px) {
-    #cart-container {
-        flex: initial;
-    }
-
     #reservation-details {
+        padding: calc(var(--radius) / 2) calc(var(--radius) / 1.5);
         flex-direction: column;
     }
 
     #cart-header {
         font-size: 2.5em;
+    }
+
+    #schedule-detail {
+        font-size: 1em;
+    }
+
+    #reservation-for {
+        text-align: center;
+    }
+
+    #services-container {
+        padding: 1.5rem;
+    }
+
+    #reservation-footer {
+        flex-direction: column;
+    }
+
+    #price-container {
+        text-align: center;
+    }
+
+    #btn-reserve {
+        font-size: 1.125em;
+    }
+
+    #btn-reset {
+        width: 30px;
+        height: 30px;
+        background-size: 35px;
+        padding: 1.5rem;
+    }
+
+    #btn-reset:hover {
+        background-size: 40px;
+    }
+}
+
+@media (max-width: 992px) {
+    #cart-container {
+        flex: initial;
+    }
+
+    #cart-header {
         text-align: center;
     }
 
@@ -244,26 +285,6 @@
     }
 
     #reservation-footer {
-        flex-direction: column;
-        align-items: normal;
-    }
-
-    #price-container {
-        text-align: center;
-    }
-
-    #btn-reserve {
-        font-size: 1.125em;
-    }
-
-    #btn-reset {
-        width: 30px;
-        height: 30px;
-        background-size: 35px;
-        padding: 1.5rem;
-    }
-
-    #btn-reset:hover {
-        background-size: 40px;
+        align-items: center;
     }
 }
