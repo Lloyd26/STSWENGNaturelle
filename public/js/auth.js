@@ -29,7 +29,16 @@ function showError(error_text) {
     error_container.text(error_text);
 }
 
+function showSuccess(success_text) {
+    let error_container = $('#error-msg');
+    error_container.attr('data-error-status', 'success');
+    error_container.text(success_text);
+}
+
 $(document).ready(function() {
+
+    // ---- Account Related Form Validation ----
+
     $("#form-login").on("submit", function(e) {
         let email = $("#input-email");
         let password = $("#input-password");
@@ -77,4 +86,39 @@ $(document).ready(function() {
             showError("Password must contain at least 8 characters!");
         }
     })
+
+    // ---- Reservation Related Form Validation ----
+
+    $(".form-reservation").on("submit", function(e) {
+        var current_date = new Date();
+        var date_value = $('#input-date').val();
+        var time_value = $('#input-time').val();
+        var format_date = new Date(date_value);
+
+        var time = time_value.split(':');
+        var hours = parseInt(time[0], 10);
+        var minutes = parseInt(time[1], 10);
+
+        format_date.setHours(hours)
+        format_date.setMinutes(minutes)
+
+        console.log(format_date)
+        console.log(current_date)
+
+        if (date_value == ""){
+            e.preventDefault();
+            showError("Please fill in all fields.")
+        } else if (format_date < current_date) {
+            e.preventDefault();
+            showError("Please pick a valid schedule.")
+        } else {
+            e.preventDefault();
+            showSuccess("The desired schedule is available")
+        }
+    })
+
+    
 })
+
+
+

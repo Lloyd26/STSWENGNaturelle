@@ -109,6 +109,17 @@
     transition: padding 180ms cubic-bezier(0.4, 0, 0.2, 1), font-size 0.375s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
 }
 
+#error-msg[data-error-status="success"] {
+    background-color: var(--clr-complementary-600);
+    color: #FFF;
+    text-align: center;
+    padding: 0.5rem calc(var(--radius) / 2);
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+    font-size: 1em;
+    transition: padding 180ms cubic-bezier(0.4, 0, 0.2, 1), font-size 0.375s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+}
+
 #register-text{
     font-size: 18px;
 }

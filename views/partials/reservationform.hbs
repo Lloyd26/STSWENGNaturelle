@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="css/reservationform.css">
 <script src="/js/auth.js"></script>
+<script src="/js/reservationform.js"></script>
 
 <form class="form-reservation">
     <h2 class="reservation-header"><i class="fa fa-plus-square"></i>Reservation</h2>
@@ -11,11 +12,11 @@
         <div class="col">
             <label class="form-label" for="input-time"><i class="fa fa-clock"></i>Time</label>
             <select class="form-select" id="input-time" name="time">
-                <option value="1000" selected>10:00 AM</option>
-                <option value="1430">2:30 PM</option>
-                <option value="2000">8:00 PM</option>
             </select>
         </div>
     </div>
     <div id="error-msg" data-error-status="normal"></div>
+    <div id="last-row">
+        <button class="btn" id="btn-submit" type="submit"><i class="fa fa-check"></i>Check Availability</button>
+    </div>
 </form>
