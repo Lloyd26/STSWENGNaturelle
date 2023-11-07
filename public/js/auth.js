@@ -1,13 +1,4 @@
-function validateForm(...forms) {
-    let valid = true;
-    forms.forEach(form => {
-        form.removeClass("is-invalid");
-        if (!form.val().trim().length)
-            valid = false;
-        return valid;
-    });
-    return valid;
-}
+import {showError, validateForm} from "./form.js";
 
 function isEmailValid(email) {
     const validEmailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -19,26 +10,7 @@ function isContactNumValid(contactNum) {
     return validContactNumRegex.test(contactNum);
 }
 
-function showError(error_text) {
-    let error_container = $('#error-msg');
-    error_container.attr('data-error-status', 'error');
-    error_container.css('animation', 'shake ease-in-out 0.375s');
-    setTimeout(function() {
-        error_container.css('animation', '');
-    }, 500);
-    error_container.text(error_text);
-}
-
-function showSuccess(success_text) {
-    let error_container = $('#error-msg');
-    error_container.attr('data-error-status', 'success');
-    error_container.text(success_text);
-}
-
 $(document).ready(function() {
-
-    // ---- Account Related Form Validation ----
-
     $("#form-login").on("submit", function(e) {
         let email = $("#input-email");
         let password = $("#input-password");
@@ -55,7 +27,7 @@ $(document).ready(function() {
             email.addClass("is-invalid");
             showError("Please enter a valid email address!");
         }
-    })
+    });
 
     $("#form-register").on("submit", function(e) {
         let fname = $("#input-firstname");
@@ -85,40 +57,5 @@ $(document).ready(function() {
             password.addClass("is-invalid");
             showError("Password must contain at least 8 characters!");
         }
-    })
-
-    // ---- Reservation Related Form Validation ----
-
-    $(".form-reservation").on("submit", function(e) {
-        var current_date = new Date();
-        var date_value = $('#input-date').val();
-        var time_value = $('#input-time').val();
-        var format_date = new Date(date_value);
-
-        var time = time_value.split(':');
-        var hours = parseInt(time[0], 10);
-        var minutes = parseInt(time[1], 10);
-
-        format_date.setHours(hours)
-        format_date.setMinutes(minutes)
-
-        console.log(format_date)
-        console.log(current_date)
-
-        if (date_value == ""){
-            e.preventDefault();
-            showError("Please fill in all fields.")
-        } else if (format_date < current_date) {
-            e.preventDefault();
-            showError("Please pick a valid schedule.")
-        } else {
-            e.preventDefault();
-            showSuccess("The desired schedule is available")
-        }
-    })
-
-    
-})
-
-
-
+    });
+});
