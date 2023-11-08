@@ -35,7 +35,7 @@ function generateTimeOptions() {
 $(document).ready(function(){
     generateTimeOptions();
 
-    $(".form-reservation").on("submit", function(e) {
+    $("#form-reservation").on("submit", function(e) {
         let current_date = new Date();
         let date_value = $('#input-date').val();
         let time_value = $('#input-time').val();
@@ -51,19 +51,19 @@ $(document).ready(function(){
 
         if (!date_value){
             e.preventDefault();
-            showError("Please fill in all fields.");
+            showError("Please fill in all fields.", "#reserve-error-msg");
         } else if (format_date < current_date) {
             e.preventDefault();
-            showError("Please pick a valid schedule."); 
+            showError("Please pick a valid schedule.", "#reserve-error-msg"); 
         } else if (day_diff < 1 && format_date.getDate() == current_date.getDate()) {
             e.preventDefault();
-            showError("Same day reservations are not accommodated.");
+            showError("Same day reservations are not accommodated.", "#reserve-error-msg");
         } else if (format_date > reservation_limit) {
             e.preventDefault();
-            showError("You can only reserve a date that is within two weeks from now.");
+            showError("You can only reserve a date that is within two weeks from now.", "#reserve-error-msg");
         } else {
             e.preventDefault();
-            showSuccess("The desired schedule is available");
+            showSuccess("The desired schedule is available", "#reserve-error-msg");
         }
     });
 });

@@ -76,12 +76,12 @@
     margin-top: 3rem;
 }
 
-#error-msg {
+.error-msg {
     padding: 0;
     font-size: 0;
 }
 
-#error-msg:not([data-error-status="normal"]) {
+.error-msg:not([data-error-status="normal"]) {
     color: #FFF;
     text-align: center;
     padding: 0.5rem calc(var(--radius) / 2);
@@ -93,11 +93,11 @@
     flex-wrap: wrap;
 }
 
-#error-msg[data-error-status="error"] {
+.error-msg[data-error-status="error"] {
     background-color: var(--clr-triadic-1);
 
 }
 
-#error-msg[data-error-status="success"] {
+.error-msg[data-error-status="success"] {
     background-color: var(--clr-complementary-700);
 }

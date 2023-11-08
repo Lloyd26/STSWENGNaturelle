@@ -20,12 +20,12 @@ $(document).ready(function() {
         if (!validForm) {
             e.preventDefault();
             email.focus();
-            showError("Please enter your email and password.")
+            showError("Please enter your email and password.", "#login-error-msg")
         } else if (!isEmailValid(email.val())) {
             e.preventDefault();
             email.focus();
             email.addClass("is-invalid");
-            showError("Please enter a valid email address!");
+            showError("Please enter a valid email address!", "#login-error-msg");
         }
     });
 
@@ -40,22 +40,22 @@ $(document).ready(function() {
 
         if (!validForm) {
             e.preventDefault();
-            showError("Please fill out the form.")
+            showError("Please fill out the form.", "#reg-error-msg")
         } else if (!isEmailValid(email.val())) {
             e.preventDefault();
             email.focus();
             email.addClass("is-invalid");
-            showError("Please enter a valid email address!");
+            showError("Please enter a valid email address!", "#reg-error-msg");
         } else if (!isContactNumValid(contact_num.val())) {
             e.preventDefault();
             contact_num.focus();
             contact_num.addClass("is-invalid");
-            showError("Please follow the contact number format: 09XXXXXXXXX");
+            showError("Please follow the contact number format: 09XXXXXXXXX", "#reg-error-msg");
         } else if (password.val().length < 8) {
             e.preventDefault();
             password.focus();
             password.addClass("is-invalid");
-            showError("Password must contain at least 8 characters!");
+            showError("Password must contain at least 8 characters!", "#reg-error-msg");
         }
     });
 });

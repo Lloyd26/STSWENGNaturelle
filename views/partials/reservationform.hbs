@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="css/reservationform.css">
 <script type="module" src="/js/reservationform.js"></script>
 
-<form class="form-reservation">
+<form class="form-reservation" id="form-reservation">
     <h2 class="reservation-header"><i class="fa fa-plus-square"></i>Reservation</h2>
     <div class="row g-4 mb-3">
         <div class="col">
@@ -15,7 +15,7 @@
             </select>
         </div>
     </div>
-    <div id="error-msg" data-error-status="normal"></div>
+    <div class="error-msg" id="reserve-error-msg" data-error-status="normal"></div>
     <div id="last-row">
         <button class="btn" id="btn-submit" type="submit"><i class="fa fa-check"></i>Check Availability</button>
     </div>
