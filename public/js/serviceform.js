@@ -6,7 +6,10 @@ $(document).ready(function(){
         let staff = $('#input-staff').val()
         let details = $('#input-details').val()
         console.log(service,staff)
-        if (!service){
+        if ($('#input-service').prop('disabled')){
+            e.preventDefault();
+            showError("Select a valid reservation date first.", "#add-error-msg");
+        } else if (!service){
             e.preventDefault();
             showError("Please select an service to put in the cart.", "#add-error-msg");
         } else if (!staff){

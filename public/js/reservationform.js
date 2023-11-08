@@ -1,4 +1,4 @@
-import {showError, showSuccess} from "./form.js";
+import {showError, showSuccess, disableServiceForm} from "./form.js";
 
 function generateTimeOptions() {
     let input_time = $("#input-time");
@@ -51,18 +51,23 @@ $(document).ready(function(){
 
         if (!date_value){
             e.preventDefault();
+            disableServiceForm(true);
             showError("Please fill in all fields.", "#reserve-error-msg");
         } else if (format_date < current_date) {
             e.preventDefault();
+            disableServiceForm(true);
             showError("Please pick a valid schedule.", "#reserve-error-msg"); 
         } else if (day_diff < 1 && format_date.getDate() == current_date.getDate()) {
             e.preventDefault();
+            disableServiceForm(true);
             showError("Same day reservations are not accommodated.", "#reserve-error-msg");
         } else if (format_date > reservation_limit) {
             e.preventDefault();
+            disableServiceForm(true);
             showError("You can only reserve a date that is within two weeks from now.", "#reserve-error-msg");
         } else {
             e.preventDefault();
+            disableServiceForm(false);
             showSuccess("The desired schedule is available", "#reserve-error-msg");
         }
     });
