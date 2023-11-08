@@ -41,19 +41,26 @@ $(document).ready(function(){
         let time_value = $('#input-time').val();
         let format_date = new Date(date_value);
 
-        let time = time_value.split(':');
-        let hours = parseInt(time[0], 10);
-        let minutes = parseInt(time[1], 10);
+        current_date.setHours(0,0,0,0)
 
-        format_date.setHours(hours);
-        format_date.setMinutes(minutes);
+        let reservation_limit = new Date()
+        reservation_limit.setDate(current_date.getDate() + 14)
+
+        let time_diff = format_date.getTime() - current_date.getTime(); 
+        let day_diff = (time_diff / (1000 * 3600 * 24)); 
 
         if (!date_value){
             e.preventDefault();
             showError("Please fill in all fields.");
         } else if (format_date < current_date) {
             e.preventDefault();
-            showError("Please pick a valid schedule.");
+            showError("Please pick a valid schedule."); 
+        } else if (day_diff < 1 && format_date.getDate() == current_date.getDate()) {
+            e.preventDefault();
+            showError("Same day reservations are not accommodated.");
+        } else if (format_date > reservation_limit) {
+            e.preventDefault();
+            showError("You can only reserve a date that is within two weeks from now.");
         } else {
             e.preventDefault();
             showSuccess("The desired schedule is available");

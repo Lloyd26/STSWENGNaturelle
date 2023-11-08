@@ -89,6 +89,8 @@
     margin-bottom: 1rem;
     font-size: 1em;
     transition: padding 180ms cubic-bezier(0.4, 0, 0.2, 1), font-size 0.375s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+    flex: 0;
+    flex-wrap: wrap;
 }
 
 #error-msg[data-error-status="error"] {
