@@ -84,6 +84,15 @@
     font-size: 20px;
 }
 
+#user-bt{
+    background: linear-gradient(180deg, var(--salon-purple), transparent) transparent;
+    background-color: transparent;
+}
+
+#log-out-bt:hover{
+    color: var(--clr-triadic-1-400);
+}
+
 .last{
     border-right: none;
 }

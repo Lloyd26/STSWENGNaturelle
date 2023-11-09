@@ -37,6 +37,17 @@
                 </li>
             </ul>
         </div>
+        {{#if active.login}}
+        <div class="nav-item dropdown{{#if active.services}} active{{/if}}" id="user-bt">
+            <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Hi, First Name </a>
+            <ul class="dropdown-menu w-100" id="user-dropdown-menu">
+                <li><a href="" class="dropdown-item">My Profile</a></li>
+                <li><a href="" class="dropdown-item">My Reservations</a></li>
+                <li><a href="" class="dropdown-item w-100 h-100" id="log-out-bt">Log Out</a></li>
+            </ul>
+        </div>
+        {{else}}
         <a class="btn{{#if active.login}} active{{/if}}" id="btn-login" href="/login">LOG IN</a>
+        {{/if}}
     </div>
 </nav>
