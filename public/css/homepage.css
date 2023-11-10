@@ -1,10 +1,74 @@
-#page-frame{
+#homepage-container{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    background-color: var(--clr-analogous-2-50);
+    gap: 2rem;
+    padding: 2em;
+    min-height: 100vh;
 }
 
-#main-content{
-    height: 100vh;
+#title-promo-container {
+    background-color: #FFF;
+    box-shadow: 2px 1px 16px rgba(0, 0, 0, 0.15);
+    border-radius: var(--radius);
     width: 100%;
-    background-color: white;
+    display: flex;
+    flex-direction: row;
+}
+
+#title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 5 0 0;
+}
+
+#salon-title{
+    font-family: "Dr Sugiyama";
+    color: var(--salon-purple);
+    font-size: 6em;
+    text-align: center;
+    line-height: 1em;
+}
+
+#salon-subtitle{
+    margin-top: 1.5em;
+    font-family: "Open Sans";
+    letter-spacing: .5em;
+    font-weight: 500;
+    color: gray;
+}
+
+#salon-address{
+    margin-top: 1.5em;
+    font-weight: 800;
+    font-size: 1.5em;
+}
+
+#btn-reservation{
+    padding: 1rem 2rem;
+    background-color: var(--salon-purple);
+    color: #FFF;
+    border-radius: 50px;
+    transition: background-color 180ms ease-in-out;
+    font-weight: 700;
+    font-size: 1.2em;
+    margin-top: 3em;
+}
+
+i{
+    margin: 0em .5em;
+}
+
+#promo-container{
+    flex: 5 0 0;
+}
+
+.carousel-inner{
+    background-color: var(--space-black);
+    display: flex;
+    align-items: center;
+    border-top-right-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
 }
