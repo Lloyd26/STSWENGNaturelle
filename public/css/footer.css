@@ -1,71 +1,85 @@
-#footer{
+#footer {
     background-color: var(--space-black);
-    height: 375px;
+    color: #FFF;
     width: 100%;
+    height: 25rem;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
     bottom: 0;
-    color: white;
-    justify-content: center;
-    align-items: center;
+    padding: 1rem;
 }
 
-#walk-in-info{
+#walk-in-info {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    gap: 25px;
+    justify-content: center;
+    gap: 1rem;
 }
 
-#walk-in-address{
-    font-weight: 600;
-    font-size: 25px;
+#walk-in-address {
+    font-weight: 700;
+    font-size: 1.5em;
 }
 
-#contact-info{
-    margin: 35px;
+#contact-info {
+    margin: 2rem;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
     align-items: center;
-    gap: 30px;
+    justify-content: center;
+    gap: 2rem;
     width: 100%;
 }
 
-#facebook-info{
+#facebook-info {
     display: flex;
     flex-direction: row;
-    border-right: 2px gray solid;
-    gap: 5;
-    justify-content: right;
+    border-right: 2px solid gray;
+    gap: 0.5rem;
     align-items: center;
+    justify-content: right;
     flex: 5 5 0;
-    padding: 20px;
+    padding: 1.25rem;
 }
 
-#visit-text{
+#visit-text {
     width: 90px;
     font-weight: 600;
 }
 
-#fb-logo{
+#fb-logo {
     height: 60px;
     width: 60px;
 }
 
-#telephone-icon{
+#telephone-icon {
     height: 15px;
     width: 15px;
     margin-right: 10px;
 }
 
-#telephone-info{
+#telephone-info {
     flex: 5 5 0;
     justify-content: left;
     align-items: center;
 }
 
-#telephone-num{
+#telephone-num {
     font-weight: 600;
+}
+
+#telephone-num > .fa-phone {
+    color: var(--salon-purple);
+}
+
+#telephone-num > a {
+    color: #FFF;
+}
+
+#copyright {
+    font-weight: 200;
+    font-size: 0.95em;
 }
