@@ -23,6 +23,10 @@ body {
     font-family: 'Raleway', sans-serif;
 }
 
+::selection {
+    background-color: var(--clr-primary-100);
+}
+
 .sticky {
     position: sticky;
     top: 0;
