@@ -1,21 +1,28 @@
-const { Schema, SchemaTypes, model } = require('mongoose');
+const mongoose = require('mongoose');
 
-const userSchema = new Schema ({
-    full_name: {
-        type: SchemaTypes.String
+const UserSchema = new mongoose.Schema({
+    firstName: {
+        type: String,
+        required: true
     },
-    contact_num: {
-        type: SchemaTypes.Number
+    lastName: {
+        type: String,
+        required: true
+    },
+    contactNumber: {
+        type: String,
+        required: true
     },
     email: {
-        type: SchemaTypes.String
+        type: String,
+        required: true
     },
     password: {
-        type: SchemaTypes.String,
+        type: String,
         required: true
     }
 })
 
 // for MongoDB collection "users"
-const User = model("users", userSchema, "users");
-module.exports = User;
+//const User = model("users", userSchema, "users");
+module.exports = mongoose.model('User', UserSchema, "users");
