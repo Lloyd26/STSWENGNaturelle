@@ -38,9 +38,20 @@
 }
 
 #salon-address{
-    margin-top: 1.5em;
+    margin-top: 1.5rem;
     font-weight: 800;
     font-size: 1.5em;
+}
+
+#salon-contact {
+    margin-top: 1rem;
+    font-weight: 600;
+    font-size: 1.25em;
+    opacity: 0.8;
+}
+
+#salon-contact > a {
+    color: #000;
 }
 
 #btn-reservation {
