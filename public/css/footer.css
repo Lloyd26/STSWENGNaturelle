@@ -22,6 +22,7 @@
 #walk-in-address {
     font-weight: 700;
     font-size: 1.5em;
+    text-align: center;
 }
 
 #contact-info {
@@ -50,8 +51,8 @@
 }
 
 #fb-logo {
-    height: 60px;
-    width: 60px;
+    height: 4rem;
+    width: 4rem;
 }
 
 #telephone-icon {
@@ -81,4 +82,12 @@
 #copyright {
     font-weight: 200;
     font-size: 0.95em;
+    text-align: center;
+}
+
+@media (max-width: 992px) {
+    #fb-logo {
+        width: 2rem;
+        height: 2rem;
+    }
 }
