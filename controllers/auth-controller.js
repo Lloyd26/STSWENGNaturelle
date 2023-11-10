@@ -38,6 +38,14 @@ const controller = {
         res.redirect('/');
     },
 
+    getLogout: function(req, res) {
+        req.session.destroy(err => {
+            if (err) throw err;
+
+            res.redirect('/');
+        })
+    },
+
     getRegister: function(req, res) {
         res.render('register', {layout: 'index', active: {login: true}});
     }
