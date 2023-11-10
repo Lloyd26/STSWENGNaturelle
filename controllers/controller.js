@@ -2,11 +2,22 @@ const User = require('../models/User');
 
 const controller = {
     getIndex: function(req, res) {
-        res.render('main', {layout: 'index', active: {home: true}});
+        res.render('main', {
+            layout: 'index',
+            active: {home: true},
+            logged_in: {
+                state: req.session.logged_in,
+                user: req.session.user
+            }
+        });
     },
 
     getLogin: function(req, res) {
-        res.render('login', {layout: 'index', active: {login: true}});
+        if (!req.session.logged_in) {
+            res.render('login', {layout: 'index', active: {login: true}});
+        } else {
+            res.redirect('/');
+        }
     },
 
     postLogin: async function(req, res) {
@@ -27,8 +38,15 @@ const controller = {
             return;
         }
 
-        res.render('login', {layout: 'index', active: {login: true},
-            logged_in: {state: true}});
+        req.session.logged_in = true;
+        req.session.user = {
+            firstName: result.firstName,
+            lastName: result.lastName,
+            contactNumber: result.contactNumber,
+            email: result.email
+        };
+
+        res.redirect('/');
     },
 
     getRegister: function(req, res) {

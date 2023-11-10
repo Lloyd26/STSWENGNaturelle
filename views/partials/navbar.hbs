@@ -39,7 +39,7 @@
         </div>
         {{#if logged_in.state}}
         <div class="dropdown">
-            <div class="dropdown-toggle" id="nav-user" data-bs-toggle="dropdown"><i class="fa fa-user-circle"></i>First Name</div>
+            <div class="dropdown-toggle" id="nav-user" data-bs-toggle="dropdown"><i class="fa fa-user-circle"></i>{{logged_in.user.firstName}}</div>
             <ul class="dropdown-menu w-100" id="user-dropdown-menu">
                 <li><a href="" class="dropdown-item">My Profile</a></li>
                 <li><a href="" class="dropdown-item">My Reservations</a></li>
