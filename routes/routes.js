@@ -7,6 +7,7 @@ const app = express();
 app.get('/', controller.getIndex);
 
 app.get('/login', controller.getLogin);
+app.post('/login', controller.postLogin);
 
 app.get('/register', controller.getRegister);
 
