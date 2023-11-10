@@ -17,6 +17,7 @@ const hbs = exp_hbs.create({
     defaultLayout: 'index',
     partialsDir: path.join(__dirname, 'views/partials'),
     helpers: {
+        isDefined(variable) { return variable !== undefined; },
         isUndefined(variable) { return variable === undefined; },
         isEmpty(string) { return string === ''; }
     }

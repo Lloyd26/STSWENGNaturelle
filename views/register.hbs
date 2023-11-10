@@ -2,31 +2,31 @@
 <script type="module" src="/js/auth.js"></script>
 
 <div id="form-wrapper">
-    <form id="form-register" class="form-container">
+    <form id="form-register" class="form-container" method="post">
         <h2 id="form-header">Create an Account</h2>
         <div class="row mb-3">
             <div class="col">
                 <label class="form-label" for="input-firstname">First Name</label>
-                <input class="form-control" id="input-firstname" name="firstname" type="text" placeholder="Ex: Juan" required>
+                <input class="form-control" id="input-firstname" name="first_name" type="text" placeholder="Ex: Juan" {{#if (isDefined form.firstName)}}value="{{form.firstName}}" {{/if}}required>
             </div>
             <div class="col">
                 <label class="form-label" for="input-lastname">Last Name</label>
-                <input class="form-control" id="input-lastname" name="lastname" type="text" placeholder="Ex: Dela Cruz" required>
+                <input class="form-control" id="input-lastname" name="last_name" type="text" placeholder="Ex: Dela Cruz" {{#if (isDefined form.lastName)}}value="{{form.lastName}}" {{/if}}required>
             </div>
         </div>
         <div class="mb-3">
             <label class="form-label" for="input-email">Email Address</label>
-            <input class="form-control" id="input-email" name="email" type="email" placeholder="Ex: juandelacruz@gmail.com" required>
+            <input class="form-control" id="input-email" name="email" type="email" placeholder="Ex: juandelacruz@gmail.com"  {{#if (isDefined form.email)}}value="{{form.email}}" {{/if}}required>
         </div>
         <div class="mb-3">
-            <label class="form-label" for="input-contactnum">Contact Number</label>
-            <input class="form-control" id="input-contactnum" name="contactnum" type="tel" placeholder="Ex: 09123456789" required>
+            <label class="form-label" for="input-contact_number">Contact Number</label>
+            <input class="form-control" id="input-contact_number" name="contact_number" type="tel" placeholder="Ex: 09123456789"  {{#if (isDefined form.contactNumber)}}value="{{form.contactNumber}}" {{/if}}required>
         </div>
         <div class="mb-3">
             <label class="form-label" for="input-password">Password</label>
             <input class="form-control" id="input-password" name="password" type="password" placeholder="Must be at least 8 characters" required>
         </div>
-        <div class="error-msg" id="reg-error-msg"data-error-status="normal"></div>
+        <div class="error-msg" id="reg-error-msg" data-error-status="{{#if (isUndefined error)}}normal{{else}}error{{/if}}">{{error}}</div>
         <div id="last-row">
             <div id="form-switch-text">Already have an account? <a href="/login" id="form-switch-link">Login</a></div>
             <button class="btn" id="btn-submit" type="submit">Sign Up</button>
