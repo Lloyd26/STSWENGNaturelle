@@ -15,16 +15,22 @@ const controller = {
         let password = req.body.password;
 
         if (email === undefined || password === undefined) {
-            res.render('login', {layout: 'index', active: {login: true},
-                error: 'Please enter your email and password.'});
+            res.render('login', {
+                layout: 'index',
+                active: {login: true},
+                error: 'Please enter your email and password.'
+            });
             return;
         }
 
         let result = await User.findOne({email: email, password: password});
 
         if (result == null) {
-            res.render('login', {layout: 'index', active: {login: true},
-                error: 'Incorrect username or password!'});
+            res.render('login', {
+                layout: 'index',
+                active: {login: true},
+                error: 'Incorrect email address or password!'
+            });
             return;
         }
 
