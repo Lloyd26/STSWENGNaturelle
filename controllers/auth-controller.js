@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const e = require("express");
+const bcrypt = require('bcrypt');
 
 const controller = {
     getLogin: function(req, res) {
@@ -23,9 +24,20 @@ const controller = {
             return;
         }
 
-        let result = await User.findOne({email: email, password: password});
+        let result = await User.findOne({email: email});
 
         if (result == null) {
+            res.render('login', {
+                layout: 'index',
+                active: {login: true},
+                error: 'Incorrect email address or password!'
+            });
+            return;
+        }
+
+        let passwordCompare = await bcrypt.compare(password, result.password);
+
+        if (!passwordCompare) {
             res.render('login', {
                 layout: 'index',
                 active: {login: true},
@@ -211,12 +223,16 @@ const controller = {
             return;
         }
 
+        const saltRounds = 10;
+
+        let passwordHashed = await bcrypt.hash(password, saltRounds);
+
         let user = {
             firstName: firstName,
             lastName: lastName,
             email: email,
             contactNumber: contactNumber,
-            password: password
+            password: passwordHashed
         }
 
         await User.create(user);
