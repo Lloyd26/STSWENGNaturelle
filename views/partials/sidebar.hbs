@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="/css/sidebar.css">
+
+<div class="sticky-top h-100" id="left-side-container">
+    <div id="salon-title">Salon<br/>Naturelle</div>
+    <div id="sidebar-btn-container">
+        <a href="/admin" class="btn border-0 sidebar-btn{{#if active.adminhome}} active{{/if}}">Dashboard<i class="fa-solid fa-home"></i></a>
+        <hr>
+        <a href="/admin" class="btn border-0 sidebar-btn{{#if active.adminreservations}} active{{/if}}">Reservations<i class="fa-solid fa-sticky-note"></i></a>
+        <a href="/admin" class="btn border-0 sidebar-btn{{#if active.adminservices}} active{{/if}}">Services<i class="fa-solid fa-spa"></i></a>
+        <a href="/admin" class="btn border-0 sidebar-btn{{#if active.adminemployees}} active{{/if}}">Employees<i class="fa-solid fa-users-cog"></i></a>
+        <a href="/admin" class="btn border-0 sidebar-btn{{#if active.adminpromos}} active{{/if}}">Promos<i class="fa-solid fa-tag"></i></a>
+    </div>
+    <div id="bottom-btn-container">
+        <a href="/" class="btn bottom-btn" id="customer-view-btn"><i class="fa-solid fa-laptop"></i>Customer View</a>
+        <div id="account-tab-container">
+            <btn class="btn bottom-btn" id="settings-btn"><i class="fa-solid fa-gear"></i>Settings</btn>
+            <btn class="btn bottom-btn" id="admin-logout-btn"><i class="fa-solid fa-right-from-bracket"></i>Log Out</btn>
+        </div>
+    </div>
+</div>

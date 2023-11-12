@@ -1,0 +1,63 @@
+#dashboard-wrapper{
+    background-color: var(--clr-primary-50);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4em;
+    overflow: auto;
+    flex: 7.5 0 0;
+}
+
+h2{
+    font-size: 4em;
+    font-weight: 800;
+    color: var(--clr-primary);
+    text-align: center;
+    margin-bottom: .5em;
+}
+
+#tools-container{
+    background-color: #FFF;
+    flex:  0 5 0;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5em;
+    gap: 1em;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-radius: var(--radius);
+    box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.10);
+}
+
+.tool-row{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+.tool-btn{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: .5em;
+    padding: 1.5em;
+    background-color: #FFF;
+    border-radius: 40px;
+    border: 1px var(--clr-primary-200) solid;
+    font-weight: 600;
+    flex: 5 0 0;
+    font-size: 1.5em;
+    flex-wrap: wrap;
+    color: var(--clr-primary-200);
+}
+
+.tool-btn:hover{
+    background-color: var(--clr-primary-50) !important;
+    color: var(--salon-purple) !important;
+    border: 2px solid var(--clr-primary-50) !important;
+}
+
+.tool-btn:active{
+    border: 2px solid var(--clr-primary-200) !important;
+}
