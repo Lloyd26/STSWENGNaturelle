@@ -73,7 +73,7 @@ const controller = {
     getAdminIndex: function(req, res) {
         res.render('main-admin', {
             layout: 'admin',
-            active: {services: true},
+            active: {adminhome: true},
             logged_in: {
                 state: req.session.logged_in,
                 user: req.session.user
