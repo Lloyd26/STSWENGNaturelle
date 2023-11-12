@@ -3,7 +3,7 @@ const exp_hbs = require('express-handlebars');
 const path = require('path');
 
 const mongoose = require('mongoose');
-const MONGODB_URL = "mongodb+srv://test_user:test123@naturellesalon.oxkbfbn.mongodb.net/?retryWrites=true&w=majority";
+const MONGODB_URL = "mongodb+srv://dev:dev@naturellesalon.oxkbfbn.mongodb.net/NaturelleSalon?retryWrites=true&w=majority";
 
 const session = require('express-session');
 const MongoStore = require('connect-mongo');

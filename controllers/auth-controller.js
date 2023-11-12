@@ -54,7 +54,8 @@ const controller = {
             email: result.email
         };
 
-        res.redirect('/');
+        if (req.query.next) res.redirect(decodeURIComponent(req.query.next));
+        else res.redirect('/');
     },
 
     getLogout: function(req, res) {

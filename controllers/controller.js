@@ -22,6 +22,11 @@ const controller = {
     },
 
     getReservation: function(req, res) {
+        if (!req.session.logged_in) {
+            res.redirect("/login?next=" + encodeURIComponent("/reservation"));
+            return;
+        }
+
         res.render('reservation', {
             layout: 'index',
             active: {reservation: true},
