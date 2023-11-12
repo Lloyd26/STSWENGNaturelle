@@ -68,6 +68,17 @@ const controller = {
                 user: req.session.user
             }
         });
+    },
+
+    getAdminIndex: function(req, res) {
+        res.render('main-admin', {
+            layout: 'admin',
+            active: {services: true},
+            logged_in: {
+                state: req.session.logged_in,
+                user: req.session.user
+            }
+        });
     }
 }
 

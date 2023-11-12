@@ -1,0 +1,106 @@
+#dashboard-wrapper{
+    background-color: #FFF;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    overflow: auto;
+}
+
+#left-side-container{
+    display: flex;
+    flex-direction: column;
+    background-color: #FFF;
+    flex: 2 0 0;
+    padding: 2em 0em;
+    box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.10);
+}
+
+#right-side-container{
+    display: flex;
+    flex-direction: column;
+    flex: 8 0 0;
+    justify-content: center;
+    padding: 4em;
+}
+
+#salon-title{
+    font-family: "Dr Sugiyama", cursive;
+    color: var(--salon-purple);
+    font-size: 3em;
+    text-align: center;
+    line-height: 1em;
+}
+
+#sidebar-btn-container{
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    padding: 1em;
+    justify-content: center;
+}
+
+.sidebar-btn{
+    box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.10);
+}
+
+.sidebar-btn:hover{
+    color: white !important;
+    background-color: var(--space-black) !important;
+}
+
+#admin-logout-btn{
+    color: var(--clr-triadic-1-400) !important;
+}
+
+#admin-logout-btn:hover{
+    color: white !important;
+    background-color: var(--clr-triadic-1-400) !important;
+}
+
+h2{
+    font-size: 4em;
+    font-weight: 800;
+}
+
+#tools-container{
+    background-color: var(--salon-purple);
+    flex:  0 5 0;
+    display: flex;
+    flex-direction: row;
+    padding: 2em;
+    gap: 2em;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-radius: var(--radius);
+}
+
+.tool-btn{
+    padding: 4em;
+    background-color: #FFF;
+    box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.20);
+    flex: 40% 0 0;
+    border-radius: var(--radius);
+    font-weight: 600;
+}
+
+.tool-btn:hover{
+    background-color: #FFF !important;
+    color: var(--salon-purple) !important;
+    border: 2px solid var(--clr-analogous-2-900) !important;
+}
+
+.tool-btn:active, .tool-btn:focus{
+    background-color: var(--clr-primary-50) !important;
+    color: var(--salon-purple) !important;
+    border: 2px solid var(--clr-analogous-2-900) !important;
+}
+
+#user-name{
+    align-items: center;
+    justify-content: center;
+    margin-top: 3em;
+    margin-bottom: auto;
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: 600;
+}
