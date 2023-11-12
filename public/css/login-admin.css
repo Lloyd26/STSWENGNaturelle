@@ -1,0 +1,10 @@
+@import url("form.css");
+
+#form-wrapper {
+    min-height: 100vh;
+    background-color: var(--salon-purple);
+}
+
+.form-container {
+    width: 40%;
+}
