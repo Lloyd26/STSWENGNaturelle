@@ -7,6 +7,8 @@ const app = express();
 
 app.get('/', controller.getIndex);
 
+app.get('/about', controller.getAbout);
+
 app.get('/login', auth_controller.getLogin);
 app.post('/login', auth_controller.postLogin);
 

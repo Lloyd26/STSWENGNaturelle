@@ -10,6 +10,17 @@ const controller = {
         });
     },
 
+    getAbout: function(req, res) {
+        res.render('about', {
+            layout: 'index',
+            active: {about: true},
+            logged_in: {
+                state: req.session.logged_in,
+                user: req.session.user
+            }
+        });
+    },
+
     getReservation: function(req, res) {
         res.render('reservation', {
             layout: 'index',
