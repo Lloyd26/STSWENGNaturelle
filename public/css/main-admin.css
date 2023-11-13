@@ -1,7 +1,3 @@
 body {
     background-color: var(--clr-primary-50);
-    height: 100vh;
-    display: flex;
-    flex-direction: row;
-    flex: 7.5 0 0;
 }

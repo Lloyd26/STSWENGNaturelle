@@ -17,7 +17,15 @@
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     </head>
     <body>
+        <div id="main-wrapper">
+            <div class="row g-0">
+                <div class="col-3">
         {{>sidebar}}
+                </div>
+                <div class="col-9">
         {{{body}}}
+                </div>
+            </div>
+        </div>
     </body>
 </html>

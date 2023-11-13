@@ -1,36 +1,74 @@
-#left-side-container{
+#sidenav {
     display: flex;
     flex-direction: column;
     background-color: #FFF;
-    flex: 2.5 0 0;
-    box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.10);
+    box-shadow: 2px 1px 16px rgba(0, 0, 0, 0.15);
     align-items: center;
+    height: 100vh;
+    position: sticky;
+    top: 0;
 }
 
-#sidebar-btn-container{
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    width: 100%;
-    padding: 1.5em 0em;
-    margin-bottom: auto;
-}
-
-#admin-info{
-    display: flex;
-    flex-direction: column;
-}
-
-#salon-title{
+#salon-title {
     font-family: "Dr Sugiyama", cursive;
     color: var(--salon-purple);
     font-size: 3em;
     text-align: center;
     line-height: 1em;
-    padding: 1em 0em;
+    padding: 1em;
 }
 
-#bottom-btn-container{
+#sidenav-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 1.5rem;
+    margin-bottom: auto;
+}
+
+#sidenav-container > .nav {
+    flex-wrap: nowrap;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#sidenav-container .nav-link {
+    color: #888;
+    font-weight: 700;
+    display: flex;
+    margin-right: auto;
+    width: 100%;
+    align-items: center;
+    padding: calc(var(--radius) / 4) calc(var(--radius) / 2);
+    border-radius: var(--radius);
+    font-size: 1.125em;
+}
+
+#sidenav-container .nav-link > .fa {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+#sidenav-container .nav-link:hover {
+    color: var(--clr-primary);
+}
+
+#sidenav-container .nav-item.active > .nav-link {
+    background-color: var(--clr-primary-50);
+    color: var(--salon-purple);
+}
+
+#sidenav-container hr {
+    border-top-color: #888;
+}
+
+#admin-info {
+    display: flex;
+    flex-direction: column;
+}
+
+#bottom-btn-container {
     display: flex;
     flex-direction: column;
     gap: 1em;
@@ -39,33 +77,7 @@
     width: 100%;
 }
 
-.sidebar-btn{
-    color: gray;
-    font-weight: 700;
-    display: flex;
-    margin-right: auto;
-    width: 100%;
-    align-items: center;
-    padding: .5em 2em;
-    border-radius: 0px;
-}
-
-.sidebar-btn > i{
-    margin-left: auto;
-}
-
-.sidebar-btn:hover{
-    color: var(--clr-primary);
-    background-color: var(--clr-primary-50);
-    box-shadow: 2px 5px 15px var(--clr-primary-50);
-}
-
-.sidebar-btn.active{
-    color: var(--clr-primary);
-    border: 0;
-}
-
-#account-tab-container{
+#account-tab-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -73,44 +85,54 @@
     gap: .5em;
 }
 
-.bottom-btn{
+.bottom-btn {
     display: flex;
-    gap: .5em;
     justify-content: center;
     align-items: center;
+    border-width: 1px;
+    border-style: solid;
     border-radius: var(--radius);
-    padding: .5em 0em;
+    padding: 0.5rem 0;
+    font-weight: 600;
 }
 
-#customer-view-btn{
+.bottom-btn:hover {
+    border-color: transparent !important;
+}
+
+#customer-view-btn {
     font-weight: 700;
+    font-size: 1.125em;
     color: var(--clr-primary);
     background-color: var(--clr-primary-50);
+    border-color: var(--clr-primary-100);
+    padding: 0.75rem 0;
 }
 
-#customer-view-btn:hover{
+#customer-view-btn:hover {
     background-color: var(--clr-primary);
     color: var(--clr-primary-50);
 }
 
-#admin-logout-btn{
-    color: var(--clr-triadic-1-400) !important;
-    border: 2px solid var(--clr-triadic-1-400);
+#settings-btn {
+    color: #888;
+    border-color: #CCC;
     flex: 5 0 0;
 }
 
-#admin-logout-btn:hover{
-    color: white !important;
-    background-color: var(--clr-triadic-1-400) !important;
+#settings-btn:hover {
+    color: #FFF;
+    background-color: #888;
 }
 
-#settings-btn{
-    color: gray !important;
-    border: 2px solid gray;
+#admin-logout-btn {
+    color: var(--clr-triadic-1-400);
+    border-color: var(--clr-triadic-1-100);
     flex: 5 0 0;
 }
 
-#settings-btn:hover{
-    color: white !important;
-    background-color: gray;
+#admin-logout-btn:hover {
+    color: #FFF;
+    background-color: var(--clr-triadic-1-400);
 }
+

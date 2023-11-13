@@ -1,63 +1,62 @@
-#dashboard-wrapper{
+#dashboard-wrapper {
     background-color: var(--clr-primary-50);
     height: 100vh;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
-    padding: 4em;
+    padding: 3rem;
     overflow: auto;
-    flex: 7.5 0 0;
 }
 
-h2{
+#dashboard-header {
     font-size: 4em;
     font-weight: 800;
     color: var(--clr-primary);
     text-align: center;
-    margin-bottom: .5em;
+    margin-bottom: 3rem;
 }
 
-#tools-container{
+#tools-container {
     background-color: #FFF;
-    flex:  0 5 0;
-    display: flex;
-    flex-direction: column;
-    padding: 1.5em;
-    gap: 1em;
-    justify-content: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 1.5rem;
+    gap: 1rem;
     border-radius: var(--radius);
-    box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.10);
+    box-shadow: 2px 1px 16px rgba(0, 0, 0, 0.15);
+    width: 80%;
 }
 
-.tool-row{
-    display: flex;
-    flex-direction: row;
-    gap: 1em;
-}
-
-.tool-btn{
+.tool-btn {
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
-    gap: .5em;
-    padding: 1.5em;
+    gap: 1.5rem;
+    padding: 2rem;
     background-color: #FFF;
-    border-radius: 40px;
-    border: 1px var(--clr-primary-200) solid;
-    font-weight: 600;
-    flex: 5 0 0;
+    border-radius: var(--radius);
+    border: 2px solid var(--clr-primary-50);
+    font-weight: 700;
     font-size: 1.5em;
     flex-wrap: wrap;
     color: var(--clr-primary-200);
+    text-decoration: none;
+    transition: color 180ms ease-in-out, background-color 180ms ease-in-out, border-color 180ms ease-in-out;
 }
 
-.tool-btn:hover{
-    background-color: var(--clr-primary-50) !important;
-    color: var(--salon-purple) !important;
-    border: 2px solid var(--clr-primary-50) !important;
+.tool-btn:hover {
+    background-color: var(--clr-primary-50);
+    color: var(--salon-purple);
+    border-color: var(--clr-primary-50);
 }
 
-.tool-btn:active{
-    border: 2px solid var(--clr-primary-200) !important;
+.tool-btn:active {
+    border-color: var(--clr-primary-200);
+}
+
+.tool-btn > .fa {
+    font-size: 2em;
+    margin-right: 0;
 }
