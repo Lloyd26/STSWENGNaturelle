@@ -8,3 +8,11 @@
 .form-container {
     width: 40%;
 }
+
+#salon-title-login{
+    font-family: "Dr Sugiyama", cursive;
+    color: var(--salon-purple);
+    font-size: 2em;
+    text-align: center;
+    line-height: 1em;
+}

@@ -1,10 +1,11 @@
 const User = require('../models/User');
+const Admin = require('../models/Admin');
 const e = require("express");
 const bcrypt = require('bcrypt');
 
 const controller = {
     getLogin: function(req, res) {
-        if (!req.session.logged_in) {
+        if (!req.session.logged_in || (req.session.logged_in && req.session.user.loginType != "customer")) {
             res.render('login', {layout: 'index', active: {login: true}});
         } else {
             res.redirect('/');
@@ -48,6 +49,7 @@ const controller = {
 
         req.session.logged_in = true;
         req.session.user = {
+            loginType: "customer",
             firstName: result.firstName,
             lastName: result.lastName,
             contactNumber: result.contactNumber,
@@ -240,6 +242,7 @@ const controller = {
 
         req.session.logged_in = true;
         req.session.user = {
+            loginType: "customer",
             firstName: user.firstName,
             lastName: user.lastName,
             contactNumber: user.contactNumber,
@@ -247,7 +250,71 @@ const controller = {
         };
 
         res.redirect('/');
-    }
+    },
+
+    getAdminLogin: function(req, res) {
+        if (!req.session.logged_in || (req.session.logged_in && req.session.user.loginType != "admin")) {
+            res.render('login-admin', {layout: 'admin-no-sidebar', active: {login: true}});
+        } else {
+            res.render('main-admin', {layout: 'admin', active: {login: true}});
+        }
+    },
+
+    postAdminLogin: async function(req, res) {
+        let username= req.body.username;
+        let password = req.body.password;
+
+        if (username === undefined || password === undefined) {
+            res.render('login-admin', {
+                layout: 'admin-no-sidebar',
+                active: {login: true},
+                error: 'Please enter your username and password.'
+            });
+            return;
+        }
+
+        let result = await Admin.findOne({username: username});
+
+        if (result == null) {
+            res.render('login-admin', {
+                layout: 'admin-no-sidebar',
+                active: {login: true},
+                error: 'Incorrect username or password.'
+            });
+            return;
+        }
+
+        let passwordResult = await Admin.findOne({password: password});
+        //let passwordCompare = await bcrypt.compare(password, result.password);
+
+        if (passwordResult == null) {
+            res.render('login-admin', {
+                layout: 'admin-no-sidebar',
+                active: {login: true},
+                error: 'Incorrect username or password.'
+            });
+            return;
+        }
+
+        req.session.logged_in = true;
+        req.session.user = {
+            loginType: "admin",
+            username: result.username
+        };
+
+        res.render('main-admin', {
+            layout: 'admin',
+            active: {login: true},
+        });
+    },
+    
+    getAdminLogout: function(req, res) {
+        req.session.destroy(err => {
+            if (err) throw err;
+
+            res.redirect('/admin');
+        })
+    },
 }
 
 module.exports = controller;

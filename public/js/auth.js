@@ -11,6 +11,20 @@ function isContactNumValid(contactNum) {
 }
 
 $(document).ready(function() {
+
+    $("#form-login-admin").on("submit", function(e) {
+        let username = $("#input-username");
+        let password = $("#input-password");
+
+        let validForm = validateForm(username, password);
+
+        if (!validForm) {
+            e.preventDefault();
+            username.focus();
+            showError("Please enter your username and password.", "#login-admin-error-msg")
+        }
+    });
+
     $("#form-login").on("submit", function(e) {
         let email = $("#input-email");
         let password = $("#input-password");
