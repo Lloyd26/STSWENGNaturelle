@@ -3,6 +3,7 @@ const controller = {
         res.render('main', {
             layout: 'index',
             active: {home: true},
+            loginType: req.session.loginType,
             logged_in: {
                 state: req.session.logged_in,
                 user: req.session.user
@@ -14,6 +15,7 @@ const controller = {
         res.render('about', {
             layout: 'index',
             active: {about: true},
+            loginType: req.session.loginType,
             logged_in: {
                 state: req.session.logged_in,
                 user: req.session.user
@@ -22,7 +24,7 @@ const controller = {
     },
 
     getReservation: function(req, res) {
-        if (!req.session.logged_in) {
+        if (!req.session.logged_in || (req.session.logged_in && req.session.loginType != "customer")) {
             res.redirect("/login?next=" + encodeURIComponent("/reservation"));
             return;
         }
@@ -30,6 +32,7 @@ const controller = {
         res.render('reservation', {
             layout: 'index',
             active: {reservation: true},
+            loginType: req.session.loginType,
             logged_in: {
                 state: req.session.logged_in,
                 user: req.session.user
@@ -41,6 +44,7 @@ const controller = {
         res.render('reserveinfo', {
             layout: 'index',
             active: {reservation: true},
+            loginType: req.session.loginType,
             logged_in: {
                 state: req.session.logged_in,
                 user: req.session.user
@@ -52,6 +56,7 @@ const controller = {
         res.render('services', {
             layout: 'index',
             active: {services: true},
+            loginType: req.session.loginType,
             logged_in: {
                 state: req.session.logged_in,
                 user: req.session.user

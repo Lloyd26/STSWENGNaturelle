@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 
 const controller = {
     getLogin: function(req, res) {
-        if (!req.session.logged_in || (req.session.logged_in && req.session.user.loginType != "customer")) {
+        if (!req.session.logged_in || (req.session.logged_in && req.session.loginType != "customer")) {
             res.render('login', {layout: 'index', active: {login: true}});
         } else {
             res.redirect('/');
@@ -48,8 +48,8 @@ const controller = {
         }
 
         req.session.logged_in = true;
+        req.session.loginType = "customer";
         req.session.user = {
-            loginType: "customer",
             firstName: result.firstName,
             lastName: result.lastName,
             contactNumber: result.contactNumber,
@@ -241,8 +241,8 @@ const controller = {
         await User.create(user);
 
         req.session.logged_in = true;
+        req.session.loginType = "customer";
         req.session.user = {
-            loginType: "customer",
             firstName: user.firstName,
             lastName: user.lastName,
             contactNumber: user.contactNumber,
@@ -253,7 +253,7 @@ const controller = {
     },
 
     getAdminLogin: function(req, res) {
-        if (!req.session.logged_in || (req.session.logged_in && req.session.user.loginType != "admin")) {
+        if (!req.session.logged_in || (req.session.logged_in && req.session.loginType != "admin")) {
             res.render('login-admin', {layout: 'admin-no-sidebar', active: {login: true}});
         } else {
             res.render('main-admin', {layout: 'admin', active: {login: true}});
@@ -297,13 +297,14 @@ const controller = {
         }
 
         req.session.logged_in = true;
+        req.session.loginType = "admin";
         req.session.user = {
-            loginType: "admin",
             username: result.username
         };
 
         res.render('main-admin', {
             layout: 'admin',
+            loginType: req.session.loginType,
             active: {login: true},
         });
     },
