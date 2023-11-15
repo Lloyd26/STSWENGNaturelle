@@ -1,14 +1,12 @@
-<link rel="stylesheet" href="css/services.css">
+<link rel="stylesheet" href="/css/services.css">
 
 <!-- TODO: Recode so that blanks will be filled with data from to the database / a json file -->
 
 <div id="services-page-container">
     <div id="services-container">
-        {{>servicesection}}
-        {{>servicesection}}
-        {{>servicesection}}
-        {{>servicesection}}
-        {{>servicesection}}
+        {{#each serviceCollections}}
+            {{>servicesection this}}
+        {{/each}}
     </div>
     <div class="reminders-container">
         <div class="reminder">*Prices are based on thin to normal hair. Additional charges on thick and super extra long hair.</div>

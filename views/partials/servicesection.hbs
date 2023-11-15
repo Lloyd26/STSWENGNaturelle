@@ -1,11 +1,12 @@
-<link rel="stylesheet" href="css/servicesection.css">
+<link rel="stylesheet" href="/css/servicesection.css">
 
 <div class="service-section-container">
     <table class="service-table">
         <tr class="first-row">
-            <th class="service-title">Nail Care</th>
-            <th class="service-option">Manicure</th>
-            <th class="service-option">Pedicure</th>
+            <th class="service-title">{{serviceTitle}}</th>
+            {{#optionChoices1}}
+                <th class="service-option">{{this}}</th>
+            {{/optionChoices1}}
         </tr>
         <tr>
             <td class="service-suboption">Regular Polish</td>

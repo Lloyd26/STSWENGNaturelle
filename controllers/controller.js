@@ -1,3 +1,6 @@
+const ServiceCollection = require('../models/ServiceCollection.js');
+const Service = require('../models/Service.js');
+
 const controller = {
     getIndex: function(req, res) {
         res.render('main', {
@@ -61,6 +64,28 @@ const controller = {
                 state: req.session.logged_in,
                 user: req.session.user
             }
+        });
+    },
+
+    getNailServices: async function(req, res) {
+        let nailServiceCollections = await ServiceCollection.find({
+            serviceConcern: "Nails"
+        })
+        .populate('serviceConcern')
+        .populate('serviceTitle')
+        .lean().exec();
+
+        console.log(nailServiceCollections)
+
+        res.render('services', {
+            layout: 'index',
+            active: {services: true},
+            loginType: req.session.loginType,
+            logged_in: {
+                state: req.session.logged_in,
+                user: req.session.user
+            },
+            serviceCollections: nailServiceCollections
         });
     }
 }

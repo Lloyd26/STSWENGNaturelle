@@ -24,6 +24,7 @@ app.post('/register', auth_controller.postRegister);
 app.get('/reservation', controller.getReservation);
 
 app.get('/services', controller.getServices);
+app.get('/services/nails', controller.getNailServices);
 
 app.get('/reserveinfo', controller.getReserveInfo);
 
