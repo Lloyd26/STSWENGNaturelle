@@ -68,14 +68,64 @@ const controller = {
     },
 
     getNailServices: async function(req, res) {
+
+        // Find all Nail related services
         let nailServiceCollections = await ServiceCollection.find({
             serviceConcern: "Nails"
-        })
-        .populate('serviceConcern')
-        .populate('serviceTitle')
-        .lean().exec();
+        }).populate('services')
 
-        console.log(nailServiceCollections)
+        let pricesCollectionObject = [];
+        let pricesWithOption2 = [];
+
+        // Transform to JSON object
+        let nailServiceCollectionsObject = nailServiceCollections.map(coll => coll.toObject());
+
+        // Check each service option combination
+        let mappedNailServiceCollection = nailServiceCollectionsObject.map(coll=> {
+            
+            let pricesCollection = []
+
+            for (let i = 0; i < coll.optionChoices2.length; i++){
+
+                let rowPriceCollection = []
+                let result;
+
+                for (let j = 0; j < coll.optionChoices1.length; j++){
+
+                    // Check if there is an existing service title, service options 1 and 2, in the collection
+                    result = coll.services.filter(srv => (srv.serviceOption2 == coll.optionChoices2[i] && srv.serviceOption1 == coll.optionChoices1[j] && srv.serviceTitle == coll.services[i].serviceTitle))
+                    
+                    // If nothing was found, push 0; else push the result's price
+                    if (result.length <= 0){
+                        rowPriceCollection.push(0)
+                    } else {
+                        rowPriceCollection.push(result[0].price)
+                    }
+                }
+
+                // Make a 'tuple'
+                pricesWithOption2 = [coll.optionChoices2[i], rowPriceCollection]
+
+                pricesCollection.push(pricesWithOption2)
+            }
+
+            console.log(pricesCollection)
+
+            // Turn tuple into object
+            pricesCollectionObject = pricesCollection.map(coll => {
+                return{
+                    serviceOption2: coll[0],
+                    prices: coll[1]
+                }
+            })
+            
+            return {
+                serviceTitle: coll.serviceTitle,
+                optionChoices1: coll.optionChoices1,
+                optionChoices2: coll.optionChoices2,
+                services: pricesCollectionObject
+            }
+        })
 
         res.render('services', {
             layout: 'index',
@@ -85,7 +135,7 @@ const controller = {
                 state: req.session.logged_in,
                 user: req.session.user
             },
-            serviceCollections: nailServiceCollections
+            serviceCollections: mappedNailServiceCollection
         });
     }
 }
