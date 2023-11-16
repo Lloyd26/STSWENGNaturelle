@@ -2,15 +2,24 @@ const ServiceCollection = require('../models/ServiceCollection.js');
 const Service = require('../models/Service.js');
 
 const controller = {
+    getLogout: function(req, res) {
+        let redirect;
+
+        if (req.session.logged_in.type === "customer") redirect = '/';
+        else if (req.session.logged_in.type === "admin") redirect = '/admin';
+
+        req.session.destroy(err => {
+            if (err) throw err;
+
+            res.redirect(redirect);
+        });
+    },
+
     getIndex: function(req, res) {
         res.render('main', {
             layout: 'index',
             active: {home: true},
-            loginType: req.session.loginType,
-            logged_in: {
-                state: req.session.logged_in,
-                user: req.session.user
-            }
+            logged_in: req.session.logged_in
         });
     },
 
@@ -18,16 +27,12 @@ const controller = {
         res.render('about', {
             layout: 'index',
             active: {about: true},
-            loginType: req.session.loginType,
-            logged_in: {
-                state: req.session.logged_in,
-                user: req.session.user
-            }
+            logged_in: req.session.logged_in
         });
     },
 
     getReservation: function(req, res) {
-        if (!req.session.logged_in || (req.session.logged_in && req.session.loginType != "customer")) {
+        if (!req.session.logged_in || (req.session.logged_in && req.session.logged_in.type !== "customer")) {
             res.redirect("/login?next=" + encodeURIComponent("/reservation"));
             return;
         }
@@ -35,11 +40,7 @@ const controller = {
         res.render('reservation', {
             layout: 'index',
             active: {reservation: true},
-            loginType: req.session.loginType,
-            logged_in: {
-                state: req.session.logged_in,
-                user: req.session.user
-            }
+            logged_in: req.session.logged_in
         });
     },
 
@@ -47,11 +48,7 @@ const controller = {
         res.render('reserveinfo', {
             layout: 'index',
             active: {reservation: true},
-            loginType: req.session.loginType,
-            logged_in: {
-                state: req.session.logged_in,
-                user: req.session.user
-            }
+            logged_in: req.session.logged_in
         });
     },
 
@@ -59,11 +56,7 @@ const controller = {
         res.render('services', {
             layout: 'index',
             active: {services: true},
-            loginType: req.session.loginType,
-            logged_in: {
-                state: req.session.logged_in,
-                user: req.session.user
-            }
+            logged_in: req.session.logged_in
         });
     },
 
@@ -130,12 +123,8 @@ const controller = {
         res.render('services', {
             layout: 'index',
             active: {services: true},
-            loginType: req.session.loginType,
-            logged_in: {
-                state: req.session.logged_in,
-                user: req.session.user
-            },
-            serviceCollections: mappedNailServiceCollection
+            logged_in: req.session.logged_in,
+            serviceCollections: nailServiceCollections
         });
     }
 }

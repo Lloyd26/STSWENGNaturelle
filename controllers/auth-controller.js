@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 
 const controller = {
     getLogin: function(req, res) {
-        if (!req.session.logged_in || (req.session.logged_in && req.session.loginType != "customer")) {
+        if (!req.session.logged_in || (req.session.logged_in && req.session.logged_in.type !== "customer")) {
             res.render('login', {layout: 'index', active: {login: true}});
         } else {
             res.redirect('/');
@@ -47,25 +47,19 @@ const controller = {
             return;
         }
 
-        req.session.logged_in = true;
-        req.session.loginType = "customer";
-        req.session.user = {
-            firstName: result.firstName,
-            lastName: result.lastName,
-            contactNumber: result.contactNumber,
-            email: result.email
-        };
+        req.session.logged_in = {
+            state: true,
+            type: "customer",
+            user: {
+                firstName: result.firstName,
+                lastName: result.lastName,
+                contactNumber: result.contactNumber,
+                email: result.email
+            }
+        }
 
         if (req.query.next) res.redirect(decodeURIComponent(req.query.next));
         else res.redirect('/');
-    },
-
-    getLogout: function(req, res) {
-        req.session.destroy(err => {
-            if (err) throw err;
-
-            res.redirect('/');
-        })
     },
 
     getRegister: function(req, res) {
@@ -240,82 +234,19 @@ const controller = {
 
         await User.create(user);
 
-        req.session.logged_in = true;
-        req.session.loginType = "customer";
-        req.session.user = {
-            firstName: user.firstName,
-            lastName: user.lastName,
-            contactNumber: user.contactNumber,
-            email: user.email
-        };
+        req.session.logged_in = {
+            state: true,
+            type: "customer",
+            user: {
+                firstName: user.firstName,
+                lastName: user.lastName,
+                contactNumber: user.contactNumber,
+                email: user.email
+            }
+        }
 
         res.redirect('/');
-    },
-
-    getAdminLogin: function(req, res) {
-        if (!req.session.logged_in || (req.session.logged_in && req.session.loginType != "admin")) {
-            res.render('login-admin', {layout: 'admin-no-sidebar', active: {login: true}});
-        } else {
-            res.render('main-admin', {layout: 'admin', active: {login: true}});
-        }
-    },
-
-    postAdminLogin: async function(req, res) {
-        let username= req.body.username;
-        let password = req.body.password;
-
-        if (username === undefined || password === undefined) {
-            res.render('login-admin', {
-                layout: 'admin-no-sidebar',
-                active: {login: true},
-                error: 'Please enter your username and password.'
-            });
-            return;
-        }
-
-        let result = await Admin.findOne({username: username});
-
-        if (result == null) {
-            res.render('login-admin', {
-                layout: 'admin-no-sidebar',
-                active: {login: true},
-                error: 'Incorrect username or password.'
-            });
-            return;
-        }
-
-        let passwordResult = await Admin.findOne({password: password});
-        //let passwordCompare = await bcrypt.compare(password, result.password);
-
-        if (passwordResult == null) {
-            res.render('login-admin', {
-                layout: 'admin-no-sidebar',
-                active: {login: true},
-                error: 'Incorrect username or password.'
-            });
-            return;
-        }
-
-        req.session.logged_in = true;
-        req.session.loginType = "admin";
-        req.session.user = {
-            username: result.username
-        };
-
-        res.render('main-admin', {
-            layout: 'admin',
-            loginType: req.session.loginType,
-            active: {login: true},
-        });
-    },
-    
-    getAdminLogout: function(req, res) {
-        req.session.destroy(err => {
-            if (err) throw err;
-
-            res.redirect('/admin');
-        })
-    },
+    }
 }
 
 module.exports = controller;

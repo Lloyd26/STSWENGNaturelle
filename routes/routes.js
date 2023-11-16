@@ -2,6 +2,7 @@ const express = require('express');
 
 const controller = require('../controllers/controller.js');
 const auth_controller = require('../controllers/auth-controller');
+const admin_controller = require('../controllers/admin-controller');
 
 const app = express();
 
@@ -12,11 +13,7 @@ app.get('/about', controller.getAbout);
 app.get('/login', auth_controller.getLogin);
 app.post('/login', auth_controller.postLogin);
 
-app.get('/admin', auth_controller.getAdminLogin);
-app.post('/admin', auth_controller.postAdminLogin);
-
-app.get('/logout', auth_controller.getLogout);
-app.get('/logout/admin', auth_controller.getAdminLogout);
+app.get('/logout', controller.getLogout);
 
 app.get('/register', auth_controller.getRegister);
 app.post('/register', auth_controller.postRegister);
@@ -27,5 +24,8 @@ app.get('/services', controller.getServices);
 app.get('/services/nails', controller.getNailServices);
 
 app.get('/reserveinfo', controller.getReserveInfo);
+
+app.get('/admin', admin_controller.getAdminLogin);
+app.post('/admin', admin_controller.postAdminLogin);
 
 module.exports = app;
