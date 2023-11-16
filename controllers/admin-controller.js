@@ -59,14 +59,6 @@ const controller = {
             active: {login: true},
         });
     },
-
-    getAdminLogout: function(req, res) {
-        req.session.destroy(err => {
-            if (err) throw err;
-
-            res.redirect('/admin');
-        })
-    }
 }
 
 module.exports = controller;
