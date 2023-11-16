@@ -2,6 +2,19 @@ const ServiceCollection = require('../models/ServiceCollection.js');
 const Service = require('../models/Service.js');
 
 const controller = {
+    getLogout: function(req, res) {
+        let redirect;
+
+        if (req.session.logged_in.type === "customer") redirect = '/';
+        else if (req.session.logged_in.type === "admin") redirect = '/admin';
+
+        req.session.destroy(err => {
+            if (err) throw err;
+
+            res.redirect(redirect);
+        });
+    },
+
     getIndex: function(req, res) {
         res.render('main', {
             layout: 'index',

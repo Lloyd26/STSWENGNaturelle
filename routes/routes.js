@@ -13,7 +13,7 @@ app.get('/about', controller.getAbout);
 app.get('/login', auth_controller.getLogin);
 app.post('/login', auth_controller.postLogin);
 
-app.get('/logout', auth_controller.getLogout);
+app.get('/logout', controller.getLogout);
 
 app.get('/register', auth_controller.getRegister);
 app.post('/register', auth_controller.postRegister);
