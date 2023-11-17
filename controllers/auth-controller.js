@@ -1,5 +1,4 @@
 const User = require('../models/User');
-const e = require("express");
 const bcrypt = require('bcrypt');
 
 const controller = {
@@ -16,7 +15,7 @@ const controller = {
                     text: "You need to logout as an admin before you can login as a customer.",
                     action: {
                         text: "LOGOUT",
-                        link: "/logout"
+                        link: "/logout?next=%2Flogin"
                     }
                 }
             });

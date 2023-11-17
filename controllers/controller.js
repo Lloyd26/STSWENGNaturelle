@@ -5,13 +5,20 @@ const controller = {
     getLogout: function(req, res) {
         let redirect;
 
-        if (req.session.logged_in.type === "customer") redirect = '/';
-        else if (req.session.logged_in.type === "admin") redirect = '/admin';
+        switch (req.session.logged_in.type) {
+            case "customer":
+                redirect = '/';
+                break;
+            case "admin":
+                redirect = '/admin';
+                break;
+        }
 
         req.session.destroy(err => {
             if (err) throw err;
 
-            res.redirect(redirect);
+            if (req.query.next) res.redirect(decodeURIComponent(req.query.next));
+            else res.redirect(redirect);
         });
     },
 

@@ -13,7 +13,7 @@ const controller = {
                     text: "You need to logout as a customer before you can login as an admin.",
                     action: {
                         text: "LOGOUT",
-                        link: "/logout"
+                        link: "/logout?next=%2Fadmin"
                     }
                 }
             });
