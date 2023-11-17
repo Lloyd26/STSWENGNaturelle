@@ -20,6 +20,7 @@ const hbs = exp_hbs.create({
         isDefined(variable) { return variable !== undefined; },
         isUndefined(variable) { return variable === undefined; },
         isEmpty(string) { return string === ''; },
+        isZero(number) { return number == 0;},
         isEqual(logged_in, loginType) { return logged_in && loginType === 'customer';}
     }
 });

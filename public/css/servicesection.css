@@ -7,8 +7,7 @@
     overflow: hidden;
     padding: 2em;
     gap: 2em;
-    justify-content: center;
-    width: 40%;
+    justify-content: space-around;
 }
 
 .service-table{
@@ -16,7 +15,7 @@
     flex-direction: column;
     align-items: center;
     border-collapse: separate;
-    border-spacing: 1em 0;
+    border-spacing: 1em .5em;
 }
 
 .first-row{
@@ -27,6 +26,7 @@
     font-size: 30px;
     font-weight: 900;
     flex: 7 0 0;
+    color: var(--clr-primary-700);
 }
 
 .service-option{
@@ -38,13 +38,20 @@
 }
 
 .service-suboption{
-    flex: 7 0 0;
+    flex: 8 0 0;
     text-align: left;
+    font-size: 20px;
+    font-weight: 800;
 }
 
-.service-price{
+.service-price, .no-price{
     flex: 1 0 0;
     text-align: right;
     font-weight: 600;
-    font-size: 1.2em;
+    font-size: 20px;
+    color: gray;
+}
+
+tr:hover{
+    border-bottom: 2px solid gray;
 }

@@ -14,7 +14,8 @@ const serviceCollectionSchema = new Schema ({
         type: [SchemaType.String]
     },
     services: {
-        type: [SchemaTypes.ObjectId]
+        type: [SchemaTypes.ObjectId],
+        ref: "Service"
     }
 })
 

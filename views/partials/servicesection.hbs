@@ -8,15 +8,17 @@
                 <th class="service-option">{{this}}</th>
             {{/optionChoices1}}
         </tr>
-        <tr>
-            <td class="service-suboption">Regular Polish</td>
-            <td class="service-price">220</td>
-            <td class="service-price">270</td>
-        </tr>
-        <tr>
-            <td class="service-suboption">Nail Lacquer</td>
-            <td class="service-price">290</td>
-            <td class="service-price">340</td>
-        </tr>
+        {{#each services}}
+            <tr>
+                <td class="service-suboption">{{serviceOption2}}</td>
+                {{#each prices}}
+                    {{#if (isZero this)}}
+                        <td class="no-price"></td>
+                    {{else}}
+                        <td class="service-price">{{this}}</td>
+                    {{/if}}
+                {{/each}}
+            </tr>
+        {{/each}}
     </table>
 </div>
