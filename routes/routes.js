@@ -25,7 +25,7 @@ app.get('/services/nails', controller.getNailServices);
 
 app.get('/reserveinfo', controller.getReserveInfo);
 
-app.get('/admin', admin_controller.getAdminLogin);
+app.get('/admin', admin_controller.getAdminLogin, admin_controller.getAdminDashboard);
 app.post('/admin', admin_controller.postAdminLogin);
 
 module.exports = app;

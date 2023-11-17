@@ -1,7 +1,7 @@
 const Admin = require('../models/Admin');
 
 const controller = {
-    getAdminLogin: function(req, res) {
+    getAdminLogin: function(req, res, next) {
         if (!req.session.logged_in) {
             res.render('login-admin', {layout: 'admin-no-sidebar'});
         } else if (req.session.logged_in.type !== "admin") {
@@ -18,7 +18,7 @@ const controller = {
                 }
             });
         } else {
-            res.render('main-admin', {layout: 'admin'});
+            next();
         }
     },
 
@@ -66,12 +66,21 @@ const controller = {
             }
         };
 
+        res.redirect('/admin');
+    },
+
+    getAdminDashboard: function(req, res, next) {
+        if (!req.session.logged_in || req.session.logged_in.type !== "admin") {
+            next();
+            return;
+        }
+
         res.render('main-admin', {
             layout: 'admin',
             logged_in: req.session.logged_in,
-            active: {login: true},
+            active: {admin_home: true}
         });
-    },
+    }
 }
 
 module.exports = controller;
