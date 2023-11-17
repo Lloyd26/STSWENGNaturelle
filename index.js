@@ -21,7 +21,7 @@ const hbs = exp_hbs.create({
         isUndefined(variable) { return variable === undefined; },
         isEmpty(string) { return string === ''; },
         isZero(number) { return number == 0;},
-        isEqual(logged_in, loginType) { return logged_in && loginType === 'customer';}
+        isEqual(val1, val2) { return val1 === val2;}
     }
 });
 
