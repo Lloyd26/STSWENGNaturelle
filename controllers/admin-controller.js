@@ -4,9 +4,10 @@ const controller = {
     getAdminLogin: function(req, res) {
         if (!req.session.logged_in) {
             res.render('login-admin', {layout: 'admin-no-sidebar'});
-        } else if (req.session.loginType !== "admin") {
+        } else if (req.session.logged_in.type !== "admin") {
             res.render('login-admin', {
                 layout: 'admin-no-sidebar',
+                logged_in: req.session.logged_in,
                 snackbar: {
                     type: "error",
                     text: "You need to logout as a customer before you can login as an admin.",
@@ -67,7 +68,7 @@ const controller = {
 
         res.render('main-admin', {
             layout: 'admin',
-            loginType: req.session.loginType,
+            logged_in: req.session.logged_in,
             active: {login: true},
         });
     },

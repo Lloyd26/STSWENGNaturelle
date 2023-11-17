@@ -10,6 +10,7 @@ const controller = {
             res.render('login', {
                 layout: 'index',
                 active: {login: true},
+                logged_in: req.session.logged_in,
                 snackbar: {
                     type: "error",
                     text: "You need to logout as an admin before you can login as a customer.",
