@@ -1,12 +1,24 @@
 const User = require('../models/User');
-const Admin = require('../models/Admin');
 const e = require("express");
 const bcrypt = require('bcrypt');
 
 const controller = {
     getLogin: function(req, res) {
-        if (!req.session.logged_in || (req.session.logged_in && req.session.logged_in.type !== "customer")) {
+        if (!req.session.logged_in) {
             res.render('login', {layout: 'index', active: {login: true}});
+        } else if (req.session.logged_in.type !== "customer") {
+            res.render('login', {
+                layout: 'index',
+                active: {login: true},
+                snackbar: {
+                    type: "error",
+                    text: "You need to logout as an admin before you can login as a customer.",
+                    action: {
+                        text: "LOGOUT",
+                        link: "/logout"
+                    }
+                }
+            });
         } else {
             res.redirect('/');
         }

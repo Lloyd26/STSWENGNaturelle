@@ -2,8 +2,20 @@ const Admin = require('../models/Admin');
 
 const controller = {
     getAdminLogin: function(req, res) {
-        if (!req.session.logged_in || (req.session.logged_in && req.session.loginType != "admin")) {
+        if (!req.session.logged_in) {
             res.render('login-admin', {layout: 'admin-no-sidebar'});
+        } else if (req.session.loginType !== "admin") {
+            res.render('login-admin', {
+                layout: 'admin-no-sidebar',
+                snackbar: {
+                    type: "error",
+                    text: "You need to logout as a customer before you can login as an admin.",
+                    action: {
+                        text: "LOGOUT",
+                        link: "/logout"
+                    }
+                }
+            });
         } else {
             res.render('main-admin', {layout: 'admin'});
         }
