@@ -14,7 +14,7 @@
         <div class="error-msg" id="login-admin-error-msg" data-error-status="{{#if (isDefined error)}}error{{else}}normal{{/if}}">{{error}}</div>
         <div id="last-row">
             <a href="/" id="form-switch-link">Go Back To Customer View</a>
-            <button class="btn" id="btn-submit" type="submit">Log In</button>
+            <button class="btn" id="btn-submit" type="submit"{{#if (isDefined logged_in)}}{{#unless (isEqual logged_in.type "admin")}} disabled{{/unless}}{{/if}}>Log In</button>
         </div>
     </form>
 </div>
