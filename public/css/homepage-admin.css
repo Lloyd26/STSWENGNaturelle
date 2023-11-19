@@ -60,3 +60,63 @@
     font-size: 2em;
     margin-right: 0;
 }
+
+@media (max-width: 992px) {
+    body {
+        background-color: #FFF;
+    }
+
+    #dashboard-wrapper {
+        height: unset;
+        padding: 0 0 5rem;
+        background-color: #FFF;
+        display: block;
+    }
+
+    #dashboard-header-container {
+        background-color: #FFF;
+    }
+
+    #dashboard-header {
+        background-color: var(--clr-primary-50);
+        font-size: 2em;
+        margin: 1rem;
+        padding: 3rem 1.5rem;
+        border-radius: var(--radius);
+    }
+
+    #tools-container {
+        display: flex;
+        flex-direction: column;
+        box-shadow: unset;
+        width: 100%;
+        padding: 0;
+        gap: 0;
+    }
+
+    .tool-btn {
+        flex-direction: row;
+        justify-content: flex-start;
+        border-radius: 0;
+        border: none;
+        border-top: 1px solid var(--clr-primary-50);
+        border-bottom: 1px solid var(--clr-primary-50);
+    }
+
+    #tools-container > .tool-btn:first-child {
+        border-top: 2px solid var(--clr-primary-50);
+    }
+
+    #tools-container > .tool-btn:last-child {
+        border-bottom: 2px solid var(--clr-primary-50);
+    }
+
+    .tool-btn > .fa {
+        font-size: 1em;
+        width: 5rem;
+        text-align: center;
+        border: 1px solid var(--clr-primary-50);
+        border-radius: var(--radius);
+        padding: 1rem;
+    }
+}

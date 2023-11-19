@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="/css/sidebar.css">
+<link rel="stylesheet" href="/css/fab.css">
+<script src="/js/fab.js"></script>
 
 <div id="sidenav">
     <div id="salon-title">Salon<br/>Naturelle</div>
@@ -7,7 +9,7 @@
             <li class="nav-item{{#if active.admin_home}} active{{/if}}">
                 <a href="/admin" class="nav-link">Dashboard<i class="fa fa-solid fa-home"></i></a>
             </li>
-            <li>
+            <li class="nav-separator">
                 <hr>
             </li>
             <li class="nav-item{{#if active.admin_reservations}} active{{/if}}">
@@ -29,6 +31,27 @@
         <div id="account-tab-container">
             <button class="btn bottom-btn" id="settings-btn"><i class="fa fa-solid fa-gear"></i>Settings</button>
             <a href="/logout/admin" class="btn bottom-btn" id="admin-logout-btn"><i class="fa fa-solid fa-right-from-bracket"></i>Log Out</a>
+        </div>
+    </div>
+    <div id="fab-container">
+        <button id="btn-fab" data-toggle="fab" data-fab-blur-target="#dashboard-wrapper">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div id="fab-items-container">
+            <a href="/" class="fab-item-group" id="customer-view-fab">
+                <div class="fab-item-label">Customer View</div>
+                <div class="fab-item-icon"><i class="fa fa-laptop"></i></div>
+            </a>
+            <a href="/admin/settings" class="fab-item-group" id="settings-fab">
+                <div class="fab-item-label">Settings</div>
+                <div class="fab-item-icon"><i class="fa fa-gear"></i></div>
+            </a>
+            <a href="/logout" class="fab-item-group" id="logout-fab">
+                <div class="fab-item-label">Log Out</div>
+                <div class="fab-item-icon"><i class="fa fa-right-from-bracket"></i></div>
+            </a>
         </div>
     </div>
 </div>
