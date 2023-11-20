@@ -8,7 +8,7 @@ function generateTimeOptions() {
     opening_time.setHours(10, 0, 0); // Set initial time to 10:00 AM
   
     let closing_time = new Date();
-    closing_time.setHours(20, 0, 0); // Set end time to 8:00 PM
+    closing_time.setHours(17, 30, 0); // Set end time to 8:00 PM
   
     let curr_time = new Date(opening_time);
   
@@ -29,7 +29,7 @@ function generateTimeOptions() {
         text: timeString
       }));
       
-      curr_time.setMinutes(curr_time.getMinutes() + 15);
+      curr_time.setMinutes(curr_time.getMinutes() + 30);
     }
   }
 
