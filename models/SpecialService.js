@@ -1,13 +1,10 @@
 const { Schema, SchemaTypes, model, SchemaType } = require('mongoose');
 
-const serviceSchema = new Schema ({
+const specialServiceSchema = new Schema ({
     serviceTitle: {
         type: SchemaTypes.String
     },
-    serviceOption1: {
-        type: SchemaTypes.String
-    },
-    serviceOption2: {
+    serviceOption: {
         type: SchemaTypes.String
     },
     price: {
@@ -15,5 +12,5 @@ const serviceSchema = new Schema ({
     }
 })
 
-const Service = model("Service", serviceSchema, "services");
-module.exports = Service;
+const SpecialService = model("SpecialService", specialServiceSchema, "specialServices");
+module.exports = SpecialService;

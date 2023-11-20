@@ -16,9 +16,12 @@ const serviceCollectionSchema = new Schema ({
     services: {
         type: [SchemaTypes.ObjectId],
         ref: "Service"
+    },
+    specialServices: {
+        type: [SchemaTypes.ObjectId],
+        ref: "SpecialService"
     }
 })
 
-// for MongoDB collection "reservations"
 const ServiceCollection = model("ServiceCollection", serviceCollectionSchema, "serviceCollections");
 module.exports = ServiceCollection;

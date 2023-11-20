@@ -1,5 +1,6 @@
 const ServiceCollection = require('../models/ServiceCollection.js');
 const Service = require('../models/Service.js');
+const SpecialService = require('../models/SpecialService.js');
 
 const controller = {
     getLogout: function(req, res) {
@@ -72,7 +73,7 @@ const controller = {
         // Find all Nail related services
         let nailServiceCollections = await ServiceCollection.find({
             serviceConcern: "Nails"
-        }).populate('services')
+        }).populate('services').populate('specialServices')
 
         let pricesCollectionObject = [];
         let pricesWithOption2 = [];
@@ -109,8 +110,6 @@ const controller = {
                 pricesCollection.push(pricesWithOption2)
             }
 
-            console.log(pricesCollection)
-
             // Turn tuple into object
             pricesCollectionObject = pricesCollection.map(coll => {
                 return{
@@ -123,10 +122,11 @@ const controller = {
                 serviceTitle: coll.serviceTitle,
                 optionChoices1: coll.optionChoices1,
                 optionChoices2: coll.optionChoices2,
-                services: pricesCollectionObject
+                services: pricesCollectionObject,
+                specialServices: coll.specialServices
             }
         })
-
+        
         res.render('services', {
             layout: 'index',
             active: {services: true},

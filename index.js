@@ -21,6 +21,7 @@ const hbs = exp_hbs.create({
         isEmpty(string) { return string === ''; },
         isZero(number) { return number === 0; },
         isEqual(val1, val2) { return val1 === val2; },
+        isNonEmpty(array) {return Array.isArray(array) && array.length !== 0;}
     }
 });
 

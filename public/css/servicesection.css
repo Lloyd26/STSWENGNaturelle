@@ -3,19 +3,23 @@
     box-shadow: 2px 1px 16px rgba(0, 0, 0, 0.15);
     border-radius: var(--radius);
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     overflow: hidden;
     padding: 2em;
     gap: 2em;
     justify-content: space-around;
 }
 
-.service-table{
+.service-table, .special-service-table{
     display: flex;
     flex-direction: column;
     align-items: center;
     border-collapse: separate;
     border-spacing: 1em .5em;
+}
+
+.special-service-table{
+    margin-bottom: 1em;
 }
 
 .first-row{
@@ -37,19 +41,27 @@
     padding: 0em 0em 0em 1em;
 }
 
-.service-suboption{
+.service-suboption,.special-service-suboption{
     flex: 8 0 0;
     text-align: left;
     font-size: 20px;
     font-weight: 800;
 }
 
-.service-price, .no-price{
+.special-service-suboption{
+    padding: 0em 5em 0em 0em;
+}
+
+.service-price, .no-price, .special-service-price{
     flex: 1 0 0;
     text-align: right;
     font-weight: 600;
     font-size: 20px;
     color: gray;
+}
+
+.special-service-price{
+    padding: 0em 0em 0em 18em;
 }
 
 tr:hover{
