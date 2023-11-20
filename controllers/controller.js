@@ -124,7 +124,7 @@ const controller = {
             layout: 'index',
             active: {services: true},
             logged_in: req.session.logged_in,
-            serviceCollections: nailServiceCollections
+            serviceCollections: mappedNailServiceCollection
         });
     }
 }
