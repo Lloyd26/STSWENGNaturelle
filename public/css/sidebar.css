@@ -7,6 +7,7 @@
     height: 100vh;
     position: sticky;
     top: 0;
+    z-index: 1000;
 }
 
 #salon-title {
@@ -126,13 +127,114 @@
 }
 
 #admin-logout-btn {
-    color: var(--clr-triadic-1-400);
+    color: var(--clr-triadic-1-300);
     border-color: var(--clr-triadic-1-100);
     flex: 5 0 0;
 }
 
 #admin-logout-btn:hover {
     color: #FFF;
-    background-color: var(--clr-triadic-1-400);
+    background-color: var(--clr-triadic-1-300);
 }
 
+#fab-container {
+    display: none !important;
+}
+
+#customer-view-fab > .fab-item-label {
+    background-color: var(--salon-purple);
+    color: #FFF;
+}
+
+#customer-view-fab > .fab-item-icon {
+    color: var(--salon-purple);
+}
+
+#settings-fab > .fab-item-label {
+    background-color: #888;
+    color: #FFF;
+}
+
+#settings-fab > .fab-item-icon {
+    color: #888;
+}
+
+#logout-fab > .fab-item-label {
+    background-color: var(--clr-triadic-1-300);
+    color: #FFF;
+}
+
+#logout-fab > .fab-item-icon {
+    color: var(--clr-triadic-1-300);
+}
+
+@media (max-width: 992px) {
+    #sidenav {
+        position: fixed;
+        top: unset;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: block;
+        height: auto;
+    }
+
+    #salon-title {
+        display: none;
+    }
+
+    #sidenav-container {
+        padding: 0.5rem 1rem;
+    }
+
+    #sidenav-container > .nav {
+        flex-direction: row;
+        gap: 0.25rem;
+    }
+
+    #sidenav-container > .nav .nav-separator {
+        display: none;
+    }
+
+    #sidenav-container > .nav > .nav-item {
+        flex-grow: 1;
+    }
+
+    #sidenav-container .nav-link {
+        text-align: center;
+        font-size: 0.65em;
+        font-weight: 600;
+        flex-direction: column-reverse;
+        border-radius: unset;
+        align-items: unset;
+        padding: 0;
+    }
+
+    #sidenav-container .nav-item.active > .nav-link {
+        background-color: unset;
+        font-weight: 700;
+    }
+
+    #sidenav-container .nav-link > .fa {
+        margin-left: unset;
+        margin-right: 0;
+        margin-bottom: 0.25rem;
+        display: block;
+        text-align: center;
+        padding: 0.5rem;
+        border-radius: var(--radius);
+        font-size: 1.5em;
+    }
+
+    #sidenav-container .nav-item.active > .nav-link > .fa {
+        background-color: var(--clr-primary-50);
+    }
+
+    #bottom-btn-container {
+        display: none;
+    }
+
+    #fab-container {
+        display: flex !important;
+    }
+}

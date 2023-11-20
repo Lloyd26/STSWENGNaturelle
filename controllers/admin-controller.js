@@ -1,11 +1,24 @@
 const Admin = require('../models/Admin');
 
 const controller = {
-    getAdminLogin: function(req, res) {
-        if (!req.session.logged_in || (req.session.logged_in && req.session.loginType != "admin")) {
+    getAdminLogin: function(req, res, next) {
+        if (!req.session.logged_in) {
             res.render('login-admin', {layout: 'admin-no-sidebar'});
+        } else if (req.session.logged_in.type !== "admin") {
+            res.render('login-admin', {
+                layout: 'admin-no-sidebar',
+                logged_in: req.session.logged_in,
+                snackbar: {
+                    type: "error",
+                    text: "You need to logout as a customer before you can login as an admin.",
+                    action: {
+                        text: "LOGOUT",
+                        link: "/logout?next=%2Fadmin"
+                    }
+                }
+            });
         } else {
-            res.render('main-admin', {layout: 'admin'});
+            next();
         }
     },
 
@@ -53,12 +66,21 @@ const controller = {
             }
         };
 
+        res.redirect('/admin');
+    },
+
+    getAdminDashboard: function(req, res, next) {
+        if (!req.session.logged_in || req.session.logged_in.type !== "admin") {
+            next();
+            return;
+        }
+
         res.render('main-admin', {
             layout: 'admin',
-            loginType: req.session.loginType,
-            active: {login: true},
+            logged_in: req.session.logged_in,
+            active: {admin_home: true}
         });
-    },
+    }
 }
 
 module.exports = controller;

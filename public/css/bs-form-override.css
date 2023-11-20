@@ -17,6 +17,10 @@ textarea.form-control {
     padding: calc(var(--radius) / 4) calc(var(--radius) / 2.5);
 }
 
+.form-control[disabled] {
+    cursor: not-allowed;
+}
+
 .form-control-lg, .form-select-lg {
     padding: calc(var(--radius) / 4) calc(var(--radius) / 1.5);
 }

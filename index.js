@@ -18,10 +18,9 @@ const hbs = exp_hbs.create({
     partialsDir: path.join(__dirname, 'views/partials'),
     helpers: {
         isDefined(variable) { return variable !== undefined; },
-        isUndefined(variable) { return variable === undefined; },
         isEmpty(string) { return string === ''; },
-        isZero(number) { return number == 0;},
-        isEqual(logged_in, loginType) { return logged_in && loginType === 'customer';}
+        isZero(number) { return number === 0; },
+        isEqual(val1, val2) { return val1 === val2; },
     }
 });
 

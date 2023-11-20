@@ -1,4 +1,5 @@
-import {showError, showSuccess, disableServiceForm} from "./form.js";
+import {showError, showSuccess, disableForms} from "./form.js";
+import {setCartDateTime} from "./cart.js";
 
 function generateTimeOptions() {
     let input_time = $("#input-time");
@@ -47,28 +48,34 @@ $(document).ready(function(){
         reservation_limit.setDate(current_date.getDate() + 14)
 
         let time_diff = format_date.getTime() - current_date.getTime(); 
-        let day_diff = (time_diff / (1000 * 3600 * 24)); 
+        let day_diff = (time_diff / (1000 * 3600 * 24));
+
+        let service_forms = ['#input-service', '#input-staff', '#input-details'];
+
+        let error_container = "#reserve-error-msg";
 
         if (!date_value){
             e.preventDefault();
-            disableServiceForm(true);
-            showError("Please fill in all fields.", "#reserve-error-msg");
+            disableForms(true, service_forms);
+            showError("Please fill in all fields.", error_container);
         } else if (format_date < current_date) {
             e.preventDefault();
-            disableServiceForm(true);
-            showError("Please pick a valid schedule.", "#reserve-error-msg"); 
+            disableForms(true, service_forms);
+            showError("Please pick a valid schedule.", error_container);
         } else if (day_diff < 1 && format_date.getDate() == current_date.getDate()) {
             e.preventDefault();
-            disableServiceForm(true);
-            showError("Same day reservations are not accommodated.", "#reserve-error-msg");
+            disableForms(true, service_forms);
+            showError("Same day reservations are not accommodated.", error_container);
         } else if (format_date > reservation_limit) {
             e.preventDefault();
-            disableServiceForm(true);
-            showError("You can only reserve a date that is within two weeks from now.", "#reserve-error-msg");
+            disableForms(true, service_forms);
+            showError("You can only reserve a date that is within two weeks from now.", error_container);
         } else {
             e.preventDefault();
-            disableServiceForm(false);
-            showSuccess("The desired schedule is available", "#reserve-error-msg");
+            disableForms(false, service_forms);
+            showSuccess("The desired schedule is available", error_container);
+
+            setCartDateTime(format_date.toLocaleDateString(), $("#input-time option:selected").text())
         }
     });
 });
