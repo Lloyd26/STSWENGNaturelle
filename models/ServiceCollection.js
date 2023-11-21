@@ -2,16 +2,16 @@ const { Schema, SchemaTypes, model, SchemaType } = require('mongoose');
 
 const serviceCollectionSchema = new Schema ({
     serviceConcern: {
-        type: SchemaTypes.String
+        type: String
     },
     serviceTitle: {
-        type: SchemaTypes.String
+        type: String
     },
     optionChoices1: {
-        type: [SchemaType.String]
+        type: [String]
     },
     optionChoices2: {
-        type: [SchemaType.String]
+        type: [String]
     },
     services: {
         type: [SchemaTypes.ObjectId],

@@ -36,6 +36,7 @@
 
 .close-btn{
     color: var(--clr-triadic-1-300);
+    background-color: #FFF;
     border: 2px solid var(--clr-triadic-1-300);
     border-radius: var(--radius);
     padding: .5em 2em;
@@ -53,4 +54,95 @@
 
 .close-btn:active{
     border-color: var(--clr-triadic-1-500);
+}
+
+.services-list{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.input-service-option-1, .input-service-option-2, .input-price{
+    width: 30%;
+}
+
+.input-services{
+    display: flex;
+    gap: .5em;
+    flex-wrap: nowrap;
+    border-bottom: 2px solid lightgray;
+    padding-bottom: 1em;
+}
+
+.delete-service{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0em .6em;
+    background-color: #FFF;
+    border-radius:var(--radius);
+    border: 2px solid var(--clr-triadic-1-300);
+    font-weight: 500;
+    font-size: 1.5em;
+    color: var(--clr-triadic-1-300);
+    text-decoration: none;
+    transition: color 180ms ease-in-out, background-color 180ms ease-in-out, border-color 180ms ease-in-out;
+}
+
+.delete-service > .fa{
+    margin-right: 0;
+}
+
+.delete-service:hover{
+    background-color: var(--clr-triadic-1-300);
+    color: #FFF;
+}
+
+.delete-service:active{
+    border-color: var(--clr-triadic-1-500);
+}
+
+.add-service{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .5em 1.5em;
+    border: 2px solid var(--salon-purple);
+    border-radius: var(--radius);
+    margin-left: auto;
+    background-color: #FFF;
+    color: var(--salon-purple);
+    font-weight: 700;
+}
+
+.add-service:hover{
+    background-color: var(--salon-purple);
+    color: #FFF;
+}
+
+.add-service:active{
+    border-color: var(--clr-primary-700);
+}
+
+.services-container-header {
+    display: flex;
+    flex-direction: row;
+    gap: .5em;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid lightgray;
+    padding-bottom: 1em;
+}
+
+.tabular-services-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.services-label {
+    margin-bottom: 0px;
+}
+
+ul {
+    padding-left: 0;
 }

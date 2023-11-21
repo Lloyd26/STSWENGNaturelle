@@ -1,5 +1,6 @@
 const Admin = require('../models/Admin');
 const ServiceCollection = require('../models/ServiceCollection.js');
+const helpers = require('../models/helpers.js')
 
 const controller = {
     getAdminLogin: function(req, res, next) {
@@ -135,6 +136,26 @@ const controller = {
             active: {admin_services: true},
             service_collections: serviceCollectionsWithTags
         });
+    },
+
+    postAddServiceCollection: async function(req, res) {
+        let optionChoices1 = req.body.options1.split(',')
+        let optionChoices2 = req.body.options2.split(',')
+        
+        let newServiceCollection = {
+            serviceConcern: req.body.serviceConcern,
+            serviceTitle: req.body.serviceTitle,
+            optionChoices1: optionChoices1,
+            optionChoices2: optionChoices2,
+            services: [],
+            specialServices: []
+        }
+
+        var response = await helpers.insertOne(ServiceCollection, newServiceCollection);
+
+        if (response != null){
+            res.redirect('/admin/services');
+        }
     }
 }
 

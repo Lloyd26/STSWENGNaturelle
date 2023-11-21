@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="/css/services-admin.css">
+<script type="module" src="/js/services-admin.js"></script>
 
 <div id="service-admin-wrapper" class="bg-noise-pattern">
     <div id="service-admin-header-container">
@@ -12,29 +13,45 @@
     </div>
 </div>
 
-<div class="modal fade" id="add-service-collection-modal" tabindex="-1" aria-labelledby="add-service-collection-modal" aria-hidden="true">
+<!-- Add Modal-->
+<div class="modal fade modal-lg" id="add-service-collection-modal" tabindex="-1" aria-labelledby="add-service-collection-modal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add Service Collection</h5>
+                <h5 class="modal-title">Add Service Collection</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <form class="add-service-collection-form">
+            <form id="form-add-service-collection">
+                <div class="modal-body">
                     <div class="col mb-3">
                         <label class="form-label" for="input-service-concern">Service Concern</label>
                         <input class="form-control" id="input-service-concern" name="service-concern" type="text" placeholder="Ex: Nails, Hair, etc.">
                     </div>
-                    <div class="col mb-3">
+                    <div class="col mb-4">
                         <label class="form-label" for="input-service-title">Service Title</label>
                         <input class="form-control" id="input-service-title" name="service-title" type="text" placeholder="Ex: Nail Care, Nail Design, etc.">
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <a class="close-btn" data-bs-dismiss="modal">Close</a>
-                <a class="save-btn" data-bs-dismiss="modal">Add</a>
-            </div>
+                    <div class="col mb-3 tabular-services-container">
+                        <div class="mb-3 services-container-header">
+                            <label class="form-label services-label" for="input-services">Tabular Services</label>
+                            <button class="add-service"><i class="fa fa-plus"></i>Add Service</button>
+                        </div>
+                        <ul class="services-list">
+                            <li class="input-services">
+                                <input class="form-control input-service-option-1" name="input-service-option-1" type="text" placeholder="Service Option 1">
+                                <input class="form-control input-service-option-2" name="input-service-option-2" type="text" placeholder="Service Option 2">
+                                <input class="form-control input-price" name="input-price" type="number" placeholder="Price">
+                                <button type="button" class="delete-service"><i class="fa fa-trash-can"></i></button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="error-msg" id="add-service-collection-error-msg" data-error-status="normal"></div>
+                </div>
+                <div class="modal-footer">
+                    <button class="close-btn" data-bs-dismiss="modal">Close</button>
+                    <button class="save-btn" id="add-service-collection-btn" type="button">Add</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

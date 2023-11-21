@@ -34,7 +34,7 @@
 }
 
 #service-option-tags-container{
-    display: flex;
+    display: grid;
     flex-direction: column;
     gap: .5em;
     overflow-x: hidden;
