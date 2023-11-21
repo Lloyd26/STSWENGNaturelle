@@ -1,0 +1,62 @@
+@import url("modal.css");
+@import url("form.css");
+
+#service-admin-wrapper {
+    background-color: var(--clr-primary-50);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    overflow: auto;
+}
+
+#service-admin-header-container{
+    width: 100%;
+    padding: 2em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#service-admin-header {
+    font-size: 3em;
+    font-weight: 800;
+    color: var(--clr-primary);
+    text-align: left;
+}
+
+#service-collection-container {
+    background-color: #FFF;
+    display: grid;
+    flex-direction: column;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 1.5rem;
+    gap: 1rem;
+    border-radius: var(--radius);
+    box-shadow: 2px 1px 16px rgba(0, 0, 0, 0.15);
+    width: 95%;
+}
+
+#add-btn{
+    margin-left: auto;
+    gap: 1.5rem;
+    padding: .5em 1.5em;
+    background-color: var(--salon-purple);
+    border-radius: var(--radius);
+    border: 0px;
+    font-weight: 800;
+    font-size: 1.3em;
+    color: #FFF;
+    text-decoration: none;
+    box-shadow: 2px 1px 16px rgba(0, 0, 0, 0.15);
+    transition: color 180ms ease-in-out, background-color 180ms ease-in-out, border-color 180ms ease-in-out;
+}
+
+#add-btn:hover {
+    background-color: #FFF;
+    color: var(--salon-purple);
+    border-color: var(--clr-primary-50);
+}

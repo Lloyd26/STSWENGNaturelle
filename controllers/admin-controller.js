@@ -1,4 +1,5 @@
 const Admin = require('../models/Admin');
+const ServiceCollection = require('../models/ServiceCollection.js');
 
 const controller = {
     getAdminLogin: function(req, res, next) {
@@ -79,6 +80,60 @@ const controller = {
             layout: 'admin',
             logged_in: req.session.logged_in,
             active: {admin_home: true}
+        });
+    },
+
+    getAdminServices: async function(req, res, next) {
+        if (!req.session.logged_in || req.session.logged_in.type !== "admin") {
+            next();
+            return;
+        }
+
+        let serviceCollections = await ServiceCollection.find({
+        }).populate('services', 'specialServices').lean().exec()
+
+        let serviceCollectionsWithTags = serviceCollections.map(coll=>{
+            optionChoices1Tags = []
+            optionChoices2Tags = []
+
+            if (coll.optionChoices1.length > 3){
+                for (let i = 0; i < 3; i++){
+                    optionChoices1Tags[i] = coll.optionChoices1[i]
+                }
+            } else {
+                for (let i = 0; i < coll.optionChoices1.length; i++){
+                    optionChoices1Tags[i] = coll.optionChoices1[i]
+                }
+            }
+
+            if (coll.optionChoices2.length > 3){
+                for (let i = 0; i < 3; i++){
+                    optionChoices2Tags[i] = coll.optionChoices2[i]
+                }
+            } else {
+                for (let i = 0; i < coll.optionChoices2.length; i++){
+                    optionChoices2Tags[i] = coll.optionChoices2[i]
+                }
+            }
+
+            return {
+                serviceConcern: coll.serviceConcern,
+                serviceTitle: coll.serviceTitle,
+                services: coll.services,
+                optionChoices1: coll.optionChoices1,
+                optionChoices2: coll.optionChoices2,
+                specialServices: coll.specialServices,
+                optionChoices1Tags: optionChoices1Tags,
+                optionChoices2Tags: optionChoices2Tags
+            }
+        })
+
+        console.log(serviceCollectionsWithTags)
+        res.render('services-admin', {
+            layout: 'admin',
+            logged_in: req.session.logged_in,
+            active: {admin_services: true},
+            service_collections: serviceCollectionsWithTags
         });
     }
 }

@@ -1,0 +1,56 @@
+.modal-header{
+    background-color: var(--salon-purple);
+    color: #FFF;
+    padding: 1.5em;
+}
+
+.modal-title{
+    font-weight: 700;
+}
+
+.modal-body{
+    padding: 1.5em;
+}
+
+.save-btn{
+    background-color: #FFF;
+    color: var(--salon-purple);
+    border-radius: var(--radius);
+    border: 2px solid var(--salon-purple);
+    padding: .5em 2em;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 180ms ease-in-out, background-color 180ms ease-in-out, border-color 180ms ease-in-out;
+}
+
+.save-btn:hover{
+    color:#FFF;
+    background-color: var(--salon-purple);
+    border-color: #FFF;
+}
+
+.save-btn:active{
+    border-color: var(--clr-primary-700);
+}
+
+.close-btn{
+    color: var(--clr-triadic-1-300);
+    border: 2px solid var(--clr-triadic-1-300);
+    border-radius: var(--radius);
+    padding: .5em 2em;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 180ms ease-in-out, background-color 180ms ease-in-out, border-color 180ms ease-in-out;
+}
+
+.close-btn:hover{
+    color: #FFF;
+    background-color: var(--clr-triadic-1-300);
+    border-color: #FFF;
+}
+
+.close-btn:active{
+    border-color: var(--clr-triadic-1-500);
+}

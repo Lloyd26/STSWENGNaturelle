@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="/css/services-admin.css">
+
+<div id="service-admin-wrapper">
+    <div id="service-admin-header-container">
+        <h2 id="service-admin-header">Services</h2>
+        <button type="button" id="add-btn" data-bs-toggle="modal" data-bs-target="#add-service-collection-modal"><i class="fa fa-plus"></i>Add</button>
+    </div>
+    <div id="service-collection-container">
+        {{#each service_collections}}
+            {{>servicecollection-preview this}}
+        {{/each}}
+    </div>
+</div>
+
+<div class="modal fade" id="add-service-collection-modal" tabindex="-1" aria-labelledby="add-service-collection-modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Service Collection</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="add-service-collection-form">
+                    <div class="col mb-3">
+                        <label class="form-label" for="input-service-concern">Service Concern</label>
+                        <input class="form-control" id="input-service-concern" name="service-concern" type="text" placeholder="Ex: Nails, Hair, etc.">
+                    </div>
+                    <div class="col mb-3">
+                        <label class="form-label" for="input-service-title">Service Title</label>
+                        <input class="form-control" id="input-service-title" name="service-title" type="text" placeholder="Ex: Nail Care, Nail Design, etc.">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="close-btn" data-bs-dismiss="modal">Close</a>
+                <a class="save-btn" data-bs-dismiss="modal">Add</a>
+            </div>
+        </div>
+    </div>
+</div>

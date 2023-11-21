@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="/css/servicecollection-preview.css">
+
+<div id="service-collection-preview-container">
+    <div id="service-collection-info-container">
+        <div id="service-title">{{serviceTitle}}</div>
+        <div id="service-option-tags-container">
+            {{#if (isNonEmpty optionChoices1Tags)}}
+                <div class="option1-tags-container">
+                    {{#each optionChoices1Tags}}
+                        <div class="option1-tag">{{this}}</div>
+                    {{/each}}
+                </div>
+            {{else}}
+                <div class="empty-text">Empty</div>
+            {{/if}}
+            {{#if (isNonEmpty optionChoices2Tags)}}
+                <div class="option2-tags-container">
+                    {{#each optionChoices2Tags}}
+                        <div class="option2-tag">{{this}}</div>
+                    {{/each}}
+                </div>
+            {{else}}
+                <div class="empty-text">Empty</div>
+            {{/if}}
+        </div>
+    </div>
+    <div id="service-collection-controls-container">
+        <a class="edit-btn"><i class="fa fa-edit"></i>Edit</a>
+        <a class="delete-btn"><i class="fa fa-trash-can"></i>Delete</a>
+    </div>
+</div>
