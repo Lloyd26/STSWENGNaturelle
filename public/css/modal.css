@@ -4,6 +4,12 @@
     padding: 1.5em;
 }
 
+.delete-modal-header{
+    background-color: var(--clr-triadic-1-300);
+    color: #FFF;
+    padding: 1.5em;
+}
+
 .modal-title{
     font-weight: 700;
 }
@@ -35,9 +41,9 @@
 }
 
 .close-btn{
-    color: var(--clr-triadic-1-300);
+    color: gray;
     background-color: #FFF;
-    border: 2px solid var(--clr-triadic-1-300);
+    border: 2px solid gray;
     border-radius: var(--radius);
     padding: .5em 2em;
     font-weight: 700;
@@ -48,15 +54,15 @@
 
 .close-btn:hover{
     color: #FFF;
-    background-color: var(--clr-triadic-1-300);
+    background-color: gray;
     border-color: #FFF;
 }
 
 .close-btn:active{
-    border-color: var(--clr-triadic-1-500);
+    border-color: gray;
 }
 
-.services-list{
+.services-list, .standalone-services-list{
     display: flex;
     flex-direction: column;
     gap: 1em;
@@ -66,7 +72,11 @@
     width: 30%;
 }
 
-.input-services{
+.input-standalone-service-option, .input-standalone-price{
+    width: 50%;
+}
+
+.input-services, .input-standalone-services{
     display: flex;
     gap: .5em;
     flex-wrap: nowrap;
@@ -74,7 +84,7 @@
     padding-bottom: 1em;
 }
 
-.delete-service{
+.delete-service, .delete-standalone-service {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -89,20 +99,20 @@
     transition: color 180ms ease-in-out, background-color 180ms ease-in-out, border-color 180ms ease-in-out;
 }
 
-.delete-service > .fa{
+.delete-service > .fa, .delete-standalone-service > .fa{
     margin-right: 0;
 }
 
-.delete-service:hover{
+.delete-service:hover, .delete-standalone-service:hover{
     background-color: var(--clr-triadic-1-300);
     color: #FFF;
 }
 
-.delete-service:active{
+.delete-service:active, .delete-standalone-service:hover{
     border-color: var(--clr-triadic-1-500);
 }
 
-.add-service{
+.add-service, .add-standalone-service{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -115,16 +125,16 @@
     font-weight: 700;
 }
 
-.add-service:hover{
+.add-service:hover, .add-standalone-service:hover{
     background-color: var(--salon-purple);
     color: #FFF;
 }
 
-.add-service:active{
+.add-service:active, .add-standalone-service:active{
     border-color: var(--clr-primary-700);
 }
 
-.services-container-header {
+.services-container-header, .standalone-services-container-header{
     display: flex;
     flex-direction: row;
     gap: .5em;
@@ -134,7 +144,7 @@
     padding-bottom: 1em;
 }
 
-.tabular-services-container{
+.tabular-services-container, .standalone-services-container{
     display: flex;
     flex-direction: column;
 }
@@ -145,4 +155,26 @@
 
 ul {
     padding-left: 0;
+}
+
+.service-title-info {
+    color: var(--salon-purple);
+    font-weight: 900;
+    font-size: 1.2em;
+}
+
+#delete-service-collection-btn {
+    color: var(--clr-triadic-1-300);
+    background-color: #FFF;
+    border: 2px solid var(--clr-triadic-1-300);
+}
+
+#delete-service-collection-btn:hover{
+    color: #FFF;
+    background-color: var(--clr-triadic-1-300);
+    border-color: #FFF;
+}
+
+#delete-service-collection-btn:active{
+    border-color: var(--clr-triadic-1-300);
 }

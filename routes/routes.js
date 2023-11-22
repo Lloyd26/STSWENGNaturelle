@@ -32,5 +32,6 @@ app.get('/admin/employees', admin_controller.getAdminEmployees);
 
 app.get('/admin/services', admin_controller.getAdminServices);
 app.post('/admin/services/add-service-collection', admin_controller.postAddServiceCollection);
+app.delete('/admin/services/delete-service-collection', admin_controller.deleteServiceCollection);
 
 module.exports = app;

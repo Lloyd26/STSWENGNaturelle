@@ -23,13 +23,13 @@
     </table>
     {{#if (isNonEmpty specialServices)}}
         <hr>
-        <table class="special-service-table">
+        <div class="special-service-container">
             {{#each specialServices}}
-                <tr>
-                    <td class="special-service-suboption">{{this.serviceOption}}</td>
-                    <td class="special-service-price">{{this.price}}</td>
-                </tr>
+                <div class="special-service-row">
+                    <div class="special-service-suboption">{{this.serviceOption}}</div>
+                    <div class="special-service-price">{{this.price}}</div>
+                </div>
             {{/each}}
-        </table>
+        </div>
     {{/if}}
 </div>
