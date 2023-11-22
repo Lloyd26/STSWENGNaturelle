@@ -1,9 +1,13 @@
 import {showError, showSuccess} from "./form.js";
 
-function deleteService (){
-    let to_delete = $(this).closest("li")
-    to_delete.remove()
+function getUniqueValues(arr, field) {
+    const uniqueValues = new Set();
+    arr.forEach(obj => {
+      uniqueValues.add(obj[field]);
+    });
+    return Array.from(uniqueValues);
 }
+  
 
 $(document).ready(function(){
 
@@ -11,10 +15,10 @@ $(document).ready(function(){
         let add_form = $('#form-add-service-collection')
         let service_concern = $('#input-service-concern').val()
         let service_title = $('#input-service-title').val()
-        let options1 = $('#input-service-option-choices-1').val()
-        let options2 = $('#input-service-option-choices-2').val()
         let services_list = $(".services-list")
-        let formData = {serviceConcern:service_concern, serviceTitle: service_title, options1:options1, options2:options2}
+        let service_obj = {}
+        let services_arr = []
+        let service_coll = {}
 
         if (!service_concern) {
             e.preventDefault();
@@ -25,14 +29,40 @@ $(document).ready(function(){
         } else if (services_list.children().length == 0) {
             e.preventDefault();
             showError("Please add at least 1 service in the collection", "#add-service-collection-error-msg");
-        } else if (!options2) {
-            e.preventDefault();
-            showError("Please input Service Option Choices (Row Headers)", "#add-service-collection-error-msg");
         } else {
-            $.post("/admin/services/add-service-collection", formData, function(response)
+            
+            // make service objects
+            $(".services-list li").each(function(index) {
+                service_obj = {
+                    serviceTitle: service_title,
+                    serviceOption1: $(this).find('.input-service-option-1').val(),
+                    serviceOption2: $(this).find('.input-service-option-2').val(),
+                    price: $(this).find('.input-price').val(),
+                }
+                services_arr.push(service_obj)
+            });
+
+            // make option choices
+
+            let optionChoices1 = getUniqueValues(services_arr, 'serviceOption1')
+            let optionChoices2 = getUniqueValues(services_arr, 'serviceOption2')
+
+            service_coll = {
+                serviceConcern: service_concern,
+                serviceTitle: service_title,
+                services: services_arr,
+                optionChoices1: optionChoices1,
+                optionChoices2: optionChoices2,
+                specialServices: []
+            }
+
+            console.log(service_coll)
+
+            $.post("/admin/services/add-service-collection", service_coll, function(response)
             {
                 console.log(response)
             })
+
             add_form[0].reset();
             e.preventDefault();
             showSuccess("Added Service Collection successfully!", "#add-service-collection-error-msg");

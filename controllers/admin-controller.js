@@ -1,5 +1,6 @@
 const Admin = require('../models/Admin');
 const ServiceCollection = require('../models/ServiceCollection.js');
+const Service = require('../models/Service.js');
 const helpers = require('../models/helpers.js')
 
 const controller = {
@@ -139,21 +140,26 @@ const controller = {
     },
 
     postAddServiceCollection: async function(req, res) {
-        let optionChoices1 = req.body.options1.split(',')
-        let optionChoices2 = req.body.options2.split(',')
+
+        // extract services and insert to DB
+
+        let response1 = await helpers.insertMany(Service, req.body.services)
+
+        let services = await Service.find({'serviceTitle': req.body.serviceTitle})
+        let serviceIds = await services.map(service => service._id)
         
         let newServiceCollection = {
             serviceConcern: req.body.serviceConcern,
             serviceTitle: req.body.serviceTitle,
-            optionChoices1: optionChoices1,
-            optionChoices2: optionChoices2,
-            services: [],
+            optionChoices1: req.body.optionChoices1,
+            optionChoices2: req.body.optionChoices2,
+            services: serviceIds,
             specialServices: []
         }
 
-        var response = await helpers.insertOne(ServiceCollection, newServiceCollection);
+        var response2 = await helpers.insertOne(ServiceCollection, newServiceCollection);
 
-        if (response != null){
+        if (response1 != null || response2 != null){
             res.redirect('/admin/services');
         }
     }
