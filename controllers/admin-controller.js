@@ -69,7 +69,8 @@ const controller = {
             }
         };
 
-        res.redirect('/admin');
+        if (req.query.next) res.redirect(decodeURIComponent(req.query.next));
+        else res.redirect('/admin');
     },
 
     getAdminDashboard: function(req, res, next) {
@@ -85,9 +86,16 @@ const controller = {
         });
     },
 
+    getAdminEmployees: function(req, res) {
+        if (!req.session.logged_in || req.session.logged_in.type !== "admin") {
+            res.redirect("/admin?next=" + encodeURIComponent("/admin/employees"));
+            return;
+        }
+    },
+
     getAdminServices: async function(req, res, next) {
         if (!req.session.logged_in || req.session.logged_in.type !== "admin") {
-            next();
+            res.redirect("/admin?next=" + encodeURIComponent("/admin/services"));
             return;
         }
 

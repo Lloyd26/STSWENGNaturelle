@@ -28,6 +28,8 @@ app.get('/reserveinfo', controller.getReserveInfo);
 app.get('/admin', admin_controller.getAdminLogin, admin_controller.getAdminDashboard);
 app.post('/admin', admin_controller.postAdminLogin);
 
+app.get('/admin/employees', admin_controller.getAdminEmployees);
+
 app.get('/admin/services', admin_controller.getAdminServices);
 app.post('/admin/services/add-service-collection', admin_controller.postAddServiceCollection);
 
