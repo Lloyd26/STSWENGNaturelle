@@ -2,8 +2,61 @@ body {
     background-color: var(--clr-primary-50);
 }
 
+.admin-wrapper {
+    background-color: var(--clr-primary-50);
+    min-height: 100vh;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-header-container {
+    margin: 5rem 5rem 3rem;
+}
+
+.admin-header {
+    font-size: 3em;
+    font-weight: 800;
+    color: var(--salon-purple);
+    margin: 0;
+}
+
+.admin-container {
+    background-color: #FFF;
+    margin-left: 3rem;
+    margin-right: 3rem;
+    padding: 2rem;
+    flex-grow: 1;
+    border-radius: var(--radius);
+    box-shadow: 2px 1px 16px rgba(0, 0, 0, 0.15);
+}
+
+.admin-container.container-bottom {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
 @media (max-width: 992px) {
     #main-wrapper > .row > * {
         width: 100%;
+    }
+
+    .admin-wrapper {
+        padding-left: 0;
+        padding-right: 0;
+        background-color: #FFF;
+    }
+
+    .admin-header-container {
+        margin: 1rem;
+        padding: 3rem 1.5rem;
+        background-color: var(--clr-primary-50);
+        border-radius: var(--radius);
+    }
+
+    .admin-header {
+        font-size: 2em;
+        text-align: center;
     }
 }
