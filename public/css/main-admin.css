@@ -48,6 +48,10 @@ body {
         background-color: #FFF;
     }
 
+    .admin-header-wrapper {
+        border-bottom: 2px solid var(--clr-primary-50);
+    }
+
     .admin-header-container {
         margin: 1rem;
         padding: 3rem 1.5rem;
@@ -58,5 +62,16 @@ body {
     .admin-header {
         font-size: 2em;
         text-align: center;
+    }
+
+    .admin-container {
+        margin-left: 0;
+        margin-right: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .admin-wrapper {
+        padding-bottom: 5rem;
     }
 }
