@@ -1,10 +1,17 @@
 export function validateForm(...forms) {
     let valid = true;
     forms.forEach(form => {
-        form.removeClass("is-invalid");
-        if (!form.val().trim().length)
-            valid = false;
-        return valid;
+        if (form instanceof jQuery) {
+            form.removeClass("is-invalid");
+            if (!form.val().trim().length)
+                valid = false;
+            return valid;
+        } else {
+            form.classList.remove("is-invalid");
+            if (!form.value.trim().length)
+                valid = false;
+            return valid;
+        }
     });
     return valid;
 }
@@ -31,4 +38,14 @@ export function disableForms(isDisabled, forms){
             el.disabled = isDisabled;
         });
     })
+}
+
+export function isEmailValid(email) {
+    const validEmailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return validEmailRegex.test(email);
+}
+
+export function isContactNumValid(contactNum) {
+    const validContactNumRegex = /^(09)\d{9}/;
+    return validContactNumRegex.test(contactNum);
 }

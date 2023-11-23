@@ -1,15 +1,5 @@
 import {showError, validateForm} from "./form.js";
 
-function isEmailValid(email) {
-    const validEmailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    return validEmailRegex.test(email);
-}
-
-function isContactNumValid(contactNum) {
-    const validContactNumRegex = /^(09)\d{9}/;
-    return validContactNumRegex.test(contactNum);
-}
-
 $(document).ready(function() {
 
     $("#form-login-admin").on("submit", function(e) {
