@@ -35,7 +35,8 @@ app.post('/admin/employees/edit', admin_controller.postEditEmployee);
 app.post('/admin/employees/delete', admin_controller.postDeleteEmployee);
 
 app.get('/admin/services', admin_controller.getAdminServices);
+app.get('/admin/services/get-service-collections', admin_controller.getServiceCollections);
 app.post('/admin/services/add-service-collection', admin_controller.postAddServiceCollection);
-app.delete('/admin/services/delete-service-collection', admin_controller.deleteServiceCollection);
+app.post('/admin/services/delete-service-collection', admin_controller.postDeleteServiceCollection);
 
 module.exports = app;
