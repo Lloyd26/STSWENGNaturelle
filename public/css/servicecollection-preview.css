@@ -1,4 +1,4 @@
-#service-collection-preview-container{
+.service-collection-preview-container{
     width: 100%;
     background-color: #FFF;
     border-radius: calc(var(--radius) / 1.5);
@@ -10,15 +10,15 @@
     transition: box-shadow 180ms ease-in-out;
 }
 
-#service-collection-preview-container:hover {
+.service-collection-preview-container:hover {
     box-shadow: 2px 1px 16px rgba(0, 0, 0, 0.1);
 }
 
-#service-collection-info-container{
+.service-collection-info-container{
     margin-bottom: 2em;
 }
 
-#service-collection-controls-container{
+.service-collection-controls-container{
     display: flex;
     flex-direction: row;
     gap: 1em;
@@ -26,14 +26,14 @@
     justify-content: flex-end;
 }
 
-#service-title{
+.service-title{
     font-size: 2.5em;
     font-weight: 800;
     color: var(--salon-purple);
     margin-bottom: .5em;
 }
 
-#service-option-tags-container{
+.service-option-tags-container{
     display: grid;
     flex-direction: column;
     gap: .5em;

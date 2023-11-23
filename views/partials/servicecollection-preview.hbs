@@ -1,9 +1,10 @@
 <link rel="stylesheet" href="/css/servicecollection-preview.css">
+<script type="module" src="/js/servicecollection-preview.js"></script>
 
-<div id="service-collection-preview-container">
-    <div id="service-collection-info-container">
-        <div id="service-title">{{serviceTitle}}</div>
-        <div id="service-option-tags-container">
+<div class="service-collection-preview-container">
+    <div class="service-collection-info-container">
+        <div class="service-title" data-name="{{serviceTitle}}">{{serviceTitle}}</div>
+        <div class="service-option-tags-container">
             {{#if (isNonEmpty optionChoices1Tags)}}
                 <div class="option1-tags-container">
                     {{#each optionChoices1Tags}}
@@ -24,8 +25,28 @@
             {{/if}}
         </div>
     </div>
-    <div id="service-collection-controls-container">
+    <div class="service-collection-controls-container">
         <button class="edit-btn"><i class="fa fa-edit" type="submit"></i>Edit</button>
-        <button class="delete-btn"><i class="fa fa-trash-can"></i>Delete</button>
+        <button class="delete-btn" data-bs-toggle="modal" data-bs-target="#delete-service-collection-modal"><i class="fa fa-trash-can"></i>Delete</button>
+    </div>
+</div>
+
+<!-- Delete Modal-->
+<div class="modal fade" id="delete-service-collection-modal" tabindex="-1" aria-labelledby="delete-service-collection-modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header delete-modal-header">
+                <h5 class="modal-title">Delete Service Collection</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-text">Are you sure you want to delete the <span class="service-title-info"></span> Service Collection?</div>
+                <div class="error-msg" id="delete-service-collection-error-msg" data-error-status="normal"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="close-btn" data-bs-dismiss="modal">Close</button>
+                <button class="save-btn" id="delete-service-collection-btn" type="button"><i class="fa fa-trash-can"></i>Delete</button>
+            </div>
+        </div>
     </div>
 </div>

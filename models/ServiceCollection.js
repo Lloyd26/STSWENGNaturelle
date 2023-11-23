@@ -5,7 +5,8 @@ const serviceCollectionSchema = new Schema ({
         type: String
     },
     serviceTitle: {
-        type: String
+        type: String,
+        unique: true
     },
     optionChoices1: {
         type: [String]

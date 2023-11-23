@@ -10,7 +10,7 @@
     justify-content: space-around;
 }
 
-.service-table, .special-service-table{
+.service-table{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,8 +18,11 @@
     border-spacing: 1em .5em;
 }
 
-.special-service-table{
+.special-service-container{
+    display: flex;
+    flex-direction: column;
     margin-bottom: 1em;
+    padding: 1em;
 }
 
 .first-row{
@@ -42,14 +45,14 @@
 }
 
 .service-suboption,.special-service-suboption{
-    flex: 8 0 0;
     text-align: left;
     font-size: 20px;
     font-weight: 800;
 }
 
-.special-service-suboption{
-    padding: 0em 5em 0em 0em;
+.special-service-row{
+    display: flex;
+    flex-direction: row;
 }
 
 .service-price, .no-price, .special-service-price{
@@ -58,10 +61,6 @@
     font-weight: 600;
     font-size: 20px;
     color: gray;
-}
-
-.special-service-price{
-    padding: 0em 0em 0em 18em;
 }
 
 tr:hover{
