@@ -2,6 +2,7 @@ const Admin = require('../models/Admin');
 const Employee = require('../models/Employee')
 const ServiceCollection = require('../models/ServiceCollection.js');
 const Service = require('../models/Service.js');
+const SpecialService = require('../models/SpecialService.js');
 const helpers = require('../models/helpers.js')
 
 function isEmailValid(email) {
@@ -289,25 +290,38 @@ const controller = {
 
     postAddServiceCollection: async function(req, res) {
 
+        // check if service title is unique
+        let uniquecheck = await ServiceCollection.findOne({serviceTitle:req.body.serviceTitle}, 'serviceTitle')
+    
+        if (uniquecheck != null && uniquecheck.serviceTitle === req.body.serviceTitle) {
+            res.json({hasError: true, error: "Service Title already exists!"})
+            return;
+        }
+
+
         // extract services and insert to DB
 
         let response1 = await helpers.insertMany(Service, req.body.services)
+        let response2 = await helpers.insertMany(SpecialService, req.body.specialServices)
 
         let services = await Service.find({'serviceTitle': req.body.serviceTitle})
         let serviceIds = await services.map(service => service._id)
         
+        let standaloneServices = await SpecialService.find({'serviceTitle': req.body.serviceTitle})
+        let standaloneServiceIds = await standaloneServices.map(service => service._id)
+
         let newServiceCollection = {
             serviceConcern: req.body.serviceConcern,
             serviceTitle: req.body.serviceTitle,
             optionChoices1: req.body.optionChoices1,
             optionChoices2: req.body.optionChoices2,
             services: serviceIds,
-            specialServices: []
+            specialServices: standaloneServiceIds
         }
 
-        var response2 = await helpers.insertOne(ServiceCollection, newServiceCollection);
+        var response3 = await helpers.insertOne(ServiceCollection, newServiceCollection);
 
-        if (response1 != null || response2 != null){
+        if (response1 != null || response2 != null || response3 != null){
             res.redirect('/admin/services');
         }
     },
