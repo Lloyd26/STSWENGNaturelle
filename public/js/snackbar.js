@@ -12,6 +12,9 @@ function snackbar(sb) {
         case 'error':
             snackbar_el.classList.add("sb-error");
             break;
+        case 'primary':
+            snackbar_el.classList.add("sb-primary");
+            break;
         default:
             snackbar_el.classList.add("sb-primary");
             break;
