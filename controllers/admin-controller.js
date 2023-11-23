@@ -288,6 +288,54 @@ const controller = {
         });
     },
 
+    getServiceCollections: async function(req, res) {
+        if (!req.session.logged_in || req.session.logged_in.type !== "admin") {
+            res.status(403); // HTTP 403: Forbidden
+            return;
+        }
+
+        let serviceCollections = await ServiceCollection.find({
+        }).populate('services', 'specialServices').lean().exec()
+
+        let serviceCollectionsWithTags = serviceCollections.map(coll=>{
+            optionChoices1Tags = []
+            optionChoices2Tags = []
+
+            if (coll.optionChoices1.length > 3){
+                for (let i = 0; i < 3; i++){
+                    optionChoices1Tags[i] = coll.optionChoices1[i]
+                }
+            } else {
+                for (let i = 0; i < coll.optionChoices1.length; i++){
+                    optionChoices1Tags[i] = coll.optionChoices1[i]
+                }
+            }
+
+            if (coll.optionChoices2.length > 3){
+                for (let i = 0; i < 3; i++){
+                    optionChoices2Tags[i] = coll.optionChoices2[i]
+                }
+            } else {
+                for (let i = 0; i < coll.optionChoices2.length; i++){
+                    optionChoices2Tags[i] = coll.optionChoices2[i]
+                }
+            }
+
+            return {
+                serviceConcern: coll.serviceConcern,
+                serviceTitle: coll.serviceTitle,
+                services: coll.services,
+                optionChoices1: coll.optionChoices1,
+                optionChoices2: coll.optionChoices2,
+                specialServices: coll.specialServices,
+                optionChoices1Tags: optionChoices1Tags,
+                optionChoices2Tags: optionChoices2Tags
+            }
+        })
+
+        res.send(serviceCollectionsWithTags)
+    },
+
     postAddServiceCollection: async function(req, res) {
 
         // check if service title is unique
@@ -326,13 +374,19 @@ const controller = {
         }
     },
 
-    deleteServiceCollection: async function(req, res) {
+    postDeleteServiceCollection: async function(req, res) {
+        if (!req.session.logged_in || req.session.logged_in.type !== "admin") {
+            res.status(403); // HTTP 403: Forbidden
+            return;
+        }
+        
         let deleteServices = await Service.deleteMany({serviceTitle: req.body.serviceTitle})
         let deleteSpecialServices = await SpecialService.deleteMany({serviceTitle: req.body.serviceTitle})
         let deleteServiceCollection = await ServiceCollection.deleteOne({serviceTitle: req.body.serviceTitle})
 
+        console.log(deleteServiceCollection.deletedCount)
         if (deleteServices.deletedCount > 0 || deleteSpecialServices.deletedCount > 0 || deleteServiceCollection.deletedCount > 0){
-            res.status(303).location("/admin/services").end()
+            res.sendStatus(200); // HTTP 200: OK
         }
         else {
             res.json({hasError: true, error: "Nothing to delete."});

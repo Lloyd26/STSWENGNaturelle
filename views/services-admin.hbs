@@ -7,9 +7,6 @@
         <button type="button" id="add-btn" data-bs-toggle="modal" data-bs-target="#add-service-collection-modal"><i class="fa fa-plus"></i>Add</button>
     </div>
     <div id="service-collection-container">
-        {{#each service_collections}}
-            {{>servicecollection-preview this}}
-        {{/each}}
     </div>
 </div>
 
@@ -61,11 +58,30 @@
                     <div class="error-msg" id="add-service-collection-error-msg" data-error-status="normal"></div>
                 </div>
                 <div class="modal-footer">
-                    <button class="close-btn" data-bs-dismiss="modal">Close</button>
-                    <button class="save-btn" id="add-service-collection-btn" type="button">Add</button>
+                    <button type="button" class="close-btn" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="save-btn" id="add-service-collection-btn">Add</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
+<!-- Delete Modal-->
+<div class="modal fade" id="delete-service-collection-modal" tabindex="-1" aria-labelledby="delete-service-collection-modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header delete-modal-header">
+                <h5 class="modal-title">Delete Service Collection</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-text">Are you sure you want to delete the <span class="service-title-info"></span> Service Collection?</div>
+                <div class="error-msg" id="delete-service-collection-error-msg" data-error-status="normal"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="close-btn" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="save-btn" id="delete-service-collection-btn"><i class="fa fa-trash-can"></i>Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
