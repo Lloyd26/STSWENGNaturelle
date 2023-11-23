@@ -25,7 +25,7 @@ export class Element {
                 this.tagName = left.indexOf("#") === 0 ? "div" : left.split("#")[0];
                 this.id = left.split("#")[1];
             } else {
-                this.tagName = element.indexOf(".") === 0 ? "div" : element.split("#")[0];
+                this.tagName = element.indexOf(".") === 0 ? "div" : element.split(".")[0];
             }
 
             for (let i = 1; i < element.split(".").length; i++) {
