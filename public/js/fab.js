@@ -14,6 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             let fab_blur_target = e.currentTarget.getAttribute("data-fab-blur-target");
             if (fab_blur_target != null) {
+                document.querySelector("body").style.overflow = fab_active ? "hidden" : "";
+
                 let fab_items_container = document.getElementById("fab-items-container");
                 document.querySelectorAll(fab_blur_target).forEach(fab_blur => {
                     if (fab_active) {
@@ -58,4 +60,16 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         })
     });
+
+    window.onscroll = function(e) {
+        let fab_container = document.getElementById("fab-container");
+        if (this.oldScroll < this.scrollY) {
+            // Downward scroll
+            fab_container.classList.add("hidden");
+        } else {
+            // Upward scroll
+            fab_container.classList.remove("hidden");
+        }
+        this.oldScroll = this.scrollY;
+    }
 });
