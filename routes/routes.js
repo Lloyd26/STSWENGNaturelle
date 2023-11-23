@@ -29,6 +29,10 @@ app.get('/admin', admin_controller.getAdminLogin, admin_controller.getAdminDashb
 app.post('/admin', admin_controller.postAdminLogin);
 
 app.get('/admin/employees', admin_controller.getAdminEmployees);
+app.get('/admin/employees/get', admin_controller.getAllEmployees);
+app.post('/admin/employees/add', admin_controller.postAddEmployee);
+app.post('/admin/employees/edit', admin_controller.postEditEmployee);
+app.post('/admin/employees/delete', admin_controller.postDeleteEmployee);
 
 app.get('/admin/services', admin_controller.getAdminServices);
 app.post('/admin/services/add-service-collection', admin_controller.postAddServiceCollection);
