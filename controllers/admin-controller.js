@@ -1,7 +1,18 @@
 const Admin = require('../models/Admin');
+const Employee = require('../models/Employee')
 const ServiceCollection = require('../models/ServiceCollection.js');
 const Service = require('../models/Service.js');
 const helpers = require('../models/helpers.js')
+
+function isEmailValid(email) {
+    const validEmailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return validEmailRegex.test(email);
+}
+
+function isContactNumValid(contactNum) {
+    const validContactNumRegex = /^(09)\d{9}/;
+    return validContactNumRegex.test(contactNum);
+}
 
 const controller = {
     getAdminLogin: function(req, res, next) {
@@ -91,6 +102,135 @@ const controller = {
             res.redirect("/admin?next=" + encodeURIComponent("/admin/employees"));
             return;
         }
+
+        res.render('admin-employees', {
+            layout: 'admin',
+            logged_in: req.session.logged_in,
+            active: {admin_employees: true}
+        });
+    },
+
+    getAllEmployees: async function(req, res) {
+        if (!req.session.logged_in || req.session.logged_in.type !== "admin") {
+            res.status(403); // HTTP 403: Forbidden
+            return;
+        }
+
+        let employees = await Employee.find({}, '');
+        res.send(employees);
+    },
+
+    postAddEmployee: async function(req, res) {
+        if (!req.session.logged_in || req.session.logged_in.type !== "admin") {
+            res.status(403); // HTTP 403: Forbidden
+            return;
+        }
+
+        let fname = req.body.employee_fname;
+        let lname = req.body.employee_lname;
+        let email = req.body.employee_email;
+        let contact = req.body.employee_contact;
+
+        if (fname === undefined || lname === undefined || email === undefined || contact === undefined) {
+            res.sendStatus(400); // HTTP 400: Bad Request
+            return;
+        } else if (fname === '' || lname === '' || email === '' || contact === '') {
+            res.sendStatus(400);
+            return;
+        } else if (!isEmailValid(email)) {
+            res.sendStatus(400).json({error: "Email address is not valid!"});
+            return;
+        } else if (!isContactNumValid(contact)) {
+            res.sendStatus(400).json({error: "Contact number is not valid!"});
+            return;
+        }
+
+        let employee = {
+            firstName: fname,
+            lastName: lname,
+            email: email,
+            contactNumber: contact
+        };
+
+        await Employee.create(employee);
+
+        res.sendStatus(201); // HTTP 201: Created
+    },
+
+    postEditEmployee: async function(req, res) {
+        if (!req.session.logged_in || req.session.logged_in.type !== "admin") {
+            res.status(403); // HTTP 403: Forbidden
+            return;
+        }
+
+        let id = req.body.employee_id;
+        let fname = req.body.employee_fname;
+        let lname = req.body.employee_lname;
+        let email = req.body.employee_email;
+        let contact = req.body.employee_contact;
+
+        if (fname === undefined || lname === undefined || email === undefined || contact === undefined) {
+            res.sendStatus(400); // HTTP 400: Bad Request
+            return;
+        } else if (fname === '' || lname === '' || email === '' || contact === '') {
+            res.sendStatus(400);
+            return;
+        } else if (!isEmailValid(email)) {
+            res.sendStatus(400).json({error: "Email address is not valid!"});
+            return;
+        } else if (!isContactNumValid(contact)) {
+            res.sendStatus(400).json({error: "Contact number is not valid!"});
+            return;
+        }
+
+        let employee = {
+            firstName: fname,
+            lastName: lname,
+            email: email,
+            contactNumber: contact
+        };
+
+        await Employee.updateOne({_id: id}, employee);
+
+        res.sendStatus(200); // HTTP 200: OK
+    },
+
+    postDeleteEmployee: async function(req, res) {
+        if (!req.session.logged_in || req.session.logged_in.type !== "admin") {
+            res.status(403); // HTTP 403: Forbidden
+            return;
+        }
+
+        let id = req.body.employee_id;
+        let fname = req.body.employee_fname;
+        let lname = req.body.employee_lname;
+        let email = req.body.employee_email;
+        let contact = req.body.employee_contact;
+
+        if (fname === undefined || lname === undefined || email === undefined || contact === undefined) {
+            res.sendStatus(400); // HTTP 400: Bad Request
+            return;
+        } else if (fname === '' || lname === '' || email === '' || contact === '') {
+            res.sendStatus(400);
+            return;
+        } else if (!isEmailValid(email)) {
+            res.sendStatus(400).json({error: "Email address is not valid!"});
+            return;
+        } else if (!isContactNumValid(contact)) {
+            res.sendStatus(400).json({error: "Contact number is not valid!"});
+            return;
+        }
+
+        let employee = {
+            firstName: fname,
+            lastName: lname,
+            email: email,
+            contactNumber: contact
+        };
+
+        await Employee.deleteOne({_id: id}, employee);
+
+        res.sendStatus(200); // HTTP 200: OK
     },
 
     getAdminServices: async function(req, res, next) {
@@ -169,6 +309,19 @@ const controller = {
 
         if (response1 != null || response2 != null){
             res.redirect('/admin/services');
+        }
+    },
+
+    deleteServiceCollection: async function(req, res) {
+        let deleteServices = await Service.deleteMany({serviceTitle: req.body.serviceTitle})
+        let deleteSpecialServices = await SpecialService.deleteMany({serviceTitle: req.body.serviceTitle})
+        let deleteServiceCollection = await ServiceCollection.deleteOne({serviceTitle: req.body.serviceTitle})
+
+        if (deleteServices.deletedCount > 0 || deleteSpecialServices.deletedCount > 0 || deleteServiceCollection.deletedCount > 0){
+            res.status(303).location("/admin/services").end()
+        }
+        else {
+            res.json({hasError: true, error: "Nothing to delete."});
         }
     }
 }
