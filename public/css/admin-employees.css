@@ -71,7 +71,7 @@
     color: var(--salon-purple);
     margin-bottom: 0.25rem;
     display: flex;
-    column-gap: 0.5rem;
+    column-gap: 0.25em;
     flex-wrap: wrap;
 }
 
