@@ -4,12 +4,6 @@
 <link rel="stylesheet" href="/css/admin-employees.css">
 <script type="module" src="/js/admin-employees.js"></script>
 
-<script>
-    $.get("/admin/employees/get", {}, (data, status, xhr) => {
-        console.log(data);
-    });
-</script>
-
 <div class="admin-wrapper bg-noise-pattern">
     <div class="admin-header-container">
         <h2 class="admin-header">Employees</h2>
@@ -20,41 +14,6 @@
             <button class="btn" id="btn-employee-add" data-bs-toggle="modal" data-bs-target="#modal-employee-add"><i class="fa fa-plus"></i>Add</button>
         </div>
         <div id="admin-employees-wrapper">
-            <!--
-            <div class="admin-employees-container">
-                <div class="admin-employees-details">
-                    <h4 class="employee-name"><span class="employee-fname">Juan</span><span class="employee-lname">Dela Cruz</span></h4>
-                    <p class="employee-email"><i class="fa fa-envelope"></i>email@example.com</p>
-                    <p class="employee-contact"><i class="fa fa-phone"></i>0912-345-6789</p>
-                </div>
-                <div class="admin-employees-actions">
-                    <button class="btn btn-employee-edit" data-bs-toggle="modal" data-bs-target="#modal-employee-edit"><i class="fa fa-edit"></i>Edit</button>
-                    <button class="btn btn-employee-delete" data-bs-toggle="modal" data-bs-target="#modal-employee-delete"><i class="fa fa-trash"></i>Delete</button>
-                </div>
-            </div>
-            <div class="admin-employees-container">
-                <div class="admin-employees-details">
-                    <h4 class="employee-name"><span class="employee-fname">Hello</span><span class="employee-lname">World</span></h4>
-                    <p class="employee-email"><i class="fa fa-envelope"></i>email@example.com</p>
-                    <p class="employee-contact"><i class="fa fa-phone"></i>0912-345-6789</p>
-                </div>
-                <div class="admin-employees-actions">
-                    <button class="btn btn-employee-edit" data-bs-toggle="modal" data-bs-target="#modal-employee-edit"><i class="fa fa-edit"></i>Edit</button>
-                    <button class="btn btn-employee-delete" data-bs-toggle="modal" data-bs-target="#modal-employee-delete"><i class="fa fa-trash"></i>Delete</button>
-                </div>
-            </div>
-            <div class="admin-employees-container">
-                <div class="admin-employees-details">
-                    <h4 class="employee-name"><span class="employee-fname">Lorem</span><span class="employee-lname">Ipsum</span></h4>
-                    <p class="employee-email"><i class="fa fa-envelope"></i>email@example.com</p>
-                    <p class="employee-contact"><i class="fa fa-phone"></i>0912-345-6789</p>
-                </div>
-                <div class="admin-employees-actions">
-                    <button class="btn btn-employee-edit" data-bs-toggle="modal" data-bs-target="#modal-employee-edit"><i class="fa fa-edit"></i>Edit</button>
-                    <button class="btn btn-employee-delete" data-bs-toggle="modal" data-bs-target="#modal-employee-delete"><i class="fa fa-trash"></i>Delete</button>
-                </div>
-            </div>
-            -->
         </div>
     </div>
 </div>
