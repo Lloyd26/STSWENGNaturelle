@@ -1,15 +1,92 @@
+.modal-content {
+    border: 2px solid var(--clr-primary-100);
+    border-radius: calc(var(--radius) / 2);
+    overflow: hidden;
+}
+
 .modal-header{
-    background-color: var(--salon-purple);
-    color: #FFF;
+    background-color: var(--clr-primary-50);
+    color: var(--salon-purple);
     padding: 1.5em;
 }
 
 .modal-title{
     font-weight: 700;
+    font-size: 1.5em;
 }
 
 .modal-body{
     padding: 1.5em;
+}
+
+.modal-footer {
+    background-color: #FAFAFA;
+}
+
+.modal-footer > button {
+    font-weight: 700;
+    border-radius: var(--radius);
+    padding: 0.5rem 1.5rem;
+}
+
+.btn-discard {
+    border: 1px solid var(--clr-triadic-1-300);
+    color: var(--clr-triadic-1-300);
+}
+
+.btn-modal-success {
+    background-color: var(--salon-purple);
+    color: #FFF;
+}
+
+.btn-discard:hover {
+    background-color: var(--clr-triadic-1-300);
+    color: #FFF;
+}
+
+.btn-modal-success:hover, .btn-modal-success:disabled {
+    background-color: var(--clr-primary-200) !important;
+    color: #FFF !important;
+}
+
+.btn-discard:active {
+    background-color: var(--clr-triadic-1-500) !important;
+    color: #FFF !important;
+}
+
+.btn-modal-success:active {
+    background-color: var(--clr-primary-500) !important;
+    color: #FFF !important;
+}
+
+.btn-neutral {
+    border: 1px solid #AAA;
+    color: #888;
+}
+
+.btn-neutral:hover {
+    background-color: #AAA;
+    color: #FFF;
+}
+
+.btn-neutral:active {
+    background-color: #888 !important;
+    color: #FFF !important;
+}
+
+.btn-delete {
+    background-color: var(--clr-triadic-1-300);
+    color: #FFF;
+}
+
+.btn-delete:hover, .btn-delete:disabled {
+    background-color: var(--clr-triadic-1-200) !important;
+    color: #FFF !important;
+}
+
+.btn-delete:active {
+    background-color: var(--clr-triadic-1-500) !important;
+    color: #FFF !important;
 }
 
 .save-btn{
