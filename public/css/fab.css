@@ -5,6 +5,12 @@
     display: flex;
     flex-direction: column-reverse;
     align-items: flex-end;
+    transition: bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#fab-container.hidden {
+    bottom: -2rem;
+    transition: bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #btn-fab {
@@ -58,7 +64,7 @@
 }
 
 .fab-blur {
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;

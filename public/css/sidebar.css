@@ -185,6 +185,9 @@
 
     #sidenav-container {
         padding: 0.5rem 1rem;
+        position: relative;
+        background-color: #FFF;
+        z-index: 1000;
     }
 
     #sidenav-container > .nav {
