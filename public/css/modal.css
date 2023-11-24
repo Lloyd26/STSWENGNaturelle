@@ -4,6 +4,12 @@
     overflow: hidden;
 }
 
+#delete-modal-content {
+    border: 2px solid var(--clr-triadic-1-300);
+    border-radius: calc(var(--radius) / 2);
+    overflow: hidden;
+}
+
 .modal-header{
     background-color: var(--clr-primary-50);
     color: var(--salon-purple);

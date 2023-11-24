@@ -279,13 +279,25 @@ const controller = {
             }
         })
 
-        console.log(serviceCollectionsWithTags)
+        
         res.render('services-admin', {
             layout: 'admin',
             logged_in: req.session.logged_in,
             active: {admin_services: true},
             service_collections: serviceCollectionsWithTags
         });
+    },
+
+    getFindServiceCollection: async function(req, res) {
+        if (!req.session.logged_in || req.session.logged_in.type !== "admin") {
+            res.status(403); // HTTP 403: Forbidden
+            return;
+        }
+
+        let serviceCollection = await ServiceCollection.findOne({_id: req.query.id})
+        .populate('services').populate('specialServices')
+
+        res.send(serviceCollection)
     },
 
     getServiceCollections: async function(req, res) {
@@ -322,6 +334,7 @@ const controller = {
             }
 
             return {
+                _id: coll._id,
                 serviceConcern: coll.serviceConcern,
                 serviceTitle: coll.serviceTitle,
                 services: coll.services,
@@ -332,11 +345,14 @@ const controller = {
                 optionChoices2Tags: optionChoices2Tags
             }
         })
-
         res.send(serviceCollectionsWithTags)
     },
 
     postAddServiceCollection: async function(req, res) {
+        if (!req.session.logged_in || req.session.logged_in.type !== "admin") {
+            res.status(403); // HTTP 403: Forbidden
+            return;
+        }
 
         // check if service title is unique
         let uniquecheck = await ServiceCollection.findOne({serviceTitle:req.body.serviceTitle}, 'serviceTitle')
@@ -345,7 +361,6 @@ const controller = {
             res.json({hasError: true, error: "Service Title already exists!"})
             return;
         }
-
 
         // extract services and insert to DB
 
@@ -374,6 +389,54 @@ const controller = {
         }
     },
 
+    postEditServiceCollection: async function(req, res) {
+        if (!req.session.logged_in || req.session.logged_in.type !== "admin") {
+            res.status(403); // HTTP 403: Forbidden
+            return;
+        }
+        
+        let id = req.body.id
+        
+        // check if service title is unique
+        let uniquecheck = await ServiceCollection.findOne({serviceTitle:req.body.serviceTitle}, 'serviceTitle')
+        
+        if (uniquecheck != null && uniquecheck.serviceTitle === req.body.serviceTitle && uniquecheck._id != id) {
+            res.json({hasError: true, error: "Service Title already exists!"})
+            return;
+        }
+
+        let service_collection_to_be_deleted = await ServiceCollection.findOne({_id:id})
+
+        // delete existing info
+
+        let deleteServices = await Service.deleteMany({serviceTitle: service_collection_to_be_deleted.serviceTitle})
+        let deleteSpecialServices = await SpecialService.deleteMany({serviceTitle: service_collection_to_be_deleted.serviceTitle})
+
+        // extract services and insert to DB
+
+        await helpers.insertMany(Service, req.body.services)
+        await helpers.insertMany(SpecialService, req.body.specialServices)
+
+        let services = await Service.find({'serviceTitle': req.body.serviceTitle})
+        let serviceIds = await services.map(service => service._id)
+        
+        let standaloneServices = await SpecialService.find({'serviceTitle': req.body.serviceTitle})
+        let standaloneServiceIds = await standaloneServices.map(service => service._id)
+
+        let newServiceCollection = {
+            serviceConcern: req.body.serviceConcern,
+            serviceTitle: req.body.serviceTitle,
+            optionChoices1: req.body.optionChoices1,
+            optionChoices2: req.body.optionChoices2,
+            services: serviceIds,
+            specialServices: standaloneServiceIds
+        }
+
+        await ServiceCollection.updateOne({_id: id}, newServiceCollection);
+        
+        res.sendStatus(200); // HTTP 200: OK
+    },
+
     postDeleteServiceCollection: async function(req, res) {
         if (!req.session.logged_in || req.session.logged_in.type !== "admin") {
             res.status(403); // HTTP 403: Forbidden
@@ -384,7 +447,6 @@ const controller = {
         let deleteSpecialServices = await SpecialService.deleteMany({serviceTitle: req.body.serviceTitle})
         let deleteServiceCollection = await ServiceCollection.deleteOne({serviceTitle: req.body.serviceTitle})
 
-        console.log(deleteServiceCollection.deletedCount)
         if (deleteServices.deletedCount > 0 || deleteSpecialServices.deletedCount > 0 || deleteServiceCollection.deletedCount > 0){
             res.sendStatus(200); // HTTP 200: OK
         }

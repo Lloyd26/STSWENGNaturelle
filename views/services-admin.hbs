@@ -31,9 +31,9 @@
                     <div class="col mb-3 tabular-services-container">
                         <div class="mb-3 services-container-header">
                             <label class="form-label services-label" for="services-list">Tabular Services</label>
-                            <button class="add-service"><i class="fa fa-plus"></i>Add Service</button>
+                            <button class="add-service" id="add-add-service"><i class="fa fa-plus"></i>Add Service</button>
                         </div>
-                        <ul class="services-list">
+                        <ul class="services-list" id="add-services-list">
                             <li class="input-services">
                                 <input class="form-control input-service-option-1" name="input-service-option-1" type="text" placeholder="Service Option 1">
                                 <input class="form-control input-service-option-2" name="input-service-option-2" type="text" placeholder="Service Option 2">
@@ -45,9 +45,9 @@
                     <div class="col mb-3 standalone-services-container">
                         <div class="mb-3 standalone-services-container-header">
                             <label class="form-label services-label" for="standalone-services-list">Standalone Services</label>
-                            <button class="add-standalone-service"><i class="fa fa-plus"></i>Add Service</button>
+                            <button class="add-standalone-service" id="add-add-standalone-service"><i class="fa fa-plus"></i>Add Service</button>
                         </div>
-                        <ul class="standalone-services-list">
+                        <ul class="standalone-services-list" id="add-standalone-services-list">
                             <li class="input-standalone-services">
                                 <input class="form-control input-standalone-service-option" name="input-service-option-1" type="text" placeholder="Service Option">
                                 <input class="form-control input-standalone-price" name="input-price" type="number" placeholder="Price">
@@ -66,10 +66,56 @@
     </div>
 </div>
 
+<!-- Edit Modal-->
+<div class="modal fade modal-lg" id="edit-service-collection-modal" tabindex="-1" aria-labelledby="edit-service-collection-modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Service Collection</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="form-edit-service-collection">
+                <input type="hidden" id="edit-input-service-collections-id" name="edit-service-collections_id">
+                <div class="modal-body">
+                    <div class="col mb-3">
+                        <label class="form-label" for="edit-input-service-concern">Service Concern</label>
+                        <input class="form-control" id="edit-input-service-concern" name="service-concern" type="text" placeholder="Ex: Nails, Hair, etc.">
+                    </div>
+                    <div class="col mb-4">
+                        <label class="form-label" for="edit-input-service-title">Service Title</label>
+                        <input class="form-control" id="edit-input-service-title" name="service-title" type="text" placeholder="Ex: Nail Care, Nail Design, etc.">
+                    </div>
+                    <div class="col mb-3 tabular-services-container">
+                        <div class="mb-3 services-container-header">
+                            <label class="form-label services-label" for="services-list">Tabular Services</label>
+                            <button class="add-service" id="edit-add-service"><i class="fa fa-plus"></i>Add Service</button>
+                        </div>
+                        <ul class="services-list" id="edit-services-list">
+                        </ul>
+                    </div>
+                    <div class="col mb-3 standalone-services-container">
+                        <div class="mb-3 standalone-services-container-header">
+                            <label class="form-label services-label" for="standalone-services-list">Standalone Services</label>
+                            <button class="add-standalone-service" id="edit-add-standalone-service"><i class="fa fa-plus"></i>Add Service</button>
+                        </div>
+                        <ul class="standalone-services-list" id="edit-standalone-services-list">
+                        </ul>
+                    </div>
+                    <div class="error-msg" id="edit-service-collection-error-msg" data-error-status="normal"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="close-btn" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="save-btn" id="edit-service-collection-btn">Save Edit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <!-- Delete Modal-->
 <div class="modal fade" id="delete-service-collection-modal" tabindex="-1" aria-labelledby="delete-service-collection-modal" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content" id="delete-modal-content">
             <div class="modal-header delete-modal-header">
                 <h5 class="modal-title">Delete Service Collection</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
