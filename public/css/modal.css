@@ -261,3 +261,8 @@ ul {
 #delete-service-collection-btn:active{
     border-color: var(--clr-triadic-1-300);
 }
+
+.form-section-header{
+    margin-left: .8em;
+    font-weight: 600;
+}
