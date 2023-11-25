@@ -4,6 +4,8 @@ import {Element} from "./element.js";
 const EMPLOYEE_GET_URL = "/admin/employees/get";
 const EMPLOYEES_WRAPPER = "#admin-employees-wrapper";
 
+let cached_data = [];
+
 function onBtnEditClick(e) {
     let employee_id = e.currentTarget.closest(".admin-employees-container").getAttribute("data-employee-id");
     let employee_fname = e.currentTarget.closest(".admin-employees-container").querySelector(".employee-fname").textContent;
@@ -252,7 +254,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 error_msg.setAttribute("data-error-status", "normal");
             }
 
-            document.querySelector("#admin-employees-wrapper").innerHTML = "";
             showEmployees(EMPLOYEE_GET_URL, EMPLOYEES_WRAPPER);
         });
     });
@@ -260,6 +261,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function showEmployees(url, container) {
     $.get(url, {}, (data, status, xhr) => {
+        if (!checkCache(data)) return;
+        document.querySelector(container).innerHTML = "";
+
         data.forEach(employee => {
             let admin_employees_container = new Element(".admin-employees-container", {
                 attr: {
@@ -325,4 +329,22 @@ function showEmployees(url, container) {
             document.querySelector(container).append(admin_employees_container);
         });
     });
+}
+
+function checkCache(data) {
+    if (cached_data.length === 0) {
+        data.forEach(d => cached_data.push(d._id));
+        return true;
+    }
+
+    let temp_data = [];
+    data.forEach(d => temp_data.push(d._id));
+
+    for (let i in cached_data) {
+        if (cached_data[i] !== temp_data[i]) {
+            return false;
+        }
+    }
+
+    return true;
 }
