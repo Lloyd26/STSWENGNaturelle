@@ -395,60 +395,73 @@ function onBtnEditClick (e) {
 
         services_list.innerHTML = ''
         standalone_services_list.innerHTML = ''
+        if (Array.isArray(data.services) && data.services.length !== 0 ) {
+            data.services.forEach(service => {
+                let input_services = new Element ("li.input-services").getElement()
+                let input_service_option_1 = new Element ("input.form-control.input-service-option-1", {
+                    attr: {
+                        type: "text",
+                        placeholder: "Service Option 1"
+                    }
+                }).getElement()
+    
+                input_service_option_1.value = service.serviceOption1
+    
+                let input_service_option_2 = new Element ("input.form-control.input-service-option-2", {
+                    attr: {
+                        type: "text",
+                        placeholder: "Service Option 2"
+                    }
+                }).getElement()
+    
+                input_service_option_2.value = service.serviceOption2
+    
+                let input_price = new Element ("input.form-control.input-price", {
+                    attr:{
+                        type: "number",
+                        placeholder: "Price"
+                    }
+                }).getElement()
+    
+                input_price.value = service.price
+    
+                let delete_service_button = new Element ("button.delete-service").getElement()
+                let delete_service_icon = new Element ("i.fa.fa-trash-can").getElement()
+                delete_service_button.append(delete_service_icon)
+    
+                input_services.append(input_service_option_1, input_service_option_2, input_price, delete_service_button)
+                services_list.append(input_services)
+            })
+        }
+        
+        if (Array.isArray(data.specialServices) && data.specialServices.length !== 0) {
+            data.specialServices.forEach(service => {
+                let input_standalone_services = new Element ("li.input-standalone-services").getElement()
+                let input_standalone_service_option = new Element ("input.form-control.input-standalone-service-option", {
+                    attr: {
+                        type: "text",
+                        placeholder: "Service Option"
+                    }
+                }).getElement()
 
-        data.services.forEach(service => {
-            let input_services = new Element ("li.input-services").getElement()
-            let input_service_option_1 = new Element ("input.form-control.input-service-option-1", {
-                type: "text",
-                placeholder: "Service Option 1"
-            }).getElement()
+                input_standalone_service_option.value = service.serviceOption
 
-            input_service_option_1.value = service.serviceOption1
+                let input_standalone_price = new Element ("input.form-control.input-standalone-price", {
+                    attr: {
+                        type: "number",
+                        placeholder: "Price"
+                    }
+                }).getElement()
 
-            let input_service_option_2 = new Element ("input.form-control.input-service-option-2", {
-                type: "text",
-                placeholder: "Service Option 2"
-            }).getElement()
+                input_standalone_price.value = service.price
 
-            input_service_option_2.value = service.serviceOption2
+                let delete_service_button = new Element ("button.delete-standalone-service").getElement()
+                let delete_service_icon = new Element ("i.fa.fa-trash-can").getElement()
+                delete_service_button.append(delete_service_icon)
 
-            let input_price = new Element ("input.form-control.input-price", {
-                type: "number",
-                placeholder: "Price"
-            }).getElement()
-
-            input_price.value = service.price
-
-            let delete_service_button = new Element ("button.delete-service").getElement()
-            let delete_service_icon = new Element ("i.fa.fa-trash-can").getElement()
-            delete_service_button.append(delete_service_icon)
-
-            input_services.append(input_service_option_1, input_service_option_2, input_price, delete_service_button)
-            services_list.append(input_services)
-        })
-
-        data.specialServices.forEach(service => {
-            let input_standalone_services = new Element ("li.input-standalone-services").getElement()
-            let input_standalone_service_option = new Element ("input.form-control.input-standalone-service-option", {
-                type: "text",
-                placeholder: "Service Option"
-            }).getElement()
-
-            input_standalone_service_option.value = service.serviceOption
-
-            let input_standalone_price = new Element ("input.form-control.input-standalone-price", {
-                type: "number",
-                placeholder: "Price"
-            }).getElement()
-
-            input_standalone_price.value = service.price
-
-            let delete_service_button = new Element ("button.delete-standalone-service").getElement()
-            let delete_service_icon = new Element ("i.fa.fa-trash-can").getElement()
-            delete_service_button.append(delete_service_icon)
-
-            input_standalone_services.append(input_standalone_service_option, input_standalone_price, delete_service_button)
-            standalone_services_list.append(input_standalone_services)
-        })
+                input_standalone_services.append(input_standalone_service_option, input_standalone_price, delete_service_button)
+                standalone_services_list.append(input_standalone_services)
+            })
+        }
     })
 }
