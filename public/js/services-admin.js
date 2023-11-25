@@ -401,7 +401,8 @@ function onBtnEditClick (e) {
                 let input_service_option_1 = new Element ("input.form-control.input-service-option-1", {
                     attr: {
                         type: "text",
-                        placeholder: "Service Option 1"
+                        placeholder: "Service Option 1",
+                        name: "input-service-option-1"
                     }
                 }).getElement()
     
@@ -410,7 +411,8 @@ function onBtnEditClick (e) {
                 let input_service_option_2 = new Element ("input.form-control.input-service-option-2", {
                     attr: {
                         type: "text",
-                        placeholder: "Service Option 2"
+                        placeholder: "Service Option 2",
+                        name: "input-service-option-2"
                     }
                 }).getElement()
     
@@ -419,7 +421,8 @@ function onBtnEditClick (e) {
                 let input_price = new Element ("input.form-control.input-price", {
                     attr:{
                         type: "number",
-                        placeholder: "Price"
+                        placeholder: "Price",
+                        name: "input-price"
                     }
                 }).getElement()
     
@@ -440,7 +443,8 @@ function onBtnEditClick (e) {
                 let input_standalone_service_option = new Element ("input.form-control.input-standalone-service-option", {
                     attr: {
                         type: "text",
-                        placeholder: "Service Option"
+                        placeholder: "Service Option",
+                        name: "input-service-option"
                     }
                 }).getElement()
 
@@ -449,7 +453,8 @@ function onBtnEditClick (e) {
                 let input_standalone_price = new Element ("input.form-control.input-standalone-price", {
                     attr: {
                         type: "number",
-                        placeholder: "Price"
+                        placeholder: "Price",
+                        name: "input-price"
                     }
                 }).getElement()
 
