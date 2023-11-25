@@ -66,7 +66,7 @@ $(document).ready(function(){
         } else if (!service_title) {
             e.preventDefault();
             showError("Please input a Service Title", "#add-service-collection-error-msg");
-        } else if (services_list.children().length == 0) {
+        } else if (services_list.children().length == 0 && standalone_services_list.children().length == 0) {
             e.preventDefault();
             showError("Please add at least 1 service in the collection", "#add-service-collection-error-msg");
         } else if (doesAddServiceCollHaveEmptyField()) {
@@ -128,6 +128,7 @@ $(document).ready(function(){
         let service_concern = $('#edit-input-service-concern').val()
         let service_title = $('#edit-input-service-title').val()
         let services_list = $("#edit-services-list")
+        let standalone_services_list = $("#edit-standalone-services-list")
         let service_obj = {}
         let services_arr = []
         let service_coll = {}
@@ -140,7 +141,7 @@ $(document).ready(function(){
         } else if (!service_title) {
             e.preventDefault();
             showError("Please input a Service Title", "#edit-service-collection-error-msg");
-        } else if (services_list.children().length == 0) {
+        } else if (services_list.children().length == 0 && standalone_services_list.children().length == 0) {
             e.preventDefault();
             showError("Please add at least 1 service in the collection", "#edit-service-collection-error-msg");
         } else if (doesEditServiceCollHaveEmptyField()) {
