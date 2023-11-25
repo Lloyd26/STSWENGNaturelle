@@ -16,3 +16,19 @@
     font-family: 'Raleway', sans-serif;
     letter-spacing: 0;
 }
+
+@media (max-width: 992px) {
+    #form-wrapper {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .form-container {
+        width: 90%;
+    }
+
+    #form-wrapper .row {
+        flex-direction: column;
+        row-gap: 0.5rem;
+    }
+}

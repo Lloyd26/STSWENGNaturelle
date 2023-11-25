@@ -7,3 +7,9 @@
 .form-container {
     width: 40%;
 }
+
+@media (max-width: 992px) {
+    .form-container {
+        width: 90%;
+    }
+}
