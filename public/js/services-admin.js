@@ -4,8 +4,6 @@ import {Element} from "./element.js";
 const SERVICE_COLLECTION_GET_URL = "/admin/services/get-service-collections";
 const SERVICE_COLLECTION_WRAPPER = "#service-collection-container";
 
-let cached_data = [];
-
 function getUniqueValues(arr, field) {
     const uniqueValues = new Set();
     arr.forEach(obj => {
@@ -314,8 +312,6 @@ $(document).ready(function(){
 function showServiceCollections(url, container) {
     $.get(url, {}, (data, status, xhr) => {
         data.forEach(sc => {
-            console.log(cached_data)
-            if (!checkCache(data)) return;
 
             let service_collection_preview_container = new Element(".service-collection-preview-container", {
                 attr: {
@@ -475,22 +471,4 @@ function onBtnEditClick (e) {
             })
         }
     })
-}
-
-function checkCache(data) {
-    if (cached_data.length === 0) {
-        data.forEach(d => cached_data.push(d._id));
-        return true;
-    }
-
-    let temp_data = [];
-    data.forEach(d => temp_data.push(d._id));
-
-    for (let i in cached_data) {
-        if (cached_data[i] !== temp_data[i]) {
-            return false;
-        }
-    }
-
-    return true;
 }

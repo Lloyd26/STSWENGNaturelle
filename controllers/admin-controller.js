@@ -364,8 +364,13 @@ const controller = {
 
         // extract services and insert to DB
 
-        let response1 = await helpers.insertMany(Service, req.body.services)
-        let response2 = await helpers.insertMany(SpecialService, req.body.specialServices)
+        if (Array.isArray(req.body.services) && req.body.services.length !== 0) {
+            await helpers.insertMany(Service, req.body.services)
+        }
+        
+        if (Array.isArray(req.body.specialServices) && req.body.specialServices.length !== 0) {
+            await helpers.insertMany(SpecialService, req.body.specialServices)
+        }
 
         let services = await Service.find({'serviceTitle': req.body.serviceTitle})
         let serviceIds = await services.map(service => service._id)
@@ -382,11 +387,9 @@ const controller = {
             specialServices: standaloneServiceIds
         }
 
-        var response3 = await helpers.insertOne(ServiceCollection, newServiceCollection);
+        await helpers.insertOne(ServiceCollection, newServiceCollection);
 
-        if (response1 != null || response2 != null || response3 != null){
-            res.redirect('/admin/services');
-        }
+        res.sendStatus(200); // HTTP 200: OK
     },
 
     postEditServiceCollection: async function(req, res) {
@@ -409,13 +412,18 @@ const controller = {
 
         // delete existing info
 
-        let deleteServices = await Service.deleteMany({serviceTitle: service_collection_to_be_deleted.serviceTitle})
-        let deleteSpecialServices = await SpecialService.deleteMany({serviceTitle: service_collection_to_be_deleted.serviceTitle})
+        await Service.deleteMany({serviceTitle: service_collection_to_be_deleted.serviceTitle})
+        await SpecialService.deleteMany({serviceTitle: service_collection_to_be_deleted.serviceTitle})
 
         // extract services and insert to DB
 
-        await helpers.insertMany(Service, req.body.services)
-        await helpers.insertMany(SpecialService, req.body.specialServices)
+        if (Array.isArray(req.body.services) && req.body.services.length !== 0) {
+            await helpers.insertMany(Service, req.body.services)
+        }
+        
+        if (Array.isArray(req.body.specialServices) && req.body.specialServices.length !== 0) {
+            await helpers.insertMany(SpecialService, req.body.specialServices)
+        }
 
         let services = await Service.find({'serviceTitle': req.body.serviceTitle})
         let serviceIds = await services.map(service => service._id)

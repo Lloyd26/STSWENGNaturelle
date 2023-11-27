@@ -9,7 +9,6 @@ $(document).ready(function(){
         $.get("/services/getServiceConcerns", {}, (data, status, xhr) => {
             
             data.forEach(sc => {
-                console.log(sc)
                 let service_link = new Element ("a.dropdown-item", {
                     text: sc,
                     attr: {
