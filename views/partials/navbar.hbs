@@ -18,13 +18,8 @@
                     <a href="/about" class="nav-link">About</a>
                 </li>
                 <li class="nav-item dropdown{{#if active.services}} active{{/if}}" id="services-bt">
-                    <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Services</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="" class="dropdown-item">Hair</a></li>
-                        <li><a href="" class="dropdown-item">Keratin</a></li>
-                        <li><a href="" class="dropdown-item">Rebond</a></li>
-                        <li><a href="" class="dropdown-item">Styling</a></li>
-                        <li><a href="/services/nails" class="dropdown-item">Nails</a></li>
+                    <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="service-dropdown-bt">Services</a>
+                    <ul class="dropdown-menu" id="services-dropdown-menu">
                     </ul>
                 </li>
                 <li class="nav-item{{#if active.reservation}} active{{/if}}">

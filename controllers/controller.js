@@ -60,29 +60,21 @@ const controller = {
         });
     },
 
-    getServices: function(req, res) {
-        res.render('services', {
-            layout: 'index',
-            active: {services: true},
-            logged_in: req.session.logged_in
-        });
-    },
-
-    getNailServices: async function(req, res) {
+    getServices: async function(req, res) {
 
         // Find all Nail related services
-        let nailServiceCollections = await ServiceCollection.find({
-            serviceConcern: "Nails"
+        let serviceCollections = await ServiceCollection.find({
+            serviceConcern: req.params.serviceconcern
         }).populate('services').populate('specialServices')
 
         let pricesCollectionObject = [];
         let pricesWithOption2 = [];
 
         // Transform to JSON object
-        let nailServiceCollectionsObject = nailServiceCollections.map(coll => coll.toObject());
+        let serviceCollectionsObject = serviceCollections.map(coll => coll.toObject());
 
         // Check each service option combination
-        let mappedNailServiceCollection = nailServiceCollectionsObject.map(coll=> {
+        let mappedServiceCollection = serviceCollectionsObject.map(coll=> {
             
             let pricesCollection = []
 
@@ -131,8 +123,14 @@ const controller = {
             layout: 'index',
             active: {services: true},
             logged_in: req.session.logged_in,
-            serviceCollections: mappedNailServiceCollection
+            serviceCollections: mappedServiceCollection
         });
+    },
+
+    getServiceConcerns: async function(req, res){
+        serviceConcerns = await ServiceCollection.distinct('serviceConcern')
+        console.log(serviceConcerns)
+        res.send(serviceConcerns)
     }
 }
 
