@@ -24,7 +24,7 @@ $(document).ready(function(){
             showError("Please select a valid Preferred Staff option.", "#add-error-msg");
         } else {
             e.preventDefault();
-            showSuccess("Added to cart successfully!", "#add-error-msg");
+            // showSuccess("Added to cart successfully!", "#add-error-msg");
 
             let service_select = document.getElementById("input-service");
             let staff_select = document.getElementById("input-staff");
@@ -32,6 +32,11 @@ $(document).ready(function(){
             let service = service_select.options[service_select.selectedIndex].text;
             let staff = staff_select.options[staff_select.selectedIndex].text;
             addToCart(service, staff, details_val);
+
+            snackbar({
+                type: "primary",
+                text: "Service added to cart successfully."
+            });
 
             refreshEmployeesMenu(EMPLOYEES_URL, EMPLOYEES_CONTAINER);
         }
