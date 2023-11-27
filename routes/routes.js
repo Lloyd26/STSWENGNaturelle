@@ -3,6 +3,7 @@ const express = require('express');
 const controller = require('../controllers/controller.js');
 const auth_controller = require('../controllers/auth-controller');
 const admin_controller = require('../controllers/admin-controller');
+const api_controller = require('../controllers/api-controller');
 
 const app = express();
 
@@ -40,5 +41,7 @@ app.get('/admin/services/get-service-collections', admin_controller.getServiceCo
 app.post('/admin/services/add-service-collection', admin_controller.postAddServiceCollection);
 app.post('/admin/services/edit-service-collection', admin_controller.postEditServiceCollection);
 app.post('/admin/services/delete-service-collection', admin_controller.postDeleteServiceCollection);
+
+app.get('/api/employees', api_controller.getEmployees);
 
 module.exports = app;
