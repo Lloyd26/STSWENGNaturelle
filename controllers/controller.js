@@ -129,7 +129,7 @@ const controller = {
 
     getServiceConcerns: async function(req, res){
         serviceConcerns = await ServiceCollection.distinct('serviceConcern')
-        console.log(serviceConcerns)
+        
         res.send(serviceConcerns)
     }
 }
