@@ -1,0 +1,148 @@
+@import url("modal.css");
+@import url("form.css");
+
+#faq-admin-wrapper {
+    background-color: var(--clr-primary-50);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem;
+    overflow: auto;
+}
+
+#faq-admin-header-container{
+    width: 100%;
+    padding: 2em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#faq-admin-header {
+    font-size: 3em;
+    font-weight: 800;
+    color: var(--clr-primary);
+    text-align: left;
+}
+
+#faq-collection-container {
+    background-color: #FFF;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1rem;
+    border-radius: var(--radius);
+    box-shadow: 2px 1px 16px rgba(0, 0, 0, 0.15);
+    width: 100%;
+}
+
+#add-btn{
+    margin-left: auto;
+    gap: 1.5rem;
+    padding: .5em 1.5em;
+    background-color: var(--salon-purple);
+    border-radius: var(--radius);
+    border: 0px;
+    font-weight: 800;
+    font-size: 1.3em;
+    color: #FFF;
+    text-decoration: none;
+    box-shadow: 2px 1px 16px rgba(0, 0, 0, 0.15);
+    transition: color 180ms ease-in-out, background-color 180ms ease-in-out, border-color 180ms ease-in-out;
+}
+
+#add-btn:hover {
+    background-color: #FFF;
+    color: var(--salon-purple);
+    border-color: var(--clr-primary-50);
+}
+
+.edit-btn, .delete-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 2rem;
+    background-color: #FFF;
+    border: 1px solid var(--clr-primary-200);
+    border-radius: var(--radius);
+    font-weight: 700;
+    font-size: 1em;
+    color: var(--clr-primary-200);
+    text-decoration: none;
+    transition: color 180ms ease-in-out, background-color 180ms ease-in-out, border-color 180ms ease-in-out;
+}
+
+.delete-btn{
+    border-color: var(--clr-triadic-1-300);
+    color: var(--clr-triadic-1-300);
+}
+
+.edit-btn:hover {
+    background-color: var(--clr-primary-300);
+    color: #FFF;
+    border-color: var(--clr-primary-300);
+}
+
+.edit-btn:active {
+    border-color: var(--clr-primary-200);
+}
+
+.delete-btn:hover {
+    background-color: var(--clr-triadic-1-300);
+    color: #FFF;
+    border-color: var(--clr-triadic-1-300);
+}
+
+.delete-btn:active {
+    border-color: var(--clr-triadic-1-300);
+}
+
+.faq-controls-container{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.faq-container{
+    width: 100%;
+    background-color: #FFF;
+    border-radius: calc(var(--radius) / 1.5);
+    border: 2px solid var(--clr-primary-50);
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    padding: calc(var(--radius) / 1.5);
+    transition: box-shadow 180ms ease-in-out;
+}
+
+.faq-information-container{
+    display: flex;
+    flex-direction: column;
+    margin-right: auto;
+    padding-right: 1em;
+}
+
+.faq-question{
+    font-weight: 800;
+    color: var(--salon-purple);
+    font-size: 2em;
+}
+
+.faq-answer {
+    font-weight: 500;
+    font-size: 1.5em;
+    color: gray;
+}
+
+#delete-question{
+    font-weight: 800;
+    margin-top: 2em;
+}
+
+#delete-answer{
+    margin-bottom: 2em;
+}

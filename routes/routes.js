@@ -42,6 +42,13 @@ app.post('/admin/services/add-service-collection', admin_controller.postAddServi
 app.post('/admin/services/edit-service-collection', admin_controller.postEditServiceCollection);
 app.post('/admin/services/delete-service-collection', admin_controller.postDeleteServiceCollection);
 
+app.get('/admin/faq', admin_controller.getFAQ);
+app.get('/admin/faq/get-faqs', admin_controller.getAllFAQs);
+app.get('/admin/faq/find-faq', admin_controller.getFindFAQ);
+app.post('/admin/faq/add-faq', admin_controller.postAddFAQ);
+app.post('/admin/faq/edit-faq', admin_controller.postEditFAQ);
+app.post('/admin/faq/delete-faq', admin_controller.postDeleteFAQ);
+
 app.get('/api/employees', api_controller.getEmployees);
 
 module.exports = app;

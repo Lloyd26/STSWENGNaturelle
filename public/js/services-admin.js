@@ -76,21 +76,25 @@ $(document).ready(function(){
             e.preventDefault();
             // make service objects
             $("#add-services-list li").each(function(index) {
+                let price = $(this).find('.input-price').val()
                 service_obj = {
                     serviceTitle: service_title,
                     serviceOption1: $(this).find('.input-service-option-1').val(),
                     serviceOption2: $(this).find('.input-service-option-2').val(),
-                    price: $(this).find('.input-price').val(),
+                    price: Number(price).toFixed(2)
                 }
+
+                console.log(service_obj)
                 services_arr.push(service_obj)
             });
 
             // make standalone service objects
             $("#add-standalone-services-list li").each(function(index) {
+                let price = $(this).find('.input-standalone-price').val()
                 standalone_service_obj = {
                     serviceTitle: service_title,
                     serviceOption: $(this).find('.input-standalone-service-option').val(),
-                    price: $(this).find('.input-standalone-price').val(),
+                    price: Number(price).toFixed(2)
                 }
                 standalone_services_arr.push(standalone_service_obj)
             });
@@ -151,21 +155,23 @@ $(document).ready(function(){
             e.preventDefault();
             // make service objects
             $("#edit-services-list li").each(function(index) {
+                let price = $(this).find('.input-price').val()
                 service_obj = {
                     serviceTitle: service_title,
                     serviceOption1: $(this).find('.input-service-option-1').val(),
                     serviceOption2: $(this).find('.input-service-option-2').val(),
-                    price: $(this).find('.input-price').val(),
+                    price: Number(price).toFixed(2)
                 }
                 services_arr.push(service_obj)
             });
 
             // make standalone service objects
             $("#edit-standalone-services-list li").each(function(index) {
+                let price = $(this).find('.input-standalone-price').val()
                 standalone_service_obj = {
                     serviceTitle: service_title,
                     serviceOption: $(this).find('.input-standalone-service-option').val(),
-                    price: $(this).find('.input-standalone-price').val(),
+                    price: Number(price).toFixed(2)
                 }
                 standalone_services_arr.push(standalone_service_obj)
             });
@@ -203,7 +209,7 @@ $(document).ready(function(){
         let $clone = $(`<li class="input-services">
                             <input class="form-control input-service-option-1" name="input-service-option-1" type="text" placeholder="Service Option 1">
                             <input class="form-control input-service-option-2" name="input-service-option-2" type="text" placeholder="Service Option 2">
-                            <input class="form-control input-price" name="input-price" type="number" placeholder="Price">
+                            <input class="form-control input-price" name="input-price" type="number" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" placeholder="Price">
                             <button type="button" class="delete-service"><i class="fa fa-trash-can"></i></button>
                         </li>`)
         $("#add-services-list").append($clone)
@@ -213,7 +219,7 @@ $(document).ready(function(){
         e.preventDefault()
         let $clone = $(`<li class="input-standalone-services">
                             <input class="form-control input-standalone-service-option" name="input-service-option-1" type="text" placeholder="Service Option">
-                            <input class="form-control input-standalone-price" name="input-price" type="number" placeholder="Price">
+                            <input class="form-control input-standalone-price" name="input-price" type="number" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" placeholder="Price">
                             <button type="button" class="delete-standalone-service"><i class="fa fa-trash-can"></i></button>
                         </li>`)
         $("#add-standalone-services-list").append($clone)
@@ -224,7 +230,7 @@ $(document).ready(function(){
         let $clone = $(`<li class="input-services">
                             <input class="form-control input-service-option-1" name="input-service-option-1" type="text" placeholder="Service Option 1">
                             <input class="form-control input-service-option-2" name="input-service-option-2" type="text" placeholder="Service Option 2">
-                            <input class="form-control input-price" name="input-price" type="number" placeholder="Price">
+                            <input class="form-control input-price" name="input-price" type="number" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" placeholder="Price">
                             <button type="button" class="delete-service"><i class="fa fa-trash-can"></i></button>
                         </li>`)
         $("#edit-services-list").append($clone)
@@ -234,7 +240,7 @@ $(document).ready(function(){
         e.preventDefault()
         let $clone = $(`<li class="input-standalone-services">
                             <input class="form-control input-standalone-service-option" name="input-service-option-1" type="text" placeholder="Service Option">
-                            <input class="form-control input-standalone-price" name="input-price" type="number" placeholder="Price">
+                            <input class="form-control input-standalone-price" name="input-price" type="number" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" placeholder="Price">
                             <button type="button" class="delete-standalone-service"><i class="fa fa-trash-can"></i></button>
                         </li>`)
         $("#edit-standalone-services-list").append($clone)
@@ -256,23 +262,15 @@ $(document).ready(function(){
         e.preventDefault()
         let serviceTitle = {serviceTitle: $(".service-title-info").first().text()};
 
-        $.ajax({
-            url:"/admin/services/delete-service-collection", 
-            type: "POST",
-            data: serviceTitle,
-            success: function(response) {
-                if (response.hasError) {
-                    e.preventDefault();
-                    showError(response.error, "#delete-service-collection-error-msg");
-                } else {
-                    e.preventDefault();
-                    showSuccess("Deleted " + serviceTitle.serviceTitle + " successfully!", "#delete-service-collection-error-msg");
-                    $("#service-collection-container").empty();
-                    showServiceCollections(SERVICE_COLLECTION_GET_URL, SERVICE_COLLECTION_WRAPPER);
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.error("Error deleting service collection:", errorThrown);
+        $.post("/admin/services/delete-service-collection", serviceTitle, function(response) {
+            if (response.hasError) {
+                e.preventDefault();
+                showError(response.error, "#delete-service-collection-error-msg");
+            } else {
+                e.preventDefault();
+                showSuccess("Deleted " + serviceTitle.serviceTitle + " successfully!", "#delete-service-collection-error-msg");
+                $("#service-collection-container").empty();
+                showServiceCollections(SERVICE_COLLECTION_GET_URL, SERVICE_COLLECTION_WRAPPER);
             }
         })
     });

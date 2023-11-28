@@ -246,19 +246,19 @@ ul {
     font-size: 1.2em;
 }
 
-#delete-service-collection-btn {
+#delete-service-collection-btn, #delete-faq-btn {
     color: var(--clr-triadic-1-300);
     background-color: #FFF;
     border: 2px solid var(--clr-triadic-1-300);
 }
 
-#delete-service-collection-btn:hover{
+#delete-service-collection-btn:hover, #delete-faq-btn:hover{
     color: #FFF;
     background-color: var(--clr-triadic-1-300);
     border-color: #FFF;
 }
 
-#delete-service-collection-btn:active{
+#delete-service-collection-btn:active, #delete-faq-btn:active{
     border-color: var(--clr-triadic-1-300);
 }
 

@@ -3,6 +3,7 @@ const Employee = require('../models/Employee')
 const ServiceCollection = require('../models/ServiceCollection.js');
 const Service = require('../models/Service.js');
 const SpecialService = require('../models/SpecialService.js');
+const FAQ = require('../models/FAQ.js');
 const helpers = require('../models/helpers.js')
 
 function isEmailValid(email) {
@@ -353,7 +354,6 @@ const controller = {
             res.status(403); // HTTP 403: Forbidden
             return;
         }
-
         // check if service title is unique
         let uniquecheck = await ServiceCollection.findOne({serviceTitle:req.body.serviceTitle}, 'serviceTitle')
     
@@ -459,6 +459,86 @@ const controller = {
             res.sendStatus(200); // HTTP 200: OK
         }
         else {
+            res.json({hasError: true, error: "Nothing to delete."});
+        }
+    },
+
+    getFAQ: function (req, res) {
+        if (!req.session.logged_in || req.session.logged_in.type !== "admin") {
+            res.status(403); // HTTP 403: Forbidden
+            return;
+        }
+
+        res.render('faq-admin', {
+            layout: 'admin',
+            logged_in: req.session.logged_in,
+            active: {admin_FAQ: true},
+        });
+    },
+
+    getAllFAQs: async function (req, res) {
+        if (!req.session.logged_in || req.session.logged_in.type !== "admin") {
+            res.status(403); // HTTP 403: Forbidden
+            return;
+        }
+
+        let faqs = await FAQ.find({}, '');
+        res.send(faqs);
+    },
+
+    getFindFAQ: async function (req, res) {
+        if (!req.session.logged_in || req.session.logged_in.type !== "admin") {
+            res.status(403); // HTTP 403: Forbidden
+            return;
+        }
+
+        let faq = await FAQ.findOne({_id: req.query.id});
+        res.send(faq);
+    },
+    
+    postAddFAQ: async function(req, res) {
+        if (!req.session.logged_in || req.session.logged_in.type !== "admin") {
+            res.status(403); // HTTP 403: Forbidden
+            return;
+        }
+
+        let newFAQ = {
+            question: req.body.question,
+            answer: req.body.answer
+        }
+
+        await helpers.insertOne(FAQ, newFAQ);
+
+        res.sendStatus(200); // HTTP 200: OK
+    },
+
+    postEditFAQ: async function(req, res) {
+        if (!req.session.logged_in || req.session.logged_in.type !== "admin") {
+            res.status(403); // HTTP 403: Forbidden
+            return;
+        }
+
+        let newFAQ = {
+            question: req.body.question,
+            answer: req.body.answer
+        }
+
+        await FAQ.updateOne({_id: req.body.id}, newFAQ);
+
+        res.sendStatus(200); // HTTP 200: OK
+    },
+
+    postDeleteFAQ: async function(req, res) {
+        if (!req.session.logged_in || req.session.logged_in.type !== "admin") {
+            res.status(403); // HTTP 403: Forbidden
+            return;
+        }
+
+        let result = await FAQ.deleteOne({_id: req.body.id});
+
+        if(result.deletedCount > 0){
+            res.sendStatus(200); // HTTP 200: OK
+        } else {
             res.json({hasError: true, error: "Nothing to delete."});
         }
     }

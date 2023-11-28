@@ -37,7 +37,7 @@
                             <li class="input-services">
                                 <input class="form-control input-service-option-1" name="input-service-option-1" type="text" placeholder="Service Option 1">
                                 <input class="form-control input-service-option-2" name="input-service-option-2" type="text" placeholder="Service Option 2">
-                                <input class="form-control input-price" name="input-price" type="number" placeholder="Price">
+                                <input class="form-control input-price" name="input-price" type="number" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" placeholder="Price">
                                 <button type="button" class="delete-service"><i class="fa fa-trash-can"></i></button>
                             </li>
                         </ul>
@@ -50,7 +50,7 @@
                         <ul class="standalone-services-list" id="add-standalone-services-list">
                             <li class="input-standalone-services">
                                 <input class="form-control input-standalone-service-option" name="input-service-option" type="text" placeholder="Service Option">
-                                <input class="form-control input-standalone-price" name="input-price" type="number" placeholder="Price">
+                                <input class="form-control input-standalone-price" name="input-price" type="number" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" placeholder="Price">
                                 <button type="button" class="delete-standalone-service"><i class="fa fa-trash-can"></i></button>
                             </li>
                         </ul>
