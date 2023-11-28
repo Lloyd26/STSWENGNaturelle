@@ -39,7 +39,10 @@ $(document).ready(function(){
             let serviceGroupName = service_select.options[service_select.selectedIndex].closest("optgroup").label;
 
             let staff = staff_select.options[staff_select.selectedIndex].text;
-            addToCart(serviceGroupName, service, staff, details_val);
+
+            let price = service_select.options[service_select.selectedIndex].getAttribute("data-service-price");
+
+            addToCart(serviceGroupName, service, staff, details_val, price);
 
             snackbar({
                 type: "primary",
