@@ -11,6 +11,9 @@ const SERVICES_CONTAINER = "#input-service";
 let cached_employees = [];
 
 $(document).ready(function(){
+    refreshEmployeesMenu(EMPLOYEES_URL, EMPLOYEES_CONTAINER);
+    refreshServicesMenu(SERVICES_URL, SERVICES_CONTAINER);
+
     $("#form-service").on("submit", function(e) {
         let service_val = $('#input-service').val()
         let staff_val = $('#input-staff').val()
@@ -33,41 +36,18 @@ $(document).ready(function(){
             let staff_select = document.getElementById("input-staff");
 
             let service = service_select.options[service_select.selectedIndex].text;
+            let serviceGroupName = service_select.options[service_select.selectedIndex].closest("optgroup").label;
+
             let staff = staff_select.options[staff_select.selectedIndex].text;
-            addToCart(service, staff, details_val);
+            addToCart(serviceGroupName, service, staff, details_val);
 
             snackbar({
                 type: "primary",
                 text: "Service added to cart successfully."
             });
-
-            refreshEmployeesMenu(EMPLOYEES_URL, EMPLOYEES_CONTAINER);
         }
     });
 });
-
-document.addEventListener("DOMContentLoaded", function() {
-    refreshEmployeesMenu(EMPLOYEES_URL, EMPLOYEES_CONTAINER);
-    refreshServicesMenu(SERVICES_URL, SERVICES_CONTAINER);
-});
-
-function checkCache(data, cached_data) {
-    if (cached_data.length === 0) {
-        data.forEach(d => cached_data.push(d._id));
-        return true;
-    }
-
-    let temp_data = [];
-    data.forEach(d => temp_data.push(d._id));
-
-    for (let i in cached_data) {
-        if (cached_data[i] !== temp_data[i]) {
-            return true;
-        }
-    }
-
-    return false;
-}
 
 function refreshServicesMenu(url, container) {
     $.get(url, {}, (data, status, xhr) => {
@@ -136,10 +116,6 @@ function refreshServicesMenu(url, container) {
 function refreshEmployeesMenu(url, container) {
     $.get(url, {}, (data, status, xhr) => {
         if (status === "success" && xhr.status === 200) {
-            if (!checkCache(data, cached_employees)) {
-                return;
-            }
-
             let input_staff = document.querySelector(container);
             input_staff.innerHTML = "";
 

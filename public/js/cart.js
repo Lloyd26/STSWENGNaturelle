@@ -5,14 +5,22 @@ export function setCartDateTime(date, time) {
     document.getElementById("time-detail").innerText = time;
 }
 
-export function addToCart(service, staff, details) {
+export function addToCart(serviceGroup, service, staff, details) {
     let cart_item = new Element(".cart-item").getElement();
 
     let cart_service_details = new Element(".cart-service-details").getElement();
 
+    let cart_service = new Element(".cart-service").getElement();
+
+    let cart_servicegroup_name = new Element(".cart-servicegroup-name", {
+        text: serviceGroup
+    }).getElement();
+
     let cart_service_name = new Element(".cart-service-name", {
         text: service
     }).getElement();
+
+    cart_service.append(cart_servicegroup_name, cart_service_name);
 
     let preferred_staff_container = new Element("div").getElement();
 
@@ -30,7 +38,7 @@ export function addToCart(service, staff, details) {
         text: details
     }).getElement();
 
-    cart_service_details.append(cart_service_name, preferred_staff_container, cart_other_details);
+    cart_service_details.append(cart_service, preferred_staff_container, cart_other_details);
 
     let cart_price_label = new Element(".cart-price-label").getElement();
 

@@ -89,14 +89,20 @@
     flex: 8 0 0;
 }
 
-.cart-service-name{
+.cart-servicegroup-name {
+    color: var(--clr-analogous-1-500);
+    font-size: 2em;
     font-weight: 900;
-    font-size: 1.5em;
-    color: var(--clr-primary-900);
     transition: color 0.3s ease-in-out;
 }
 
-.cart-item:hover .cart-service-name {
+.cart-service-name {
+    color: var(--clr-primary-900);
+    font-size: 1.25em;
+    font-weight: 700;
+}
+
+.cart-item:hover .cart-servicegroup-name {
     color: var(--clr-primary-500);
 }
 
