@@ -4,7 +4,10 @@ const ServiceCollection = require('../models/ServiceCollection.js');
 const Service = require('../models/Service.js');
 const SpecialService = require('../models/SpecialService.js');
 const FAQ = require('../models/FAQ.js');
-const helpers = require('../models/helpers.js')
+const helpers = require('../models/helpers.js');
+const Reservation = require('../models/Reservation.js');
+const InCartService = require('../models/InCartService.js');
+
 
 function isEmailValid(email) {
     const validEmailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -99,6 +102,29 @@ const controller = {
         });
     },
 
+    getAdminReservations: function (req, res) {
+        if (!req.session.logged_in || req.session.logged_in.type !== "admin") {
+            res.redirect("/admin?next=" + encodeURIComponent("/admin/reservations"));
+            return;
+        }
+
+        res.render('admin-reservations', {
+            layout: 'admin',
+            logged_in: req.session.logged_in,
+            active: {admin_reservations: true}
+        });
+    },
+
+    getAllReservations: async function(req, res) {
+        if (!req.session.logged_in || req.session.logged_in.type !== "admin") {
+            res.status(403); // HTTP 403: Forbidden
+            return;
+        }
+
+        let reservations = await Reservation.find({}, '').populate('services');
+        res.send(reservations);
+    },
+  
     getAdminEmployees: function(req, res) {
         if (!req.session.logged_in || req.session.logged_in.type !== "admin") {
             res.redirect("/admin?next=" + encodeURIComponent("/admin/employees"));
@@ -541,7 +567,7 @@ const controller = {
         } else {
             res.json({hasError: true, error: "Nothing to delete."});
         }
-    }
+    } 
 }
 
 module.exports = controller;

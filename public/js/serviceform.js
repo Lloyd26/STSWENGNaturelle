@@ -5,9 +5,15 @@ import {Element} from "./element.js";
 const EMPLOYEES_URL = "/api/employees";
 const EMPLOYEES_CONTAINER = "#input-staff";
 
+const SERVICES_URL = "/api/services";
+const SERVICES_CONTAINER = "#input-service";
+
 let cached_employees = [];
 
 $(document).ready(function(){
+    refreshEmployeesMenu(EMPLOYEES_URL, EMPLOYEES_CONTAINER);
+    refreshServicesMenu(SERVICES_URL, SERVICES_CONTAINER);
+
     $("#form-service").on("submit", function(e) {
         let service_val = $('#input-service').val()
         let staff_val = $('#input-staff').val()
@@ -30,48 +36,89 @@ $(document).ready(function(){
             let staff_select = document.getElementById("input-staff");
 
             let service = service_select.options[service_select.selectedIndex].text;
+            let serviceGroupName = service_select.options[service_select.selectedIndex].closest("optgroup").label;
+
             let staff = staff_select.options[staff_select.selectedIndex].text;
-            addToCart(service, staff, details_val);
+
+            let price = service_select.options[service_select.selectedIndex].getAttribute("data-service-price");
+
+            addToCart(serviceGroupName, service, staff, details_val, price);
 
             snackbar({
                 type: "primary",
                 text: "Service added to cart successfully."
             });
-
-            refreshEmployeesMenu(EMPLOYEES_URL, EMPLOYEES_CONTAINER);
         }
     });
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-    refreshEmployeesMenu(EMPLOYEES_URL, EMPLOYEES_CONTAINER);
-});
+function refreshServicesMenu(url, container) {
+    $.get(url, {}, (data, status, xhr) => {
+        if (status === "success" && xhr.status === 200) {
+            let input_service = document.querySelector(container);
+            input_service.innerHTML = "";
 
-function checkCache(data, cached_data) {
-    if (cached_data.length === 0) {
-        data.forEach(d => cached_data.push(d._id));
-        return true;
-    }
+            let choose_service = new Element("option", {
+                text: "Choose a Service",
+                attr: {
+                    "selected": "",
+                    "disabled": "",
+                    "hidden": ""
+                }
+            }).getElement();
+            input_service.appendChild(choose_service);
 
-    let temp_data = [];
-    data.forEach(d => temp_data.push(d._id));
+            let tempSpecialServicesId = [];
 
-    for (let i in cached_data) {
-        if (cached_data[i] !== temp_data[i]) {
-            return true;
+            data.specialServices.forEach(specialService => {
+                tempSpecialServicesId.push(specialService);
+            })
+
+            let lastServiceGroup = "";
+            let service_optgroup;
+            data.services.forEach(service => {
+                if (lastServiceGroup !== service.serviceTitle) {
+                    if (lastServiceGroup !== "") input_service.appendChild(service_optgroup);
+                    lastServiceGroup = service.serviceTitle;
+                    service_optgroup = new Element("optgroup", {
+                        attr: {
+                            "label": service.serviceTitle
+                        }
+                    }).getElement();
+                }
+
+                for (let i in tempSpecialServicesId) {
+                    if (lastServiceGroup === tempSpecialServicesId[i].serviceTitle) {
+                        let special_service_option = new Element("option", {
+                            text: tempSpecialServicesId[i].serviceOption,
+                            attr: {
+                                "value": tempSpecialServicesId[i]._id,
+                                "data-service-price": tempSpecialServicesId[i].price,
+                                "data-service-type": "1"
+                            }
+                        }).getElement();
+                        service_optgroup.appendChild(special_service_option);
+                        tempSpecialServicesId.splice(Number(i), 1);
+                    }
+                }
+
+                let service_option = new Element("option", {
+                    text: service.serviceOption1 + ": " + service.serviceOption2,
+                    attr: {
+                        "value": service._id,
+                        "data-service-price": service.price,
+                        "data-service-type": "0"
+                    }
+                }).getElement();
+                service_optgroup.appendChild(service_option);
+            })
         }
-    }
-
-    return false;
+    })
 }
 
 function refreshEmployeesMenu(url, container) {
     $.get(url, {}, (data, status, xhr) => {
         if (status === "success" && xhr.status === 200) {
-            if (!checkCache(data, cached_employees)) {
-                return;
-            }
-
             let input_staff = document.querySelector(container);
             input_staff.innerHTML = "";
 
@@ -84,6 +131,14 @@ function refreshEmployeesMenu(url, container) {
                 }
             }).getElement();
             input_staff.appendChild(choose_staff);
+
+            let no_preference = new Element("option", {
+                text: "No preference",
+                attr: {
+                    "value": "0"
+                }
+            }).getElement();
+            input_staff.appendChild(no_preference);
 
             data.forEach(employee => {
                 let employee_option = new Element("option", {
