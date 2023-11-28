@@ -44,4 +44,6 @@ app.post('/admin/services/delete-service-collection', admin_controller.postDelet
 
 app.get('/api/employees', api_controller.getEmployees);
 
+app.get('/api/services', api_controller.getServices);
+
 module.exports = app;
