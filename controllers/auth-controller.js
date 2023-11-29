@@ -5,6 +5,8 @@ const helpers = require('../models/helpers.js')
 const InCartService = require('../models/InCartService');
 const Reservation = require('../models/Reservation');
 
+let generatedId = [];
+
 const controller = {
     getLogin: function (req, res) {
         if (!req.session.logged_in) {
@@ -264,10 +266,6 @@ const controller = {
         res.redirect('/');
     },
 
-    getAddToCart: function (req, res) {
-        res.render('/serviceform', { layout: 'reservation', active: { login: true } });
-    },
-
     postAddToCart: async function (req, res) {
 
         let detail = req.body.details;
@@ -283,31 +281,39 @@ const controller = {
         console.log("Cart Object:", cart);
 
         try {
-            await InCartService.create(cart);
-            console.log("Cart added to MongoDB successfully!");
+            const createdCart = await InCartService.create(cart);
+            generatedId.push(createdCart._id);
+
+            console.log("Cart added to MongoDB successfully! Cart ID:", generatedId);
+
+
         } catch (error) {
             console.error("Error adding cart to MongoDB:", error);
         }
 
         res.redirect('/serviceform');
 
+
+        console.log(generatedId);
+
     },
 
     postReserve: async function (req, res) {
 
         let time = req.body.timestamp;
-        let items = req.body.cart_arr;
         let current = req.body.status;
 
-        let reservation = {
-            timestamp: time,
-            services: items,
-            status: current
-        }
-
-        console.log("Reservation:", reservation);
-
         try {
+
+            let reservation = {
+                timestamp: time,
+                services: generatedId,
+                status: current
+            }
+
+            console.log("Reservation Details:", reservation);
+            console.log(generatedId);
+
             await Reservation.create(reservation);
             console.log("Reservation added to MongoDB successfully!");
         } catch (error) {

@@ -1,15 +1,15 @@
-const { Schema, SchemaTypes, model } = require('mongoose');
+const { Schema, Types, model } = require('mongoose');
 
 const reservationSchema = new Schema({
     timestamp: {
-        type: SchemaTypes.String
+        type: Schema.Types.String
     },
-    services: {
-        type: [SchemaTypes.Mixed],
-        required: true
-    },
+    services: [{
+        type: Schema.Types.ObjectId,
+        ref: 'InCartService' // Reference to the model that represents the service (replace with the actual model name)
+    }],
     status: {
-        type: SchemaTypes.String,
+        type: Schema.Types.String,
     }
 })
 
