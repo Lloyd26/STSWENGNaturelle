@@ -7,6 +7,7 @@ const FAQ = require('../models/FAQ.js');
 const helpers = require('../models/helpers.js');
 const Reservation = require('../models/Reservation.js');
 const InCartService = require('../models/InCartService.js');
+const bcrypt = require('bcrypt');
 
 
 function isEmailValid(email) {
@@ -65,10 +66,9 @@ const controller = {
             return;
         }
 
-        let passwordResult = await Admin.findOne({password: password});
-        //let passwordCompare = await bcrypt.compare(password, result.password);
+        let passwordCompare = await bcrypt.compare(password, result.password);
 
-        if (passwordResult == null) {
+        if (!passwordCompare) {
             res.render('login-admin', {
                 layout: 'admin-no-sidebar',
                 active: {login: true},
