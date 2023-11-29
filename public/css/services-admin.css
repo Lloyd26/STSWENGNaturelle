@@ -117,16 +117,17 @@
     font-weight: 500;
     font-size: 0.85em;
     white-space: nowrap;
+    
 }
 
 .option1-tag {
-    border: 1px solid #CCC;
-    color: gray;
+    border: 1px solid var(--clr-analogous-1-100);
+    color: var(--clr-analogous-1-300);
 }
 
 .option2-tag{
-    border: 1px solid var(--clr-primary-100);
-    color: var(--clr-primary-300);
+    border: 1px solid var(--clr-analogous-2-100);
+    color: var(--clr-analogous-2-300);
 }
 
 .option1-tags-container::after, .option2-tags-container::after {

@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="/css/faq.css">
+
+<div id="faqs-wrapper">
+    <div id="faq-header">Frequently Asked Questions</div>
+    <div id="faqs-container">
+        {{#each faqs}}
+            <div class="accordion accordion-flush" id="accordion-{{this._id}}">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button collapsed faq-question" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-body-{{this._id}}" aria-expanded="true" aria-controls="{{this._id}}">
+                    {{this.question}}
+                </button>
+                </h2>
+                <div id="accordion-body-{{this._id}}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordion-{{this._id}}">
+                <div class="accordion-body">
+                    {{this.answer}}
+                </div>
+                </div>
+            </div>
+            </div>
+        {{/each}}
+    </div>
+</div>
+

@@ -1,6 +1,7 @@
 const ServiceCollection = require('../models/ServiceCollection.js');
 const Service = require('../models/Service.js');
 const SpecialService = require('../models/SpecialService.js');
+const FAQ = require('../models/FAQ.js');
 
 const controller = {
     getLogout: function(req, res) {
@@ -131,6 +132,20 @@ const controller = {
         serviceConcerns = await ServiceCollection.distinct('serviceConcern')
         
         res.send(serviceConcerns)
+    },
+
+    getFAQ: async function (req, res){
+
+        let faqs = await FAQ.find({}, '').lean();
+
+        console.log(faqs)
+
+        res.render('faq', {
+            layout: 'index',
+            active: {faq: true},
+            logged_in: req.session.logged_in,
+            faqs: faqs
+        });
     }
 }
 
