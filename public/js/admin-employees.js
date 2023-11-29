@@ -1,10 +1,11 @@
 import {isContactNumValid, isEmailValid, showError, validateForm} from "./form.js";
 import {Element} from "./element.js";
+import {checkCache} from "./dataCache.js";
 
 const EMPLOYEE_GET_URL = "/admin/employees/get";
 const EMPLOYEES_WRAPPER = "#admin-employees-wrapper";
 
-let cached_data = [];
+let employee_cache = [];
 
 function onBtnEditClick(e) {
     let employee_id = e.currentTarget.closest(".admin-employees-container").getAttribute("data-employee-id");
@@ -261,7 +262,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function showEmployees(url, container) {
     $.get(url, {}, (data, status, xhr) => {
-        if (!checkCache(data)) return;
+        if (checkCache(data, employee_cache)) return;
         document.querySelector(container).innerHTML = "";
 
         data.forEach(employee => {
@@ -329,22 +330,4 @@ function showEmployees(url, container) {
             document.querySelector(container).append(admin_employees_container);
         });
     });
-}
-
-function checkCache(data) {
-    if (cached_data.length === 0) {
-        data.forEach(d => cached_data.push(d._id));
-        return true;
-    }
-
-    let temp_data = [];
-    data.forEach(d => temp_data.push(d._id));
-
-    for (let i in cached_data) {
-        if (cached_data[i] !== temp_data[i]) {
-            return false;
-        }
-    }
-
-    return true;
 }
