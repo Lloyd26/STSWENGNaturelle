@@ -5,7 +5,7 @@
 }
 
 #delete-modal-content {
-    border: 2px solid var(--clr-triadic-1-300);
+    border: 2px solid var(--clr-triadic-1-200);
     border-radius: calc(var(--radius) / 2);
     overflow: hidden;
 }
@@ -17,8 +17,8 @@
 }
 
 .delete-modal-header{
-    background-color: var(--clr-triadic-1-300);
-    color: #FFF;
+    background-color: var(--clr-triadic-1-50);
+    color: var(--clr-triadic-1);
     padding: 1.5em;
 }
 

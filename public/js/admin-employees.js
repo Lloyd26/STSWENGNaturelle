@@ -300,7 +300,7 @@ function showEmployees(url, container) {
 
             let admin_employees_actions = new Element(".admin-employees-actions").getElement();
 
-            let btn_employee_edit = new Element("button.btn.btn-employee-edit", {
+            let btn_employee_edit = new Element("button.btn.admin-list-btn-edit", {
                 text: "Edit",
                 attr: {
                     "data-bs-toggle": "modal",
@@ -311,7 +311,7 @@ function showEmployees(url, container) {
             btn_employee_edit.prepend(edit_icon);
             btn_employee_edit.addEventListener("click", onBtnEditClick);
 
-            let btn_employee_delete = new Element("button.btn.btn-employee-delete", {
+            let btn_employee_delete = new Element("button.btn.admin-list-btn-delete", {
                 text: "Delete",
                 attr: {
                     "data-bs-toggle": "modal",

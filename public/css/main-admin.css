@@ -22,6 +22,16 @@ body {
     margin: 0;
 }
 
+.admin-header-container:has(> .admin-header-btn) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.admin-header-btn {
+
+}
+
 .admin-container {
     background-color: #FFF;
     margin-left: 3rem;
@@ -35,6 +45,46 @@ body {
 .admin-container.container-bottom {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+}
+
+.admin-container:not(.container-bottom) {
+    margin-bottom: 3rem;
+}
+
+.admin-responsive-controls-container {
+    display: none;
+}
+
+.admin-list-btn-edit, .admin-list-btn-delete {
+    border: 1px solid;
+    border-radius: var(--radius);
+    padding: 0.5rem 2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+}
+
+.admin-list-btn-edit {
+    color: #888;
+    border-color: #CCC;
+}
+
+.admin-list-btn-delete {
+    color: var(--clr-triadic-1-300);
+    border-color: var(--clr-triadic-1-100);
+}
+
+.admin-list-btn-edit:hover, .admin-list-btn-edit:active {
+    color: #FFF !important;
+    background-color: #888 !important;
+    border-color: #888 !important;
+}
+
+.admin-list-btn-delete:hover, .admin-list-btn-delete:active {
+    color: #FFF !important;
+    background-color: var(--clr-triadic-1-300) !important;
+    border-color: var(--clr-triadic-1-300) !important;
 }
 
 @media (max-width: 992px) {
@@ -64,6 +114,14 @@ body {
         text-align: center;
     }
 
+    .admin-header-container:has(.admin-header-btn) {
+        display: block;
+    }
+    
+    .admin-header-container > .admin-header-btn {
+        display: none;
+    }
+
     .admin-container {
         margin-left: 0;
         margin-right: 0;
@@ -71,7 +129,26 @@ body {
         box-shadow: none;
     }
 
+    .admin-responsive-controls-container {
+        display: flex;
+        justify-content: center;
+        padding: 1rem;
+        background-color: #FAFAFA;
+        border-bottom: 1px solid #E6E6E6;
+        position: sticky;
+        top: 0;
+    }
+
+    .admin-responsive-controls-container > .admin-header-btn {
+        font-size: 1em !important;
+    }
+
     .admin-wrapper {
         padding-bottom: 5rem;
+    }
+
+    .admin-list-btn-edit, .admin-list-btn-delete {
+        padding: 0.5rem 1.25rem;
+        font-size: 0.85em;
     }
 }

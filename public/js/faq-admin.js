@@ -14,7 +14,7 @@ function onBtnDeleteClick (e) {
     $('#delete-answer').text(answer)
 }
 
-$(document).ready(function(){
+$(document).ready(function() {
     showAllFAQS()
 
     $("#add-faq-btn").on("click", function(e){
@@ -25,77 +25,125 @@ $(document).ready(function(){
         if (!question) {
             e.preventDefault();
             showError("Please input a Question", "#add-faq-error-msg");
+            return;
         } else if (!answer) {
             e.preventDefault();
             showError("Please input a Answer", "#add-faq-error-msg");
-        } else {
-            e.preventDefault();
-
-            let faq = {
-                question: question,
-                answer: answer
-            }
-
-            $.post("/admin/faq/add-faq", faq, function(response)
-            {
-                if (response.hasError) {
-                    showError(response.error, "#add-faq-error-msg");
-                } else {
-                    add_form[0].reset();
-                    showSuccess("Added FAQ successfully!", "#add-faq-error-msg");
-                    $("faq-collection-container").empty();
-                    showAllFAQS();
-                }
-            })
+            return;
         }
-    })
 
-    $("#edit-faq-btn").on("click", function(e){
+        e.preventDefault();
+
+        let btn_add = this.closest(".modal-content").querySelector(".btn-modal-success");
+        btn_add.disabled = true;
+
+        let btn_add_icon = btn_add.querySelector("i");
+        btn_add_icon.className = "";
+        btn_add_icon.classList.add("spinner-border", "me-2");
+
+        let faq = {
+            question: question,
+            answer: answer
+        }
+
+        $.post("/admin/faq/add-faq", faq, (data, status, xhr) => {
+            if (data.hasError) {
+                showError(response.error, "#add-faq-error-msg");
+            } else {
+                btn_add_icon.className = "";
+                btn_add_icon.classList.add("fa", "fa-plus");
+
+                let employee_add_modal = this.closest("#add-faq-modal");
+                bootstrap.Modal.getInstance(employee_add_modal).hide();
+                btn_add.disabled = false;
+
+                add_form[0].reset();
+                snackbar({
+                    type: "primary",
+                    text: "Employee has been successfully added!"
+                });
+                $("faq-collection-container").empty();
+            }
+        });
+    });
+
+    $("#form-edit-faq").on("submit", function(e){
         let question = $('#edit-input-question').val()
         let answer = $('#edit-input-answer').val()
         let id = $("#edit-input-faq-id").val()
 
         if (!question) {
             e.preventDefault();
-            showError("Please input a Question", "#edit-faq-error-msg");
+            showError("Please input a question", "#edit-faq-error-msg");
+            return;
         } else if (!answer) {
             e.preventDefault();
-            showError("Please input a Answer", "#edit-faq-error-msg");
-        } else {
-            e.preventDefault();
-
-            let faq = {
-                id: id,
-                question: question,
-                answer: answer
-            }
-
-            $.post("/admin/faq/edit-faq", faq, function(response)
-            {
-                if (response.hasError) {
-                    showError(response.error, "#edit-faq-error-msg");
-                } else {
-                    showSuccess("Edited FAQ successfully!", "#edit-faq-error-msg");
-                    $("faq-collection-container").empty();
-                    showAllFAQS();
-                }
-            })
+            showError("Please input an answer", "#edit-faq-error-msg");
+            return;
         }
-    })
 
-    $('#delete-faq-btn').on('click', function(e) {
+        e.preventDefault();
+
+        let btn_edit = this.closest(".modal-content").querySelector(".btn-modal-success");
+        btn_edit.disabled = true;
+
+        let btn_edit_icon = btn_edit.querySelector("i");
+        btn_edit_icon.className = "";
+        btn_edit_icon.classList.add("spinner-border", "me-2");
+
+        let faq = {
+            id: id,
+            question: question,
+            answer: answer
+        }
+
+        $.post("/admin/faq/edit-faq", faq, (data, status, xhr) => {
+            if (data.hasError) {
+                showError(response.error, "#edit-faq-error-msg");
+            } else {
+                btn_edit_icon.className = "";
+                btn_edit_icon.classList.add("fa", "fa-edit");
+
+                let faq_edit_modal = this.closest("#edit-faq-modal");
+                bootstrap.Modal.getInstance(faq_edit_modal).hide();
+
+                btn_edit.disabled = false;
+
+                snackbar({
+                    type: "primary",
+                    text: "FAQ has been successfully edited!"
+                });
+                $("faq-collection-container").empty();
+            }
+        });
+    });
+
+    $('#delete-faq-modal .btn-delete').on('click', function(e) {
         e.preventDefault()
         let id = {id: $("#delete-input-faq-id").val()};
 
-        $.post("/admin/faq/delete-faq", id, function(response) {
-            if (response.hasError) {
-                e.preventDefault();
+        let btn_delete = this.closest(".modal-content").querySelector(".btn-delete");
+        btn_delete.disabled = true;
+
+        let btn_delete_icon = btn_delete.querySelector("i");
+        btn_delete_icon.className = "";
+        btn_delete_icon.classList.add("spinner-border", "me-2");
+
+        $.post("/admin/faq/delete-faq", id, (data, status, xhr) => {
+            if (data.hasError) {
                 showError(response.error, "#delete-faq-error-msg");
             } else {
-                e.preventDefault();
-                showSuccess("Deleted the FAQ successfully!", "#delete-faq-error-msg");
+                btn_delete_icon.className = "";
+                btn_delete_icon.classList.add("fa", "fa-trash");
+
+                let faq_delete_modal = this.closest("#delete-faq-modal");
+                bootstrap.Modal.getInstance(faq_delete_modal).hide();
+                btn_delete.disabled = false;
+                snackbar({
+                    type: "primary",
+                    text: "FAQ has been successfully deleted!"
+                });
                 $("faq-collection-container").empty();
-                showAllFAQS();
             }
         })
     });
@@ -141,7 +189,7 @@ function showAllFAQS (){
                 text: "A: " + faq.answer
             }).getElement()
 
-            let edit_btn = new Element("button.edit-btn", {
+            let edit_btn = new Element("button.btn.admin-list-btn-edit", {
                 text: "Edit",
                 attr: {
                     "data-bs-toggle": "modal",
@@ -153,7 +201,7 @@ function showAllFAQS (){
             edit_btn.prepend(edit_icon);
             edit_btn.addEventListener("click", onBtnEditClick);
 
-            let delete_btn = new Element("button.delete-btn", {
+            let delete_btn = new Element("button.btn.admin-list-btn-delete", {
                 text: "Delete",
                 attr: {
                     "data-bs-toggle": "modal",

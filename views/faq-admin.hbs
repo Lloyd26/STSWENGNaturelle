@@ -1,18 +1,24 @@
 <link rel="stylesheet" href="/css/faq-admin.css">
 <script type="module" src="/js/faq-admin.js"></script>
 
-<div id="faq-admin-wrapper" class="bg-noise-pattern">
-    <div id="faq-admin-header-container">
-        <h2 id="faq-admin-header">Frequently Asked Questions</h2>
-        <button type="button" id="add-btn" data-bs-toggle="modal" data-bs-target="#add-faq-modal"><i class="fa fa-plus"></i>Add</button>
+<div class="admin-wrapper bg-noise-pattern">
+    <div class="admin-header-wrapper">
+        <div class="admin-header-container">
+            <h2 class="admin-header">Frequently Asked Questions</h2>
+            <button type="button" id="add-btn" class="btn admin-header-btn" data-bs-toggle="modal" data-bs-target="#add-faq-modal"><i class="fa fa-plus"></i>Add</button>
+        </div>
     </div>
-    <div id="faq-collection-container">
+    <div class="admin-responsive-controls-container">
+        <button type="button" id="add-btn" class="btn admin-header-btn" data-bs-toggle="modal" data-bs-target="#add-faq-modal"><i class="fa fa-plus"></i>Add a FAQ</button>
+    </div>
+    <div class="admin-container">
+        <div id="faq-collection-container"></div>
     </div>
 </div>
 
 <!-- Add Modal-->
 <div class="modal fade modal-lg" id="add-faq-modal" tabindex="-1" aria-labelledby="add-faq-modal" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Add FAQ</h5>
@@ -31,8 +37,8 @@
                     <div class="error-msg" id="add-faq-error-msg" data-error-status="normal"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="close-btn" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="save-btn" id="add-faq-btn">Add</button>
+                    <button type="button" class="btn btn-discard" data-bs-dismiss="modal"><i class="fa fa-trash"></i>Discard</button>
+                    <button type="submit" class="btn btn-modal-success" id="add-faq-btn"><i class="fa fa-plus"></i>Add</button>
                 </div>
             </form>
         </div>
@@ -41,7 +47,7 @@
 
 <!-- Edit Modal-->
 <div class="modal fade modal-lg" id="edit-faq-modal" tabindex="-1" aria-labelledby="edit-faq-modal" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Edit FAQ</h5>
@@ -61,8 +67,8 @@
                     <div class="error-msg" id="edit-faq-error-msg" data-error-status="normal"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="close-btn" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="save-btn" id="edit-faq-btn">Add</button>
+                    <button type="button" class="btn btn-discard" data-bs-dismiss="modal"><i class="fa fa-trash"></i>Discard</button>
+                    <button type="submit" class="btn btn-modal-success" form="form-edit-faq"><i class="fa fa-check"></i>Save</button>
                 </div>
             </form>
         </div>
@@ -71,7 +77,7 @@
 
 <!-- Delete Modal-->
 <div class="modal fade" id="delete-faq-modal" tabindex="-1" aria-labelledby="delete-faq-modal" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content" id="delete-modal-content">
             <div class="modal-header delete-modal-header">
                 <h5 class="modal-title">Delete FAQ</h5>
@@ -85,8 +91,8 @@
                 <div class="error-msg" id="delete-faq-error-msg" data-error-status="normal"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="close-btn" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="save-btn" id="delete-faq-btn"><i class="fa fa-trash-can"></i>Delete</button>
+                <button type="button" class="btn btn-neutral" data-bs-dismiss="modal"><i class="fa fa-xmark"></i>Cancel</button>
+                <button type="submit" class="btn btn-delete"><i class="fa fa-trash"></i>Delete</button>
             </div>
         </div>
     </div>
