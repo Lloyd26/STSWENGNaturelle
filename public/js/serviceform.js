@@ -1,6 +1,6 @@
-import {showError, showSuccess} from "./form.js";
-import {addToCart} from "./cart.js";
-import {Element} from "./element.js";
+import { showError, showSuccess } from "./form.js";
+import { addToCart } from "./cart.js";
+import { Element } from "./element.js";
 
 const EMPLOYEES_URL = "/api/employees";
 const EMPLOYEES_CONTAINER = "#input-staff";
@@ -10,14 +10,18 @@ const SERVICES_CONTAINER = "#input-service";
 
 let cached_employees = [];
 
-$(document).ready(function(){
+export let cart_arr = [];
+
+$(document).ready(function () {
     refreshEmployeesMenu(EMPLOYEES_URL, EMPLOYEES_CONTAINER);
     refreshServicesMenu(SERVICES_URL, SERVICES_CONTAINER);
 
-    $("#form-service").on("submit", function(e) {
+    $("#form-service").on("submit", function (e) {
         let service_val = $('#input-service').val()
         let staff_val = $('#input-staff').val()
         let details_val = $('#input-details').val()
+
+        let cart_obj = {};
 
         if ($('#input-service').prop('disabled')) {
             e.preventDefault();
@@ -35,14 +39,38 @@ $(document).ready(function(){
             let service_select = document.getElementById("input-service");
             let staff_select = document.getElementById("input-staff");
 
-            let service = service_select.options[service_select.selectedIndex].text;
+            let service_f = service_select.options[service_select.selectedIndex].text;
             let serviceGroupName = service_select.options[service_select.selectedIndex].closest("optgroup").label;
 
-            let staff = staff_select.options[staff_select.selectedIndex].text;
+            let staff_f = staff_select.options[staff_select.selectedIndex].text;
 
             let price = service_select.options[service_select.selectedIndex].getAttribute("data-service-price");
 
-            addToCart(serviceGroupName, service, staff, details_val, price);
+            addToCart(serviceGroupName, service_f, staff_f, details_val, price);
+
+            cart_obj = {
+                details: details_val,
+                service: service_f,
+                staff: staff_f
+            }
+
+            cart_arr.push(cart_obj);
+
+            console.log(cart_arr);
+
+            $.post("/serviceform", {
+                details: details_val,
+                service: service_f,
+                staff: staff_f
+            }, function (data, status) {
+                if (status === "success") {
+                    // Handle success, if needed
+                    console.log("AJAX request succeeded", data);
+                } else {
+                    // Handle failure, if needed
+                    console.log("AJAX request failed", data);
+                }
+            });
 
             snackbar({
                 type: "primary",

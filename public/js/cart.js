@@ -1,5 +1,28 @@
-import {Element} from "./element.js";
-import {formatPrice} from "./nFormatter.js";
+import { Element } from "./element.js";
+import { formatPrice } from "./nFormatter.js";
+import { cart_arr } from './serviceform.js';
+
+// Function to check if the cart is empty
+function isCartEmpty() {
+    var servicesContainer = document.getElementById("services-container");
+    return servicesContainer.children.length === 0;
+}
+
+// Function to update the state of the "Reserve" button based on the cart content
+function updateReserveButtonState() {
+    var reserveButton = document.getElementById("btn-reserve");
+
+    reserveButton.disabled = isCartEmpty();
+}
+
+// Function to handle reservation
+function handleReservation() {
+    // Perform actions related to the reservation
+
+    alert("Reservation successful!");
+
+    // window.location.href = "/";
+}
 
 export function setCartDateTime(date, time) {
     document.getElementById("date-detail").innerText = date;
@@ -76,6 +99,9 @@ export function addToCart(serviceGroup, service, staff, details, price) {
     document.getElementById("services-container").appendChild(cart_item);
 
     updatePrice("add", price);
+
+    // Update the state of the "Reserve" button after adding to the cart
+    updateReserveButtonState();
 }
 
 function removeFromCart(e) {
@@ -114,6 +140,55 @@ function clearCart() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
+    // Initially disable the "Reserve" button if the cart is empty
+    updateReserveButtonState();
+
+    // Get the "Reserve" button element
+    var reserveButton = document.getElementById("btn-reserve");
+
+    // Attach a click event listener to the "Reserve" button
+    reserveButton.addEventListener("click", function () {
+        // Check if the cart is empty before handling the reservation
+        if (!isCartEmpty()) {
+
+            let date_val = document.getElementById("date-detail").innerText;
+            let time_val = document.getElementById("time-detail").innerText;
+
+            let date_time = `${date_val} ${time_val}`;
+            let reservationDate = new Date(date_time + ' UTC');
+
+            let timestamp = reservationDate.toISOString().replace('Z', '+00:00')
+
+            let status = "pending";
+
+            /*
+            console.log(timestamp);
+            console.log(cart_arr);
+            console.log(status);
+            */
+
+            $.post("/reserve", {
+                timestamp: timestamp,
+                cart_arr: cart_arr,
+                status: status
+            }, function (data, status) {
+                if (status === "success") {
+                    // Handle success, if needed
+                    console.log("AJAX request succeeded", data);
+                } else {
+                    // Handle failure, if needed
+                    console.log("AJAX request failed", data);
+                }
+            });
+
+            handleReservation(); // You can reserve when cart is not empty
+        } else {
+            // Display a message or take other actions for an empty cart
+            alert("Cannot reserve. Cart is empty.");
+        }
+    });
+
+
     document.querySelector("#btn-reset").addEventListener("click", clearCart);
 });

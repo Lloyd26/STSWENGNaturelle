@@ -19,6 +19,13 @@ app.get('/logout', controller.getLogout);
 app.get('/register', auth_controller.getRegister);
 app.post('/register', auth_controller.postRegister);
 
+
+app.get('/serviceform', auth_controller.getAddToCart);
+app.post('/serviceform', auth_controller.postAddToCart);
+
+app.post('/reserve', auth_controller.postReserve);
+
+
 app.get('/reservation', controller.getReservation);
 
 app.get('/services/pages/:serviceconcern', controller.getServices);

@@ -1,19 +1,18 @@
 const { Schema, SchemaTypes, model } = require('mongoose');
 
-const reservationsSchema = new Schema ({
-
-    timestamp:{
-        type: SchemaTypes.Date
-    },
-    services:{
-        type: [SchemaTypes.ObjectId],
-        ref: 'InCartService'
-    },
-    status:{
+const reservationSchema = new Schema({
+    timestamp: {
         type: SchemaTypes.String
+    },
+    services: {
+        type: [SchemaTypes.Mixed],
+        required: true
+    },
+    status: {
+        type: SchemaTypes.String,
     }
 })
 
 // for MongoDB collection "reservations"
-const Reservation = model("reservations", reservationsSchema, "reservations");
+const Reservation = model("reservations", reservationSchema, "reservations");
 module.exports = Reservation;

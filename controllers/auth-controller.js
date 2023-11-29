@@ -1,14 +1,18 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
+const helpers = require('../models/helpers.js')
+
+const InCartService = require('../models/InCartService');
+const Reservation = require('../models/Reservation');
 
 const controller = {
-    getLogin: function(req, res) {
+    getLogin: function (req, res) {
         if (!req.session.logged_in) {
-            res.render('login', {layout: 'index', active: {login: true}});
+            res.render('login', { layout: 'index', active: { login: true } });
         } else if (req.session.logged_in.type !== "customer") {
             res.render('login', {
                 layout: 'index',
-                active: {login: true},
+                active: { login: true },
                 logged_in: req.session.logged_in,
                 snackbar: {
                     type: "error",
@@ -24,25 +28,25 @@ const controller = {
         }
     },
 
-    postLogin: async function(req, res) {
+    postLogin: async function (req, res) {
         let email = req.body.email;
         let password = req.body.password;
 
         if (email === undefined || password === undefined) {
             res.render('login', {
                 layout: 'index',
-                active: {login: true},
+                active: { login: true },
                 error: 'Please enter your email and password.'
             });
             return;
         }
 
-        let result = await User.findOne({email: email});
+        let result = await User.findOne({ email: email });
 
         if (result == null) {
             res.render('login', {
                 layout: 'index',
-                active: {login: true},
+                active: { login: true },
                 error: 'Incorrect email address or password!'
             });
             return;
@@ -53,7 +57,7 @@ const controller = {
         if (!passwordCompare) {
             res.render('login', {
                 layout: 'index',
-                active: {login: true},
+                active: { login: true },
                 error: 'Incorrect email address or password!'
             });
             return;
@@ -74,11 +78,11 @@ const controller = {
         else res.redirect('/');
     },
 
-    getRegister: function(req, res) {
-        res.render('register', {layout: 'index', active: {login: true}});
+    getRegister: function (req, res) {
+        res.render('register', { layout: 'index', active: { login: true } });
     },
 
-    postRegister: async function(req, res) {
+    postRegister: async function (req, res) {
         let firstName = req.body.first_name;
         let lastName = req.body.last_name;
         let email = req.body.email;
@@ -89,7 +93,7 @@ const controller = {
         if (email === '') {
             res.render('register', {
                 layout: 'index',
-                active: {login: true},
+                active: { login: true },
                 error: 'Please enter your email address!',
                 form: {
                     firstName: firstName,
@@ -102,11 +106,11 @@ const controller = {
         }
 
         // Check if email is already in use by someone else
-        let emailCheck = await User.findOne({email: email}, 'email');
+        let emailCheck = await User.findOne({ email: email }, 'email');
         if (emailCheck != null && emailCheck.email === email) {
             res.render('register', {
                 layout: 'index',
-                active: {login: true},
+                active: { login: true },
                 error: 'Email address is already in use!',
                 form: {
                     firstName: firstName,
@@ -122,7 +126,7 @@ const controller = {
         if (firstName === '') {
             res.render('register', {
                 layout: 'index',
-                active: {login: true},
+                active: { login: true },
                 error: 'Please enter your first name!',
                 form: {
                     firstName: firstName,
@@ -138,7 +142,7 @@ const controller = {
         if (lastName === '') {
             res.render('register', {
                 layout: 'index',
-                active: {login: true},
+                active: { login: true },
                 error: 'Please enter your last name!',
                 form: {
                     firstName: firstName,
@@ -154,7 +158,7 @@ const controller = {
         if (contactNumber === '') {
             res.render('register', {
                 layout: 'index',
-                active: {login: true},
+                active: { login: true },
                 error: 'Please enter your contact number!',
                 form: {
                     firstName: firstName,
@@ -170,7 +174,7 @@ const controller = {
         if (password === '') {
             res.render('register', {
                 layout: 'index',
-                active: {login: true},
+                active: { login: true },
                 error: 'Please enter your password!',
                 form: {
                     firstName: firstName,
@@ -187,7 +191,7 @@ const controller = {
         if (!validEmailRegex.test(email)) {
             res.render('register', {
                 layout: 'index',
-                active: {login: true},
+                active: { login: true },
                 error: 'Please enter a valid email address!',
                 form: {
                     firstName: firstName,
@@ -204,7 +208,7 @@ const controller = {
         if (!validContactNumRegex.test(contactNumber)) {
             res.render('register', {
                 layout: 'index',
-                active: {login: true},
+                active: { login: true },
                 error: 'Please follow the contact number format: 09XXXXXXXXX',
                 form: {
                     firstName: firstName,
@@ -220,7 +224,7 @@ const controller = {
         if (password.length < 8) {
             res.render('register', {
                 layout: 'index',
-                active: {login: true},
+                active: { login: true },
                 error: 'Password must contain at least 8 characters!',
                 form: {
                     firstName: firstName,
@@ -258,7 +262,61 @@ const controller = {
         }
 
         res.redirect('/');
-    }
+    },
+
+    getAddToCart: function (req, res) {
+        res.render('/serviceform', { layout: 'reservation', active: { login: true } });
+    },
+
+    postAddToCart: async function (req, res) {
+
+        let detail = req.body.details;
+        let pstaff = req.body.staff;
+        let pservice = req.body.service;
+
+        let cart = {
+            details: detail,
+            preferredEmployee: pstaff,
+            serviceTitle: pservice
+        }
+
+        console.log("Cart Object:", cart);
+
+        try {
+            await InCartService.create(cart);
+            console.log("Cart added to MongoDB successfully!");
+        } catch (error) {
+            console.error("Error adding cart to MongoDB:", error);
+        }
+
+        res.redirect('/serviceform');
+
+    },
+
+    postReserve: async function (req, res) {
+
+        let time = req.body.timestamp;
+        let items = req.body.cart_arr;
+        let current = req.body.status;
+
+        let reservation = {
+            timestamp: time,
+            services: items,
+            status: current
+        }
+
+        console.log("Reservation:", reservation);
+
+        try {
+            await Reservation.create(reservation);
+            console.log("Reservation added to MongoDB successfully!");
+        } catch (error) {
+            console.error("Error adding reservation to MongoDB:", error);
+        }
+
+        res.redirect('/reserve');
+
+    },
 }
 
 module.exports = controller;
