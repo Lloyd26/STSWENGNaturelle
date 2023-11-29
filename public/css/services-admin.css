@@ -40,7 +40,6 @@
 }
 
 #add-btn{
-    margin-left: auto;
     gap: 1.5rem;
     padding: .5em 1.5em;
     background-color: var(--salon-purple);
@@ -235,4 +234,52 @@
 
 .modal-show {
     display: block; /* Show the modal when the "modal-show" class is added */
+}
+
+@media (max-width: 992px) {
+    .admin-container {
+        padding: 0 !important;
+    }
+
+    .admin-responsive-controls-container{
+        z-index: 1000;
+    }
+
+    #service-collection-container {
+        gap: 0;
+        grid-template-columns: 1fr;
+        border-radius: 0;
+        box-shadow: 0;
+        padding: 0;
+    }
+
+    .service-collection-preview-container {
+        border-radius: 0;
+        border: unset;
+        box-shadow: unset;
+        border-bottom: 2px solid var(--clr-primary-50);
+        padding: calc(var(--radius) / 2);
+    }
+
+    .service-title {
+        font-size: 2em;
+        line-height: 1.25;
+    }
+
+    .option1-tag, .option2-tag{
+        font-size: 0.75em;
+    }
+
+    .service-collection-controls-container {
+        flex-direction: row;
+        gap: 0.5rem;
+        align-items: normal;
+        justify-content: normal;
+    }
+
+    .edit-btn, .delete-btn {
+        padding: 0.5rem 1.5rem;
+        font-size: 0.85em;
+        flex: 5 0 0;
+    }
 }
