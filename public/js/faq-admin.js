@@ -1,5 +1,8 @@
 import {showError, showSuccess} from "./form.js";
 import {Element} from "./element.js";
+import {checkCache} from "./dataCache.js";
+
+let faq_cache = [];
 
 function onBtnDeleteClick (e) {
     e.preventDefault()
@@ -62,7 +65,6 @@ $(document).ready(function() {
                     type: "primary",
                     text: "Employee has been successfully added!"
                 });
-                $("faq-collection-container").empty();
             }
         });
     });
@@ -113,7 +115,6 @@ $(document).ready(function() {
                     type: "primary",
                     text: "FAQ has been successfully edited!"
                 });
-                $("faq-collection-container").empty();
             }
         });
     });
@@ -143,7 +144,6 @@ $(document).ready(function() {
                     type: "primary",
                     text: "FAQ has been successfully deleted!"
                 });
-                $("faq-collection-container").empty();
             }
         })
     });
@@ -162,16 +162,18 @@ $(document).ready(function() {
                 error_msg.setAttribute("data-error-status", "normal");
             }
 
-            document.querySelector("#faq-collection-container").innerHTML = "";
             showAllFAQS()
         });
     });
 })
 
 function showAllFAQS (){
-    $("#faq-collection-container").empty();
-    let faq_collection_container = document.getElementById("faq-collection-container");
     $.get("/admin/faq/get-faqs", {}, (data, status, xhr) => {
+        if (checkCache(data, faq_cache)) return;
+
+        $("#faq-collection-container").empty();
+        let faq_collection_container = document.getElementById("faq-collection-container");
+
         data.forEach(faq => {
             let faq_container = new Element (".faq-container", {
                 attr: {

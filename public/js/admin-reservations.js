@@ -25,11 +25,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 */
 import {Element} from "./element.js";
+import {checkCache} from "./dataCache.js";
 
 const RESERVATION_GET_URL = "/admin/reservations/get";
 const RESERVATION_WRAPPER = "#admin-reservations-wrapper";
 
-let cached_data = [];
+let reservations_cache = [];
 
 document.addEventListener("DOMContentLoaded", function() {
     showReservations(RESERVATION_GET_URL, RESERVATION_WRAPPER);
@@ -37,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function showReservations(url, container) {
     $.get(url, {}, (data, status, xhr) => {
-        if (!checkCache(data)) return;
+        if (checkCache(data, reservations_cache)) return;
         document.querySelector(container).innerHTML = "";
 
         data.forEach(reservations => {
@@ -113,25 +114,6 @@ function showModal() {
 
 }
 
-
-
-function checkCache(data) {
-    if (cached_data.length === 0) {
-        data.forEach(d => cached_data.push(d._id));
-        return true;
-    }
-
-    let temp_data = [];
-    data.forEach(d => temp_data.push(d._id));
-
-    for (let i in cached_data) {
-        if (cached_data[i] !== temp_data[i]) {
-            return false;
-        }
-    }
-
-    return true;
-}
 /**
 
 $(document).ready(function(){
