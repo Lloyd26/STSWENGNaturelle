@@ -83,6 +83,7 @@ $(document).ready(function () {
 function refreshServicesMenu(url, container) {
     $.get(url, {}, (data, status, xhr) => {
         if (status === "success" && xhr.status === 200) {
+
             let input_service = document.querySelector(container);
             input_service.innerHTML = "";
 
@@ -139,6 +140,7 @@ function refreshServicesMenu(url, container) {
                     }
                 }).getElement();
                 service_optgroup.appendChild(service_option);
+                input_service.appendChild(service_optgroup);
             })
         }
     })
