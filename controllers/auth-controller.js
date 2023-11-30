@@ -266,6 +266,10 @@ const controller = {
         res.redirect('/');
     },
 
+    getAddToCart: function (req, res) {
+        res.render('partials/serviceform', { layout: 'index', active: { login: true } });
+    },
+
     postAddToCart: async function (req, res) {
 
         let detail = req.body.details;
@@ -312,10 +316,24 @@ const controller = {
             }
 
             console.log("Reservation Details:", reservation);
-            console.log(generatedId);
+            // console.log(generatedId);
+
+            // await Reservation.create(reservation);
+
+            // // Populate the 'services' field with the contents from InCartService
+            // const populatedReservation = await Reservation.findOne({ services: generatedId }).populate('services').exec();
+
+            // console.log("Populated Reservation:", populatedReservation);
 
             await Reservation.create(reservation);
+
+            let populated = await Reservation.findById({ services: generatedId }).populate('services').lean().exec();
+
+            console.log(populated);
+
             console.log("Reservation added to MongoDB successfully!");
+
+
         } catch (error) {
             console.error("Error adding reservation to MongoDB:", error);
         }
