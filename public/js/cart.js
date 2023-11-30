@@ -19,9 +19,12 @@ function updateReserveButtonState() {
 function handleReservation() {
     // Perform actions related to the reservation
 
-    alert("Reservation successful!");
+    // alert("Reservation successful!");
 
-    // window.location.href = "/";
+    setTimeout(function () {
+        // Reload the page
+        window.location.reload();
+    }, 1 * 1000); // Convert seconds to milliseconds
 }
 
 export function setCartDateTime(date, time) {
@@ -176,10 +179,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (status === "success") {
                     // Handle success, if needed
                     console.log("AJAX request succeeded", data);
+
+                    clearCart();
+
                 } else {
                     // Handle failure, if needed
                     console.log("AJAX request failed", data);
                 }
+            });
+
+            snackbar({
+                type: "primary",
+                text: "Reserved appointment successfully."
             });
 
             handleReservation(); // You can reserve when cart is not empty
@@ -189,6 +200,15 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    var trashButton = document.getElementById("btn-reset");
 
-    document.querySelector("#btn-reset").addEventListener("click", clearCart);
+    trashButton.addEventListener("click", function () {
+
+        clearCart();
+
+        $.post("/cart-clear", {}, function (data, status) {
+            // ...
+        });
+
+    });
 });

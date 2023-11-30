@@ -69,12 +69,15 @@ const controller = {
             state: true,
             type: "customer",
             user: {
+                generatedUserID: result.generatedUserID,
                 firstName: result.firstName,
                 lastName: result.lastName,
                 contactNumber: result.contactNumber,
                 email: result.email
             }
         }
+
+        console.log(result);
 
         if (req.query.next) res.redirect(decodeURIComponent(req.query.next));
         else res.redirect('/');
@@ -85,6 +88,7 @@ const controller = {
     },
 
     postRegister: async function (req, res) {
+        let userID;
         let firstName = req.body.first_name;
         let lastName = req.body.last_name;
         let email = req.body.email;
@@ -243,6 +247,7 @@ const controller = {
         let passwordHashed = await bcrypt.hash(password, saltRounds);
 
         let user = {
+            generatedUserID: userID,
             firstName: firstName,
             lastName: lastName,
             email: email,
@@ -250,18 +255,25 @@ const controller = {
             password: passwordHashed
         }
 
-        await User.create(user);
+        let createdUser = await User.create(user);
+
+        userID = createdUser._id;
+
+        await User.updateOne({ _id: createdUser._id }, { $set: { generatedUserID: userID } });
 
         req.session.logged_in = {
             state: true,
             type: "customer",
             user: {
+                userID: userID,
                 firstName: user.firstName,
                 lastName: user.lastName,
                 contactNumber: user.contactNumber,
                 email: user.email
             }
         }
+
+        console.log(user);
 
         res.redirect('/');
     },
@@ -282,7 +294,7 @@ const controller = {
             serviceTitle: pservice
         }
 
-        console.log("Cart Object:", cart);
+        // console.log("Cart Object:", cart);
 
         try {
             const createdCart = await InCartService.create(cart);
@@ -298,32 +310,28 @@ const controller = {
         res.redirect('/serviceform');
 
 
-        console.log(generatedId);
+        // console.log(generatedId);
 
     },
 
     postReserve: async function (req, res) {
 
+        let userID = req.session.logged_in.user.generatedUserID;
+
         let time = req.body.timestamp;
         let current = req.body.status;
+
 
         try {
 
             let reservation = {
+                currentUserID: userID,
                 timestamp: time,
                 services: generatedId,
                 status: current
             }
 
             console.log("Reservation Details:", reservation);
-            // console.log(generatedId);
-
-            // await Reservation.create(reservation);
-
-            // // Populate the 'services' field with the contents from InCartService
-            // const populatedReservation = await Reservation.findOne({ services: generatedId }).populate('services').exec();
-
-            // console.log("Populated Reservation:", populatedReservation);
 
             createdReservation = await Reservation.create(reservation);
 
@@ -333,12 +341,30 @@ const controller = {
 
             console.log("Reservation added to MongoDB successfully!");
 
+            generatedId = [];
+
 
         } catch (error) {
             console.error("Error adding reservation to MongoDB:", error);
         }
 
         res.redirect('/reserve');
+
+    },
+
+    postDeleteAllCart: async function (req, res) {
+
+        let cartsToDelete = await InCartService.find({ _id: { $in: generatedId } });
+
+        // Log the carts to be deleted
+        console.log("Carts to be deleted:", cartsToDelete);
+
+        // Delete all carts that match the IDs in the generatedId array
+        await InCartService.deleteMany({ _id: { $in: generatedId } });
+
+        generatedId = [];
+
+        res.redirect('/serviceform');
 
     },
 }
