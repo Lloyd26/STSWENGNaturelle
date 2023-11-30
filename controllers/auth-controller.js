@@ -325,9 +325,9 @@ const controller = {
 
             // console.log("Populated Reservation:", populatedReservation);
 
-            await Reservation.create(reservation);
+            createdReservation = await Reservation.create(reservation);
 
-            let populated = await Reservation.findById({ services: generatedId }).populate('services').lean().exec();
+            let populated = await Reservation.findById(createdReservation._id).populate('services').lean().exec();
 
             console.log(populated);
 
