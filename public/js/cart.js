@@ -110,6 +110,12 @@ export function addToCart(serviceGroup, service, staff, details, price) {
 function removeFromCart(e) {
     let cart_item = e.currentTarget.closest(".cart-item");
     updatePrice("subtract", cart_item.getAttribute("data-service-price"));
+
+    $.post("/cart-delete-one", {}, function (data, status) {
+        // ...
+
+    });
+
     cart_item.remove();
 }
 
@@ -163,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             let timestamp = reservationDate.toISOString().replace('Z', '+00:00')
 
-            let status = "pending";
+            let status = "Pending";
 
             /*
             console.log(timestamp);

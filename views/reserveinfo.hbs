@@ -3,10 +3,47 @@
 
 <div id="reservation-container">
     <div class="info-header">
-        <h1>Your Reservations</h1>
+        <h1>Your Saved Reservations</h1>
     </div>
+
+
     <div class="reservation-list-container">
-        <button><span> Reservation for 2023 November 28 </span></button>
-        <button><span>hello </span></button>
+
+        <!-- Timestamp -->
+
+        <!-- service details -->
+
+        <!-- status -->
+
+        <div class="reservartion-details" id="show-reservations">
+            {{#each reservation_info}}
+            <div>
+                {{this.timestamp}}
+                {{#each this.services}}
+                <div>
+                    <div>
+                        {{this.serviceTitle}}
+                    </div>
+
+                    <div>
+                        {{this.preferredEmployee}}
+                    </div>
+
+                    <div>
+                        {{this.details}}
+                    </div>
+
+                </div>
+                {{/each}}
+
+                <div>
+                    {{this.status}}
+                </div>
+
+            </div>
+            {{/each}}
+
+        </div>
+
     </div>
 </div>
