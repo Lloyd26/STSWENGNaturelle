@@ -90,7 +90,7 @@ const controller = {
     },
 
     getCurrentUser: async function(req, res){
-        user = await Admin.findOne({username:_req.session.logged_in.user})
+        user = await Admin.findOne({username:req.session.logged_in.user})
         console.log(user)
         res.send(username)
     },
