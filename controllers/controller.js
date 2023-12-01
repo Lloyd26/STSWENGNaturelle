@@ -55,14 +55,19 @@ const controller = {
     },
 
     getReserveInfo: async function (req, res) {
-        let userID = req.session.logged_in.user.generatedUserID;
 
-        console.log(userID);
+        if (!req.session.logged_in || (req.session.logged_in && req.session.logged_in.type !== "customer")) {
+            res.redirect("/login?next=" + encodeURIComponent("/reservation"));
+            return;
+        }
+
+        let userID = req.session.logged_in.user.generatedUserID;
 
         let reservation_info = await Reservation.find({ currentUserID: userID }).populate('services').lean().exec();
 
         let reservationsWithFormattedDate = reservation_info.map(coll => {
-            formattedDate = new Date(coll.timestamp).toLocaleDateString();
+            
+            formattedDate = new Date(coll.timestamp).toUTCString();
 
             return {
                 currentUserID: coll.currentUserID,
@@ -79,10 +84,6 @@ const controller = {
             reservation_info: reservationsWithFormattedDate
 
         });
-
-        console.log(reservation_info);
-
-
     },
 
     getServices: async function (req, res) {

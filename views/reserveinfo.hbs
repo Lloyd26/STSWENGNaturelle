@@ -8,42 +8,20 @@
 
 
     <div class="reservation-list-container">
-
-        <!-- Timestamp -->
-
-        <!-- service details -->
-
-        <!-- status -->
-
-        <div class="reservartion-details" id="show-reservations">
-            {{#each reservation_info}}
-            <div>
-                {{this.timestamp}}
-                {{#each this.services}}
-                <div>
-                    <div>
-                        {{this.serviceTitle}}
+        {{#each reservation_info}}
+            <div class="reservation-details-container">
+                <div class="timestamp"> {{this.timestamp}} </div>
+                    <div class="services-container">
+                        {{#each this.services}}
+                                <div class="reservation-details">
+                                    <div class="service-title">{{this.serviceTitle}}</div>
+                                    <div class="preferred-employee">{{this.preferredEmployee}}</div>
+                                    <div class="details">{{this.details}}</div>
+                                </div>
+                        {{/each}}
                     </div>
-
-                    <div>
-                        {{this.preferredEmployee}}
-                    </div>
-
-                    <div>
-                        {{this.details}}
-                    </div>
-
-                </div>
-                {{/each}}
-
-                <div>
-                    {{this.status}}
-                </div>
-
+                <div class="status">{{this.status}}</div>
             </div>
-            {{/each}}
-
-        </div>
-
+        {{/each}}
     </div>
 </div>
