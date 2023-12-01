@@ -89,6 +89,12 @@ const controller = {
         else res.redirect('/admin');
     },
 
+    getCurrentUser: async function(req, res){
+        user = await Admin.findOne({username:_req.session.logged_in.user})
+        console.log(user)
+        res.send(username)
+    },
+
     getAdminDashboard: function(req, res, next) {
         if (!req.session.logged_in || req.session.logged_in.type !== "admin") {
             next();

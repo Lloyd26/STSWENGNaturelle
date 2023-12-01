@@ -39,6 +39,7 @@ app.get('/reserveinfo', controller.getReserveInfo);
 
 app.get('/admin', admin_controller.getAdminLogin, admin_controller.getAdminDashboard);
 app.post('/admin', admin_controller.postAdminLogin);
+app.get('/admin/getuser', admin_controller.getCurrentUser);
 
 app.get('/admin/reservations', admin_controller.getAdminReservations);
 app.get('/admin/reservations/get', admin_controller.getAllReservations);
