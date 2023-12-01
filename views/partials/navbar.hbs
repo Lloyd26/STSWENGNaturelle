@@ -18,7 +18,8 @@
                     <a href="/about" class="nav-link">About</a>
                 </li>
                 <li class="nav-item dropdown{{#if active.services}} active{{/if}}" id="services-bt">
-                    <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="service-dropdown-bt">Services</a>
+                    <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+                        id="service-dropdown-bt">Services</a>
                     <ul class="dropdown-menu" id="services-dropdown-menu">
                     </ul>
                 </li>
@@ -34,18 +35,19 @@
             </ul>
         </div>
         {{#if (isDefined logged_in)}}
-            {{#if (isEqual logged_in.type "customer")}}
-            <div class="dropdown">
-                <div class="dropdown-toggle" id="nav-user" data-bs-toggle="dropdown"><i class="fa fa-user-circle"></i>{{logged_in.user.firstName}}</div>
-                <ul class="dropdown-menu w-100" id="user-dropdown-menu">
-                    <li><a href="" class="dropdown-item">My Profile</a></li>
-                    <li><a href="" class="dropdown-item">My Reservations</a></li>
-                    <li><a href="/logout" class="dropdown-item w-100 h-100" id="log-out-bt">Log Out</a></li>
-                </ul>
-            </div>
-            {{else}}
-            <a class="btn{{#if active.login}} active{{/if}}" id="btn-login" href="/login">LOG IN</a>
-            {{/if}}
+        {{#if (isEqual logged_in.type "customer")}}
+        <div class="dropdown">
+            <div class="dropdown-toggle" id="nav-user" data-bs-toggle="dropdown"><i
+                    class="fa fa-user-circle"></i>{{logged_in.user.firstName}}</div>
+            <ul class="dropdown-menu w-100" id="user-dropdown-menu">
+                <li><a href="" class="dropdown-item">My Profile</a></li>
+                <li><a href="/reserveinfo" class="dropdown-item">My Reservations</a></li>
+                <li><a href="/logout" class="dropdown-item w-100 h-100" id="log-out-bt">Log Out</a></li>
+            </ul>
+        </div>
+        {{else}}
+        <a class="btn{{#if active.login}} active{{/if}}" id="btn-login" href="/login">LOG IN</a>
+        {{/if}}
         {{else}}
         <a class="btn{{#if active.login}} active{{/if}}" id="btn-login" href="/login">LOG IN</a>
         {{/if}}

@@ -65,7 +65,7 @@ $(document).ready(function () {
             }, function (data, status) {
                 if (status === "success") {
                     // Handle success, if needed
-                    console.log("AJAX request succeeded", data);
+                    //console.log("AJAX request succeeded", data);
                 } else {
                     // Handle failure, if needed
                     console.log("AJAX request failed", data);

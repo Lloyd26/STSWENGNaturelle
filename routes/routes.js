@@ -24,6 +24,7 @@ app.get('/serviceform', auth_controller.getAddToCart);
 app.post('/serviceform', auth_controller.postAddToCart);
 
 app.post('/cart-clear', auth_controller.postDeleteAllCart);
+app.post('/cart-delete-one', auth_controller.postDeleteOneCart);
 
 
 app.post('/reserve', auth_controller.postReserve);

@@ -24,15 +24,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 */
-import {Element} from "./element.js";
-import {checkCache} from "./dataCache.js";
+import { Element } from "./element.js";
+import { checkCache } from "./dataCache.js";
 
 const RESERVATION_GET_URL = "/admin/reservations/get";
 const RESERVATION_WRAPPER = "#admin-reservations-wrapper";
 
 let reservations_cache = [];
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     showReservations(RESERVATION_GET_URL, RESERVATION_WRAPPER);
 });
 
@@ -47,15 +47,15 @@ function showReservations(url, container) {
                     "data-reservation-id": reservations._id
                 }
             }).getElement();
-     
+
             let reservation_button = new Element("button.reservation-button").getElement();
             let reservation_date = new Element("span.reservation-date", {
                 text: reservations.timestamp
             }).getElement();
-            let reservation_id= new Element("span.reservation-id", {
+            let reservation_id = new Element("span.reservation-id", {
                 text: reservations._id
             }).getElement();
-            
+
             reservation_button.appendChild(reservation_date);
             reservation_button.appendChild(reservation_id);
 

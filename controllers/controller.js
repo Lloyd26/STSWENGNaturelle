@@ -2,9 +2,10 @@ const ServiceCollection = require('../models/ServiceCollection.js');
 const Service = require('../models/Service.js');
 const SpecialService = require('../models/SpecialService.js');
 const FAQ = require('../models/FAQ.js');
+const Reservation = require('../models/Reservation.js');
 
 const controller = {
-    getLogout: function(req, res) {
+    getLogout: function (req, res) {
         let redirect;
 
         switch (req.session.logged_in.type) {
@@ -24,23 +25,23 @@ const controller = {
         });
     },
 
-    getIndex: function(req, res) {
+    getIndex: function (req, res) {
         res.render('main', {
             layout: 'index',
-            active: {home: true},
+            active: { home: true },
             logged_in: req.session.logged_in
         });
     },
 
-    getAbout: function(req, res) {
+    getAbout: function (req, res) {
         res.render('about', {
             layout: 'index',
-            active: {about: true},
+            active: { about: true },
             logged_in: req.session.logged_in
         });
     },
 
-    getReservation: function(req, res) {
+    getReservation: function (req, res) {
         if (!req.session.logged_in || (req.session.logged_in && req.session.logged_in.type !== "customer")) {
             res.redirect("/login?next=" + encodeURIComponent("/reservation"));
             return;
@@ -48,20 +49,43 @@ const controller = {
 
         res.render('reservation', {
             layout: 'index',
-            active: {reservation: true},
+            active: { reservation: true },
             logged_in: req.session.logged_in
         });
     },
 
-    getReserveInfo: function(req, res) {
+    getReserveInfo: async function (req, res) {
+        let userID = req.session.logged_in.user.generatedUserID;
+
+        console.log(userID);
+
+        let reservation_info = await Reservation.find({ currentUserID: userID }).populate('services').lean().exec();
+
+        let reservationsWithFormattedDate = reservation_info.map(coll => {
+            formattedDate = new Date(coll.timestamp).toLocaleDateString();
+
+            return {
+                currentUserID: coll.currentUserID,
+                timestamp: formattedDate,
+                services: coll.services,
+                status: coll.status,
+            }
+        });
+
         res.render('reserveinfo', {
             layout: 'index',
-            active: {reservation: true},
-            logged_in: req.session.logged_in
+            active: { reservation: true },
+            logged_in: req.session.logged_in,
+            reservation_info: reservationsWithFormattedDate
+
         });
+
+        console.log(reservation_info);
+
+
     },
 
-    getServices: async function(req, res) {
+    getServices: async function (req, res) {
 
         // Find all Nail related services
         let serviceCollections = await ServiceCollection.find({
@@ -75,22 +99,22 @@ const controller = {
         let serviceCollectionsObject = serviceCollections.map(coll => coll.toObject());
 
         // Check each service option combination
-        let mappedServiceCollection = serviceCollectionsObject.map(coll=> {
-            
+        let mappedServiceCollection = serviceCollectionsObject.map(coll => {
+
             let pricesCollection = []
 
-            for (let i = 0; i < coll.optionChoices2.length; i++){
+            for (let i = 0; i < coll.optionChoices2.length; i++) {
 
                 let rowPriceCollection = []
                 let result;
 
-                for (let j = 0; j < coll.optionChoices1.length; j++){
+                for (let j = 0; j < coll.optionChoices1.length; j++) {
 
                     // Check if there is an existing service title, service options 1 and 2, in the collection
                     result = coll.services.filter(srv => (srv.serviceOption2 == coll.optionChoices2[i] && srv.serviceOption1 == coll.optionChoices1[j] && srv.serviceTitle == coll.services[i].serviceTitle))
-                    
+
                     // If nothing was found, push 0; else push the result's price
-                    if (result.length <= 0){
+                    if (result.length <= 0) {
                         rowPriceCollection.push(0)
                     } else {
                         rowPriceCollection.push(result[0].price)
@@ -105,12 +129,12 @@ const controller = {
 
             // Turn tuple into object
             pricesCollectionObject = pricesCollection.map(coll => {
-                return{
+                return {
                     serviceOption2: coll[0],
                     prices: coll[1]
                 }
             })
-            
+
             return {
                 serviceTitle: coll.serviceTitle,
                 optionChoices1: coll.optionChoices1,
@@ -119,22 +143,22 @@ const controller = {
                 specialServices: coll.specialServices
             }
         })
-        
+
         res.render('services', {
             layout: 'index',
-            active: {services: true},
+            active: { services: true },
             logged_in: req.session.logged_in,
             serviceCollections: mappedServiceCollection
         });
     },
 
-    getServiceConcerns: async function(req, res){
+    getServiceConcerns: async function (req, res) {
         serviceConcerns = await ServiceCollection.distinct('serviceConcern')
-        
+
         res.send(serviceConcerns)
     },
 
-    getFAQ: async function (req, res){
+    getFAQ: async function (req, res) {
 
         let faqs = await FAQ.find({}, '').lean();
 
@@ -142,7 +166,7 @@ const controller = {
 
         res.render('faq', {
             layout: 'index',
-            active: {faq: true},
+            active: { faq: true },
             logged_in: req.session.logged_in,
             faqs: faqs
         });

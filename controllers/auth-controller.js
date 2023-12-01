@@ -337,9 +337,11 @@ const controller = {
 
             let populated = await Reservation.findById(createdReservation._id).populate('services').lean().exec();
 
-            console.log(populated);
+            // console.log(populated);
 
             console.log("Reservation added to MongoDB successfully!");
+
+            console.log(createdReservation);
 
             generatedId = [];
 
@@ -349,6 +351,22 @@ const controller = {
         }
 
         res.redirect('/reserve');
+
+    },
+
+    postDeleteOneCart: async function (req, res) {
+
+        let cartsToDelete = await InCartService.findOne({ _id: { $in: generatedId } });
+
+        // Log the carts to be deleted
+        console.log("Carts to be deleted:", cartsToDelete);
+
+        // Delete all carts that match the IDs in the generatedId array
+        // await InCartService.deleteOne({ _id: { $in: generatedId } });
+
+        // generatedId = [];
+
+        res.redirect('/serviceform');
 
     },
 
