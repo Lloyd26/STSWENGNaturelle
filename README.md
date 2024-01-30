@@ -1,2 +1,2 @@
-# CSSWENGNaturelle
-CSSWENG Web Application Project for client Naturelle Salon
+# STSWENGNaturelle
+STSWENG Web Application Project for client Naturelle Salon
