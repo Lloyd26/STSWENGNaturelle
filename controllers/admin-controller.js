@@ -4,7 +4,6 @@ const ServiceCollection = require('../models/ServiceCollection.js');
 const Service = require('../models/Service.js');
 const SpecialService = require('../models/SpecialService.js');
 const FAQ = require('../models/FAQ.js');
-const helpers = require('../models/helpers.js');
 const Reservation = require('../models/Reservation.js');
 const InCartService = require('../models/InCartService.js');
 const bcrypt = require('bcrypt');
@@ -397,11 +396,11 @@ const controller = {
         // extract services and insert to DB
 
         if (Array.isArray(req.body.services) && req.body.services.length !== 0) {
-            await helpers.insertMany(Service, req.body.services)
+            await Service.insertMany(req.body.services)
         }
         
         if (Array.isArray(req.body.specialServices) && req.body.specialServices.length !== 0) {
-            await helpers.insertMany(SpecialService, req.body.specialServices)
+            await SpecialService.insertMany(req.body.specialServices)
         }
 
         let services = await Service.find({'serviceTitle': req.body.serviceTitle})
@@ -419,7 +418,7 @@ const controller = {
             specialServices: standaloneServiceIds
         }
 
-        await helpers.insertOne(ServiceCollection, newServiceCollection);
+        await ServiceCollection.create(newServiceCollection);
 
         res.sendStatus(200); // HTTP 200: OK
     },
@@ -450,11 +449,11 @@ const controller = {
         // extract services and insert to DB
 
         if (Array.isArray(req.body.services) && req.body.services.length !== 0) {
-            await helpers.insertMany(Service, req.body.services)
+            await Service.insertMany(req.body.services)
         }
         
         if (Array.isArray(req.body.specialServices) && req.body.specialServices.length !== 0) {
-            await helpers.insertMany(SpecialService, req.body.specialServices)
+            await SpecialService.insertMany(req.body.specialServices)
         }
 
         let services = await Service.find({'serviceTitle': req.body.serviceTitle})
@@ -539,7 +538,7 @@ const controller = {
             answer: req.body.answer
         }
 
-        await helpers.insertOne(FAQ, newFAQ);
+        await FAQ.create(newFAQ);
 
         res.sendStatus(200); // HTTP 200: OK
     },

@@ -1,6 +1,5 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
-const helpers = require('../models/helpers.js')
 
 const InCartService = require('../models/InCartService');
 const Reservation = require('../models/Reservation');
