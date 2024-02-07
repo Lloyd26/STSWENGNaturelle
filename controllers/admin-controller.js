@@ -462,7 +462,9 @@ const controller = {
         let standaloneServices = await SpecialService.find({'serviceTitle': req.body.serviceTitle})
         let standaloneServiceIds = await standaloneServices.map(service => service._id)
 
-        let newServiceCollection = {
+        let newServiceCollection = {}
+
+        newServiceCollection = {
             serviceConcern: req.body.serviceConcern,
             serviceTitle: req.body.serviceTitle,
             optionChoices1: req.body.optionChoices1,
@@ -470,8 +472,8 @@ const controller = {
             services: serviceIds,
             specialServices: standaloneServiceIds
         }
-
-        await ServiceCollection.updateOne({_id: id}, newServiceCollection);
+        
+        await ServiceCollection.replaceOne({_id: id}, newServiceCollection);
         
         res.sendStatus(200); // HTTP 200: OK
     },

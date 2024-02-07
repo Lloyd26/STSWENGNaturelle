@@ -9,10 +9,10 @@ const serviceCollectionSchema = new Schema ({
         unique: true
     },
     optionChoices1: {
-        type: [String]
+        type: [String, null]
     },
     optionChoices2: {
-        type: [String]
+        type: [String, null]
     },
     services: {
         type: [SchemaTypes.ObjectId],

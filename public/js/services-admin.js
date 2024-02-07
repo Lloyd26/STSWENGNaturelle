@@ -26,7 +26,7 @@ function getUniqueValues(arr, field) {
  * @returns {boolean} - if it has empty fields or not
  */
 function doesAddServiceCollHaveEmptyField() {
-    let doesTabularHaveEmpty = $("#add-services-list li input").filter(function() {
+    let doesTabularHaveEmpty = $("#add-tabular-services-list li input").filter(function() {
         return $(this).val() === '';
     })
 
@@ -43,7 +43,7 @@ function doesAddServiceCollHaveEmptyField() {
  * @returns {boolean} - if it has empty fields or not
  */
 function doesEditServiceCollHaveEmptyField() {
-    let doesTabularHaveEmpty = $("#edit-services-list li input").filter(function() {
+    let doesTabularHaveEmpty = $("#edit-tabular-services-list li input").filter(function() {
         return $(this).val() === '';
     })
 
@@ -76,10 +76,10 @@ $(document).ready(function(){
         let add_form = $('#form-add-service-collection')
         let service_concern = $('#input-service-concern').val()
         let service_title = $('#input-service-title').val()
-        let services_list = $("#add-services-list")
+        let tabular_services_list = $("#add-tabular-services-list")
         let standalone_services_list = $("#add-standalone-services-list")
-        let service_obj = {}
-        let services_arr = []
+        let tabular_service_obj = {}
+        let tabular_services_arr = []
         let service_coll = {}
         let standalone_service_obj = {}
         let standalone_services_arr = []
@@ -90,7 +90,7 @@ $(document).ready(function(){
         } else if (!service_title) {
             e.preventDefault();
             showError("Please input a Service Title", "#add-service-collection-error-msg");
-        } else if (services_list.children().length == 0 && standalone_services_list.children().length == 0) {
+        } else if (tabular_services_list.children().length == 0 && standalone_services_list.children().length == 0) {
             e.preventDefault();
             showError("Please add at least 1 service in the collection", "#add-service-collection-error-msg");
         } else if (doesAddServiceCollHaveEmptyField()) {
@@ -99,17 +99,17 @@ $(document).ready(function(){
         } else {
             e.preventDefault();
             // make service objects
-            $("#add-services-list li").each(function(index) {
-                let price = $(this).find('.input-price').val()
-                service_obj = {
+            $("#add-tabular-services-list li").each(function(index) {
+                let price = $(this).find('.input-tabular-price').val()
+                tabular_service_obj = {
                     serviceTitle: service_title,
-                    serviceOption1: $(this).find('.input-service-option-1').val(),
-                    serviceOption2: $(this).find('.input-service-option-2').val(),
+                    serviceOption1: $(this).find('.input-tabular-service-option-1').val(),
+                    serviceOption2: $(this).find('.input-tabular-service-option-2').val(),
                     price: Number(price).toFixed(2)
                 }
 
-                console.log(service_obj)
-                services_arr.push(service_obj)
+                console.log(tabular_service_obj)
+                tabular_services_arr.push(tabular_service_obj)
             });
 
             // make standalone service objects
@@ -125,13 +125,13 @@ $(document).ready(function(){
 
             // make option choices
 
-            let optionChoices1 = getUniqueValues(services_arr, 'serviceOption1')
-            let optionChoices2 = getUniqueValues(services_arr, 'serviceOption2')
+            let optionChoices1 = getUniqueValues(tabular_services_arr, 'serviceOption1')
+            let optionChoices2 = getUniqueValues(tabular_services_arr, 'serviceOption2')
 
             service_coll = {
                 serviceConcern: service_concern,
                 serviceTitle: service_title,
-                services: services_arr,
+                services: tabular_services_arr,
                 optionChoices1: optionChoices1,
                 optionChoices2: optionChoices2,
                 specialServices: standalone_services_arr
@@ -158,10 +158,10 @@ $(document).ready(function(){
         let service_collection_id = $("#edit-input-service-collections-id").val()
         let service_concern = $('#edit-input-service-concern').val()
         let service_title = $('#edit-input-service-title').val()
-        let services_list = $("#edit-services-list")
+        let tabular_services_list = $("#edit-tabular-services-list")
         let standalone_services_list = $("#edit-standalone-services-list")
-        let service_obj = {}
-        let services_arr = []
+        let tabular_service_obj = {}
+        let tabular_services_arr = []
         let service_coll = {}
         let standalone_service_obj = {}
         let standalone_services_arr = []
@@ -172,7 +172,7 @@ $(document).ready(function(){
         } else if (!service_title) {
             e.preventDefault();
             showError("Please input a Service Title", "#edit-service-collection-error-msg");
-        } else if (services_list.children().length == 0 && standalone_services_list.children().length == 0) {
+        } else if (tabular_services_list.children().length == 0 && standalone_services_list.children().length == 0) {
             e.preventDefault();
             showError("Please add at least 1 service in the collection", "#edit-service-collection-error-msg");
         } else if (doesEditServiceCollHaveEmptyField()) {
@@ -181,17 +181,19 @@ $(document).ready(function(){
         } else {
             e.preventDefault();
             // make service objects
-            $("#edit-services-list li").each(function(index) {
-                let price = $(this).find('.input-price').val()
-                service_obj = {
+
+            $("#edit-tabular-services-list li").each(function(index) {
+                let price = $(this).find('.input-tabular-price').val()
+                tabular_service_obj = {
                     serviceTitle: service_title,
-                    serviceOption1: $(this).find('.input-service-option-1').val(),
-                    serviceOption2: $(this).find('.input-service-option-2').val(),
+                    serviceOption1: $(this).find('.input-tabular-service-option-1').val(),
+                    serviceOption2: $(this).find('.input-tabular-service-option-2').val(),
                     price: Number(price).toFixed(2)
                 }
-                services_arr.push(service_obj)
+                tabular_services_arr.push(tabular_service_obj)
             });
-
+            
+            
             // make standalone service objects
             $("#edit-standalone-services-list li").each(function(index) {
                 let price = $(this).find('.input-standalone-price').val()
@@ -205,14 +207,14 @@ $(document).ready(function(){
 
             // make option choices
 
-            let optionChoices1 = getUniqueValues(services_arr, 'serviceOption1')
-            let optionChoices2 = getUniqueValues(services_arr, 'serviceOption2')
+            let optionChoices1 = getUniqueValues(tabular_services_arr, 'serviceOption1')
+            let optionChoices2 = getUniqueValues(tabular_services_arr, 'serviceOption2')
 
             service_coll = {
                 id: service_collection_id,
                 serviceConcern: service_concern,
                 serviceTitle: service_title,
-                services: services_arr,
+                services: tabular_services_arr,
                 optionChoices1: optionChoices1,
                 optionChoices2: optionChoices2,
                 specialServices: standalone_services_arr
@@ -234,15 +236,15 @@ $(document).ready(function(){
     /**
      * This mouse event adds more service forms in the Add Service Collection Modal
      */
-    $("#add-add-service").on("click", function(e){
+    $("#add-add-tabular-service").on("click", function(e){
         e.preventDefault()
-        let $clone = $(`<li class="input-services">
-                            <input class="form-control input-service-option-1" name="input-service-option-1" type="text" placeholder="Service Option 1">
-                            <input class="form-control input-service-option-2" name="input-service-option-2" type="text" placeholder="Service Option 2">
-                            <input class="form-control input-price" name="input-price" type="number" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" placeholder="Price">
-                            <button type="button" class="delete-service"><i class="fa fa-trash-can"></i></button>
+        let $clone = $(`<li class="input-tabular-services">
+                            <input class="form-control input-tabular-service-option-1" name="input-tabular-service-option-1" type="text" placeholder="Service Option 1">
+                            <input class="form-control input-tabular-service-option-2" name="input-tabular-service-option-2" type="text" placeholder="Service Option 2">
+                            <input class="form-control input-tabular-price" name="input-tabular-price" type="number" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" placeholder="Price">
+                            <button type="button" class="delete-tabular-service"><i class="fa fa-trash-can"></i></button>
                         </li>`)
-        $("#add-services-list").append($clone)
+        $("#add-tabular-services-list").append($clone)
     })
 
     /**
@@ -251,8 +253,8 @@ $(document).ready(function(){
     $("#add-add-standalone-service").on("click", function(e){
         e.preventDefault()
         let $clone = $(`<li class="input-standalone-services">
-                            <input class="form-control input-standalone-service-option" name="input-service-option-1" type="text" placeholder="Service Option">
-                            <input class="form-control input-standalone-price" name="input-price" type="number" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" placeholder="Price">
+                            <input class="form-control input-standalone-service-option" name="input-tabular-service-option-1" type="text" placeholder="Service Option">
+                            <input class="form-control input-standalone-price" name="input-tabular-price" type="number" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" placeholder="Price">
                             <button type="button" class="delete-standalone-service"><i class="fa fa-trash-can"></i></button>
                         </li>`)
         $("#add-standalone-services-list").append($clone)
@@ -261,15 +263,15 @@ $(document).ready(function(){
     /**
      * This mouse event adds more service forms in the Edit Service Collection Modal
      */
-    $("#edit-add-service").on("click", function(e){
+    $("#edit-add-tabular-service").on("click", function(e){
         e.preventDefault()
-        let $clone = $(`<li class="input-services">
-                            <input class="form-control input-service-option-1" name="input-service-option-1" type="text" placeholder="Service Option 1">
-                            <input class="form-control input-service-option-2" name="input-service-option-2" type="text" placeholder="Service Option 2">
-                            <input class="form-control input-price" name="input-price" type="number" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" placeholder="Price">
-                            <button type="button" class="delete-service"><i class="fa fa-trash-can"></i></button>
+        let $clone = $(`<li class="input-tabular-services">
+                            <input class="form-control input-tabular-service-option-1" name="input-tabular-service-option-1" type="text" placeholder="Service Option 1">
+                            <input class="form-control input-tabular-service-option-2" name="input-tabular-service-option-2" type="text" placeholder="Service Option 2">
+                            <input class="form-control input-tabular-price" name="input-tabular-price" type="number" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" placeholder="Price">
+                            <button type="button" class="delete-tabular-service"><i class="fa fa-trash-can"></i></button>
                         </li>`)
-        $("#edit-services-list").append($clone)
+        $("#edit-tabular-services-list").append($clone)
     })
 
     /**
@@ -278,8 +280,8 @@ $(document).ready(function(){
     $("#edit-add-standalone-service").on("click", function(e){
         e.preventDefault()
         let $clone = $(`<li class="input-standalone-services">
-                            <input class="form-control input-standalone-service-option" name="input-service-option-1" type="text" placeholder="Service Option">
-                            <input class="form-control input-standalone-price" name="input-price" type="number" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" placeholder="Price">
+                            <input class="form-control input-standalone-service-option" name="input-tabular-service-option-1" type="text" placeholder="Service Option">
+                            <input class="form-control input-standalone-price" name="input-tabular-price" type="number" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" placeholder="Price">
                             <button type="button" class="delete-standalone-service"><i class="fa fa-trash-can"></i></button>
                         </li>`)
         $("#edit-standalone-services-list").append($clone)
@@ -288,9 +290,9 @@ $(document).ready(function(){
     /**
      * This mouse event deletes a service form in the Add / Edit Service Collection Modal
      */
-    $(document).on("click", ".delete-service", function(e){
+    $(document).on("click", ".delete-tabular-service", function(e){
         e.preventDefault()
-        let toDelete = $(this).closest('.input-services')
+        let toDelete = $(this).closest('.input-tabular-services')
         toDelete.remove()
     })
 
@@ -340,17 +342,17 @@ $(document).ready(function(){
                 error_msg.textContent = "";
                 error_msg.setAttribute("data-error-status", "normal");
             }
-            document.querySelector(".services-list").innerHTML = "";
-            document.querySelector("#add-services-list").innerHTML = `<li class="input-services">
-                                                                        <input class="form-control input-service-option-1" name="input-service-option-1" type="text" placeholder="Service Option 1">
-                                                                        <input class="form-control input-service-option-2" name="input-service-option-2" type="text" placeholder="Service Option 2">
-                                                                        <input class="form-control input-price" name="input-price" type="number" placeholder="Price">
-                                                                        <button type="button" class="delete-service"><i class="fa fa-trash-can"></i></button>
+            document.querySelector(".tabular-services-list").innerHTML = "";
+            document.querySelector("#add-tabular-services-list").innerHTML = `<li class="input-tabular-services">
+                                                                        <input class="form-control input-tabular-service-option-1" name="input-tabular-service-option-1" type="text" placeholder="Service Option 1">
+                                                                        <input class="form-control input-tabular-service-option-2" name="input-tabular-service-option-2" type="text" placeholder="Service Option 2">
+                                                                        <input class="form-control input-tabular-price" name="input-tabular-price" type="number" placeholder="Price">
+                                                                        <button type="button" class="delete-tabular-service"><i class="fa fa-trash-can"></i></button>
                                                                     </li>`
             document.querySelector(".standalone-services-list").innerHTML = "";
             document.querySelector("#add-standalone-services-list").innerHTML = `<li class="input-standalone-services">
-                                                                                    <input class="form-control input-standalone-service-option" name="input-service-option-1" type="text" placeholder="Service Option">
-                                                                                    <input class="form-control input-standalone-price" name="input-price" type="number" placeholder="Price">
+                                                                                    <input class="form-control input-standalone-service-option" name="input-tabular-service-option-1" type="text" placeholder="Service Option">
+                                                                                    <input class="form-control input-standalone-price" name="input-tabular-price" type="number" placeholder="Price">
                                                                                     <button type="button" class="delete-standalone-service"><i class="fa fa-trash-can"></i></button>
                                                                                 </li>`
             document.querySelector("#service-collection-container").innerHTML = "";
@@ -451,50 +453,50 @@ function onBtnEditClick (e) {
         document.querySelector('#edit-input-service-concern').value = data.serviceConcern
         document.querySelector('#edit-input-service-title').value = data.serviceTitle
 
-        let services_list = document.querySelector("#edit-services-list")
+        let tabular_services_list = document.querySelector("#edit-tabular-services-list")
         let standalone_services_list = document.querySelector("#edit-standalone-services-list")
 
-        services_list.innerHTML = ''
+        tabular_services_list.innerHTML = ''
         standalone_services_list.innerHTML = ''
         if (Array.isArray(data.services) && data.services.length !== 0 ) {
             data.services.forEach(service => {
-                let input_services = new Element ("li.input-services").getElement()
-                let input_service_option_1 = new Element ("input.form-control.input-service-option-1", {
+                let input_tabular_services = new Element ("li.input-tabular-services").getElement()
+                let input_tabular_service_option_1 = new Element ("input.form-control.input-tabular-service-option-1", {
                     attr: {
                         type: "text",
                         placeholder: "Service Option 1",
-                        name: "input-service-option-1"
+                        name: "input-tabular-service-option-1"
                     }
                 }).getElement()
     
-                input_service_option_1.value = service.serviceOption1
+                input_tabular_service_option_1.value = service.serviceOption1
     
-                let input_service_option_2 = new Element ("input.form-control.input-service-option-2", {
+                let input_tabular_service_option_2 = new Element ("input.form-control.input-tabular-service-option-2", {
                     attr: {
                         type: "text",
                         placeholder: "Service Option 2",
-                        name: "input-service-option-2"
+                        name: "input-tabular-service-option-2"
                     }
                 }).getElement()
     
-                input_service_option_2.value = service.serviceOption2
+                input_tabular_service_option_2.value = service.serviceOption2
     
-                let input_price = new Element ("input.form-control.input-price", {
+                let input_price = new Element ("input.form-control.input-tabular-price", {
                     attr:{
                         type: "number",
                         placeholder: "Price",
-                        name: "input-price"
+                        name: "input-tabular-price"
                     }
                 }).getElement()
     
                 input_price.value = service.price
     
-                let delete_service_button = new Element ("button.delete-service").getElement()
+                let delete_tabular_service_button = new Element ("button.delete-tabular-service").getElement()
                 let delete_service_icon = new Element ("i.fa.fa-trash-can").getElement()
-                delete_service_button.append(delete_service_icon)
+                delete_tabular_service_button.append(delete_service_icon)
     
-                input_services.append(input_service_option_1, input_service_option_2, input_price, delete_service_button)
-                services_list.append(input_services)
+                input_tabular_services.append(input_tabular_service_option_1, input_tabular_service_option_2, input_price, delete_tabular_service_button)
+                tabular_services_list.append(input_tabular_services)
             })
         }
         
@@ -505,7 +507,7 @@ function onBtnEditClick (e) {
                     attr: {
                         type: "text",
                         placeholder: "Service Option",
-                        name: "input-service-option"
+                        name: "input-tabular-service-option"
                     }
                 }).getElement()
 
@@ -515,17 +517,17 @@ function onBtnEditClick (e) {
                     attr: {
                         type: "number",
                         placeholder: "Price",
-                        name: "input-price"
+                        name: "input-tabular-price"
                     }
                 }).getElement()
 
                 input_standalone_price.value = service.price
 
-                let delete_service_button = new Element ("button.delete-standalone-service").getElement()
+                let delete_standalone_service_button = new Element ("button.delete-standalone-service").getElement()
                 let delete_service_icon = new Element ("i.fa.fa-trash-can").getElement()
-                delete_service_button.append(delete_service_icon)
+                delete_standalone_service_button.append(delete_service_icon)
 
-                input_standalone_services.append(input_standalone_service_option, input_standalone_price, delete_service_button)
+                input_standalone_services.append(input_standalone_service_option, input_standalone_price, delete_standalone_service_button)
                 standalone_services_list.append(input_standalone_services)
             })
         }

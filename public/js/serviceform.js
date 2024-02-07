@@ -6,7 +6,7 @@ const EMPLOYEES_URL = "/api/employees";
 const EMPLOYEES_CONTAINER = "#input-staff";
 
 const SERVICES_URL = "/api/services";
-const SERVICES_CONTAINER = "#input-service";
+const SERVICES_CONTAINER = "#input-tabular-service";
 
 let cached_employees = [];
 
@@ -17,13 +17,13 @@ $(document).ready(function () {
     refreshServicesMenu(SERVICES_URL, SERVICES_CONTAINER);
 
     $("#form-service").on("submit", function (e) {
-        let service_val = $('#input-service').val()
+        let service_val = $('#input-tabular-service').val()
         let staff_val = $('#input-staff').val()
         let details_val = $('#input-details').val()
 
         let cart_obj = {};
 
-        if ($('#input-service').prop('disabled')) {
+        if ($('#input-tabular-service').prop('disabled')) {
             e.preventDefault();
             showError("Select a valid reservation date first.", "#add-error-msg");
         } else if (!service_val) {
@@ -36,7 +36,7 @@ $(document).ready(function () {
             e.preventDefault();
             // showSuccess("Added to cart successfully!", "#add-error-msg");
 
-            let service_select = document.getElementById("input-service");
+            let service_select = document.getElementById("input-tabular-service");
             let staff_select = document.getElementById("input-staff");
 
             let service_f = service_select.options[service_select.selectedIndex].text;

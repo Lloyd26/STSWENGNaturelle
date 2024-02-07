@@ -145,13 +145,13 @@
     border-color: gray;
 }
 
-.services-list, .standalone-services-list{
+.tabular-services-list, .standalone-services-list{
     display: flex;
     flex-direction: column;
     gap: 1em;
 }
 
-.input-service-option-1, .input-service-option-2, .input-price{
+.input-tabular-service-option-1, .input-tabular-service-option-2, .input-tabular-price{
     width: 30%;
 }
 
@@ -159,7 +159,7 @@
     width: 50%;
 }
 
-.input-services, .input-standalone-services{
+.input-tabular-services, .input-standalone-services{
     display: flex;
     gap: .5em;
     flex-wrap: nowrap;
@@ -167,7 +167,7 @@
     padding-bottom: 1em;
 }
 
-.delete-service, .delete-standalone-service {
+.delete-tabular-service, .delete-standalone-service {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -182,20 +182,20 @@
     transition: color 180ms ease-in-out, background-color 180ms ease-in-out, border-color 180ms ease-in-out;
 }
 
-.delete-service > .fa, .delete-standalone-service > .fa{
+.delete-tabular-service > .fa, .delete-standalone-service > .fa{
     margin-right: 0;
 }
 
-.delete-service:hover, .delete-standalone-service:hover{
+.delete-tabular-service:hover, .delete-standalone-service:hover{
     background-color: var(--clr-triadic-1-300);
     color: #FFF;
 }
 
-.delete-service:active, .delete-standalone-service:hover{
+.delete-tabular-service:active, .delete-standalone-service:hover{
     border-color: var(--clr-triadic-1-500);
 }
 
-.add-service, .add-standalone-service{
+.add-tabular-service, .add-standalone-service{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -208,16 +208,16 @@
     font-weight: 700;
 }
 
-.add-service:hover, .add-standalone-service:hover{
+.add-tabular-service:hover, .add-standalone-service:hover{
     background-color: var(--salon-purple);
     color: #FFF;
 }
 
-.add-service:active, .add-standalone-service:active{
+.add-tabular-service:active, .add-standalone-service:active{
     border-color: var(--clr-primary-700);
 }
 
-.services-container-header, .standalone-services-container-header{
+.tabular-services-container-header, .standalone-services-container-header{
     display: flex;
     flex-direction: row;
     gap: .5em;

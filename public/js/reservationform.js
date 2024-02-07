@@ -50,7 +50,7 @@ $(document).ready(function(){
         let time_diff = format_date.getTime() - current_date.getTime(); 
         let day_diff = (time_diff / (1000 * 3600 * 24));
 
-        let service_forms = ['#input-service', '#input-staff', '#input-details'];
+        let service_forms = ['#input-tabular-service', '#input-staff', '#input-details'];
 
         let error_container = "#reserve-error-msg";
 
