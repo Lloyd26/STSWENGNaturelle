@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="css/reservationinfo.css">
-<script src="/js/auth.js"></script>
+<script type="module" src="/js/auth.js"></script>
+<script type="module" src="/js/reserveinfo.js"></script>
 
 <div id="reservation-container">
     <div class="info-header">
@@ -9,7 +10,8 @@
 
     <div class="reservation-list-container">
         {{#each reservation_info}}
-            <div class="reservation-details-container">
+            <div></div>
+            <div class="reservation-details-container" data-reservation-id="{{this.reservationID}}">
                 <div class="timestamp"> {{this.timestamp}} </div>
                     <div class="services-container">
                         {{#each this.services}}

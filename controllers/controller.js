@@ -70,6 +70,7 @@ const controller = {
             formattedDate = new Date(coll.timestamp).toUTCString();
 
             return {
+                reservationID: coll._id,
                 currentUserID: coll.currentUserID,
                 timestamp: formattedDate,
                 services: coll.services,
@@ -171,6 +172,13 @@ const controller = {
             logged_in: req.session.logged_in,
             faqs: faqs
         });
+    },
+
+    postCancelReservation: async function (req, res) {
+        let reservation_id = req.body.reservation_id
+
+        await Reservation.updateOne({_id: reservation_id}, {status: "Cancelled"});
+        res.sendStatus(200); // HTTP 200: OK
     }
 }
 
