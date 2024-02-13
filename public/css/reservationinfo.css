@@ -20,7 +20,7 @@
     text-align: center;
 }
 
-.reservation-list-container {
+#reservation-list-container {
     padding: 40px 30px;
     background-color: #FFF;
     box-shadow: 2px 1px 16px rgba(0, 0, 0, 0.15);
@@ -74,4 +74,62 @@
     text-align: right;
     margin-right: 2em;
     color: var(--clr-primary-900);
+}
+
+.cancel-reservation-btn{
+    display: flex;
+    font-weight: 600;
+    align-items: center;
+    justify-items: center;
+    border-radius: var(--radius);
+    margin-left: auto;
+    padding: 1em;
+    border: 1px solid var(--clr-triadic-1-300);
+    background-color: #FFF;
+    color: var(--clr-triadic-1-300);
+}
+
+.cancel-reservation-btn:hover{
+    background-color: var(--clr-triadic-1-300);
+    color: #FFF;
+}
+
+#modal-cancel-reservation-details-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.reservation-date-container{
+    display: flex;
+    gap: 1em;
+    align-items: center;
+}
+
+label{
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.desc{
+    font-weight: 600;
+    display: flex;
+}
+
+.detail{
+    font-weight: 500;
+    margin-left: auto;
+}
+
+.confirm-services-container{
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid lightgray;
+    padding-top: 1em;
+}
+
+#cancel-services-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
 }

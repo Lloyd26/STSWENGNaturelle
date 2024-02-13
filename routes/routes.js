@@ -37,7 +37,9 @@ app.get('/services/pages/:serviceconcern', controller.getServices);
 app.get('/services/getServiceConcerns', controller.getServiceConcerns);
 
 app.get('/reserveinfo', controller.getReserveInfo);
-app.get('/reserveinfo/cancel', controller.postCancelReservation);
+app.get('/reserveinfo/get-user-reservations', controller.getUserReservations);
+app.post('/reserveinfo/cancel', controller.postCancelReservation);
+app.get('/reserveinfo/find-reservation', controller.getFindReservation);
 
 app.get('/admin', admin_controller.getAdminLogin, admin_controller.getAdminDashboard);
 app.post('/admin', admin_controller.postAdminLogin);
