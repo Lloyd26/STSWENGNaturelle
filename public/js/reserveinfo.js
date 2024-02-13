@@ -7,14 +7,16 @@ const RESERVATION_WRAPPER="#reservation-list-container"
 $(document).ready(function(){
     showReservations(RESERVATION_GET_URL, RESERVATION_WRAPPER);
 
-    $("#confirm-cancellation-btn").on("click", function(e){
+    $("#confirm-cancel-reservation-btn").on("click", function(e){
         let reservation_id = $("#confirm-reservation-id").val()
 
         let reservation_id_obj = {
             reservation_id: reservation_id
         }
 
+        console.log(reservation_id)
         $.post("/reserveinfo/cancel", reservation_id_obj, function(response){
+            showSuccess("Cancelled Reservation successfully!", "#cancel-reservation-error-msg");
         })
 
     })
@@ -38,10 +40,23 @@ function showReservations (url, container) {
     $.get(url, {}, (data, status, xhr) => {
         data.forEach(rsrv => {
 
-            let reservation_details_container = new Element(".reservation-details-container", {
-                attr: {
-                    "data-reservation-id": rsrv.reservationID
-                }
+            let reservation_details_container
+            if (rsrv.status == "Cancelled"){
+                reservation_details_container = new Element(".reservation-details-container.cancelled", {
+                    attr: {
+                        "data-reservation-id": rsrv.reservationID
+                    }
+                }).getElement();
+            } else {
+                reservation_details_container = new Element(".reservation-details-container", {
+                    attr: {
+                        "data-reservation-id": rsrv.reservationID
+                    }
+                }).getElement();
+            }
+            
+            let services_label = new Element(".services-label", {
+                text: "Services"
             }).getElement();
 
             let services_container = new Element(".services-container").getElement();
@@ -101,7 +116,11 @@ function showReservations (url, container) {
             cancel_reservation_btn.prepend(cancel_icon);
             cancel_reservation_btn.addEventListener("click", onCancelReservationClick);
 
-            reservation_details_container.append(timestamp, services_container, status, cancel_reservation_btn)
+            if (rsrv.status == "Cancelled"){
+                reservation_details_container.append(timestamp, services_label, services_container, status)
+            } else {
+                reservation_details_container.append(timestamp, services_label, services_container, status, cancel_reservation_btn)
+            }
 
             document.querySelector(container).append(reservation_details_container);
         });

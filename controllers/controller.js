@@ -108,7 +108,7 @@ const controller = {
                 services: coll.services,
                 status: coll.status,
             }
-        });
+        }).reverse();
 
         res.send(reservationsWithFormattedDate)
     },

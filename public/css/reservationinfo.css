@@ -1,4 +1,6 @@
 @import url("bs-form-override.css");
+@import url("modal.css");
+@import url("form.css");
 
 #reservation-container {
     background-color: var(--clr-analogous-2-50);
@@ -74,6 +76,7 @@
     text-align: right;
     margin-right: 2em;
     color: var(--clr-primary-900);
+    font-weight: 700;
 }
 
 .cancel-reservation-btn{
@@ -132,4 +135,19 @@ label{
     display: flex;
     flex-direction: column;
     gap: 1em;
+    margin-bottom: 1em;
+}
+
+.cancelled {
+    color: lightgray;
+    border-color: var(--clr-triadic-1-300);
+}
+
+.cancelled > .timestamp, .cancelled > .status, .cancelled > .services-label{
+    color: var(--clr-triadic-1-300);
+}
+
+.services-label{
+    font-weight: 700;
+    color: var(--clr-primary-700);
 }
