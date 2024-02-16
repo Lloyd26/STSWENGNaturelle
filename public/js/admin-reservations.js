@@ -28,7 +28,7 @@ import { Element } from "./element.js";
 import { checkCache } from "./dataCache.js";
 
 const RESERVATION_GET_URL = "/admin/reservations/get";
-const RESERVATION_WRAPPER = "#admin-reservations-wrapper";
+const RESERVATION_WRAPPER = "#admin-reservations-container";
 
 let reservations_cache = [];
 
@@ -41,31 +41,65 @@ function showReservations(url, container) {
         if (checkCache(data, reservations_cache)) return;
         document.querySelector(container).innerHTML = "";
 
-        data.forEach(reservations => {
-            let admin_reservations_container = new Element(".admin-reservations-container", {
+        data.forEach(reservation => {
+            let reservation_container = new Element(".reservation-container", {
                 attr: {
-                    "data-reservation-id": reservations._id
+                    "data-reservation-id": reservation._id
                 }
             }).getElement();
 
-            let reservation_button = new Element("button.reservation-button").getElement();
-            let reservation_date = new Element("span.reservation-date", {
-                text: reservations.timestamp
+            let reservation_header = new Element(".reservation-header").getElement();
+
+            let reservation_details = new Element(".reservation-details").getElement();
+
+            let reservation_user = new Element(".reservation-user", {
+                text: reservation.userID.firstName + " " + reservation.userID.lastName
             }).getElement();
-            let reservation_id = new Element("span.reservation-id", {
-                text: reservations._id
+
+            let reservation_datetime = new Element(".reservation-datetime", {
+                text: formatDateTime(reservation.timestamp)
             }).getElement();
 
-            reservation_button.appendChild(reservation_date);
-            reservation_button.appendChild(reservation_id);
+            reservation_details.append(reservation_user, reservation_datetime);
 
-            admin_reservations_container.appendChild(reservation_button);
+            let reservation_status = new Element(".reservation-status", {
+                text: reservation.status,
+                attr: {
+                    "data-reservation-status": reservation.status.toLowerCase()
+                }
+            }).getElement();
 
-            reservation_button.addEventListener("click", () => {
-                showDetails(reservation._id);// Call a function to show details
-            });
+            let status_icon_class = new Map();
+            status_icon_class.set('Pending', 'fa-clock');
+            status_icon_class.set('Approved', 'fa-check');
+            status_icon_class.set('Cancelled', 'fa-cross');
 
-            document.querySelector(container).append(admin_reservations_container);
+            let status_icon = new Element("i.fa." + status_icon_class.get(reservation.status)).getElement();
+            reservation_status.prepend(status_icon);
+
+            reservation_header.append(reservation_details, reservation_status);
+
+            let reservation_controls = new Element(".reservation-controls").getElement();
+
+            let btn_services = new Element("button.btn.admin-btn-reservation-services", {
+                text: "Services"
+            }).getElement();
+
+            let btn_services_icon = new Element("i.fa.fa-cog").getElement();
+            btn_services.prepend(btn_services_icon);
+
+            let btn_update = new Element("button.btn.admin-btn-reservation-update", {
+                text: "Update"
+            }).getElement();
+
+            let btn_update_icon = new Element("i.fa.fa-pen").getElement();
+            btn_update.prepend(btn_update_icon);
+
+            reservation_controls.append(btn_services, btn_update);
+
+            reservation_container.append(reservation_header, reservation_controls);
+
+            document.querySelector(container).append(reservation_container);
         });
     });
 }
@@ -126,3 +160,15 @@ function showReservations() {
     });
 }
 */
+
+function formatDateTime(datetime) {
+    let date = new Date(datetime);
+
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+
+    let minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+
+    let AMPM = date.getHours() > 12 ? "PM" : "AM";
+
+    return monthNames[date.getMonth()] + ". " + date.getDate() + " – " + date.getHours() + ":" + minutes + " " + AMPM;
+}
