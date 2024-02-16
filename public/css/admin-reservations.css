@@ -1,0 +1,98 @@
+#admin-reservations-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.reservation-container {
+    border: 2px solid var(--clr-primary-50);
+    border-radius: calc(var(--radius) / 1.5);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: calc(var(--radius) / 2) calc(var(--radius) / 1.5);
+}
+
+.reservation-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.reservation-user {
+    font-size: 1.5em;
+    font-weight: 800;
+    color: var(--salon-purple);
+}
+
+.reservation-datetime {
+    font-size: 1em;
+    font-weight: 500;
+    color: #888;
+}
+
+.reservation-status {
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1.5rem;
+    font-weight: 700;
+    font-size: 1.15em;
+}
+
+.reservation-status[data-reservation-status=pending] {
+    background-color: var(--clr-triadic-2-50);
+    color: var(--clr-triadic-2-600);
+}
+
+.reservation-status[data-reservation-status=approved] {
+    background-color: var(--clr-complementary-50);
+    color: var(--clr-complementary-700);
+}
+
+.reservation-status[data-reservation-status=cancelled] {
+    background-color: var(--clr-triadic-1-50);
+    color: var(--clr-triadic-1-300);
+}
+
+.reservation-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.admin-btn-reservation-services, .admin-btn-reservation-update {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 2rem;
+    background-color: #FFF;
+    border: 1px solid;
+    border-radius: var(--radius);
+    font-weight: 700;
+    font-size: 1em;
+    text-decoration: none;
+    transition: color 180ms ease-in-out, background-color 180ms ease-in-out, border-color 180ms ease-in-out;
+}
+
+.admin-btn-reservation-services {
+    border-color: #CCC;
+    color: #888;
+}
+
+.admin-btn-reservation-update {
+    border-color: var(--clr-primary-200);
+    color: var(--salon-purple);
+}
+
+.admin-btn-reservation-services:hover {
+    border-color: #888;
+    color: #FFF;
+    background-color: #888;
+}
+
+.admin-btn-reservation-update:hover {
+    border-color: var(--salon-purple);
+    color: #FFF;
+    background-color: var(--salon-purple);
+}
