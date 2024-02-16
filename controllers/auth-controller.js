@@ -68,7 +68,7 @@ const controller = {
             state: true,
             type: "customer",
             user: {
-                generatedUserID: result.generatedUserID,
+                userID: result._id,
                 firstName: result.firstName,
                 lastName: result.lastName,
                 contactNumber: result.contactNumber,
@@ -246,7 +246,7 @@ const controller = {
         let passwordHashed = await bcrypt.hash(password, saltRounds);
 
         let user = {
-            generatedUserID: userID,
+            userID: userID,
             firstName: firstName,
             lastName: lastName,
             email: email,
@@ -315,8 +315,6 @@ const controller = {
 
     postReserve: async function (req, res) {
 
-        let userID = req.session.logged_in.user.generatedUserID;
-
         let time = req.body.timestamp;
         let current = req.body.status;
 
@@ -324,7 +322,7 @@ const controller = {
         try {
 
             let reservation = {
-                currentUserID: userID,
+                userID: req.session.logged_in.user.userID,
                 timestamp: time,
                 services: generatedId,
                 status: current

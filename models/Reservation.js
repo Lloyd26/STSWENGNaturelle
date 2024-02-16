@@ -3,7 +3,7 @@ const { Schema, Types, model } = require('mongoose');
 const InCartService = require('../models/InCartService');
 
 const reservationSchema = new Schema({
-    currentUserID: {
+    userID: {
         type: Schema.Types.ObjectId,
         ref: "User"
     },
