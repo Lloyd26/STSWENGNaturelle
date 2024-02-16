@@ -126,7 +126,11 @@ const controller = {
             return;
         }
 
-        let reservations = await Reservation.find({}, '').populate('services');
+        let reservations = await Reservation.find({}, '').populate('services').populate('userID', 'firstName lastName').exec();
+
+        /*reservations.forEach(reservation => {
+            console.log(reservation.services);
+        })*/
         res.send(reservations);
     },
   
