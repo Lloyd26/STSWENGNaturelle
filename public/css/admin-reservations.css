@@ -96,3 +96,44 @@
     color: #FFF;
     background-color: var(--salon-purple);
 }
+
+@media (max-width: 1200px) {
+    #admin-reservations-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 992px) {
+    .admin-container {
+        padding: 0;
+    }
+
+    #admin-reservations-container {
+        gap: 0;
+    }
+
+    .reservation-container {
+        border: none;
+        border-radius: 0;
+        border-bottom: 2px solid var(--clr-primary-50);
+        padding: calc(var(--radius) / 2);
+    }
+
+    .reservation-user {
+        font-size: 1.35em;
+    }
+
+    .reservation-datetime {
+        font-size: 0.85em;
+    }
+
+    .reservation-status {
+        font-size: 1em;
+    }
+
+    .admin-btn-reservation-services, .admin-btn-reservation-update {
+        flex-grow: 1;
+        font-size: 0.85em;
+        padding: 0.5rem 1.5rem;
+    }
+}
