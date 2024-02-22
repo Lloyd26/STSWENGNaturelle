@@ -72,7 +72,7 @@ function showReservations(url, container) {
             let status_icon_class = new Map();
             status_icon_class.set('Pending', 'fa-clock');
             status_icon_class.set('Approved', 'fa-check');
-            status_icon_class.set('Cancelled', 'fa-cross');
+            status_icon_class.set('Cancelled', 'fa-xmark');
 
             let status_icon = new Element("i.fa." + status_icon_class.get(reservation.status)).getElement();
             reservation_status.prepend(status_icon);
