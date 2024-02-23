@@ -24,6 +24,9 @@ jobs:
         chmod +x render
         sudo mv render /usr/local/bin/
 
+    - name: Check Render CLI Version
+      run: render --version
+
     - name: Install dependencies
       run: npm install
 
@@ -33,3 +36,4 @@ jobs:
           --token ${{ secrets.RENDER_API_KEY }} \
           --branch main \
           --commit "${GITHUB_SHA}"
+
