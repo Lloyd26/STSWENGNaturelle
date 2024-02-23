@@ -20,9 +20,7 @@ jobs:
 
     - name: Install Render CLI
       run: |
-        curl -o render https://render.com/static/render-cli-linux-latest
-        chmod +x render
-        sudo mv render /usr/local/bin/
+        curl -sSL https://render.com/install.sh | bash
 
     - name: Check Render CLI Version
       run: render --version
