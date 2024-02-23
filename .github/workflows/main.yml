@@ -21,10 +21,10 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Deploy to Render
-      run: |
-        curl -X POST \
-          -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
-          -H "Content-Type: application/json" \
-          -d '{"branch": "main", "commit_sha": "${GITHUB_SHA}"}' \
-          https://api.render.com/v1/deploys
+    - name: Deploy to production
+      uses: johnbeynon/render-deploy-action@v0.0.8
+      with:
+        service-id: ${{ secrets.SERVICE_ID }}
+        api-key: ${{ secrets.RENDER_API_KEY }}
+        
+
