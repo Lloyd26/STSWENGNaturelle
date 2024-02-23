@@ -18,13 +18,18 @@ jobs:
       with:
         node-version: 20.10.0
 
+    - name: Install Render CLI
+      run: |
+        curl -o render https://render.com/static/render-cli-linux-latest
+        chmod +x render
+        sudo mv render /usr/local/bin/
+
     - name: Install dependencies
       run: npm install
 
     - name: Deploy to Render
       run: |
-        curl -X POST \
-          -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
-          -H "Content-Type: application/json" \
-          -d '{"branch": "main", "commit_sha": "${GITHUB_SHA}"}' \
-          https://api.render.com/v1/deploys
+        render deploy \
+          --token ${{ secrets.RENDER_API_KEY }} \
+          --branch main \
+          --commit "${GITHUB_SHA}"
