@@ -17,6 +17,7 @@ const controller = {
                 logged_in: req.session.logged_in,
                 snackbar: {
                     type: "error",
+                    persistent: true,
                     text: "You need to logout as an admin before you can login as a customer.",
                     action: {
                         text: "LOGOUT",

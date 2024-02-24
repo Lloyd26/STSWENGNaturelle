@@ -41,7 +41,7 @@ function snackbar(sb) {
 
     document.getElementById('snackbar-container').appendChild(snackbar_el);
 
-    if (sb.type !== "error") {
+    if (sb.persistent === undefined || sb.persistent !== false) {
         setTimeout(() => {
             snackbar_el.classList.add("sb-out");
         }, 4000);
