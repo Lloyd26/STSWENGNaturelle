@@ -45,6 +45,7 @@ app.get('/admin/getuser', admin_controller.getCurrentUser);
 app.get('/admin/reservations', admin_controller.getAdminReservations);
 app.get('/admin/reservations/get', admin_controller.getAllReservations);
 app.post('/admin/reservations/update-status', admin_controller.postUpdateReservationStatus);
+app.get('/admin/reservations/get-services', admin_controller.getServicesOfReservation);
 
 
 app.get('/admin/employees', admin_controller.getAdminEmployees);

@@ -144,6 +144,10 @@ const controller = {
         await Reservation.updateOne({_id: req.body.reservation_id}, {status: req.body.reservation_status});
         res.sendStatus(200);
     },
+
+    getServicesOfReservation: async function(req, res) {
+        res.send(await Reservation.findOne({_id: req.query.reservation_id}, 'services').populate("services").exec());
+    },
   
     getAdminEmployees: function(req, res) {
         if (!req.session.logged_in || req.session.logged_in.type !== "admin") {

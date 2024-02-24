@@ -110,6 +110,87 @@ document.addEventListener("DOMContentLoaded", function () {
     })
 });
 
+function resetModalServices() {
+    let modal_reservation_services = document.querySelector("#modal-reservation-services");
+
+    let modal_reservation_services_container = modal_reservation_services.querySelector("#modal-reservation-services-container");
+    modal_reservation_services_container.innerHTML = "";
+}
+
+function onBtnServicesClick(e) {
+    resetModalServices();
+
+    let btn_services_icon = e.currentTarget.querySelector("i");
+    btn_services_icon.className = "";
+    btn_services_icon.classList.add("spinner-border", "me-2");
+
+    let reservation_id = e.currentTarget.closest(".reservation-container").getAttribute("data-reservation-id");
+
+    let reservation_user = e.currentTarget.closest(".reservation-container").querySelector(".reservation-user").textContent;
+    let reservation_datetime = e.currentTarget.closest(".reservation-container").querySelector(".reservation-datetime").textContent;
+
+    let modal_reservation_user = document.getElementById("modal-reservation-services-user");
+    let modal_reservation_datetime = document.getElementById("modal-reservation-services-datetime");
+
+    modal_reservation_user.textContent = reservation_user;
+    modal_reservation_datetime.textContent = reservation_datetime;
+
+    $.get("/admin/reservations/get-services", {
+        reservation_id: reservation_id
+    }, (data, status, xhr) => {
+        btn_services_icon.className = "";
+        btn_services_icon.classList.add("fa", "fa-cog");
+        for (var i = 0; i < data.services.length; i++) {
+            let accordion_item = new Element(".accordion-item").getElement();
+
+            let accordion_header = new Element("h2.accordion-header").getElement();
+
+            let accordion_button = new Element("button.accordion-button.collapsed", {
+                text: (i + 1) + ": " + data.services[i].serviceTitle,
+                attr: {
+                    "type": "button",
+                    "data-bs-toggle": "collapse",
+                    "data-bs-target": "#accordion-reservation-service-" + i
+                }
+            }).getElement();
+            accordion_header.append(accordion_button);
+
+            let accordion_collapse = new Element(".accordion-collapse.collapse", {
+                id: "accordion-reservation-service-" + i
+            }).getElement();
+
+            let accordion_body = new Element(".accordion-body").getElement();
+
+            let preferredEmployee = new Element("div", {
+                text: data.services[i].preferredEmployee
+            }).getElement();
+            let preferredEmployeeHeader = new Element("b", {
+                text: "Preferred Employee: "
+            }).getElement();
+            preferredEmployee.prepend(preferredEmployeeHeader);
+
+            let serviceDetails = new Element("div", {
+                text: data.services[i].details
+            }).getElement();
+            let serviceDetailsHeader = new Element("b", {
+                text: "Details: "
+            }).getElement();
+            serviceDetails.prepend(serviceDetailsHeader);
+
+            accordion_body.append(preferredEmployee, serviceDetails);
+            accordion_collapse.append(accordion_body);
+
+            accordion_item.append(accordion_header, accordion_collapse);
+
+            document.querySelector("#modal-reservation-services-container").append(accordion_item);
+
+        }
+
+        bootstrap.Modal.getOrCreateInstance(document.querySelector("#modal-reservation-services")).show();
+    });
+
+}
+
 function resetModalStatus() {
     let modal_reservation_status = document.querySelector("#modal-reservation-status");
 
@@ -193,8 +274,9 @@ function showReservations(url, container) {
             let reservation_controls = new Element(".reservation-controls").getElement();
 
             let btn_services = new Element("button.btn.admin-btn-reservation-services", {
-                text: "Services"
+                text: "Services",
             }).getElement();
+            btn_services.addEventListener("click", onBtnServicesClick);
 
             let btn_services_icon = new Element("i.fa.fa-cog").getElement();
             btn_services.prepend(btn_services_icon);

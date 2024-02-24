@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="/css/form.css">
 <link rel="stylesheet" href="/css/bs-form-override.css">
 <link rel="stylesheet" href="/css/modal.css">
+<link rel="stylesheet" href="/css/accordion.css">
 <link rel="stylesheet" href="/css/admin-reservations.css">
 <script type="module" src="/js/admin-reservations.js"></script>
 
@@ -16,6 +17,33 @@
     </div>
 </div>
 
+<div class="modal modal-lg fade" id="modal-reservation-services">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Services</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-reservation-details">
+                    <h5 class="modal-reservation-details-header">Reservation Details</h5>
+                    <div class="modal-reservation-user-container">
+                        <i class="fa fa-user"></i>
+                        <span id="modal-reservation-services-user">Juan Dela Cruz</span>
+                    </div>
+                    <div class="modal-reservation-datetime-container">
+                        <i class="fa fa-calendar"></i>
+                        <span id="modal-reservation-services-datetime">Feb. 16 – 6:00 PM</span>
+                    </div>
+                </div>
+                <div id="modal-reservation-services-container" class="accordion">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal modal-md fade" id="modal-reservation-status">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -25,13 +53,13 @@
             </div>
             <div class="modal-body">
                 <input type="hidden" id="input-reservation-id" name="reservation_id">
-                <div id="modal-reservation-status-details">
-                    <h5 id="modal-reservation-status-details-header">Reservation Details</h5>
-                    <div id="modal-reservation-status-user-container">
+                <div class="modal-reservation-details">
+                    <h5 class="modal-reservation-details-header">Reservation Details</h5>
+                    <div class="modal-reservation-user-container">
                         <i class="fa fa-user"></i>
                         <span id="modal-reservation-status-user">Juan Dela Cruz</span>
                     </div>
-                    <div id="modal-reservation-status-datetime-container">
+                    <div class="modal-reservation-datetime-container">
                         <i class="fa fa-calendar"></i>
                         <span id="modal-reservation-status-datetime">Feb. 16 – 6:00 PM</span>
                     </div>
