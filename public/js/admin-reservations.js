@@ -36,6 +36,43 @@ document.addEventListener("DOMContentLoaded", function () {
     showReservations(RESERVATION_GET_URL, RESERVATION_WRAPPER);
 });
 
+function resetModalStatus() {
+    let modal_reservation_status = document.querySelector("#modal-reservation-status");
+
+    modal_reservation_status.querySelectorAll("#modal-reservation-status-controls-container > input[type='radio']").forEach(i => {
+        i.checked = false;
+        i.disabled = false;
+    })
+
+    modal_reservation_status.querySelectorAll("#modal-reservation-status-controls-container > label.btn").forEach(lb => {
+        lb.classList.remove("disabled");
+    });
+}
+
+function onBtnUpdateClick(e) {
+    resetModalStatus();
+
+    let reservation_id = e.currentTarget.closest(".reservation-container").getAttribute("data-reservation-id");
+    let modal_reservation_id = document.getElementById("input-reservation-id");
+    modal_reservation_id.value = reservation_id;
+
+    let reservation_user = e.currentTarget.closest(".reservation-container").querySelector(".reservation-user").textContent;
+    let reservation_datetime = e.currentTarget.closest(".reservation-container").querySelector(".reservation-datetime").textContent;
+
+    let modal_reservation_user = document.getElementById("modal-reservation-status-user");
+    let modal_reservation_datetime = document.getElementById("modal-reservation-status-datetime");
+
+    modal_reservation_user.textContent = reservation_user;
+    modal_reservation_datetime.textContent = reservation_datetime;
+
+    let reservation_status = e.currentTarget.closest(".reservation-container").querySelector(".reservation-status").getAttribute("data-reservation-status");
+    let modal_reservation_status_radio = document.getElementById("status-" + reservation_status);
+    modal_reservation_status_radio.checked = true;
+    modal_reservation_status_radio.disabled = true;
+    let modal_reservation_status_btn = document.querySelector(".btn.status-" + reservation_status);
+    modal_reservation_status_btn.classList.add("disabled");
+}
+
 function showReservations(url, container) {
     $.get(url, {}, (data, status, xhr) => {
         if (checkCache(data, reservations_cache)) return;
@@ -89,8 +126,13 @@ function showReservations(url, container) {
             btn_services.prepend(btn_services_icon);
 
             let btn_update = new Element("button.btn.admin-btn-reservation-update", {
-                text: "Update"
+                text: "Update",
+                attr: {
+                    "data-bs-toggle": "modal",
+                    "data-bs-target": "#modal-reservation-status"
+                }
             }).getElement();
+            btn_update.addEventListener("click", onBtnUpdateClick);
 
             let btn_update_icon = new Element("i.fa.fa-pen").getElement();
             btn_update.prepend(btn_update_icon);

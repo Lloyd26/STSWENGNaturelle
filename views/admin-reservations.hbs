@@ -16,8 +16,41 @@
     </div>
 </div>
 
-<div class="modal">
-    <div class="modal-content">
+<div class="modal modal-md fade" id="modal-reservation-status">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update Status</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="input-reservation-id" name="reservation_id">
+                <div id="modal-reservation-status-details">
+                    <h5 id="modal-reservation-status-details-header">Reservation Details</h5>
+                    <div id="modal-reservation-status-user-container">
+                        <i class="fa fa-user"></i>
+                        <span id="modal-reservation-status-user">Juan Dela Cruz</span>
+                    </div>
+                    <div id="modal-reservation-status-datetime-container">
+                        <i class="fa fa-calendar"></i>
+                        <span id="modal-reservation-status-datetime">Feb. 16 – 6:00 PM</span>
+                    </div>
+                </div>
+                <hr />
+                <div id="modal-reservation-status-controls-container">
+                    <input type="radio" class="btn-check" name="status" id="status-pending">
+                    <label class="btn status-pending" for="status-pending"><i class="fa fa-clock"></i>Pending</label>
+                    <input type="radio" class="btn-check" name="status" id="status-approved">
+                    <label class="btn status-approved" for="status-approved"><i class="fa fa-check"></i>Approve</label>
+                    <input type="radio" class="btn-check" name="status" id="status-cancelled">
+                    <label class="btn status-cancelled" for="status-cancelled"><i class="fa fa-xmark"></i>Cancel</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-discard" data-bs-dismiss="modal"><i class="fa fa-trash"></i>Discard</button>
+                <button type="submit" class="btn btn-modal-success" id="btn-modal-reservation-save"><i class="fa fa-floppy-disk"></i>Save</button>
+            </div>
+        </div>
     </div>
 </div>
 

@@ -41,18 +41,18 @@
 }
 
 .reservation-status[data-reservation-status=pending] {
-    background-color: var(--clr-triadic-2-50);
-    color: var(--clr-triadic-2-600);
+    background-color: var(--clr-triadic-2-50) !important;
+    color: var(--clr-triadic-2-600) !important;
 }
 
 .reservation-status[data-reservation-status=approved] {
-    background-color: var(--clr-complementary-50);
-    color: var(--clr-complementary-700);
+    background-color: var(--clr-complementary-50) !important;
+    color: var(--clr-complementary-700) !important;
 }
 
 .reservation-status[data-reservation-status=cancelled] {
-    background-color: var(--clr-triadic-1-50);
-    color: var(--clr-triadic-1-300);
+    background-color: var(--clr-triadic-1-50) !important;
+    color: var(--clr-triadic-1-300) !important;
 }
 
 .reservation-controls {
@@ -85,16 +85,84 @@
     color: var(--salon-purple);
 }
 
-.admin-btn-reservation-services:hover {
-    border-color: #888;
-    color: #FFF;
-    background-color: #888;
+.admin-btn-reservation-services:hover, .admin-btn-reservation-services:active {
+    border-color: #888 !important;
+    color: #FFF !important;
+    background-color: #888 !important;
 }
 
-.admin-btn-reservation-update:hover {
-    border-color: var(--salon-purple);
+.admin-btn-reservation-update:hover, .admin-btn-reservation-update:active {
+    border-color: var(--salon-purple) !important;
+    color: #FFF !important;
+    background-color: var(--salon-purple) !important;
+}
+
+#modal-reservation-status-details-header {
+    color: var(--salon-purple);
+    font-weight: 700;
+    font-size: 1.5em;
+}
+
+#modal-reservation-status-user-container, #modal-reservation-status-datetime-container {
+    color: #555;
+}
+
+#modal-reservation-status-controls-container {
+    display: flex;
+    gap: 0.5rem;
+}
+
+#modal-reservation-status-controls-container .btn {
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    font-weight: 600;
+    flex-grow: 1;
+}
+
+input[type="radio"] + .status-pending, input[type="radio"] + .status-pending:hover {
+    color: var(--clr-triadic-2-600);
+    border-color: var(--clr-triadic-2-600) !important;
+}
+
+input[type="radio"] + .status-approved, input[type="radio"] + .status-approved:hover {
+    color: var(--clr-complementary-700);
+    border-color: var(--clr-complementary-700) !important;
+}
+
+input[type="radio"] + .status-cancelled, input[type="radio"] + .status-cancelled:hover {
+    color: var(--clr-triadic-1-300);
+    border-color: var(--clr-triadic-1-300) !important;
+}
+
+input[type="radio"]:checked + .status-pending {
     color: #FFF;
-    background-color: var(--salon-purple);
+    background-color: var(--clr-triadic-2-600);
+}
+
+input[type="radio"]:checked + .status-approved {
+    color: #FFF;
+    background-color: var(--clr-complementary-700);
+}
+
+input[type="radio"]:checked + .status-cancelled {
+    color: #FFF;
+    background-color: var(--clr-triadic-1-300);
+}
+
+.btn.disabled {
+    pointer-events: auto !important;
+    cursor: not-allowed;
+}
+
+.modal .btn-discard {
+    color: #888;
+    border-color: #CCC;
+}
+
+.modal .btn-discard:hover, .modal .btn-discard:active {
+    color: #FFF !important;
+    background-color: #888 !important;
+    border-color: #888;
 }
 
 @media (max-width: 1200px) {
@@ -135,5 +203,9 @@
         flex-grow: 1;
         font-size: 0.85em;
         padding: 0.5rem 1.5rem;
+    }
+
+    #modal-reservation-status-controls-container .btn {
+        font-size: 0.85em;
     }
 }
