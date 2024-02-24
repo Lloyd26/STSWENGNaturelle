@@ -1,0 +1,28 @@
+.accordion {
+    --bs-accordion-border-radius: calc(var(--radius) / 2);
+}
+
+.accordion-item {
+    overflow: hidden;
+    transition: border-radius 180ms ease-in-out;
+}
+
+.accordion-item:first-child:has(.accordion-button:not(.collapsed)) {
+    border-top-left-radius: calc(var(--radius) / 4);
+    border-top-right-radius: calc(var(--radius) / 4);
+}
+
+.accordion-button {
+    color: #555;
+    font-weight: 600;
+    transition: background-color 180ms ease-in-out, color 180ms ease-in-out;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: var(--clr-primary-50);
+    color: var(--salon-purple);
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+}
