@@ -80,6 +80,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     text: "Error: Something went wrong while updating the status of the reservation."
                 });
             }
+        }).fail(function(res) {
+            btn_save_icon.className = "";
+            btn_save_icon.classList.add("fa", "fa-floppy-disk");
+            btn_save.disabled = false;
+            snackbar({
+                type: "error",
+                text: "Error: Something went wrong while updating the status of the reservation."
+            });
         });
     });
 
