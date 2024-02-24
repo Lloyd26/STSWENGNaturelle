@@ -133,6 +133,16 @@ const controller = {
         })*/
         res.send(reservations);
     },
+
+    postUpdateReservationStatus: async function(req, res) {
+        if (!req.session.logged_in || req.session.logged_in.type !== "admin") {
+            res.status(403); // HTTP 403: Forbidden
+            return;
+        }
+
+        await Reservation.updateOne({_id: req.body.reservation_id}, {status: req.body.reservation_status});
+        res.sendStatus(200);
+    },
   
     getAdminEmployees: function(req, res) {
         if (!req.session.logged_in || req.session.logged_in.type !== "admin") {

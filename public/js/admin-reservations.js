@@ -34,6 +34,72 @@ let reservations_cache = [];
 
 document.addEventListener("DOMContentLoaded", function () {
     showReservations(RESERVATION_GET_URL, RESERVATION_WRAPPER);
+
+    document.getElementById("btn-modal-reservation-save").addEventListener("click", function() {
+        let modal_reservation_status = this.closest("#modal-reservation-status");
+
+        let reservation_id = document.getElementById("input-reservation-id").value;
+        let reservation_status_radio = document.querySelector("#modal-reservation-status-controls-container > input[type='radio']:checked");
+
+        if (reservation_status_radio.hasAttribute("disabled")) {
+            bootstrap.Modal.getInstance(modal_reservation_status).hide();
+            snackbar({
+                type: "primary",
+                text: "No changes were made to the reservation status."
+            });
+            return;
+        }
+
+        let reservation_status = reservation_status_radio.id.split("-")[1];
+        reservation_status = reservation_status.charAt(0).toUpperCase() + reservation_status.slice(1);
+
+        let btn_save = this.closest(".modal-content").querySelector(".btn-modal-success");
+        btn_save.disabled = true;
+
+        let btn_save_icon = btn_save.querySelector("i");
+        btn_save_icon.className = "";
+        btn_save_icon.classList.add("spinner-border", "me-2");
+
+        $.post("/admin/reservations/update-status", {
+            reservation_id: reservation_id,
+            reservation_status: reservation_status
+        }, (data, status, xhr) => {
+            if (status === "success" && xhr.status === 200) {
+                btn_save_icon.className = "";
+                btn_save_icon.classList.add("fa", "fa-floppy-disk");
+
+                bootstrap.Modal.getInstance(modal_reservation_status).hide();
+                btn_save.disabled = false;
+                snackbar({
+                    type: "primary",
+                    text: "Reservation status has been updated."
+                });
+            } else {
+                snackbar({
+                    type: "error",
+                    text: "Error: Something went wrong while updating the status of the reservation."
+                });
+            }
+        });
+    });
+
+    document.querySelectorAll("#modal-reservation-status").forEach(modal => {
+        modal.addEventListener("hidden.bs.modal", function() {
+            this.querySelectorAll("input, textarea").forEach(input => {
+                input.value = "";
+            });
+            this.querySelectorAll("input[type=checkbox], input[type=radio]").forEach(input => {
+                input.checked = "";
+            });
+            let error_msg = this.querySelector(".error-msg");
+            if (error_msg !== null) {
+                error_msg.textContent = "";
+                error_msg.setAttribute("data-error-status", "normal");
+            }
+
+            showReservations(RESERVATION_GET_URL, RESERVATION_WRAPPER);
+        })
+    })
 });
 
 function resetModalStatus() {
