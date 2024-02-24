@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 
 const InCartService = require('../models/InCartService');
 const Reservation = require('../models/Reservation');
+const Notification = require('../models/Notification');
 
 let generatedId = [];
 
@@ -260,6 +261,14 @@ const controller = {
         userID = createdUser._id;
 
         await User.updateOne({ _id: createdUser._id }, { $set: { generatedUserID: userID } });
+
+        await Notification.create({
+            receiver: userID,
+            date: new Date(),
+            title: "Welcome, " + createdUser.firstName + "!",
+            body: "Thank you for taking your time to create an account with Salon Naturelle. You may now book reservations with us.",
+            isRead: false
+        })
 
         req.session.logged_in = {
             state: true,

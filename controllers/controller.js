@@ -3,6 +3,7 @@ const Service = require('../models/Service.js');
 const SpecialService = require('../models/SpecialService.js');
 const FAQ = require('../models/FAQ.js');
 const Reservation = require('../models/Reservation.js');
+const Notification = require('../models/Notification');
 
 const controller = {
     getLogout: function (req, res) {
