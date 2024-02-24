@@ -21,4 +21,4 @@ const notificationSchema = new Schema ({
 })
 
 const Notification = model("Notification", notificationSchema, "notification");
-module.exports = SpecialService;
+module.exports = Notification;
