@@ -1,6 +1,9 @@
 const express = require('express');
 const exp_hbs = require('express-handlebars');
 const path = require('path');
+const dayjs = require('dayjs');
+var relativeTime = require('dayjs/plugin/relativeTime');
+dayjs.extend(relativeTime);
 
 const mongoose = require('mongoose');
 const MONGODB_URL = "mongodb+srv://naturellesalon:4XsQADUybHP6qwtt@naturellesalon.daylhxq.mongodb.net/NaturelleSalon?retryWrites=true&w=majority";

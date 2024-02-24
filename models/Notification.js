@@ -5,6 +5,9 @@ const notificationSchema = new Schema ({
         type: SchemaTypes.ObjectId,
         ref: "User"
     },
+    type: {
+        type: SchemaTypes.String
+    },
     timestamp: {
         type: SchemaTypes.String
     },

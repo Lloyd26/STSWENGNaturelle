@@ -62,7 +62,7 @@ const controller = {
             return;
         }
 
-        let userID = req.session.logged_in.user.generatedUserID;
+        let userID = req.session.logged_in.user.userID;
 
         let reservation_info = await Reservation.find({ currentUserID: userID }).populate('services').lean().exec();
 
@@ -172,6 +172,11 @@ const controller = {
             logged_in: req.session.logged_in,
             faqs: faqs
         });
+    },
+
+    getNotifications: async function (req, res) {
+        notifications = await Notification.find({receiver: req.session.logged_in.user.userID})
+        res.send(notifications)
     }
 }
 

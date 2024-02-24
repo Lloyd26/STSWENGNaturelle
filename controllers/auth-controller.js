@@ -70,7 +70,7 @@ const controller = {
             state: true,
             type: "customer",
             user: {
-                generatedUserID: result.generatedUserID,
+                userID: result._id,
                 firstName: result.firstName,
                 lastName: result.lastName,
                 contactNumber: result.contactNumber,
@@ -265,6 +265,7 @@ const controller = {
 
         await Notification.create({
             receiver: userID,
+            type: "Registration",
             timestamp: curr_date,
             title: "Welcome, " + createdUser.firstName + "!",
             body: "Thank you for taking your time to create an account with Salon Naturelle. You may now book reservations with us.",
@@ -326,7 +327,7 @@ const controller = {
 
     postReserve: async function (req, res) {
 
-        let userID = req.session.logged_in.user.generatedUserID;
+        let userID = req.session.logged_in.user.userID;
 
         let time = req.body.timestamp;
         let current = req.body.status;
