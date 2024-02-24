@@ -259,12 +259,13 @@ const controller = {
         let createdUser = await User.create(user);
 
         userID = createdUser._id;
+        curr_date = new String(new Date())
 
         await User.updateOne({ _id: createdUser._id }, { $set: { generatedUserID: userID } });
 
         await Notification.create({
             receiver: userID,
-            date: new Date(),
+            timestamp: curr_date,
             title: "Welcome, " + createdUser.firstName + "!",
             body: "Thank you for taking your time to create an account with Salon Naturelle. You may now book reservations with us.",
             isRead: false
