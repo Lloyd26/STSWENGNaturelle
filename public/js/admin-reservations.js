@@ -368,5 +368,7 @@ function formatDateTime(datetime) {
 
     let AMPM = date.getHours() > 12 ? "PM" : "AM";
 
-    return monthNames[date.getMonth()] + ". " + date.getDate() + " – " + date.getHours() + ":" + minutes + " " + AMPM;
+    let hours = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
+
+    return monthNames[date.getMonth()] + ". " + date.getDate() + " – " + hours + ":" + minutes + " " + AMPM;
 }
