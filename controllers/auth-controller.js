@@ -357,7 +357,7 @@ const controller = {
                 type: "Reservation Pending",
                 timestamp: curr_date,
                 title: "Reservation is Pending",
-                body: "Your reservation is now pending for approval. Please wait for future notifications about the status of you reservation.",
+                body: "Your reservation is now pending for approval. Please wait for future notifications about the status of your reservation.",
                 isRead: false
             })
 

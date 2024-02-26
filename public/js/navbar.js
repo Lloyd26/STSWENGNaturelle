@@ -49,7 +49,7 @@ $(document).ready(function(){
                     }).getElement()
                 } else if (nt.type == "Cancelled Appointment") {
                     notif_preview_body = new Element ("div.notif-preview-body", {
-                        text: "Your reservation has been cancelled."
+                        text: "Reservation Cancelled"
                     }).getElement()
                 } else if (nt.type == "Reservation Pending") {
                     notif_preview_body = new Element ("div.notif-preview-body", {

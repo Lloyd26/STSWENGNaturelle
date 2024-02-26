@@ -175,6 +175,11 @@ const controller = {
     },
 
     getNotifications: async function (req, res) {
+        if (!req.session.logged_in || (req.session.logged_in && req.session.logged_in.type !== "customer")) {
+            res.redirect("/login?next=" + encodeURIComponent("/reservation"));
+            return;
+        }
+
         notifications = await (await Notification.find({receiver: req.session.logged_in.user.userID})).reverse()
         res.send(notifications)
     },
