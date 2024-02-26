@@ -3,6 +3,7 @@ const Service = require('../models/Service.js');
 const SpecialService = require('../models/SpecialService.js');
 const FAQ = require('../models/FAQ.js');
 const Reservation = require('../models/Reservation.js');
+const Notification = require('../models/Notification');
 
 const controller = {
     getLogout: function (req, res) {
@@ -61,7 +62,7 @@ const controller = {
             return;
         }
 
-        let userID = req.session.logged_in.user.generatedUserID;
+        let userID = req.session.logged_in.user.userID;
 
         let reservation_info = await Reservation.find({ currentUserID: userID }).populate('services').lean().exec();
 
@@ -198,6 +199,23 @@ const controller = {
             logged_in: req.session.logged_in,
             faqs: faqs
         });
+    },
+
+    getNotifications: async function (req, res) {
+        if (!req.session.logged_in || (req.session.logged_in && req.session.logged_in.type !== "customer")) {
+            res.redirect("/login?next=" + encodeURIComponent("/reservation"));
+            return;
+        }
+
+        notifications = await (await Notification.find({receiver: req.session.logged_in.user.userID})).reverse()
+        res.send(notifications)
+    },
+
+    findNotification: async function (req, res) {
+        notification = await Notification.findOne({_id: req.query.id})
+
+        await Notification.updateOne({_id: req.query.id}, {isRead: "true"})
+        res.send(notification)
     },
 
     postCancelReservation: async function (req, res) {

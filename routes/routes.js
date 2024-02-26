@@ -36,6 +36,8 @@ app.get('/faq', controller.getFAQ);
 app.get('/services/pages/:serviceconcern', controller.getServices);
 app.get('/services/getServiceConcerns', controller.getServiceConcerns);
 
+app.get('/find-notification', controller.findNotification);
+app.get('/get-notifications', controller.getNotifications);
 app.get('/reserveinfo', controller.getReserveInfo);
 app.get('/reserveinfo/get-user-reservations', controller.getUserReservations);
 app.post('/reserveinfo/cancel', controller.postCancelReservation);

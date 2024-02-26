@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 
 const InCartService = require('../models/InCartService');
 const Reservation = require('../models/Reservation');
+const Notification = require('../models/Notification');
 
 let generatedId = [];
 
@@ -69,7 +70,7 @@ const controller = {
             state: true,
             type: "customer",
             user: {
-                generatedUserID: result.generatedUserID,
+                userID: result._id,
                 firstName: result.firstName,
                 lastName: result.lastName,
                 contactNumber: result.contactNumber,
@@ -258,8 +259,18 @@ const controller = {
         let createdUser = await User.create(user);
 
         userID = createdUser._id;
+        curr_date = new String(new Date())
 
         await User.updateOne({ _id: createdUser._id }, { $set: { generatedUserID: userID } });
+
+        await Notification.create({
+            receiver: userID,
+            type: "Registration",
+            timestamp: curr_date,
+            title: "Welcome, " + createdUser.firstName + "!",
+            body: "Thank you for taking your time to create an account with Salon Naturelle. You may now book reservations with us.",
+            isRead: false
+        })
 
         req.session.logged_in = {
             state: true,
@@ -316,7 +327,7 @@ const controller = {
 
     postReserve: async function (req, res) {
 
-        let userID = req.session.logged_in.user.generatedUserID;
+        let userID = req.session.logged_in.user.userID;
 
         let time = req.body.timestamp;
         let current = req.body.status;
@@ -340,6 +351,15 @@ const controller = {
             // console.log(populated);
 
             console.log("Reservation added to MongoDB successfully!");
+            curr_date = new String(new Date())
+            await Notification.create({
+                receiver: userID,
+                type: "Reservation Pending",
+                timestamp: curr_date,
+                title: "Reservation is Pending",
+                body: "Your reservation is now pending for approval. Please wait for future notifications about the status of your reservation.",
+                isRead: false
+            })
 
             console.log(createdReservation);
 
@@ -367,7 +387,6 @@ const controller = {
         // generatedId = [];
 
         res.redirect('/serviceform');
-
     },
 
     postDeleteAllCart: async function (req, res) {
@@ -383,7 +402,6 @@ const controller = {
         generatedId = [];
 
         res.redirect('/serviceform');
-
     },
 }
 
