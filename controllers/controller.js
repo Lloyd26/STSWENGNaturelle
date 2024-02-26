@@ -70,6 +70,7 @@ const controller = {
             formattedDate = new Date(coll.timestamp).toUTCString();
 
             return {
+                reservationID: coll._id,
                 currentUserID: coll.currentUserID,
                 timestamp: formattedDate,
                 services: coll.services,
@@ -84,6 +85,32 @@ const controller = {
             reservation_info: reservationsWithFormattedDate
 
         });
+    },
+
+    getUserReservations: async function (req, res) {
+        if (!req.session.logged_in || (req.session.logged_in && req.session.logged_in.type !== "customer")) {
+            res.redirect("/login?next=" + encodeURIComponent("/reservation"));
+            return;
+        }
+
+        let userID = req.session.logged_in.user.generatedUserID;
+
+        let reservation_info = await Reservation.find({ currentUserID: userID }).populate('services').lean().exec();
+
+        let reservationsWithFormattedDate = reservation_info.map(coll => {
+            
+            formattedDate = new Date(coll.timestamp).toUTCString();
+
+            return {
+                reservationID: coll._id,
+                currentUserID: coll.currentUserID,
+                timestamp: formattedDate,
+                services: coll.services,
+                status: coll.status,
+            }
+        }).reverse();
+
+        res.send(reservationsWithFormattedDate)
     },
 
     getServices: async function (req, res) {
@@ -171,7 +198,30 @@ const controller = {
             logged_in: req.session.logged_in,
             faqs: faqs
         });
-    }
+    },
+
+    postCancelReservation: async function (req, res) {
+        let reservation_id = req.body.reservation_id
+
+        await Reservation.updateOne({_id: reservation_id}, {status: "Cancelled"});
+        res.sendStatus(200); // HTTP 200: OK
+    },
+
+    getFindReservation: async function(req, res) {
+        let reservation = await Reservation.findOne({_id: req.query.id})
+        .populate('services')
+
+        formattedDate = new Date(reservation.timestamp).toUTCString()
+
+        formattedReservation ={
+            reservationID: reservation._id,
+            currentUserID: reservation.currentUserID,
+            timestamp: formattedDate,
+            services: reservation.services,
+            status: reservation.status,
+        }
+        res.send(formattedReservation)
+    },
 }
 
 module.exports = controller;

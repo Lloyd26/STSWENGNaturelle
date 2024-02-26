@@ -1,5 +1,7 @@
 <link rel="stylesheet" href="css/reservationinfo.css">
-<script src="/js/auth.js"></script>
+<link rel="stylesheet" href="css/modal.css">
+<script type="module" src="/js/auth.js"></script>
+<script type="module" src="/js/reserveinfo.js"></script>
 
 <div id="reservation-container">
     <div class="info-header">
@@ -7,21 +9,37 @@
     </div>
 
 
-    <div class="reservation-list-container">
-        {{#each reservation_info}}
-            <div class="reservation-details-container">
-                <div class="timestamp"> {{this.timestamp}} </div>
-                    <div class="services-container">
-                        {{#each this.services}}
-                                <div class="reservation-details">
-                                    <div class="service-title">{{this.serviceTitle}}</div>
-                                    <div class="preferred-employee">{{this.preferredEmployee}}</div>
-                                    <div class="details">{{this.details}}</div>
-                                </div>
-                        {{/each}}
-                    </div>
-                <div class="status">{{this.status}}</div>
+    <div id="reservation-list-container">
+    </div>
+</div>
+
+<!-- Cancel Confirmation Modal-->
+
+<div class="modal fade" id="cancel-reservation-modal" tabindex="-1" aria-labelledby="cancel-reservation-modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="cancel-reservation-modal-content">
+            <div class="modal-header cancel-reservation-modal-header">
+                <h5 class="modal-title">Cancel Reservation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-        {{/each}}
+            <div class="modal-body">
+                <div class="modal-text">Are you sure you want to cancel this reservation?</div>
+                <div id="modal-cancel-reservation-details-container">
+                    <input type="hidden" id="confirm-reservation-id" name="confirm-reservation-id">
+                    <div class="reservation-date-container">
+                        <label for="input-reservation-date">Reservation Date: </label>
+                        <input type="text" readonly id="input-reservation-date" class="form-control-plaintext">
+                    </div>
+                    <div class="services-label">Services </div>
+                    <div id="cancel-services-container">
+                    </div>
+                </div>
+                <div class="error-msg" id="cancel-reservation-error-msg" data-error-status="normal"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="close-btn" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="save-btn" id="confirm-cancel-reservation-btn"><i class="fa fa-trash-can"></i>Confirm Cancellation</button>
+            </div>
+        </div>
     </div>
 </div>
