@@ -175,8 +175,15 @@ const controller = {
     },
 
     getNotifications: async function (req, res) {
-        notifications = await Notification.find({receiver: req.session.logged_in.user.userID})
+        notifications = await (await Notification.find({receiver: req.session.logged_in.user.userID})).reverse()
         res.send(notifications)
+    },
+
+    findNotification: async function (req, res) {
+        notification = await Notification.findOne({_id: req.query.id})
+
+        await Notification.updateOne({_id: req.query.id}, {isRead: "true"})
+        res.send(notification)
     }
 }
 

@@ -351,6 +351,15 @@ const controller = {
             // console.log(populated);
 
             console.log("Reservation added to MongoDB successfully!");
+            curr_date = new String(new Date())
+            await Notification.create({
+                receiver: userID,
+                type: "Reservation Pending",
+                timestamp: curr_date,
+                title: "Reservation is Pending",
+                body: "Your reservation is now pending for approval. Please wait for future notifications about the status of you reservation.",
+                isRead: false
+            })
 
             console.log(createdReservation);
 
@@ -378,7 +387,6 @@ const controller = {
         // generatedId = [];
 
         res.redirect('/serviceform');
-
     },
 
     postDeleteAllCart: async function (req, res) {
@@ -394,7 +402,6 @@ const controller = {
         generatedId = [];
 
         res.redirect('/serviceform');
-
     },
 }
 

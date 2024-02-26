@@ -1,3 +1,5 @@
+@import url("modal.css");
+
 .navbar > .container-fluid {
     padding-left: 3rem;
     padding-right: 3rem;
@@ -193,8 +195,27 @@
     color: gray;
 }
 
+#modal-notif-title {
+    font-size: 2em;
+    font-weight: 700;
+}
+
+#modal-notif-body {
+    margin-top: 2em;
+    text-align: justify;
+}
+
+#modal-notif-timestamp-container {
+    font-size: .75;
+    margin-top: 3em;
+}
+
 .dropdown-item{
     white-space: normal;
+}
+
+.read{
+    opacity: 0.0;
 }
 
 @media (max-width: 1200px) {
