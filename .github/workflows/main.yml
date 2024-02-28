@@ -6,6 +6,8 @@ on:
       - main
       - feature-admin-change-status-reservation
       - jest-in-node-modules
+  workflow_dispatch:
+    
 jobs:
 
   unit-test:
