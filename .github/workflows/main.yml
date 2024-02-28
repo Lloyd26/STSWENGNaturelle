@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - feature-admin-change-status-reservation
+      - jest-in-node-modules
 jobs:
 
   unit-test:
