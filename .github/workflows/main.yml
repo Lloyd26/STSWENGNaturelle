@@ -4,8 +4,26 @@ on:
   push:
     branches:
       - main
-
+      - feature-admin-change-status-reservation
 jobs:
+
+  unit-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4.1.1
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4.0.2
+      with:
+        node-version: 20.10.0
+
+    - name: Install dependencies
+      run: npm install
+    - name: Run test
+      run: npm run test
+      
   deploy:
     runs-on: ubuntu-latest
 
