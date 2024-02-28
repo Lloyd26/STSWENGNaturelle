@@ -2,10 +2,7 @@ name: Test at scheduled time
 
 on:
   schedule:
-    - cron: '8 15 * * *'
-  push:
-    branches:
-      - feature-admin-change-status-reservation
+    - cron: '0 16 * * *'
   workflow_dispatch:
 
 jobs:
