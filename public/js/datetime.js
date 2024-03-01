@@ -1,5 +1,5 @@
 export function formatDateTime(date, format) {
-    if (!date instanceof Date) {
+    if (date.constructor.name !== Date.name) {
         throw new Error("Parameter \"date\" is not an instance of the Date object.");
     }
 
@@ -48,7 +48,7 @@ export function formatDateTime(date, format) {
     dateTimeFormatMap.set("t", h >= 12 ? "P" : "A");
 
     let formatted = format;
-    dateTimeFormatMap.forEach((v, k) => formatted = formatted.replaceAll(k, v));
+    dateTimeFormatMap.forEach((v, k) => formatted = formatted.replaceAll("%" + k, v));
 
     return formatted;
 }

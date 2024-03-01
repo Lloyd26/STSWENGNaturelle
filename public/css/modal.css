@@ -1,3 +1,15 @@
+.modal.fade.show .modal-dialog {
+    transition: transform 0.5s cubic-bezier(0.25, 0.75, 0, 1);
+}
+
+.modal.fade .modal-dialog {
+    transition: transform 0.3s cubic-bezier(0.25, 0.75, 0, 1);
+}
+
+.fade {
+    transition: opacity 180ms ease-in-out;
+}
+
 .modal-content {
     border: 2px solid var(--clr-primary-100);
     border-radius: calc(var(--radius) / 2);
