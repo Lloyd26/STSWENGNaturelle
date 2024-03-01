@@ -48,7 +48,7 @@ export function formatDateTime(date, format) {
     dateTimeFormatMap.set("t", h >= 12 ? "P" : "A");
 
     let formatted = format;
-    dateTimeFormatMap.forEach((v, k) => formatted = formatted.replaceAll(k, v));
+    dateTimeFormatMap.forEach((v, k) => formatted = formatted.replaceAll("%" + k, v));
 
     return formatted;
 }
