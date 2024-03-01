@@ -1,24 +1,27 @@
 <link rel="stylesheet" href="/css/faq.css">
+<link rel="stylesheet" href="/css/accordion.css">
 
-<div id="faqs-wrapper">
-    <div id="faq-header">Frequently Asked Questions</div>
-    <div id="faqs-container">
-        {{#each faqs}}
-            <div class="accordion accordion-flush" id="accordion-{{this._id}}">
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button collapsed faq-question" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-body-{{this._id}}" aria-expanded="true" aria-controls="{{this._id}}">
-                    {{this.question}}
-                </button>
-                </h2>
-                <div id="accordion-body-{{this._id}}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordion-{{this._id}}">
-                <div class="accordion-body">
-                    {{this.answer}}
+<div id="faq-wrapper" class="row g-0 bg-noise-pattern">
+    <div class="col-5" id="faq-header-container">
+        <div id="faq-header">Frequently<br />Asked<br />Questions</div>
+    </div>
+    <div class="col-7">
+        <div id="faq-container" class="accordion">
+            {{#each faqs}}
+                <div class="accordion-item" id="accordion-{{this._id}}">
+                    <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-body-{{this._id}}" aria-expanded="false">
+                        {{this.question}}
+                    </button>
+                    </h2>
+                    <div id="accordion-body-{{this._id}}" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                        {{this.answer}}
+                    </div>
+                    </div>
                 </div>
-                </div>
-            </div>
-            </div>
-        {{/each}}
+            {{/each}}
+        </div>
     </div>
 </div>
 

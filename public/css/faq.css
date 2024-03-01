@@ -1,31 +1,17 @@
-#faqs-wrapper {
-    display: flex;
-    flex-direction: column;
+#faq-wrapper {
     background-color: var(--clr-analogous-2-50);
-    padding: 5rem;
-    gap: 2rem;
-    justify-content: center;
-    align-items: center;
 }
 
-#faqs-container {
-    background-color: #FFF;
+#faq-header-container {
     display: flex;
-    flex-direction: column;
-    padding: 1.5rem;
-    gap: 1rem;
-    border-radius: var(--radius);
-    box-shadow: 2px 1px 16px rgba(0, 0, 0, 0.15);
-    width: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
-.faq-question {
-    background-color: var(--salon-purple);
-    border-radius: var(--radius) !important;
-    color: #FFF;
-    font-size: .75em;
-    font-weight: 700;
-    padding: 1.5em;
+#faq-container {
+    background-color: #FFF;
+    padding: 1.5rem;
+    box-shadow: 2px 1px 16px rgba(0, 0, 0, 0.15);
 }
 
 #faq-header {
@@ -33,21 +19,36 @@
     font-size: 2.5em;
     font-weight: 900;
     text-align: center;
-    margin-top: 1.5rem;
-    margin-bottom: 3rem;
 }
 
-.accordion {
-    --bs-accordion-active-bg: var(--clr-analogous-2-200);
-    --bs-accordion-active-color: #FFF;
+.accordion-item:has(.accordion-button:not(.collapsed)) {
+    margin-bottom: 1rem;
+    box-shadow: 2px 1px 16px rgba(0, 0, 0, 0.3);
+    border: none;
+    border-radius: calc(var(--radius) / 4);
+    margin-top: 1rem;
+    transition: margin-bottom 0.5s cubic-bezier(0.25, 0.75, 0, 1), margin-top 0.5s cubic-bezier(0.25, 0.75, 0, 1), box-shadow 1s cubic-bezier(0.25, 0.75, 0, 1), border-radius 180ms ease-in-out !important;
 }
 
-.accordion-button:focus {
-    box-shadow: 0 0 0 0.25rem var(--clr-analogous-2-200);
+.accordion-item {
+    transition: margin-bottom 0.375s cubic-bezier(0.25, 0.75, 0, 1), margin-top 0.375s cubic-bezier(0.25, 0.75, 0, 1), box-shadow 0.5s cubic-bezier(0.25, 0.75, 0, 1), border-radius 180ms ease-in-out !important;
 }
 
-.accordion-body {
-    border-radius: var(--radius);
-    font-size: 1.2em;
-    padding: 2em;
+.accordion-item:has(.accordion-button:not(.collapsed)) + .accordion-item {
+    border-top: 1px solid var(--bs-accordion-border-color);
+}
+
+@media (max-width: 992px) {
+    #faq-wrapper {
+        flex-direction: column;
+    }
+
+    #faq-wrapper.row > * {
+        width: 100%;
+    }
+
+    #faq-header {
+        font-size: 2em;
+        margin: 3rem;
+    }
 }
