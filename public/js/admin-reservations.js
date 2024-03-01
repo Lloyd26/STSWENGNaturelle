@@ -1,3 +1,5 @@
+import {formatDateTime} from "./datetime.js";
+
 // to change
 /**
 document.addEventListener('DOMContentLoaded', function() {
@@ -233,6 +235,8 @@ function showReservations(url, container) {
         if (checkCache(data, reservations_cache)) return;
         document.querySelector(container).innerHTML = "";
 
+        console.log(data);
+
         data.forEach(reservation => {
             let reservation_container = new Element(".reservation-container", {
                 attr: {
@@ -249,7 +253,7 @@ function showReservations(url, container) {
             }).getElement();
 
             let reservation_datetime = new Element(".reservation-datetime", {
-                text: formatDateTime(reservation.timestamp)
+                text: formatDateTime(new Date(reservation.timestamp), "%MMM. %dd – %h:%mm %tt")
             }).getElement();
 
             reservation_details.append(reservation_user, reservation_datetime);
@@ -358,17 +362,3 @@ function showReservations() {
     });
 }
 */
-
-function formatDateTime(datetime) {
-    let date = new Date(datetime);
-
-    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
-
-    let minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
-
-    let AMPM = date.getHours() > 12 ? "PM" : "AM";
-
-    let hours = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
-
-    return monthNames[date.getMonth()] + ". " + date.getDate() + " – " + hours + ":" + minutes + " " + AMPM;
-}
