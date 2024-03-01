@@ -1,5 +1,5 @@
 export function formatDateTime(date, format) {
-    if (!date instanceof Date) {
+    if (date.constructor.name !== Date.name) {
         throw new Error("Parameter \"date\" is not an instance of the Date object.");
     }
 
