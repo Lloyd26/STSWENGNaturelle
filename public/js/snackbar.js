@@ -42,12 +42,13 @@ function snackbar(sb) {
     document.getElementById('snackbar-container').appendChild(snackbar_el);
 
     if (sb.persistent === undefined || sb.persistent !== false) {
+        let duration = (sb.duration === undefined || sb.duration === "short") ? 4000 : (sb.duration === "long" ? 8000 : 4000);
         setTimeout(() => {
             snackbar_el.classList.add("sb-out");
-        }, 4000);
+        }, duration);
 
         setTimeout(() => {
             snackbar_el.remove();
-        }, 4300);
+        }, duration + 300);
     }
 }
