@@ -128,7 +128,33 @@ document.addEventListener("DOMContentLoaded", function() {
             } else {
                 snackbar({
                     type: "error",
-                    text: "Error: Something went wrong while adding an employee."
+                    text: "Error: Something went wrong while adding an employee.",
+                    duration: "long"
+                });
+            }
+        }).fail(function(res) {
+            btn_add_icon.className = "";
+            btn_add_icon.classList.add("fa", "fa-plus");
+
+            let employee_add_modal = document.querySelector("#modal-employee-add");
+            bootstrap.Modal.getInstance(employee_add_modal).hide();
+            btn_add.disabled = false;
+
+            if (res.status === 403) {
+                snackbar({
+                    type: "error",
+                    text: "Error: You are not logged in as an admin.",
+                    duration: "long",
+                    action: {
+                        text: "LOGIN",
+                        link: "/admin?next=" + window.location.pathname
+                    }
+                });
+            } else {
+                snackbar({
+                    type: "error",
+                    text: "Error: Something went wrong while adding an employee.",
+                    duration: "long"
                 });
             }
         });
@@ -192,7 +218,34 @@ document.addEventListener("DOMContentLoaded", function() {
             } else {
                 snackbar({
                     type: "error",
-                    text: "Error: Something went wrong while editing the employee."
+                    text: "Error: Something went wrong while editing the employee.",
+                    duration: "long"
+                });
+            }
+        }).fail(function(res) {
+            btn_edit_icon.className = "";
+            btn_edit_icon.classList.add("fa", "fa-edit");
+
+            let employee_edit_modal = document.querySelector("#modal-employee-edit");
+            bootstrap.Modal.getInstance(employee_edit_modal).hide();
+
+            btn_edit.disabled = false;
+
+            if (res.status === 403) {
+                snackbar({
+                    type: "error",
+                    text: "Error: You are not logged in as an admin.",
+                    duration: "long",
+                    action: {
+                        text: "LOGIN",
+                        link: "/admin?next=" + window.location.pathname
+                    }
+                });
+            } else {
+                snackbar({
+                    type: "error",
+                    text: "Error: Something went wrong while editing the employee.",
+                    duration: "long"
                 });
             }
         });
@@ -235,10 +288,36 @@ document.addEventListener("DOMContentLoaded", function() {
             } else {
                 snackbar({
                     type: "error",
-                    text: "Error: Something went wrong while deleting the employee."
+                    text: "Error: Something went wrong while deleting the employee.",
+                    duration: "long"
                 });
             }
-        })
+        }).fail(function(res) {
+            btn_delete_icon.className = "";
+            btn_delete_icon.classList.add("fa", "fa-trash");
+
+            let employee_delete_modal = document.querySelector("#modal-employee-delete");
+            bootstrap.Modal.getInstance(employee_delete_modal).hide();
+            btn_delete.disabled = false;
+
+            if (res.status === 403) {
+                snackbar({
+                    type: "error",
+                    text: "Error: You are not logged in as an admin.",
+                    duration: "long",
+                    action: {
+                        text: "LOGIN",
+                        link: "/admin?next=" + window.location.pathname
+                    }
+                });
+            } else {
+                snackbar({
+                    type: "error",
+                    text: "Error: Something went wrong while deleting the employee.",
+                    duration: "long"
+                });
+            }
+        });
     })
 
     document.querySelectorAll("#modal-employee-add, #modal-employee-edit, #modal-employee-delete").forEach(modal => {

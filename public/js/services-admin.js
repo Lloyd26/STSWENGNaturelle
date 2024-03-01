@@ -147,7 +147,25 @@ $(document).ready(function(){
                     $("#service-collection-container").empty();
                     showServiceCollections(SERVICE_COLLECTION_GET_URL, SERVICE_COLLECTION_WRAPPER);
                 }
-            })
+            }).fail(function(res) {
+                if (res.status === 403) {
+                    snackbar({
+                        type: "error",
+                        text: "Error: You are not logged in as an admin.",
+                        duration: "long",
+                        action: {
+                            text: "LOGIN",
+                            link: "/admin?next=" + window.location.pathname
+                        }
+                    });
+                } else {
+                    snackbar({
+                        type: "error",
+                        text: "Error: Something went wrong while trying to add the Service Collection.",
+                        duration: "long"
+                    });
+                }
+            });
         }
     })
 
@@ -229,7 +247,25 @@ $(document).ready(function(){
                     $("#service-collection-container").empty();
                     showServiceCollections(SERVICE_COLLECTION_GET_URL, SERVICE_COLLECTION_WRAPPER);
                 }
-            })
+            }).fail(function(res) {
+                if (res.status === 403) {
+                    snackbar({
+                        type: "error",
+                        text: "Error: You are not logged in as an admin.",
+                        duration: "long",
+                        action: {
+                            text: "LOGIN",
+                            link: "/admin?next=" + window.location.pathname
+                        }
+                    });
+                } else {
+                    snackbar({
+                        type: "error",
+                        text: "Error: Something went wrong while trying to add the Service Collection.",
+                        duration: "long"
+                    });
+                }
+            });
         }
     })
 
@@ -323,7 +359,25 @@ $(document).ready(function(){
                 $("#service-collection-container").empty();
                 showServiceCollections(SERVICE_COLLECTION_GET_URL, SERVICE_COLLECTION_WRAPPER);
             }
-        })
+        }).fail(function(res) {
+            if (res.status === 403) {
+                snackbar({
+                    type: "error",
+                    text: "Error: You are not logged in as an admin.",
+                    duration: "long",
+                    action: {
+                        text: "LOGIN",
+                        link: "/admin?next=" + window.location.pathname
+                    }
+                });
+            } else {
+                snackbar({
+                    type: "error",
+                    text: "Error: Something went wrong while trying to delete the Service Collection.",
+                    duration: "long"
+                });
+            }
+        });
     });
 
     /**
@@ -531,5 +585,23 @@ function onBtnEditClick (e) {
                 standalone_services_list.append(input_standalone_services)
             })
         }
-    })
+    }).fail(function(res) {
+        if (res.status === 403) {
+            snackbar({
+                type: "error",
+                text: "Error: You are not logged in as an admin.",
+                duration: "long",
+                action: {
+                    text: "LOGIN",
+                    link: "/admin?next=" + window.location.pathname
+                }
+            });
+        } else {
+            snackbar({
+                type: "error",
+                text: "Error: Something went wrong while trying to fetch the Service Collection.",
+                duration: "long"
+            });
+        }
+    });
 }

@@ -66,6 +66,31 @@ $(document).ready(function() {
                     text: "Employee has been successfully added!"
                 });
             }
+        }).fail(function(res) {
+            btn_add_icon.className = "";
+            btn_add_icon.classList.add("fa", "fa-plus");
+
+            let employee_add_modal = document.querySelector("#add-faq-modal");
+            bootstrap.Modal.getInstance(employee_add_modal).hide();
+            btn_add.disabled = false;
+
+            if (res.status === 403) {
+                snackbar({
+                    type: "error",
+                    text: "Error: You are not logged in as an admin.",
+                    duration: "long",
+                    action: {
+                        text: "LOGIN",
+                        link: "/admin?next=" + window.location.pathname
+                    }
+                });
+            } else {
+                snackbar({
+                    type: "error",
+                    text: "Error: Something went wrong while trying to edit the FAQ.",
+                    duration: "long"
+                });
+            }
         });
     });
 
@@ -116,6 +141,32 @@ $(document).ready(function() {
                     text: "FAQ has been successfully edited!"
                 });
             }
+        }).fail(function(res) {
+            btn_edit_icon.className = "";
+            btn_edit_icon.classList.add("fa", "fa-edit");
+
+            let faq_edit_modal = document.querySelector("#edit-faq-modal");
+            bootstrap.Modal.getInstance(faq_edit_modal).hide();
+
+            btn_edit.disabled = false;
+
+            if (res.status === 403) {
+                snackbar({
+                    type: "error",
+                    text: "Error: You are not logged in as an admin.",
+                    duration: "long",
+                    action: {
+                        text: "LOGIN",
+                        link: "/admin?next=" + window.location.pathname
+                    }
+                });
+            } else {
+                snackbar({
+                    type: "error",
+                    text: "Error: Something went wrong while trying to edit the FAQ.",
+                    duration: "long"
+                });
+            }
         });
     });
 
@@ -145,7 +196,32 @@ $(document).ready(function() {
                     text: "FAQ has been successfully deleted!"
                 });
             }
-        })
+        }).fail(function(res) {
+            btn_delete_icon.className = "";
+            btn_delete_icon.classList.add("fa", "fa-trash");
+
+            let faq_delete_modal = document.querySelector("#delete-faq-modal");
+            bootstrap.Modal.getInstance(faq_delete_modal).hide();
+            btn_delete.disabled = false;
+
+            if (res.status === 403) {
+                snackbar({
+                    type: "error",
+                    text: "Error: You are not logged in as an admin.",
+                    duration: "long",
+                    action: {
+                        text: "LOGIN",
+                        link: "/admin?next=" + window.location.pathname
+                    }
+                });
+            } else {
+                snackbar({
+                    type: "error",
+                    text: "Error: Something went wrong while trying to delete the FAQ.",
+                    duration: "long"
+                });
+            }
+        });
     });
 
     document.querySelectorAll("#add-faq-modal, #edit-faq-modal, #delete-faq-modal").forEach(modal => {
@@ -232,5 +308,25 @@ function onBtnEditClick (e) {
     $.get("/admin/faq/find-faq", {id:faq_id}, (data, status, xhr) => {
         document.querySelector('#edit-input-question').value = data.question
         document.querySelector('#edit-input-answer').value = data.answer
-    })
+    }).fail(function(res) {
+        bootstrap.Modal.getInstance(modal_edit).hide();
+
+        if (res.status === 403) {
+            snackbar({
+                type: "error",
+                text: "Error: You are not logged in as an admin.",
+                duration: "long",
+                action: {
+                    text: "LOGIN",
+                    link: "/admin?next=" + window.location.pathname
+                }
+            });
+        } else {
+            snackbar({
+                type: "error",
+                text: "Error: Something went wrong while trying to fetch the FAQ.",
+                duration: "long"
+            });
+        }
+    });
 }
