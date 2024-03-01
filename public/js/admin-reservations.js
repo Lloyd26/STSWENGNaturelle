@@ -235,8 +235,6 @@ function showReservations(url, container) {
         if (checkCache(data, reservations_cache)) return;
         document.querySelector(container).innerHTML = "";
 
-        console.log(data);
-
         data.forEach(reservation => {
             let reservation_container = new Element(".reservation-container", {
                 attr: {
