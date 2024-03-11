@@ -16,6 +16,14 @@ const EmployeeSchema = new mongoose.Schema({
     contactNumber: {
         type: String,
         required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    changedPassword: {
+        type: Boolean,
+        required: true
     }
 });
 
