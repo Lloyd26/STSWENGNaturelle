@@ -4,7 +4,7 @@
   "description": "CSSWENG Web Application Project for client Naturelle Salon",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
@@ -19,5 +19,8 @@
     "hbs": "^4.2.0",
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }

@@ -127,8 +127,26 @@ const controller = {
             return;
         }
 
-        let reservations = await Reservation.find({}, '').populate('services');
+        let reservations = await Reservation.find({}, '').populate('services').populate('userID', 'firstName lastName').exec();
+
+        /*reservations.forEach(reservation => {
+            console.log(reservation.services);
+        })*/
         res.send(reservations);
+    },
+
+    postUpdateReservationStatus: async function(req, res) {
+        if (!req.session.logged_in || req.session.logged_in.type !== "admin") {
+            res.status(403); // HTTP 403: Forbidden
+            return;
+        }
+
+        await Reservation.updateOne({_id: req.body.reservation_id}, {status: req.body.reservation_status});
+        res.sendStatus(200);
+    },
+
+    getServicesOfReservation: async function(req, res) {
+        res.send(await Reservation.findOne({_id: req.query.reservation_id}, 'services').populate("services").exec());
     },
   
     getAdminEmployees: function(req, res) {
