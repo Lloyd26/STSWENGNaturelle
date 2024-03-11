@@ -304,7 +304,8 @@ const controller = {
             details: detail,
             preferredEmployee: pstaff,
             serviceTitle: pservice,
-            employeeID: employeeID
+            employeeID: employeeID,
+            status: "Pending"
         }
 
         // console.log("Cart Object:", cart);
