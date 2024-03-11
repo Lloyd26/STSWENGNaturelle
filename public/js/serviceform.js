@@ -43,6 +43,7 @@ $(document).ready(function () {
             let serviceGroupName = service_select.options[service_select.selectedIndex].closest("optgroup").label;
 
             let staff_f = staff_select.options[staff_select.selectedIndex].text;
+            let staff_id = staff_select.options[staff_select.selectedIndex].getAttribute("value");
 
             let price = service_select.options[service_select.selectedIndex].getAttribute("data-service-price");
 
@@ -61,7 +62,8 @@ $(document).ready(function () {
             $.post("/serviceform", {
                 details: details_val,
                 service: service_f,
-                staff: staff_f
+                staff: staff_f,
+                employeeID: staff_id
             }, function (data, status) {
                 if (status === "success") {
                     // Handle success, if needed

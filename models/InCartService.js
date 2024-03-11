@@ -9,6 +9,10 @@ const InCartServiceSchema = new Schema ({
     },
     serviceTitle: {
         type: SchemaTypes.String
+    },
+    employeeID: {
+        type: Schema.Types.ObjectId,
+        ref: "Employee"
     }
 })
 

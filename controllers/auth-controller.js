@@ -298,11 +298,13 @@ const controller = {
         let detail = req.body.details;
         let pstaff = req.body.staff;
         let pservice = req.body.service;
+        let employeeID = req.body.employeeID;
 
         let cart = {
             details: detail,
             preferredEmployee: pstaff,
-            serviceTitle: pservice
+            serviceTitle: pservice,
+            employeeID: employeeID
         }
 
         // console.log("Cart Object:", cart);
