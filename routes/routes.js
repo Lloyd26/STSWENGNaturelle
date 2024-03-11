@@ -4,6 +4,7 @@ const controller = require('../controllers/controller.js');
 const auth_controller = require('../controllers/auth-controller');
 const admin_controller = require('../controllers/admin-controller');
 const api_controller = require('../controllers/api-controller');
+const employee_controller = require('../controllers/employee-controller');
 
 const app = express();
 
@@ -65,6 +66,9 @@ app.get('/admin/services/get-service-collections', admin_controller.getServiceCo
 app.post('/admin/services/add-service-collection', admin_controller.postAddServiceCollection);
 app.post('/admin/services/edit-service-collection', admin_controller.postEditServiceCollection);
 app.post('/admin/services/delete-service-collection', admin_controller.postDeleteServiceCollection);
+
+app.get('/employee', employee_controller.getEmployeeLogin, employee_controller.getEmployeeDashboard);
+app.post('/employee', employee_controller.postEmployeeLogin);
 
 app.get('/admin/faq', admin_controller.getFAQ);
 app.get('/admin/faq/get-faqs', admin_controller.getAllFAQs);

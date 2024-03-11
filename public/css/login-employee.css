@@ -1,0 +1,40 @@
+@import url("form.css");
+
+#form-wrapper {
+    min-height: 100vh;
+    background-color: var(--clr-triadic-1-400);
+}
+
+.form-container {
+    width: 40%;
+}
+
+#form-header {
+    color: var(--clr-triadic-1-500);
+}
+
+#form-switch-link {
+    color: var(--clr-triadic-1-500);
+}
+
+#btn-submit {
+    background-color: var(--clr-triadic-1-400);
+}
+
+#btn-submit:hover{
+    background-color: var(--clr-triadic-1-200);
+}
+
+#salon-title-login{
+    font-family: "Dr Sugiyama", cursive;
+    color: var(--clr-triadic-1-400);
+    font-size: 2em;
+    text-align: center;
+    line-height: 1em;
+}
+
+@media (max-width: 992px) {
+    .form-container {
+        width: 90%;
+    }
+}

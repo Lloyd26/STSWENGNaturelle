@@ -22,10 +22,10 @@ function isContactNumValid(contactNum) {
 const controller = {
     getAdminLogin: function(req, res, next) {
         if (!req.session.logged_in) {
-            res.render('login-admin', {layout: 'admin-no-sidebar'});
+            res.render('login-admin', {layout: 'no-sidebar'});
         } else if (req.session.logged_in.type !== "admin") {
             res.render('login-admin', {
-                layout: 'admin-no-sidebar',
+                layout: 'no-sidebar',
                 logged_in: req.session.logged_in,
                 snackbar: {
                     type: "error",
@@ -48,7 +48,7 @@ const controller = {
 
         if (username === undefined || password === undefined) {
             res.render('login-admin', {
-                layout: 'admin-no-sidebar',
+                layout: 'no-sidebar',
                 active: {login: true},
                 error: 'Please enter your username and password.'
             });
@@ -59,7 +59,7 @@ const controller = {
 
         if (result == null) {
             res.render('login-admin', {
-                layout: 'admin-no-sidebar',
+                layout: 'no-sidebar',
                 active: {login: true},
                 error: 'Incorrect username or password.'
             });
@@ -70,7 +70,7 @@ const controller = {
 
         if (!passwordCompare) {
             res.render('login-admin', {
-                layout: 'admin-no-sidebar',
+                layout: 'no-sidebar',
                 active: {login: true},
                 error: 'Incorrect username or password.'
             });
