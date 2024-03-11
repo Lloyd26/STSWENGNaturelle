@@ -84,7 +84,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="input-edit-employee-contact" class="form-label">Contact Number</label>
-                        <input type="tel" id="input-edit-employee-contact" name="employee_contact" class="form-control">
+                        <input type="text" id="input-edit-employee-contact" name="employee_contact" class="form-control">
                     </div>
                     <div class="error-msg" id="form-employee-edit-error" data-error-status="normal"></div>
                 </form>
@@ -121,6 +121,24 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-neutral" data-bs-dismiss="modal"><i class="fa fa-xmark"></i>Cancel</button>
                 <button type="button" class="btn btn-delete"><i class="fa fa-trash"></i>Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-md fade" id="modal-employee-req-pass">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Temporary Password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="modal-req-pass-details-container">
+                    <input type="hidden" id="input-req-pass-employee-id" name="employee_id">
+                    <label for="input-temporary-password">Temporary Password</label>
+                    <input type="text" readonly id="input-temporary-password" class="form-control-plaintext">
+                </div>
             </div>
         </div>
     </div>

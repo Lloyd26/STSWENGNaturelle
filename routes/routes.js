@@ -69,6 +69,7 @@ app.post('/admin/services/delete-service-collection', admin_controller.postDelet
 
 app.get('/employee', employee_controller.getEmployeeLogin, employee_controller.getEmployeeDashboard);
 app.post('/employee', employee_controller.postEmployeeLogin);
+app.get('/employee/request-temp-password', employee_controller.getRequestTempPassword);
 
 app.get('/admin/faq', admin_controller.getFAQ);
 app.get('/admin/faq/get-faqs', admin_controller.getAllFAQs);

@@ -49,6 +49,17 @@ function onBtnDeleteClick(e) {
     modal_delete_contact.value = employee_contact;
 }
 
+function onBtnPasswordClick(e) {
+    let employee_id = e.currentTarget.closest(".admin-employees-container").getAttribute("data-employee-id");
+
+    $.get("/employee/request-temp-password", {id:employee_id}, (data, status, xhr) => {
+        let modal_temp_pass = document.getElementById("modal-employee-req-pass");
+        let modal_input_temp_pass = modal_temp_pass.querySelector("#input-temporary-password");
+
+        modal_input_temp_pass.value = data.password
+    })
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     showEmployees(EMPLOYEE_GET_URL, EMPLOYEES_WRAPPER);
 
@@ -376,9 +387,25 @@ function showEmployees(url, container) {
             }).getElement();
             employee_contact_container.append(contact_icon, employee_contact);
 
-            admin_employees_details.append(employee_name, employee_email_container, employee_contact_container);
 
+            admin_employees_details.append(employee_name, employee_email_container, employee_contact_container);
+        
+            
             let admin_employees_actions = new Element(".admin-employees-actions").getElement();
+
+            if (!employee.changedPassword){
+                let btn_employee_password = new Element("button.btn.admin-list-btn-password", {
+                    text: "Check Password",
+                    attr: {
+                        "data-bs-toggle": "modal",
+                        "data-bs-target": "#modal-employee-req-pass"
+                    }
+                }).getElement();
+                let eye_icon = new Element("i.fa.fa-eye").getElement();
+                btn_employee_password.prepend(eye_icon);
+                btn_employee_password.addEventListener("click", onBtnPasswordClick);
+                admin_employees_actions.append(btn_employee_password);
+            }
 
             let btn_employee_edit = new Element("button.btn.admin-list-btn-edit", {
                 text: "Edit",
@@ -401,6 +428,8 @@ function showEmployees(url, container) {
             let delete_icon = new Element("i.fa.fa-trash").getElement();
             btn_employee_delete.prepend(delete_icon);
             btn_employee_delete.addEventListener("click", onBtnDeleteClick);
+
+            
 
             admin_employees_actions.append(btn_employee_edit, btn_employee_delete);
 

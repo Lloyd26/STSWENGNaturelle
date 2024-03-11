@@ -54,15 +54,25 @@ const controller = {
             return;
         }
 
-        let passwordCompare = await bcrypt.compare(password, result.password);
-
-        if (!passwordCompare) {
-            res.render('login-employee', {
-                layout: 'employee-no-sidebar',
-                active: {login: true},
-                error: 'Incorrect email or password.'
-            });
-            return;
+        if (result.changedPassword){
+            let passwordCompare = await bcrypt.compare(password, result.password);
+            if (!passwordCompare) {
+                res.render('login-employee', {
+                    layout: 'employee-no-sidebar',
+                    active: {login: true},
+                    error: 'Incorrect email or password.'
+                });
+                return;
+            }
+        } else {
+            if (result.password != password) {
+                res.render('login-employee', {
+                    layout: 'employee-no-sidebar',
+                    active: {login: true},
+                    error: 'Incorrect email or password.'
+                });
+                return;
+            }
         }
 
         req.session.logged_in = {
@@ -88,6 +98,16 @@ const controller = {
             logged_in: req.session.logged_in,
             active: {employee_home: true}
         });
+    },
+
+    getRequestTempPassword: async function(req, res, next) {
+        let employee = await Employee.findOne({_id:req.query.id})
+
+        let password = {
+            password: employee.password
+        }
+
+        res.send(password)
     }
 }
 

@@ -55,7 +55,7 @@ body {
     display: none;
 }
 
-.admin-list-btn-edit, .admin-list-btn-delete {
+.admin-list-btn-edit, .admin-list-btn-delete, .admin-list-btn-password{
     border: 1px solid;
     border-radius: var(--radius);
     padding: 0.5rem 2rem;
@@ -75,6 +75,11 @@ body {
     border-color: var(--clr-triadic-1-100);
 }
 
+.admin-list-btn-password {
+    color: var(--clr-analogous-1-300);
+    border-color: var(--clr-analogous-1-300);
+}
+
 .admin-list-btn-edit:hover, .admin-list-btn-edit:active {
     color: #FFF !important;
     background-color: #888 !important;
@@ -86,6 +91,13 @@ body {
     background-color: var(--clr-triadic-1-300) !important;
     border-color: var(--clr-triadic-1-300) !important;
 }
+
+.admin-list-btn-password:hover, .admin-list-btn-password:active {
+    color: #FFF !important;
+    background-color: var(--clr-analogous-1-300) !important;
+    border-color: var(--clr-analogous-1-300) !important;
+}
+
 
 @media (max-width: 992px) {
     #main-wrapper > .row > * {
@@ -147,7 +159,7 @@ body {
         padding-bottom: 5rem;
     }
 
-    .admin-list-btn-edit, .admin-list-btn-delete {
+    .admin-list-btn-edit, .admin-list-btn-delete, .admin-list-btn-password {
         padding: 0.5rem 1.25rem;
         font-size: 0.85em;
     }

@@ -8,6 +8,16 @@ const Reservation = require('../models/Reservation.js');
 const InCartService = require('../models/InCartService.js');
 const bcrypt = require('bcrypt');
 
+function generateRandomPassword(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+';
+    let password = '';
+  
+    for (let i = 0; i < length; i++) {
+      password += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+  
+    return password;
+}
 
 function isEmailValid(email) {
     const validEmailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -197,16 +207,20 @@ const controller = {
             return;
         }
 
+        let generatedPassword = generateRandomPassword(20)
+
         let employee = {
             firstName: fname,
             lastName: lname,
             email: email,
-            contactNumber: contact
+            contactNumber: contact,
+            password: generatedPassword,
+            changedPassword: false
         };
 
         await Employee.create(employee);
 
-        res.sendStatus(201); // HTTP 201: Created
+        res.status(201).json({password: generatedPassword}); // HTTP 201: Created
     },
 
     postEditEmployee: async function(req, res) {

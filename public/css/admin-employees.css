@@ -118,7 +118,7 @@
     border-color: var(--clr-triadic-1-300) !important;
 }
 
-#modal-delete-details-container {
+#modal-delete-details-container, #modal-req-pass-details-container {
     display: grid;
     grid-template-columns: 1fr 2fr;
     align-items: center;
@@ -126,11 +126,11 @@
     column-gap: 1rem;
 }
 
-#modal-delete-details-container > label {
+#modal-delete-details-container > label, #modal-req-pass-details-container > label{
     font-weight: 700;
 }
 
-#modal-delete-details-container > input {
+#modal-delete-details-container > input, #modal-req-pass-details-container > input{
     color: #888;
 }
 
