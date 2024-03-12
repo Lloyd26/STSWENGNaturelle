@@ -5,6 +5,7 @@ const SpecialService = require('../models/SpecialService.js');
 const Reservation = require('../models/Reservation.js');
 const InCartService = require('../models/InCartService.js');
 const bcrypt = require('bcrypt');
+const { ObjectId } = require('mongodb');
 
 
 const controller = {
@@ -81,6 +82,7 @@ const controller = {
             state: true,
             type: "employee",
             user: {
+                employee_id: result._id,
                 employee_name: employee_name,
                 employee_firstName: result.firstName,
                 employee_lastName: result.lastName,
@@ -101,7 +103,7 @@ const controller = {
             return;
         }
 
-        res.render('main-employee', {
+        res.render('employee-reservations', {
             layout: 'employee',
             logged_in: req.session.logged_in,
             active: {employee_home: true}
@@ -116,6 +118,31 @@ const controller = {
         }
 
         res.send(password)
+    },
+
+    getEmployeeReservations: async function(req, res) {
+        if (!req.session.logged_in || req.session.logged_in.type !== "employee") {
+            res.sendStatus(403); // HTTP 403: Forbidden
+            return;
+        }
+
+        let reservations = await Reservation.find({}).populate('services').populate('userID', 'firstName lastName').exec();
+        let employee_id = new ObjectId (req.query.id)
+        const filteredReservations = reservations.filter(reservation => {
+            let foundMatch = false;
+            reservation.services.forEach(service => {
+                console.log(service)
+                if (service.employeeID == undefined){
+                    foundMatch = false;
+                } else if (service.employeeID.equals(employee_id)) {
+                    foundMatch = true;
+                }
+            });
+            console.log(foundMatch)
+            return foundMatch;
+        });
+        console.log(filteredReservations)
+        res.send(filteredReservations)
     }
 }
 

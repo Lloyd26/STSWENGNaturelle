@@ -339,7 +339,7 @@ const controller = {
         try {
 
             let reservation = {
-                currentUserID: userID,
+                userID: userID,
                 timestamp: time,
                 services: generatedId,
                 status: current
