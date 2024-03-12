@@ -16,6 +16,9 @@ const controller = {
             case "admin":
                 redirect = '/admin';
                 break;
+            case "employee":
+                redirect = '/employee';
+                break;
         }
 
         req.session.destroy(err => {

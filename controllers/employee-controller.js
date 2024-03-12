@@ -75,11 +75,19 @@ const controller = {
             }
         }
 
+        let employee_name = result.firstName + " "+ result.lastName
+
         req.session.logged_in = {
             state: true,
             type: "employee",
             user: {
-                employee_name: result.firstName
+                employee_name: employee_name,
+                employee_firstName: result.firstName,
+                employee_lastName: result.lastName,
+                employee_email: result.email,
+                employee_contactNumber: result.contactNumber,
+                employee_password: result.password,
+                employee_changedPassword: result.changedPassword
             }
         };
 

@@ -19,7 +19,7 @@ const controller = {
                 snackbar: {
                     type: "error",
                     persistent: true,
-                    text: "You need to logout as an admin before you can login as a customer.",
+                    text: "You need to logout on other accounts before you can login as a customer.",
                     action: {
                         text: "LOGOUT",
                         link: "/logout?next=%2Flogin"
