@@ -259,4 +259,19 @@
     #fab-container {
         display: flex !important;
     }
+
+    #employee-info-container{
+        padding: 0em;
+        border: none;
+    }
+    
+    #employee-name{
+        font-size: 1em;
+        font-weight: 700;
+    }
+    
+    #employee-email{
+        font-size: .8em;
+        color: var(--clr-triadic-1-400);
+    }
 }
