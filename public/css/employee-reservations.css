@@ -28,10 +28,6 @@ body {
     justify-content: space-between;
 }
 
-.employee-header-btn {
-
-}
-
 .employee-container {
     background-color: #FFF;
     margin-left: 3rem;
@@ -122,7 +118,7 @@ body {
 .reservation-user {
     font-size: 1.5em;
     font-weight: 800;
-    color: var(--salon-purple);
+    color: var(--clr-triadic-1-300);
 }
 
 .reservation-datetime {
@@ -267,6 +263,64 @@ input[type="radio"]:checked + .status-cancelled {
 
 #modal-reservation-services-container {
     margin-top: 1rem;
+}
+
+.status-buttons-container{
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    gap: .4em;
+}
+
+.status-btn{
+    border-radius: var(--radius);
+    border: none;
+    padding: .5em;
+    font-size: .7em;
+    font-weight: 700;
+}
+
+.approve-btn{
+    color: var(--clr-complementary-700);
+    background-color: var(--clr-complementary-100);
+    border: 1px solid var(--clr-complementary-700);
+}
+
+.approve-btn:hover{
+    color: #FFF;
+    background-color: var(--clr-complementary-700);
+}
+
+.pending-btn{
+    color: var(--clr-triadic-2-600);
+    background-color: var(--clr-triadic-2-100);
+    border: 1px solid var(--clr-triadic-2-600);
+}
+
+.pending-btn:hover{
+    color: #FFF;
+    background-color: var(--clr-triadic-2-600);
+}
+
+.cancelled-btn{
+    color: var(--clr-triadic-1-600);
+    background-color: var(--clr-triadic-1-100);
+    border: 1px solid var(--clr-triadic-1-600);
+}
+
+.cancelled-btn:hover{
+    color: #FFF;
+    background-color: var(--clr-triadic-1-600);
+}
+
+.service-details-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.accordion-body {
+    display: flex;
+    align-items: center;
 }
 
 @media (max-width: 1200px) {

@@ -143,6 +143,32 @@ const controller = {
         });
         console.log(filteredReservations)
         res.send(filteredReservations)
+    },
+    
+    getEmployeeServicesOfReservation: async function(req, res) {
+        const reservation = await Reservation.findOne({_id: req.query.reservation_id}, 'services').populate("services").exec()
+        let employee_id = new ObjectId (req.query.employee_id)
+        const filteredServices = reservation.services.filter(service => {
+            let foundMatch = false;
+            if (service.employeeID == undefined){
+                foundMatch = false;
+            } else if (service.employeeID.equals(employee_id)) {
+                foundMatch = true;
+            }
+            return foundMatch;
+        });
+
+        let filteredReservation = {
+            _id: reservation._id,
+            services: filteredServices
+        }
+
+        res.send(filteredReservation);
+    },
+
+    postUpdateServiceStatus: async function(req, res){
+        await InCartService.updateOne({_id: req.body.id}, {status: req.body.service_status})
+        res.sendStatus(200)
     }
 }
 
