@@ -1,7 +1,6 @@
 <link rel="stylesheet" href="/css/form.css">
 <link rel="stylesheet" href="/css/bs-form-override.css">
-<link rel="stylesheet" href="/css/modal.css">
-<link rel="stylesheet" href="/css/accordion.css">
+<link rel="stylesheet" href="/css/employee-modal.css">
 <link rel="stylesheet" href="/css/employee-reservations.css">
 <script type="module" src="/js/employee-reservations.js"></script>
 
@@ -40,44 +39,6 @@
                 <div id="modal-reservation-services-container" class="accordion">
 
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal modal-md fade" id="modal-reservation-status">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Update Status</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <input type="hidden" id="input-reservation-id" name="reservation_id">
-                <div class="modal-reservation-details">
-                    <h5 class="modal-reservation-details-header">Reservation Details</h5>
-                    <div class="modal-reservation-user-container">
-                        <i class="fa fa-user"></i>
-                        <span id="modal-reservation-status-user">Juan Dela Cruz</span>
-                    </div>
-                    <div class="modal-reservation-datetime-container">
-                        <i class="fa fa-calendar"></i>
-                        <span id="modal-reservation-status-datetime">Feb. 16 – 6:00 PM</span>
-                    </div>
-                </div>
-                <hr />
-                <div id="modal-reservation-status-controls-container">
-                    <input type="radio" class="btn-check" name="status" id="status-pending">
-                    <label class="btn status-pending" for="status-pending"><i class="fa fa-clock"></i>Pending</label>
-                    <input type="radio" class="btn-check" name="status" id="status-approved">
-                    <label class="btn status-approved" for="status-approved"><i class="fa fa-check"></i>Approve</label>
-                    <input type="radio" class="btn-check" name="status" id="status-cancelled">
-                    <label class="btn status-cancelled" for="status-cancelled"><i class="fa fa-xmark"></i>Cancel</label>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-discard" data-bs-dismiss="modal"><i class="fa fa-trash"></i>Discard</button>
-                <button type="submit" class="btn btn-modal-success" id="btn-modal-reservation-save"><i class="fa fa-floppy-disk"></i>Save</button>
             </div>
         </div>
     </div>

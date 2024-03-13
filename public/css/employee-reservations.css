@@ -194,7 +194,7 @@ body {
 }
 
 .modal-reservation-details-header {
-    color: var(--salon-purple);
+    color: var(--clr-triadic-1-700);
     font-weight: 700;
     font-size: 1.5em;
 }

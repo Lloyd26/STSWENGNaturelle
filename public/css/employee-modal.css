@@ -1,0 +1,18 @@
+@import url("modal.css");
+@import url("accordion.css");
+
+.modal-content {
+    border-color: var(--clr-triadic-1-100);
+}
+
+.modal-header{
+    background-color: var(--clr-triadic-1-50);
+    color: var(--clr-triadic-1-500);
+    padding: 1.5em;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: var(--clr-triadic-1-50);
+    color: var(--clr-triadic-1-700);
+}
+
