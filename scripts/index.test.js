@@ -1,7 +1,9 @@
 const {ObjectId} = require('mongodb');
 const Reservation  = require('../models/Reservation');
 const controller  = require('../controllers/controller.js');
-
+const Notification  = require('../models/Notification');
+const adminController = require('../controllers/admin-controller.js');
+//import {res} as adminReservations from '../public/js/admin-reservations.js';
 //Test if website renders (may need to open website first)
 test('Salon website renders without errors',async () => {
 
@@ -15,7 +17,8 @@ test('Salon website renders without errors',async () => {
 // RESERVATION-RELATED TESTS
 jest.mock('../models/Reservation',() => ({
   updateOne: jest.fn().mockResolvedValue({nModified: 1}),
-  create: jest.fn().mockResolvedValue('mock reservation')
+  create: jest.fn().mockResolvedValue('mock reservation'),
+  findOne: jest.fn()
 }));
 
 // testing the cancel reservation function
@@ -65,3 +68,221 @@ describe("Make a reservation", () => {
 });
 
 
+//NOTIFICATION-RELATED TESTS
+jest.mock('../models/Notification',() => ({
+  updateOne: jest.fn().mockResolvedValue({nModified: 1}),
+  create: jest.fn().mockResolvedValue('mock notification'),
+  findOne: jest.fn().mockResolvedValue('mock notification'),
+  find: jest.fn().mockReturnValue(['mock notification 1', 'mock notification 2', 'mock notification 3'])
+}));
+
+
+// testing the find notification function
+describe("Find a notification", () => {
+  it("should find a notification", async   () => {
+    const req = {
+      query: {
+        id: '614cb3fbb49ae3f9602cb5bc' // random id
+      }
+    };
+    
+    const res = { 
+      send: jest.fn()
+    };
+
+    await controller.findNotification(req, res);
+    expect(Notification.findOne).toHaveBeenCalledWith({_id: req.query.id});
+    expect(Notification.updateOne).toHaveBeenCalledWith({_id: req.query.id}, {isRead: "true"});
+    expect(res.send).toHaveBeenCalledWith('mock notification');
+
+   });
+
+});
+
+
+// testing getting all notifications
+describe("Get all notifications", () => {
+  it("should get all notifications", async   () => {
+    //creation of a mock user session
+    const req = {
+      session: {
+        logged_in: {
+          user: {
+            userID: '5f8614a2f796ac1c7e62af94' // random id
+          },
+          type: "customer"
+        }
+      }
+    };
+    
+    const res = { 
+      send: jest.fn()
+    };
+
+    await controller.getNotifications(req, res);
+    expect(Notification.find).toHaveBeenCalledWith({receiver: req.session.logged_in.user.userID});
+    expect(res.send).toHaveBeenCalledWith(['mock notification 3', 'mock notification 2', 'mock notification 1']);
+
+   });
+
+});
+
+//test get all notifications (no user session)
+describe("Get all notifications without user session", () => {
+  it("should redirect to login", async   () => {
+    const req = {
+      session: {
+        logged_in: null
+      }
+    };
+    
+    const res = { 
+      redirect: jest.fn()
+    };
+
+    await controller.getNotifications(req, res);
+    expect(res.redirect).toHaveBeenCalledWith("/login?next=" + encodeURIComponent("/reservation"));
+
+   });
+
+});
+
+//test get all notifications (not a customer)
+describe("Get all notifications but not a customer", () => {
+  it("should redirect to login", async   () => {
+    const req = {
+      session: {
+        logged_in: {
+          type: "employee"
+        }
+      }
+    };
+    
+    const res = { 
+      redirect: jest.fn()
+    };
+
+    await controller.getNotifications(req, res);
+    expect(res.redirect).toHaveBeenCalledWith("/login?next=" + encodeURIComponent("/reservation"));
+
+   });
+
+});
+
+// ADMIN-RELATED TESTS
+
+//test postupdatereservationstatus
+describe("Update reservation status", () => {
+  it("should update reservation status", async   () => {
+    const req = {
+      session: {
+        logged_in: {
+          user: {
+            userID: '5f8614a2f796ac1c7e62af94' // random id
+          },
+          type: "admin"
+        },
+      },
+      body: {
+        reservation_id: '614cb3fbb49ae3f9602cb5bc', // random id
+        status: "Cancelled"
+      }
+    };
+    
+    const res = { 
+      sendStatus: jest.fn()
+    };
+
+    await adminController.postUpdateReservationStatus(req, res);
+    expect(res.sendStatus).toHaveBeenCalledWith(200);
+
+   });
+
+});
+
+//test postupdatereservationstatus (not an admin)
+describe("Update reservation status but not an admin", () => {
+  it("should give a 403", async   () => {
+    const req = {
+      session: {
+        logged_in: {
+          user: {
+            userID: '5f8614a2f796ac1c7e62af94' // random id
+          },
+          type: "customer"
+        },
+      },
+      body: {
+        reservation_id: '614cb3fbb49ae3f9602cb5bc', // random id
+        status: "Cancelled"
+      }
+    };
+    
+    const res = { 
+      status: jest.fn()
+    };
+
+    await adminController.postUpdateReservationStatus(req, res);
+    expect(res.status).toHaveBeenCalledWith(403);
+
+   });
+
+});
+
+// i cant import the function from admin-reservations.js so i cant test it rn
+// // test resetModalServices
+// describe("Reset modal services", () => {
+//   it("should reset modal services", async   () => {
+//     const res = { 
+//       innerHTML: "not null"
+//     };
+
+//     adminReservations.resetModalServices();
+//     expect(res.innerHTML).toBe("");
+
+//    });
+
+// });
+
+
+//test getservicesofreservation
+describe("Get services of reservation", () => {
+  it("should get services of reservation", async   () => {
+
+
+    const mockReservation = {
+      _id: '614cb3fbb49ae3f9602cb5bc',
+      services: [
+        {
+          serviceTitle: "Haircut",
+          preferredEmployee: "Juan",
+          details: "None"
+        }
+      ]
+    };
+    const req = {
+      query: {
+        reservation_id: '614cb3fbb49ae3f9602cb5bc' // random id
+      }  
+    };
+
+    // Reservation.findOne.mockImplementation(() => ({
+    //   populate: jest.fn().mockResolvedValue(req.services)
+    // }));
+    jest.spyOn(Reservation, 'findOne').mockReturnThis()
+      .mockReturnValue({
+        populate: jest.fn().mockReturnThis(),
+        exec: jest.fn().mockResolvedValue(mockReservation),
+      });
+
+    const res = { 
+      send: jest.fn()
+    };
+
+    await adminController.getServicesOfReservation(req, res);
+    expect(Reservation.findOne).toHaveBeenCalledWith({_id: req.query.reservation_id},'services');
+    expect(res.send).toHaveBeenCalledWith(mockReservation);
+
+   });
+
+});
