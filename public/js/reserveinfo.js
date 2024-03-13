@@ -173,3 +173,5 @@ function onCancelReservationClick (e) {
         
     })
 }
+
+module.exports = reserveinfo;
