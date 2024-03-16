@@ -33,6 +33,17 @@
     line-height: 1em;
 }
 
+.password-container{
+    display: flex;
+    align-items: center;
+    gap: 1em
+}
+
+i {
+    position: relative;
+    z-index: 1;
+}
+
 @media (max-width: 992px) {
     .form-container {
         width: 90%;

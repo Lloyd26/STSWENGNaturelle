@@ -138,7 +138,7 @@ const controller = {
         }
 
         let reservations = await Reservation.find({}, '').populate('services').populate('userID', 'firstName lastName').exec();
-
+        console.log(reservations)
         /*reservations.forEach(reservation => {
             console.log(reservation.services);
         })*/

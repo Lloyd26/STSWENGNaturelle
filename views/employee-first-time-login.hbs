@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="/css/login-employee.css">
+<script type="module" src="/js/auth.js"></script>
+<script type="module" src="/js/employee-first-time-login.js"></script>
+
+<div id="form-wrapper">
+    <form id="form-login-first-time" class="form-container" method="post">
+        <div id="salon-title-login">Salon</br>Naturelle</div>
+        <h2 id="form-header">Change your Password</h2>
+        <div class="mb-3 password-container">
+            <input class="form-control form-control-lg" id="input-password" name="password" type="password" placeholder="New Password"{{#if (isDefined logged_in)}}{{#unless (isEqual logged_in.state "valid")}} disabled{{/unless}}{{/if}}>
+            <i class="fa fa-eye-slash" id="togglePassword"></i></input></span>
+        </div>
+        <div class="error-msg" id="login-admin-error-msg" data-error-status="{{#if (isDefined error)}}error{{else}}normal{{/if}}">{{error}}</div>
+        <div id="last-row">
+            <a href="/" id="form-switch-link">Go Back To Customer View</a>
+            <button class="btn" id="btn-submit" type="submit"{{#if (isDefined logged_in)}}{{#unless (isEqual logged_in.state "valid")}} disabled{{/unless}}{{/if}}>Change Password</button>
+        </div>
+    </form>
+</div>

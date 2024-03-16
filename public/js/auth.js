@@ -33,6 +33,23 @@ $(document).ready(function() {
         }
     });
 
+    $("#form-login-first-time").on("submit", function(e) {
+        let password = $("#input-password");
+
+        let validForm = validateForm(password);
+
+        if (!validForm) {
+            e.preventDefault();
+            password.focus();
+            showError("Please a new password", "#login-error-msg")
+        } else if (password.val().length < 8) {
+            e.preventDefault();
+            password.focus();
+            password.addClass("is-invalid");
+            showError("Password needs to be at least 8 characters long!", "#login-admin-error-msg");
+        }
+    });
+
     $("#form-register").on("submit", function(e) {
         let fname = $("#input-firstname");
         let lname = $("#input-lastname");

@@ -9,7 +9,7 @@ const { ObjectId } = require('mongodb');
 
 
 const controller = {
-    getEmployeeLogin: function(req, res, next) {
+    getEmployeeLogin: function(req, res) {
         if (!req.session.logged_in) {
             res.render('login-employee', {layout: 'employee-no-sidebar'});
         } else if (req.session.logged_in.type !== "employee") {
@@ -19,7 +19,7 @@ const controller = {
                 snackbar: {
                     type: "error",
                     persistent: true,
-                    text: "You need to logout as a customer before you can login as an employee.",
+                    text: "You need to logout on other accounts before you can login as an employee.",
                     action: {
                         text: "LOGOUT",
                         link: "/logout?next=%2Femployee"
@@ -27,7 +27,7 @@ const controller = {
                 }
             });
         } else {
-            next();
+            res.redirect('/employee/home');
         }
     },
 
@@ -75,8 +75,28 @@ const controller = {
                 return;
             }
         }
+        
 
         let employee_name = result.firstName + " "+ result.lastName
+
+        if (!result.changedPassword){
+
+            req.session.first_time = {
+                user: {
+                    employee_id: result._id,
+                    employee_name: employee_name,
+                    employee_firstName: result.firstName,
+                    employee_lastName: result.lastName,
+                    employee_email: result.email,
+                    employee_contactNumber: result.contactNumber,
+                    employee_changedPassword: result.changedPassword
+                }
+            };
+
+            first_time_login_id = result._id
+            res.redirect("/employee/first-time-login")
+            return;
+        };
 
         req.session.logged_in = {
             state: true,
@@ -88,18 +108,88 @@ const controller = {
                 employee_lastName: result.lastName,
                 employee_email: result.email,
                 employee_contactNumber: result.contactNumber,
-                employee_password: result.password,
                 employee_changedPassword: result.changedPassword
             }
         };
 
-        if (req.query.next) res.redirect(decodeURIComponent(req.query.next));
-        else res.redirect('/employee');
+        res.redirect('/employee/home');
     },
 
-    getEmployeeDashboard: function(req, res, next) {
+    getEmployeeFirstTimeLogin: function(req, res) {
+        console.log(!req.session.first_time)
+        if (req.session.first_time) {
+            res.render('employee-first-time-login', {layout: 'employee-no-sidebar', logged_in: {state: "valid"}});
+        } else if (!req.session.first_time) {
+            res.render('employee-first-time-login', {
+                layout: 'employee-no-sidebar',
+                logged_in: {state: "invalid"},
+                snackbar: {
+                    type: "error",
+                    persistent: true,
+                    text: "You are an unauthorized user.",
+                    action: {
+                        text: "GO BACK",
+                        link: "/employee"
+                    }
+                }
+            });
+        } else {
+            res.redirect('/employee/home');
+        }
+    },
+
+    postEmployeeFirstTimeLogin: async function(req, res, next) {
+        let password = req.body.password;
+
+        if (password === undefined) {
+            res.render('employee-first-time-login', {
+                layout: 'employee-no-sidebar',
+                active: {login: true},
+                error: 'Please enter a new password.'
+            });
+            return;
+        }
+
+        if (password.length < 8) {
+            res.render('employee-first-time-login', {
+                layout: 'employee-no-sidebar',
+                active: {login: true},
+                error: 'Password should be at least 8 characters!'
+            });
+            return;
+        }
+
+        const saltRounds = 10;
+
+        let passwordHashed = await bcrypt.hash(password, saltRounds);
+
+        await Employee.updateOne({_id: req.session.first_time.user.employee_id}, {password: passwordHashed, changedPassword:true})
+        let result = await Employee.findOne({_id: req.session.first_time.user.employee_id})
+        let employee_name = result.firstName + " "+ result.lastName
+
+        console.log(result)
+        req.session.logged_in = {
+            state: true,
+            type: "employee",
+            user: {
+                employee_id: result._id,
+                employee_name: employee_name,
+                employee_firstName: result.firstName,
+                employee_lastName: result.lastName,
+                employee_email: result.email,
+                employee_contactNumber: result.contactNumber,
+                employee_changedPassword: result.changedPassword
+            }
+        };
+
+        delete req.session.first_time
+
+        res.redirect('/employee/home');
+    },
+
+    getEmployeeDashboard: function(req, res) {
         if (!req.session.logged_in || req.session.logged_in.type !== "employee") {
-            next();
+            res.redirect('/employee');
             return;
         }
 
