@@ -169,6 +169,24 @@ input[type="radio"]:checked + .status-cancelled {
     margin-top: 1rem;
 }
 
+#modal-reservation-status-reason-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
+}
+
+#status-change-reason{
+    border-radius: 10px;
+    border: 1px solid var(--clr-primary-200);
+    min-height: 20vh;
+    padding: 1em;
+}
+
+#status-change-reason:focus-visible{
+    outline-color: var(--clr-primary-500);
+}
+
+
 @media (max-width: 1200px) {
     #admin-reservations-container {
         grid-template-columns: 1fr;

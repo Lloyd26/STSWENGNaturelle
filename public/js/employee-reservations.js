@@ -127,9 +127,13 @@ function onBtnServicesClick(e) {
             accordion_item.append(accordion_header, accordion_collapse);
 
             document.querySelector("#modal-reservation-services-container").append(accordion_item);
-
         }
+        let reservationID = new Element("#reservation-id", {
+            text: reservation_id
+        }).getElement();
 
+        reservationID.style.display = "none"
+        document.querySelector("#modal-reservation-services-container").append(reservationID);
         bootstrap.Modal.getOrCreateInstance(document.querySelector("#modal-reservation-services")).show();
     });
 
@@ -221,8 +225,12 @@ function showModal() {
 function onStatusButtonClick(e) {
     let status_buttons_container = e.currentTarget.closest(".status-buttons-container");
     let service_id = status_buttons_container.firstElementChild.textContent.trim()
+    let reservation_id= document.querySelector("#reservation-id").textContent;
     let modal_reservation_services = this.closest("#modal-reservation-services");
+    let reason = document.querySelector("#service-status-change-reason").value;
     console.log(service_id)
+    console.log(reservation_id)
+    console.log(reason)
     let service_status
     if (e.currentTarget.classList.contains("approve-btn")) {
         service_status = "Approved"
@@ -232,7 +240,7 @@ function onStatusButtonClick(e) {
         service_status = "Cancelled"
     }
 
-    $.post("/employee/update-service-status", {id: service_id, service_status: service_status}, (data, status, xhr) => {
+    $.post("/employee/update-service-status", {id: service_id, service_status: service_status, reservation_id: reservation_id, reason:reason}, (data, status, xhr) => {
         if (status === "success" && xhr.status === 200) {
             bootstrap.Modal.getInstance(modal_reservation_services).hide();
             snackbar({

@@ -323,6 +323,23 @@ input[type="radio"]:checked + .status-cancelled {
     align-items: center;
 }
 
+#modal-service-status-reason-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
+}
+
+#service-status-change-reason{
+    border-radius: 10px;
+    border: 1px solid var(--clr-triadic-1-200);
+    min-height: 20vh;
+    padding: 1em;
+}
+
+#service-status-change-reason:focus-visible{
+    outline-color: var(--clr-triadic-1-300);
+}
+
 @media (max-width: 1200px) {
     #employee-reservations-container {
         grid-template-columns: 1fr;

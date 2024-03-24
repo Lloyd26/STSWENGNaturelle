@@ -216,15 +216,49 @@ const controller = {
 
     findNotification: async function (req, res) {
         notification = await Notification.findOne({_id: req.query.id})
-
+        
         await Notification.updateOne({_id: req.query.id}, {isRead: "true"})
-        res.send(notification)
+
+        let data = {}
+
+        if (notification.type == "Admin Set Pending" || notification.type == "Admin Set Approved" || 
+            notification.type == "Admin Set Cancelled" || notification.type == "Reservation Pending" ||
+            notification.type == "Employee Set Cancelled" || notification.type == "Employee Set Pending" ||
+            notification.type == "Employee Set Approved" || notification.type == "Customer Set Cancelled"){
+            reservation = await Reservation.findOne({_id: notification.reservationID}).populate('services').exec();
+
+            data = {
+                notif_details: notification,
+                reservation_details: reservation
+            }
+
+        }
+        else {
+            data = {
+                notif_details: notification
+            }
+        }
+
+        res.send(data)
+        console.log(data)
     },
 
     postCancelReservation: async function (req, res) {
         let reservation_id = req.body.reservation_id
 
         await Reservation.updateOne({_id: reservation_id}, {status: "Cancelled"});
+        let userID = req.session.logged_in.user.userID;
+        curr_date = new String(new Date())
+        await Notification.create({
+            receiver: userID,
+            type: "Customer Set Cancelled",
+            timestamp: curr_date,
+            title: "You cancelled a Reservation",
+            body: "You cancelled the following reservation:",
+            reservationID: req.body.reservation_id,
+            isRead: false
+        })
+
         res.sendStatus(200); // HTTP 200: OK
     },
 

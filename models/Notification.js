@@ -17,6 +17,13 @@ const notificationSchema = new Schema ({
     body: {
         type: SchemaTypes.String
     },
+    reservationID: {
+        type: SchemaTypes.ObjectId,
+        ref: "Reservation"
+    },
+    reason: {
+        type: SchemaTypes.String
+    },
     isRead: {
         type: SchemaTypes.Boolean
     }

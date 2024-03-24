@@ -218,6 +218,94 @@
     opacity: 0.0;
 }
 
+#modal-reservation-details-container-notif{
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    padding: 1em 1em;
+    gap: 1em;
+    margin-top: 2em;
+    background-color: var(--salon-purple);
+    color: #FFF;
+}
+
+.timestamp-notif{
+    font-size: 1.5em;
+    color: #FFF;
+    font-weight: 700;
+    border-top: 1px dashed #FFF;
+    padding-top: 1em;
+}
+
+.reservation-details-notif{
+    display: flex;
+    flex-direction: column;
+    padding: 1em 1em;
+    border-radius: 10px;
+    background-color: #FFF;
+    color: var(--space-black);
+}
+
+.service-title-notif{
+    font-size: 1em;
+    font-weight: 900;
+    color: var(--clr-primary-300)
+}
+
+.services-container-notif{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.status-notif{
+    text-align: right;
+    margin-right: 2em;
+    color: var(--clr-primary-900);
+    font-weight: 700;
+}
+
+.reservation-date-container-notif{
+    display: flex;
+    gap: 1em;
+    align-items: center;
+}
+
+label{
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.desc-notif{
+    font-weight: 600;
+    display: flex;
+}
+
+.detail-notif{
+    font-weight: 500;
+    margin-left: auto;
+}
+
+.services-label-notif{
+    font-weight: 700;
+    color: white;
+    font-size: 1.3em;
+    text-align: center;
+}
+
+#modal-status-reason-label{
+    font-size: 1.1em;
+    font-style: italic;
+    font-weight: 700;
+}
+
+#modal-status-reason{
+    font-size: 1em;
+    font-style: normal;
+    text-align: right;
+    font-weight: 500;
+}
+
 @media (max-width: 1200px) {
     .navbar > .container-fluid {
         padding-left: 1.5rem;

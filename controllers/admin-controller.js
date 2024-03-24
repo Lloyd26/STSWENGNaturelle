@@ -7,6 +7,7 @@ const FAQ = require('../models/FAQ.js');
 const Reservation = require('../models/Reservation.js');
 const InCartService = require('../models/InCartService.js');
 const bcrypt = require('bcrypt');
+const Notification = require('../models/Notification');
 
 function generateRandomPassword(length) {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+';
@@ -151,7 +152,39 @@ const controller = {
             return;
         }
 
+        reservation = await Reservation.findOne({_id: req.body.reservation_id})
+        userID = reservation.userID
         await Reservation.updateOne({_id: req.body.reservation_id}, {status: req.body.reservation_status});
+        curr_date = new String(new Date())
+        notif_title = ""
+        notif_body = ""
+
+        if (req.body.reservation_status == "Pending"){
+            notif_type = "Admin Set Pending"
+            notif_title = "Reservation has been set to Pending"
+            notif_body = "Your reservation was set to Pending by our admin."
+        }
+        else if (req.body.reservation_status == "Approved"){
+            notif_type = "Admin Set Approved"
+            notif_title = "Your Reservation has been Approved"
+            notif_body = "Good news! Your reservation has been approved by our admin."
+        }
+        else if (req.body.reservation_status == "Cancelled"){
+            notif_type = "Admin Set Cancelled"
+            notif_title = "Your Reservation has been Cancelled"
+            notif_body = "Sorry, dear customer. Your reservation has been cancelled by our admin."
+        }
+
+        await Notification.create({
+            receiver: userID,
+            type: notif_type,
+            timestamp: curr_date,
+            title: notif_title,
+            body: notif_body,
+            reservationID: req.body.reservation_id,
+            reason: req.body.status_change_reason,
+            isRead: false
+        })
         res.sendStatus(200);
     },
 

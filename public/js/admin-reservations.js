@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let reservation_id = document.getElementById("input-reservation-id").value;
         let reservation_status_radio = document.querySelector("#modal-reservation-status-controls-container > input[type='radio']:checked");
+        let reason_for_change = document.getElementById("status-change-reason").value;
 
         if (reservation_status_radio.hasAttribute("disabled")) {
             bootstrap.Modal.getInstance(modal_reservation_status).hide();
@@ -64,7 +65,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         $.post("/admin/reservations/update-status", {
             reservation_id: reservation_id,
-            reservation_status: reservation_status
+            reservation_status: reservation_status,
+            status_change_reason: reason_for_change
         }, (data, status, xhr) => {
             if (status === "success" && xhr.status === 200) {
                 btn_save_icon.className = "";
