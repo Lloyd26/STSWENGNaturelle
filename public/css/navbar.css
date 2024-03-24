@@ -161,6 +161,8 @@
     top: 3.5em;
     min-width: 400px;
     cursor: pointer;
+    max-height: 50vh;
+    overflow: auto;
 }
 
 #notification-dropdown-menu > .dropdown-item:hover,
