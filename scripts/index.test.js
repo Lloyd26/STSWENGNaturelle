@@ -3,6 +3,11 @@ const Reservation  = require('../models/Reservation');
 const controller  = require('../controllers/controller.js');
 const Notification  = require('../models/Notification');
 const adminController = require('../controllers/admin-controller.js');
+const authController = require('../controllers/auth-controller.js');
+//const employeeController = require('../controllers/employee-controller.js');
+const User = require('../models/User');
+
+
 //import {res} as adminReservations from '../public/js/admin-reservations.js';
 //Test if website renders (may need to open website first)
 test('Salon website renders without errors',async () => {
@@ -65,6 +70,42 @@ describe("Make a reservation", () => {
 
    });
 
+});
+
+
+//test postreserve
+describe("Creating reservations", () => {
+  it("should create a reservation", async   () => {
+    const req = {
+      body: {
+        services: [
+          {
+            serviceTitle: "Haircut",
+            preferredEmployee: "Juan",
+            details: "None"
+          }
+        ],
+        date: "2025-01-01"
+      },
+      session: {
+        logged_in: {
+          user: {
+            userID: '5f8614a2f796ac1c7e62af94' // random id
+          }
+        }
+      }
+    };
+
+    const res = {
+      redirect: jest.fn()
+    };
+
+    await authController.postReserve(req, res);
+    expect(Reservation.create).toHaveBeenCalled();
+    expect(res.redirect).toHaveBeenCalledWith("/reserve");
+
+
+  });
 });
 
 
@@ -286,3 +327,82 @@ describe("Get services of reservation", () => {
    });
 
 });
+
+
+// ACCOUNT MANAGEMENT TESTS
+
+
+//mock user model and bcrypt functions
+jest.mock('../models/User',() => ({
+  updateOne: jest.fn().mockResolvedValue({nModified: 1}),
+  findOne: jest.fn().mockResolvedValue('mock user'),
+  create: jest.fn().mockResolvedValue('mock user')
+}));
+
+jest.mock('bcrypt',() => ({
+  compare: jest.fn().mockResolvedValue(true),
+  hash: jest.fn().mockResolvedValue('hashedPassword')
+}));
+
+//test postlogin
+describe("Login Functionality", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+ });
+  it("should redirect to home", async   () => {
+    const req = {
+      body: {
+        email: 'testEmail@gmail.com',
+        password: 'password'
+      },
+      session: {
+        logged_in: null
+      },
+      query: {
+        next: "/"
+      }
+    };
+
+    const res = { 
+      redirect: jest.fn()
+    };
+
+
+    await authController.postLogin(req, res);
+    expect(res.redirect).toHaveBeenCalledWith("/");
+    expect(req.session.logged_in).not.toBe(null);
+    expect(req.session.logged_in.user).not.toBe(null);
+  });
+
+  it("should not redirect or log in", async   () => {
+    const req = {
+      body: {
+        email: 'testEmail@gmail.com',
+        password: 'password'
+      },
+      session: {
+        logged_in: null
+      },
+      query: {
+        next: "/"
+      }
+    };
+
+    const res = {
+      redirect: jest.fn(),
+      render: jest.fn()
+    };
+
+    //mock the findOne function to return null
+    User.findOne.mockImplementation(() => null);
+
+    await authController.postLogin(req, res);
+    expect(res.redirect).not.toHaveBeenCalledWith("/");
+    expect(req.session.logged_in).toBe(null);
+
+    
+
+  });
+});
+
+//change password functionality test here (it doesnt exist yet)
