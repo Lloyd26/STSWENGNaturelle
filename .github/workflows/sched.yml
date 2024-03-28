@@ -1,9 +1,9 @@
 name: Test at scheduled time
 
 on:
-  schedule:
-    - cron: '0 3 * * *'
   workflow_dispatch:
+  schedule:
+    - cron: '0 9 * * *'
 
 jobs:
   unit-test:
